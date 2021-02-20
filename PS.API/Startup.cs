@@ -31,6 +31,7 @@ namespace PS.API
 
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,13 +44,25 @@ namespace PS.API
 
             //app.UseHttpsRedirection();
 
-            app.UseRouting();
+            //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x => x.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
 
-            app.UseAuthorization();
+
+            app.UseRouting();
+            //app.UseAuthentication();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("bs", "api/", new { controller = "Photos", action = "GetPhoto" });
                 endpoints.MapControllers();
+
+                // endpoints.MapControllerRoute(
+                //     name: "spa-fallback",
+                //     pattern: "{controller=Fallback}/{action=Index}/{id?}");
+
+                // endpoints.MapFallbackToController("Index", "Fallback");
+
             });
         }
     }
