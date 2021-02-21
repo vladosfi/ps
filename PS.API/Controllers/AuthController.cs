@@ -19,7 +19,7 @@ namespace PS.API.Controllers
         private readonly IAuthRepository repo;
         private readonly IConfiguration config;
 
-        public AuthController(IAuthRepository repo, IConfiguration config )
+        public AuthController(IAuthRepository repo, IConfiguration config)
         {
             this.repo = repo;
             this.config = config;
@@ -53,7 +53,6 @@ namespace PS.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-
             userForLoginDto.Username = userForLoginDto.Username.ToLower();
 
             var userFromRepo = await this.repo.Login(userForLoginDto.Username, userForLoginDto.Password);
