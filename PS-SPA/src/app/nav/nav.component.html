@@ -1,63 +1,61 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">PSApp</a>
+  <div class="container">
+    <a class="navbar-brand" href="#">PSApp</a>
 
+    <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">Gallery</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">Mixed Tehnique</a>
+          <a class="dropdown-item" href="#">Sea mosaic</a>
+          <a class="dropdown-item" href="#">Marine-themed wall panels</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Events</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contacts</a>
+      </li>
 
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <a class="nav-link" href="#">Home</a>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">Gallery</a>
-      <div class="dropdown-menu" aria-labelledby="dropdown01">
-        <a class="dropdown-item" href="#">Mixed Tehnique</a>
-        <a class="dropdown-item" href="#">Sea mosaic</a>
-        <a class="dropdown-item" href="#">Marine-themed wall panels</a>
+      <div class="dropdown" dropdown>
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" dropdownToggle>
+          <span class="flag-icon flag-icon-gb"></span> English
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" *dropdownMenu>
+          <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-bg"></span>Български</a>
+          <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-de"></span>Deutsch</a>
+          <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-ru"></span>Русский</a>
+        </div>
       </div>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Events</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Contacts</a>
-    </li>
 
-    <div class="dropdown">
-      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="flag-icon flag-icon-gb"></span> English
+    </ul>
+
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+      <a class="dropdown-toggle text-light" dropdownToggle>
+        Welcome {{authService.decodedToken?.unique_name | titlecase}}
       </a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-bg"></span>Български</a>
-        <a class="dropdown-item" href="#" ><span class="flag-icon flag-icon-de"></span>Deutsch</a>
-        <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-ru"></span>Русский</a>
+      <div class="dropdown-menu mt-3" *dropdownMenu>
+        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Edit Profile</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
       </div>
     </div>
-    <li class="nav-item">
-      <a class="nav-link" (click)="logout()">Logout</a>
-    </li>
-  </ul>
 
-  <div *ngIf="loggedIn()" class="dropdown">
-    <a class="dropdown-toggle text-light" >
-      Welkome User
-    </a>  
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Edit Profile</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i> Logout</a>
-    </div>
+    <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login(loginForm.value)">
+      <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username" required ngModel username>
+      <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password" required ngModel
+        password>
+      <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+    </form>
+
+    <!-- <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
   </div>
-
-  <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login(loginForm.value)">
-    <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username" required ngModel username>
-    <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password" required ngModel password>
-    <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
-  </form>
-  
-  <!-- <form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form> -->
-
 </nav>
-

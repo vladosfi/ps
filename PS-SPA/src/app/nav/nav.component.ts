@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PopupService } from '../_services/popup.service';
 import { AuthService } from '../_services/auth.service';
 
 @Component({
@@ -9,25 +10,28 @@ import { AuthService } from '../_services/auth.service';
 export class NavComponent implements OnInit {
   model: any = {};
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    public authService: AuthService,
+    private popup: PopupService,
+    ) { }
 
   ngOnInit() {
   }
 
   login(model){
     this.authService.login(model).subscribe(next => {
-      console.log('Logged in successfully');
+      this.popup.success('Logged in successfully','');
     }, error => {
-      console.log(error);
+      this.popup.error(error);
     });
   }
 
   loggedIn(){
-    const token = localStorage.getItem('token');
-    return !!token;
+    return this.authService.loggedIn();
   }
 
   logout(){
     localStorage.removeItem('token');
+    this.popup.info('Logged out');
   }
 }

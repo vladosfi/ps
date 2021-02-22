@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { PopupService } from '../_services/popup.service';
 import { AuthService } from '../_services/auth.service';
 
 @Component({
@@ -9,16 +10,18 @@ import { AuthService } from '../_services/auth.service';
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   
-  constructor(private authService: AuthService) { }
+  constructor(
+    private popup: PopupService,
+    private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   register(model) {
     this.authService.register(model).subscribe(() => {
-      console.log('registration successful');
+      this.popup.success('registration successful');
     }, error =>{
-      console.log(error);
+      this.popup.error(error);
     });
   }
 
