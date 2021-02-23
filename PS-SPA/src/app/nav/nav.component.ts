@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PopupService } from '../_services/popup.service';
 import { AuthService } from '../_services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -13,25 +14,29 @@ export class NavComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private popup: PopupService,
-    ) { }
+    private router: Router,
+  ) { }
 
   ngOnInit() {
   }
 
-  login(model){
+  login(model) {
     this.authService.login(model).subscribe(next => {
-      this.popup.success('Logged in successfully','');
+      this.popup.success('Logged in successfully', '');
     }, error => {
       this.popup.error(error);
+    }, () => {
+      this.router.navigate(['/home']);
     });
   }
 
-  loggedIn(){
+  loggedIn() {
     return this.authService.loggedIn();
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('token');
     this.popup.info('Logged out');
+    this.router.navigate(['/home']);
   }
 }
