@@ -2,9 +2,9 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
 import { ContactsComponent } from './contacts/contacts.component';
-import { GalleryMixedComponent } from './gallery-mixed/gallery-mixed.component';
-import { GallerySeaComponent } from './gallery-sea/gallery-sea.component';
-import { GalleryMarineComponent } from './gallery-marine/gallery-marine.component';
+import { GalleryMixedComponent } from './gallery/gallery-mixed/gallery-mixed.component';
+import { GallerySeaComponent } from './gallery/gallery-sea/gallery-sea.component';
+import { GalleryMarineComponent } from './gallery/gallery-marine/gallery-marine.component';
 import { AuthGuard } from './_guards/auth.guard';
 
 export const appRoutes: Routes = [

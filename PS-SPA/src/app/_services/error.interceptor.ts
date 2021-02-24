@@ -9,6 +9,9 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(
             catchError(error => {
                 if (error instanceof HttpErrorResponse) {
+                    if(error.status === 404){
+                        return throwError('Resource not found');
+                    }
                     if (error.status === 401) {
                         return throwError(error.statusText);
                     }

@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { JwtModule } from '@auth0/angular-jwt';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
@@ -17,9 +18,15 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { appRoutes } from './routes';
 import { ContactsComponent } from './contacts/contacts.component';
 import { EventsComponent } from './events/events.component';
-import { GalleryMixedComponent } from './gallery-mixed/gallery-mixed.component';
-import { GallerySeaComponent } from './gallery-sea/gallery-sea.component';
-import { GalleryMarineComponent } from './gallery-marine/gallery-marine.component';
+import { GalleryMixedComponent } from './gallery/gallery-mixed/gallery-mixed.component';
+import { GallerySeaComponent } from './gallery/gallery-sea/gallery-sea.component';
+import { GalleryMarineComponent } from './gallery/gallery-marine/gallery-marine.component';
+import { GalleryThumbComponent } from './gallery/gallery-thumb/gallery-thumb.component';
+import { GalleryDetailComponent } from './gallery/gallery-detail/gallery-detail.component';
+
+export function tokenGetter(){
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -31,7 +38,9 @@ import { GalleryMarineComponent } from './gallery-marine/gallery-marine.componen
     EventsComponent,
     GalleryMixedComponent,
     GallerySeaComponent,
-    GalleryMarineComponent
+    GalleryMarineComponent,
+    GalleryThumbComponent,
+    GalleryDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +51,13 @@ import { GalleryMarineComponent } from './gallery-marine/gallery-marine.componen
     FormsModule,
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:5000'],
+        disallowedRoutes: ['localhost:5000/api/auth'],
+      }
+    }),
   ],
   providers: [
     AuthService,
