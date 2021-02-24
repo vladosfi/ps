@@ -15,6 +15,7 @@ import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { appRoutes } from './routes';
 import { ContactsComponent } from './contacts/contacts.component';
 import { EventsComponent } from './events/events.component';
@@ -23,6 +24,11 @@ import { GallerySeaComponent } from './gallery/gallery-sea/gallery-sea.component
 import { GalleryMarineComponent } from './gallery/gallery-marine/gallery-marine.component';
 import { GalleryThumbComponent } from './gallery/gallery-thumb/gallery-thumb.component';
 import { GalleryDetailComponent } from './gallery/gallery-detail/gallery-detail.component';
+import { NgxGalleryModule } from 'ngx-gallery-9';
+import { AuthGuard } from './_guards/auth.guard';
+import { GalleryDetailResolver } from './_resolvers/gallery-detai.resolver';
+import { TimeagoModule } from 'ngx-timeago';
+import { GalleryMixedResolver } from './_resolvers/gallery-mixed.resolver';
 
 export function tokenGetter(){
   return localStorage.getItem('token');
@@ -49,6 +55,9 @@ export function tokenGetter(){
     ToastrModule.forRoot(), // ToastrModule added
     HttpClientModule,
     FormsModule,
+    NgxGalleryModule,
+    TimeagoModule.forRoot(),
+    TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({
@@ -61,7 +70,10 @@ export function tokenGetter(){
   ],
   providers: [
     AuthService,
+    AuthGuard,
     ErrorInterceptorProvider,
+    GalleryDetailResolver,   
+    GalleryMixedResolver, 
   ],
   bootstrap: [AppComponent]
 })
