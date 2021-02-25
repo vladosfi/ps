@@ -8,20 +8,18 @@ import { PopupService } from '../_services/popup.service';
 
 
 @Injectable()
-export class GalleryMixedResolver implements Resolve<IUser[]>{
-    pageNumber = 1;
-    pageSize = 5;
+export class GalleryDetailResolver implements Resolve<IUser>{
 
     constructor(
         private userService: UserService,
         private router: Router,
         private popup: PopupService) { }
 
-        resolve(route: ActivatedRouteSnapshot): Observable<IUser[]>{
-            return this.userService.getUsers().pipe(
+        resolve(route: ActivatedRouteSnapshot): Observable<IUser>{
+            return this.userService.getUser(Number(route.params['id'])).pipe(
                 catchError(error => {
                     this.popup.error('Problem retreiving data');
-                    this.router.navigate(['/home']);
+                    this.router.navigate(['/gallery']);
                     return of(null);
                 })
             )

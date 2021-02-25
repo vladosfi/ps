@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '../../_models/user';
+import { IUser } from '../../_models/user';
 import { PopupService } from '../../_services/popup.service';
 import { UserService } from '../../_services/user.service';
 
@@ -10,7 +10,7 @@ import { UserService } from '../../_services/user.service';
   styleUrls: ['./gallery-mixed.component.css']
 })
 export class GalleryMixedComponent implements OnInit {
-  users: User[];
+  users: IUser[];
 
   constructor(private userService: UserService, private popup: PopupService, private route: ActivatedRoute) { }
 
@@ -21,7 +21,7 @@ export class GalleryMixedComponent implements OnInit {
   }
 
   loadUsers() {
-    this.userService.getUsers().subscribe((users: User[]) => {
+    this.userService.getUsers().subscribe((users: IUser[]) => {
       this.users = users;
     }, error => {
       this.popup.error(error);

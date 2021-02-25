@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery-9';
 import { TimeagoPipe } from 'ngx-timeago';
-import { User } from 'src/app/_models/user';
+import { IUser } from 'src/app/_models/user';
 import { PopupService } from 'src/app/_services/popup.service';
 import { UserService } from 'src/app/_services/user.service';
 
@@ -14,7 +14,7 @@ import { UserService } from 'src/app/_services/user.service';
 })
 export class GalleryDetailComponent implements OnInit {
   @ViewChild('memberTabs', { static: true }) memberTabs: TabsetComponent
-  user: User;
+  user: IUser;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   live: TimeagoPipe;

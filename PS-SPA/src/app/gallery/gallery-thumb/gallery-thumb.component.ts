@@ -1,6 +1,6 @@
 import { unsupported } from '@angular/compiler/src/render3/view/util';
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from 'src/app/_models/user';
+import { IUser } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-gallery-thumb',
@@ -8,7 +8,7 @@ import { User } from 'src/app/_models/user';
   styleUrls: ['./gallery-thumb.component.css']
 })
 export class GalleryThumbComponent implements OnInit {
-  @Input() user: User;
+  @Input() user: IUser;
   
   constructor() { }
 

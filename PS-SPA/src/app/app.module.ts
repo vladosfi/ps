@@ -26,9 +26,12 @@ import { GalleryThumbComponent } from './gallery/gallery-thumb/gallery-thumb.com
 import { GalleryDetailComponent } from './gallery/gallery-detail/gallery-detail.component';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 import { AuthGuard } from './_guards/auth.guard';
-import { GalleryDetailResolver } from './_resolvers/gallery-detai.resolver';
+import { GalleryDetailResolver } from './_resolvers/gallery-detail.resolver';
 import { TimeagoModule } from 'ngx-timeago';
 import { GalleryMixedResolver } from './_resolvers/gallery-mixed.resolver';
+import { GalleryDetailEditComponent } from './gallery/gallery-detail-edit/gallery-detail-edit.component';
+import { GalleryDetailEditResolver } from './_resolvers/gallery-detail-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes';
 
 export function tokenGetter(){
   return localStorage.getItem('token');
@@ -46,7 +49,8 @@ export function tokenGetter(){
     GallerySeaComponent,
     GalleryMarineComponent,
     GalleryThumbComponent,
-    GalleryDetailComponent
+    GalleryDetailComponent,
+    GalleryDetailEditComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +78,8 @@ export function tokenGetter(){
     ErrorInterceptorProvider,
     GalleryDetailResolver,   
     GalleryMixedResolver, 
+    GalleryDetailEditResolver,
+    PreventUnsavedChanges,
   ],
   bootstrap: [AppComponent]
 })
