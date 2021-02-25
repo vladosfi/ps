@@ -32,6 +32,8 @@ import { GalleryMixedResolver } from './_resolvers/gallery-mixed.resolver';
 import { GalleryDetailEditComponent } from './gallery/gallery-detail-edit/gallery-detail-edit.component';
 import { GalleryDetailEditResolver } from './_resolvers/gallery-detail-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes';
+import { GalleryPhotoEditorComponent } from './gallery/gallery-photo-editor/gallery-photo-editor.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 export function tokenGetter(){
   return localStorage.getItem('token');
@@ -50,7 +52,8 @@ export function tokenGetter(){
     GalleryMarineComponent,
     GalleryThumbComponent,
     GalleryDetailComponent,
-    GalleryDetailEditComponent
+    GalleryDetailEditComponent,
+    GalleryPhotoEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,7 @@ export function tokenGetter(){
     HttpClientModule,
     FormsModule,
     NgxGalleryModule,
+    FileUploadModule,
     TimeagoModule.forRoot(),
     TabsModule.forRoot(),
     BsDropdownModule.forRoot(),

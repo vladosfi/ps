@@ -23,21 +23,25 @@ export class PopupService {
     "hideMethod": "fadeOut"
   }
 
-  constructor( private toastr: ToastrService) {}
+  constructor(private toastr: ToastrService) { }
 
-  success(message: string, title?: string, ){
-    this.toastr.success(message,title, this.toastrOptions);
-  }
-  
-  info(message: string, title?: string, ){
-    this.toastr.info(message,title, this.toastrOptions);
+  success(message: string, title?: string,) {
+    this.toastr.success(message, title, this.toastrOptions);
   }
 
-  warning(message: string, title?: string, ){
-    this.toastr.warning(message,title, this.toastrOptions);
+  info(message: string, title?: string,) {
+    this.toastr.info(message, title, this.toastrOptions);
   }
 
-  error(message: string, title?: string, ){
-    this.toastr.error(message,title, this.toastrOptions);
+  warning(message: string, title?: string,) {
+    this.toastr.warning(message, title, this.toastrOptions);
+  }
+
+  error(message: string, title?: string,) {
+    this.toastr.error(message, title, this.toastrOptions);
+  }
+
+  confirm(message: string, fn: any) {
+    this.toastr.success(message, this.toastrOptions);
   }
 }
