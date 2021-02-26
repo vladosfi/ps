@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using PS.API.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PS.API.Data
 {
@@ -24,6 +25,11 @@ namespace PS.API.Data
             this.context.Remove(entity);
         }
 
+        public async Task<Photo> GetMainPhotoForUser(int userId)
+        {
+            return await this.context.Photos.Where(u => u.UserId == userId).FirstOrDefaultAsync(p => p.IsMain);
+        }
+
         public async Task<Photo> GetPhoto(int id)
         {
             var photo = await this.context.Photos.FirstOrDefaultAsync(p => p.Id == id);
@@ -38,7 +44,8 @@ namespace PS.API.Data
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetUsers(){
+        public async Task<IEnumerable<User>> GetUsers()
+        {
             var users = await this.context.Users.Include(p => p.Photos).ToListAsync();
 
             return users;

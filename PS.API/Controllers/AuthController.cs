@@ -9,6 +9,7 @@ using System.Text;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
+using AutoMapper;
 
 namespace PS.API.Controllers
 {
@@ -18,9 +19,11 @@ namespace PS.API.Controllers
     {
         private readonly IAuthRepository repo;
         private readonly IConfiguration config;
+        private readonly IMapper mapper;
 
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
         {
+            this.mapper = mapper;
             this.repo = repo;
             this.config = config;
         }
@@ -84,12 +87,12 @@ namespace PS.API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            // var user = this.mapper.Map<UserForListDto>(userFromRepo);
+            var user = this.mapper.Map<UserForListDto>(userFromRepo);
 
             return Ok(new
             {
                 token = tokenHandler.WriteToken(token),
-                userFromRepo
+                user
             });
 
         }

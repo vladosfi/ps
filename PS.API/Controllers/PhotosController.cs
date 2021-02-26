@@ -19,6 +19,17 @@ namespace PS.API.Controllers
     [ApiController]
     public class PhotosController : ControllerBase
     {
+        private const string alreadyMainPhoto = "This is already the main photo";
+        private const string couldNotSetMainPhoto = "Could not set photo to main";
+        private const string failedToDeletePhoto = "Failed to delete the photo";
+        private const string couldNotAddPhoto = "Could not add the photo!";
+        private const string cloudinaryFolderPath = "ps-api";
+        private const string cloudinaryCorpOption = "fill";
+        private const string cloudinaryGravityOption = "face";
+        private const string cannotDeleteMainPhoto = "You cannot delete your main photo";
+        private const string cloudinaryOk = "ok";
+
+
         private readonly IPSRepository repo;
         private readonly IMapper mapper;
         private readonly IOptions<CloudinarySettings> cloudinaryConfig;
@@ -67,7 +78,7 @@ namespace PS.API.Controllers
             var file = photoForCreationDto.File;
 
             var uploadResult = new ImageUploadResult();
-            
+
             if (file.Length > 0)
             {
                 using (var stream = file.OpenReadStream())
@@ -76,8 +87,8 @@ namespace PS.API.Controllers
                     {
                         File = new FileDescription(file.Name, stream),
                         Transformation = new Transformation()
-                            .Width(500).Height(500).Crop("fill").Gravity("face"),
-                        Folder = "ps-api",
+                            .Width(500).Height(500).Crop(cloudinaryCorpOption).Gravity(cloudinaryGravityOption),
+                        Folder = cloudinaryFolderPath,
                     };
 
                     uploadResult = this.cloudinary.Upload(uploadParams);
@@ -104,7 +115,7 @@ namespace PS.API.Controllers
                 return CreatedAtAction(nameof(this.GetPhoto), new { id = photo.Id }, photoToReturn);
             }
 
-            return BadRequest("Coud not add the photo!");
+            return BadRequest(couldNotAddPhoto);
         }
 
 
@@ -127,11 +138,11 @@ namespace PS.API.Controllers
 
             if (photoFromRepo.IsMain)
             {
-                return BadRequest("This is already the main photo");
+                return BadRequest(alreadyMainPhoto);
             }
 
-            //var currentManPhoto = await this.repo.GetMainPhotoForUser(userId);
-            //currentManPhoto.IsMain = false;
+            var currentManPhoto = await this.repo.GetMainPhotoForUser(userId);
+            currentManPhoto.IsMain = false;
             photoFromRepo.IsMain = true;
 
             if (await this.repo.SaveAll())
@@ -139,7 +150,7 @@ namespace PS.API.Controllers
                 return NoContent();
             }
 
-            return BadRequest("Could not set photo to main");
+            return BadRequest(couldNotSetMainPhoto);
 
         }
 
@@ -162,7 +173,7 @@ namespace PS.API.Controllers
 
             if (photoFromRepo.IsMain)
             {
-                return BadRequest("You cannot delete your main photo");
+                return BadRequest(cannotDeleteMainPhoto);
             }
 
             if (photoFromRepo.PublicId != null)
@@ -171,7 +182,7 @@ namespace PS.API.Controllers
 
                 var result = this.cloudinary.Destroy(deleteParams);
 
-                if (result.Result == "ok")
+                if (result.Result == cloudinaryOk)
                 {
                     this.repo.Delete(photoFromRepo);
                 }
@@ -187,7 +198,7 @@ namespace PS.API.Controllers
                 return Ok();
             }
 
-            return BadRequest("Failed to delete the photo");
+            return BadRequest(failedToDeletePhoto);
         }
 
     }

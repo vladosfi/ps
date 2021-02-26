@@ -30,7 +30,7 @@ export class GalleryPhotoEditorComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private popup: PopupService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initializeUploader();
@@ -72,7 +72,7 @@ export class GalleryPhotoEditorComponent implements OnInit {
 
         this.photos.push(photo);
 
-        if(photo.isMain){
+        if (photo.isMain) {
           this.authService.changeMemberPhoto(photo.url);
           this.authService.currentUser.photoUrl = photo.url;
           localStorage.setItem(
@@ -112,10 +112,7 @@ export class GalleryPhotoEditorComponent implements OnInit {
         .deletePhoto(this.authService.decodedToken.nameid, id)
         .subscribe(
           () => {
-            this.photos.splice(
-              this.photos.findIndex((p) => p.id === id),
-              1
-            );
+            this.photos.splice(this.photos.findIndex((p) => p.id === id), 1);
             this.popup.success('Photo has been deleted');
           },
           (error) => {
