@@ -16,6 +16,7 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { appRoutes } from './routes';
 import { ContactsComponent } from './contacts/contacts.component';
 import { EventsComponent } from './events/events.component';
@@ -35,6 +36,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes';
 import { GalleryPhotoEditorComponent } from './gallery/gallery-photo-editor/gallery-photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -65,9 +67,11 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     NgxGalleryModule,
+    PaginationModule.forRoot(),
     FileUploadModule,
     TimeagoModule.forRoot(),
     TabsModule.forRoot(),
+    ButtonsModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
