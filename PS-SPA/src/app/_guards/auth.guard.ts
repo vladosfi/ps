@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
-import { PopupService } from '../_services/popup.service';
+import { ToastService } from '../_services/toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private popup: PopupService
+    private toast: ToastService
   ) { }
 
   canActivate(): boolean {
@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    this.popup.error('You shall not pass!');
+    this.toast.error('You shall not pass!');
     this.router.navigate(['/home']);
     return false;
   }

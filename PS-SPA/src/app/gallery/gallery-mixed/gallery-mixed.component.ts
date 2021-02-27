@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IUser } from '../../_models/user';
-import { PopupService } from '../../_services/popup.service';
+import { ToastService } from '../../_services/toast.service';
 import { UserService } from '../../_services/user.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { UserService } from '../../_services/user.service';
 export class GalleryMixedComponent implements OnInit {
   users: IUser[];
 
-  constructor(private userService: UserService, private popup: PopupService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private toast: ToastService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
@@ -24,7 +24,7 @@ export class GalleryMixedComponent implements OnInit {
     this.userService.getUsers().subscribe((users: IUser[]) => {
       this.users = users;
     }, error => {
-      this.popup.error(error);
+      this.toast.error(error);
     })
   }
 

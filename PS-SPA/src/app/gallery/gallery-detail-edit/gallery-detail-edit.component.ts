@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TimeagoPipe } from 'ngx-timeago';
 import { IUser } from 'src/app/_models/user';
 import { AuthService } from 'src/app/_services/auth.service';
-import { PopupService } from 'src/app/_services/popup.service';
+import { ToastService } from 'src/app/_services/toast.service';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class GalleryDetailEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private popup: PopupService,
+    private toast: ToastService,
     private userService: UserService,
     private authService: AuthService) { }
 
@@ -41,10 +41,10 @@ export class GalleryDetailEditComponent implements OnInit {
   updateUser(updatedUser: IUser) {
     this.userService.updateUsers(this.authService.decodedToken.nameid, updatedUser)
       .subscribe(next => {
-        this.popup.success('Profile updated successfully');
+        this.toast.success('Profile updated successfully');
         this.editForm.reset(updatedUser);
       }, error => {
-        this.popup.error(error);
+        this.toast.error(error);
       });
   }
 

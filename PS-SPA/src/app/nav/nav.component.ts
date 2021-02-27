@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopupService } from '../_services/popup.service';
+import { ToastService } from '../_services/toast.service';
 import { AuthService } from '../_services/auth.service';
 import { Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ export class NavComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private popup: PopupService,
+    private toast: ToastService,
     private router: Router,
   ) { }
 
@@ -24,9 +24,9 @@ export class NavComponent implements OnInit {
 
   login(model) {
     this.authService.login(model).subscribe(next => {
-      this.popup.success('Logged in successfully', '');
+      this.toast.success('Logged in successfully', '');
     }, error => {
-      this.popup.error(error);
+      this.toast.error(error);
     }, () => {
       this.router.navigate(['/home']);
     });
@@ -39,7 +39,7 @@ export class NavComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.popup.info('Logged out');
+    this.toast.info('Logged out');
     this.authService.decodedToken = null;
     this.authService.currentUser = null;
     this.router.navigate(['/home']);

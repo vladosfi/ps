@@ -4,7 +4,7 @@ import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery-9';
 import { TimeagoPipe } from 'ngx-timeago';
 import { IUser } from 'src/app/_models/user';
-import { PopupService } from 'src/app/_services/popup.service';
+import { ToastService } from 'src/app/_services/toast.service';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class GalleryDetailComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private popup: PopupService,
+    private toast: ToastService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -50,7 +50,7 @@ export class GalleryDetailComponent implements OnInit {
   //   this.userService.getUser(Number(this.route.snapshot.params['id'])).subscribe((user: User) => {
   //     this.user = user;
   //   }, error => {
-  //     this.popup.error(error);
+  //     this.toast.error(error);
   //   });
   // }
 

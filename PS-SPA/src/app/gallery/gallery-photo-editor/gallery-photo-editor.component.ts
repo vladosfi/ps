@@ -9,7 +9,7 @@ import {
 import { FileUploader } from 'ng2-file-upload';
 import { IPhoto } from 'src/app/_models/photo';
 import { AuthService } from 'src/app/_services/auth.service';
-import { PopupService } from 'src/app/_services/popup.service';
+import { ToastService } from 'src/app/_services/toast.service';
 import { UserService } from 'src/app/_services/user.service';
 import { environment } from 'src/environments/environment';
 
@@ -29,7 +29,7 @@ export class GalleryPhotoEditorComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private popup: PopupService,
+    private toast: ToastService,
   ) { }
 
   ngOnInit(): void {
@@ -101,25 +101,26 @@ export class GalleryPhotoEditorComponent implements OnInit {
           );
         },
         (error) => {
-          this.popup.error(error);
+          this.toast.error(error);
         }
       );
   }
 
   deletePhoto(id: number) {
-    this.popup.confirm('Are you sure you want to delete this photo?', () => {
+    
+    if(confirm('Are you sure you want to delete this photo?')){
       this.userService
         .deletePhoto(this.authService.decodedToken.nameid, id)
         .subscribe(
           () => {
             this.photos.splice(this.photos.findIndex((p) => p.id === id), 1);
-            this.popup.success('Photo has been deleted');
+            this.toast.success('Photo has been deleted');
           },
           (error) => {
-            this.popup.error('Failed to delete photo');
+            this.toast.error('Failed to delete photo');
           }
-        );
-    });
+        );  
+    }
   }
 
 }
