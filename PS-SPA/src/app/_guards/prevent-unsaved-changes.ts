@@ -6,7 +6,7 @@ import { GalleryDetailEditComponent } from "../gallery/gallery-detail-edit/galle
 export class PreventUnsavedChanges implements CanDeactivate<GalleryDetailEditComponent>{
     canDeactivate(component: GalleryDetailEditComponent){
         if(component.editForm.dirty){
-            return confirm('Are you shure you want to continue? Any unsaved changes will be lost');
+            return confirm('Are you shure you want to continue? Any unsaved changes will be lost!');
         }
 
         return true;

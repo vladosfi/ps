@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root'
 })
-export class PopupService {
+export class ToastService {
   toastrOptions: any = {
     "closeButton": false,
     "debug": false,
@@ -39,9 +39,5 @@ export class PopupService {
 
   error(message: string, title?: string,) {
     this.toastr.error(message, title, this.toastrOptions);
-  }
-
-  confirm(message: string, fn: any) {
-    this.toastr.success(message, this.toastrOptions);
   }
 }

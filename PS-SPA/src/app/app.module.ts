@@ -35,7 +35,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes';
 import { GalleryPhotoEditorComponent } from './gallery/gallery-photo-editor/gallery-photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
 
-export function tokenGetter(){
+export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
@@ -53,7 +53,7 @@ export function tokenGetter(){
     GalleryThumbComponent,
     GalleryDetailComponent,
     GalleryDetailEditComponent,
-    GalleryPhotoEditorComponent
+    GalleryPhotoEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,8 +80,8 @@ export function tokenGetter(){
     AuthService,
     AuthGuard,
     ErrorInterceptorProvider,
-    GalleryDetailResolver,   
-    GalleryMixedResolver, 
+    GalleryDetailResolver,
+    GalleryMixedResolver,
     GalleryDetailEditResolver,
     PreventUnsavedChanges,
   ],
