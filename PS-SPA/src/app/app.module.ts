@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { JwtModule } from '@auth0/angular-jwt';
@@ -34,6 +34,7 @@ import { GalleryDetailEditResolver } from './_resolvers/gallery-detail-edit.reso
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes';
 import { GalleryPhotoEditorComponent } from './gallery/gallery-photo-editor/gallery-photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -57,15 +58,17 @@ export function tokenGetter() {
   ],
   imports: [
     BrowserModule,
-    CommonModule,
     BrowserAnimationsModule, // required animations module
+    CommonModule,
     ToastrModule.forRoot(), // ToastrModule added
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgxGalleryModule,
     FileUploadModule,
     TimeagoModule.forRoot(),
     TabsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({

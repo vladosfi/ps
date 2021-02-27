@@ -3,7 +3,7 @@
 @import '../node_modules/bootswatch/dist/united/bootstrap.min.css';
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
 @import '../node_modules/flag-icon-css/css/flag-icon.min.css';
-
+@import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
 
 /* ngx-toastr */
  @import '../node_modules/ngx-toastr/toastr';
@@ -53,3 +53,5 @@
     border-top: 1px solid #eee;
     padding: 15px 0;
   }
+
+  

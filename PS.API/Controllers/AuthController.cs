@@ -17,58 +17,57 @@ namespace PS.API.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthRepository repo;
-        private readonly IConfiguration config;
+        private const string userAlreadyExist = "Username already exist";
+
+        private IAuthRepository repo;
+        private IConfiguration config;
         private readonly IMapper mapper;
 
-        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
+        public AuthController(
+            IAuthRepository repo,
+            IConfiguration config,
+            IMapper mapper)
         {
+            this.config = config;
             this.mapper = mapper;
             this.repo = repo;
-            this.config = config;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
+        public async Task<IActionResult> Regietr(UserForRegisterDto userForRegisterDto)
         {
+            //validate result
+
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
             if (await this.repo.UserExist(userForRegisterDto.Username))
             {
-                return BadRequest("Username already exist");
+                return BadRequest(userAlreadyExist);
             }
 
-            var userToCreate = new User
-            {
-                Username = userForRegisterDto.Username
-            };
+            var userToCreate = this.mapper.Map<User>(userForRegisterDto);
 
             var createdUser = await this.repo.Register(userToCreate, userForRegisterDto.Password);
 
-            if (createdUser != null)
-            {
-                return Ok(createdUser);
-            }
+            var userToReturn = this.mapper.Map<UserForDetailedDto>(createdUser);
 
-            return StatusCode(201);
+            return CreatedAtAction(nameof(UsersController.GetUser), new { controller="Users", id = createdUser.Id }, userToReturn);
+
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            userForLoginDto.Username = userForLoginDto.Username.ToLower();
-
-            var userFromRepo = await this.repo.Login(userForLoginDto.Username, userForLoginDto.Password);
+            var userFromRepo = await this.repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)
             {
                 return Unauthorized();
             }
 
-            var claims = new[]
-            {
+            var claims = new[]{
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.Username),
+                new Claim(ClaimTypes.Name, userFromRepo.Username)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8
@@ -94,7 +93,6 @@ namespace PS.API.Controllers
                 token = tokenHandler.WriteToken(token),
                 user
             });
-
         }
     }
 }
