@@ -10,7 +10,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
-import { HomeComponent } from './home/home.component';
+import { StartComponent } from './start/start.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { ToastrModule } from 'ngx-toastr';
@@ -39,6 +39,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ListsComponent } from './lists/lists.component';
 import { ListsResolver } from './_resolvers/lists.resolver';
+import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './footer/footer.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -48,7 +50,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     NavComponent,
-    HomeComponent,
+    StartComponent,
     RegisterComponent,
     ContactsComponent,
     EventsComponent,
@@ -60,6 +62,8 @@ export function tokenGetter() {
     DetailEditComponent,
     PhotoEditorComponent,
     ListsComponent,
+    HomeComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

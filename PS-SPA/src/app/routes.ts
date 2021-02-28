@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { StartComponent } from './start/start.component';
 import { EventsComponent } from './events/events.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { GalleryMixedComponent } from './gallery/gallery-mixed/gallery-mixed.component';
@@ -14,6 +14,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes';
 import { ListsComponent } from './lists/lists.component';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { DetailComponent } from './gallery/detail/detail.component';
+import { HomeComponent } from './home/home.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent }, //home
@@ -38,6 +39,7 @@ export const appRoutes: Routes = [
             },
         ]
     },
+    { path: 'start', component: StartComponent },
     { path: 'events', component: EventsComponent },
     { path: 'lists', component: ListsComponent, resolve: {users: ListsResolver} },
     //{path: 'events', component: EventsComponent, canActivate:[AuthGuard]},

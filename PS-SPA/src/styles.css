@@ -4,6 +4,18 @@
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
 @import '../node_modules/flag-icon-css/css/flag-icon.min.css';
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+@font-face {
+  font-family: lato;
+  src: url("./assets/fonts/lucida-grande/LucidaGrande.ttf") format("opentype");
+}
+
+body{
+  color: #21539C;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif!important;
+}
 
 /* ngx-toastr */
  @import '../node_modules/ngx-toastr/toastr';
