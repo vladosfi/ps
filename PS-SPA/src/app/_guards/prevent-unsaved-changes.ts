@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { CanDeactivate } from "@angular/router";
-import { GalleryDetailEditComponent } from "../gallery/gallery-detail-edit/gallery-detail-edit.component";
+import { DetailEditComponent } from "../gallery/detail-edit/gallery-detail-edit.component";
 
 @Injectable()
-export class PreventUnsavedChanges implements CanDeactivate<GalleryDetailEditComponent>{
-    canDeactivate(component: GalleryDetailEditComponent){
+export class PreventUnsavedChanges implements CanDeactivate<DetailEditComponent>{
+    canDeactivate(component: DetailEditComponent){
         if(component.editForm.dirty){
             return confirm('Are you shure you want to continue? Any unsaved changes will be lost!');
         }

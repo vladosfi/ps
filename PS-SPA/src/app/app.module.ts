@@ -23,20 +23,22 @@ import { EventsComponent } from './events/events.component';
 import { GalleryMixedComponent } from './gallery/gallery-mixed/gallery-mixed.component';
 import { GallerySeaComponent } from './gallery/gallery-sea/gallery-sea.component';
 import { GalleryMarineComponent } from './gallery/gallery-marine/gallery-marine.component';
-import { GalleryThumbComponent } from './gallery/gallery-thumb/gallery-thumb.component';
-import { GalleryDetailComponent } from './gallery/gallery-detail/gallery-detail.component';
+import { ThumbComponent } from './gallery/thumb/thumb.component';
+import { DetailComponent } from './gallery/detail/detail.component';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 import { AuthGuard } from './_guards/auth.guard';
-import { GalleryDetailResolver } from './_resolvers/gallery-detail.resolver';
+import { DetailResolver } from './_resolvers/detail.resolver';
 import { TimeagoModule } from 'ngx-timeago';
 import { GalleryMixedResolver } from './_resolvers/gallery-mixed.resolver';
-import { GalleryDetailEditComponent } from './gallery/gallery-detail-edit/gallery-detail-edit.component';
-import { GalleryDetailEditResolver } from './_resolvers/gallery-detail-edit.resolver';
+import { DetailEditComponent } from './gallery/detail-edit/gallery-detail-edit.component';
+import { DetailEditResolver } from './_resolvers/detail-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes';
-import { GalleryPhotoEditorComponent } from './gallery/gallery-photo-editor/gallery-photo-editor.component';
+import { PhotoEditorComponent } from './gallery/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ListsComponent } from './lists/lists.component';
+import { ListsResolver } from './_resolvers/lists.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -53,10 +55,11 @@ export function tokenGetter() {
     GalleryMixedComponent,
     GallerySeaComponent,
     GalleryMarineComponent,
-    GalleryThumbComponent,
-    GalleryDetailComponent,
-    GalleryDetailEditComponent,
-    GalleryPhotoEditorComponent,
+    ThumbComponent,
+    DetailComponent,
+    DetailEditComponent,
+    PhotoEditorComponent,
+    ListsComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,10 +90,11 @@ export function tokenGetter() {
     AuthService,
     AuthGuard,
     ErrorInterceptorProvider,
-    GalleryDetailResolver,
+    DetailResolver,
     GalleryMixedResolver,
-    GalleryDetailEditResolver,
+    DetailEditResolver,
     PreventUnsavedChanges,
+    ListsResolver,
   ],
   bootstrap: [AppComponent]
 })

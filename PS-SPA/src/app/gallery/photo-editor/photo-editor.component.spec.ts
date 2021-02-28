@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GalleryPhotoEditorComponent } from './gallery-photo-editor.component';
+import { PhotoEditorComponent } from './photo-editor.component';
 
-describe('GalleryPhotoEditorComponent', () => {
-  let component: GalleryPhotoEditorComponent;
-  let fixture: ComponentFixture<GalleryPhotoEditorComponent>;
+describe('PhotoEditorComponent', () => {
+  let component: PhotoEditorComponent;
+  let fixture: ComponentFixture<PhotoEditorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GalleryPhotoEditorComponent ]
+      declarations: [ PhotoEditorComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GalleryPhotoEditorComponent);
+    fixture = TestBed.createComponent(PhotoEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

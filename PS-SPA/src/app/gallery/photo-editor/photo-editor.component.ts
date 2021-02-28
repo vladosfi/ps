@@ -14,11 +14,11 @@ import { UserService } from 'src/app/_services/user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-gallery-photo-editor',
-  templateUrl: './gallery-photo-editor.component.html',
-  styleUrls: ['./gallery-photo-editor.component.css']
+  selector: 'app-photo-editor',
+  templateUrl: './photo-editor.component.html',
+  styleUrls: ['./photo-editor.component.css']
 })
-export class GalleryPhotoEditorComponent implements OnInit {
+export class PhotoEditorComponent implements OnInit {
   @Input() photos: IPhoto[];
   @Output() getMemberPhotoChange = new EventEmitter<string>();
   uploader: FileUploader;

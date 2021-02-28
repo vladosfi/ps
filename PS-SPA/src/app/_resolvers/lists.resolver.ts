@@ -8,20 +8,23 @@ import { ToastService } from '../_services/toast.service';
 
 
 @Injectable()
-export class GalleryDetailResolver implements Resolve<IUser>{
+export class ListsResolver implements Resolve<IUser[]>{
+    pageNumber = 1;
+    pageSize = 5;
+    likesParam = 'Likers';
 
     constructor(
         private userService: UserService,
         private router: Router,
         private toast: ToastService) { }
 
-        resolve(route: ActivatedRouteSnapshot): Observable<IUser>{
-            return this.userService.getUser(Number(route.params['id'])).pipe(
-                catchError(error => {
-                    this.toast.error('Problem retreiving data');
-                    this.router.navigate(['/gallery']);
-                    return of(null);
-                })
-            )
-        }
+    resolve(route: ActivatedRouteSnapshot): Observable<IUser[]> {
+        return this.userService.getUsers(this.pageNumber, this.pageSize, null, this.likesParam).pipe(
+            catchError(error => {
+                this.toast.error('Problem retreiving data');
+                this.router.navigate(['/home']);
+                return of(null);
+            })
+        )
+    }
 }

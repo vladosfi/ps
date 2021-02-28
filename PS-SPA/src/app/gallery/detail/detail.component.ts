@@ -4,25 +4,29 @@ import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery-9';
 import { TimeagoPipe } from 'ngx-timeago';
 import { IUser } from 'src/app/_models/user';
+import { AuthService } from 'src/app/_services/auth.service';
 import { ToastService } from 'src/app/_services/toast.service';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
-  selector: 'app-gallery-detail',
-  templateUrl: './gallery-detail.component.html',
-  styleUrls: ['./gallery-detail.component.css']
+  selector: 'app-detail',
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.css']
 })
-export class GalleryDetailComponent implements OnInit {
+export class DetailComponent implements OnInit {
   @ViewChild('memberTabs', { static: true }) memberTabs: TabsetComponent
   user: IUser;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   live: TimeagoPipe;
 
+
   constructor(
     private userService: UserService,
     private toast: ToastService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    ) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
@@ -75,6 +79,14 @@ export class GalleryDetailComponent implements OnInit {
 
   selectTab(tabId: number) {
     this.memberTabs.tabs[tabId].active = true;
+  }
+
+  sendLike(id: number) {
+    this.userService.sendLike(this.authService.decodedToken.nameid, id).subscribe(data => {
+      this.toast.success('You have liked: ' + this.user.knownAs);
+    }, error => {
+      this.toast.error(error);
+    });
   }
 
 }

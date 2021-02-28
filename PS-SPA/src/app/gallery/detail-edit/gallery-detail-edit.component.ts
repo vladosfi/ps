@@ -8,11 +8,11 @@ import { ToastService } from 'src/app/_services/toast.service';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
-  selector: 'app-gallery-detail-edit',
+  selector: 'app-detail-edit',
   templateUrl: './gallery-detail-edit.component.html',
   styleUrls: ['./gallery-detail-edit.component.css']
 })
-export class GalleryDetailEditComponent implements OnInit {
+export class DetailEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   user: IUser;
   live: TimeagoPipe;

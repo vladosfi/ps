@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GalleryThumbComponent } from './gallery-thumb.component';
+import { ThumbComponent } from './thumb.component';
 
-describe('GalleryThumbComponent', () => {
-  let component: GalleryThumbComponent;
-  let fixture: ComponentFixture<GalleryThumbComponent>;
+describe('ThumbComponent', () => {
+  let component: ThumbComponent;
+  let fixture: ComponentFixture<ThumbComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GalleryThumbComponent ]
+      declarations: [ ThumbComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GalleryThumbComponent);
+    fixture = TestBed.createComponent(ThumbComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

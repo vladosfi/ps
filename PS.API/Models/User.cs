@@ -8,6 +8,8 @@ namespace PS.API.Models
         public User()
         {
             this.Photos = new HashSet<Photo>();
+            this.Likers = new HashSet<Like>();
+            this.Likees = new HashSet<Like>();
         }
 
         public int Id { get; set; }
@@ -24,5 +26,7 @@ namespace PS.API.Models
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
+        public ICollection<Like> Likers { get; set; }
+        public ICollection<Like> Likees { get; set; }
     }
 }
