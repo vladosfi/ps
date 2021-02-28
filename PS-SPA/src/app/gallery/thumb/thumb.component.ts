@@ -1,6 +1,6 @@
 import { unsupported } from '@angular/compiler/src/render3/view/util';
 import { Component, Input, OnInit } from '@angular/core';
-import { IUser } from 'src/app/_models/user';
+import { IUser } from 'src/app/_interfaces/user';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ToastService } from 'src/app/_services/toast.service';
 import { UserService } from 'src/app/_services/user.service';

@@ -4,6 +4,13 @@
   "newProjectRoot": "projects",
   "projects": {
     "PS-SPA": {
+      "i18n": {
+        "locales": {
+          "en": "src/translate/messages.en.xlf",
+          "bg": "src/translate/messages.bg.xlf",
+          "ru": "src/translate/messages.ru.xlf",
+          "de": "src/translate/messages.de.xlf"
+      }},
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -29,6 +36,18 @@
             "scripts": []
           },
           "configurations": {
+            "en": {
+              "localize": ["en"]
+            },
+            "bg": {
+              "localize": ["bg"]
+            },
+            "ru": {
+              "localize": ["ru"]
+            },
+            "de": {
+              "localize": ["de"]
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -66,6 +85,18 @@
           "configurations": {
             "production": {
               "browserTarget": "PS-SPA:build:production"
+            },
+            "en": {
+              "browserTarget": "PS-SPA:build:en"
+            },
+            "bg": {
+              "browserTarget": "PS-SPA:build:ru"
+            },
+            "ru": {
+              "browserTarget": "PS-SPA:build:ru"
+            },
+            "de": {
+              "browserTarget": "PS-SPA:build:de"
             }
           }
         },

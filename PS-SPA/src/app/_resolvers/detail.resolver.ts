@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUser } from '../_models/user';
+import { IUser } from '../_interfaces/user';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { Observable, of } from 'rxjs';

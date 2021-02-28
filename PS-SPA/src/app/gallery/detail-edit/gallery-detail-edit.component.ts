@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TimeagoPipe } from 'ngx-timeago';
-import { IUser } from 'src/app/_models/user';
+import { IUser } from 'src/app/_interfaces/user';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ToastService } from 'src/app/_services/toast.service';
 import { UserService } from 'src/app/_services/user.service';

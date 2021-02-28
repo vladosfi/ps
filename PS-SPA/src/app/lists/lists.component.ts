@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PaginatedResult, Pagination } from '../_models/pagination';
-import { IUser } from '../_models/user';
+import { PaginatedResult, Pagination } from '../_interfaces/pagination';
+import { IUser } from '../_interfaces/user';
 import { AuthService } from '../_services/auth.service';
 import { ToastService } from '../_services/toast.service';
 import { UserService } from '../_services/user.service';

@@ -9,6 +9,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  siteLanguage: string = 'English';
+  siteLocale: string;
+  languageList = [
+    { code: 'en', label: 'English' },
+    { code: 'bg', label: 'Български' },
+    { code: 'ru', label: 'Русский' },
+    { code: 'de', label: 'Deutsch' }
+  ];
+
   model: any = {};
   photoUrl: string;
 
@@ -19,6 +28,9 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.siteLocale = window.location.pathname.split('/')[1];
+    this.siteLanguage = this.languageList.find(f => f.code === this.siteLocale).label;
+
     this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 

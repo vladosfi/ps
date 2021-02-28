@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { PaginatedResult } from '../_models/pagination';
-import { IUser } from '../_models/user';
+import { PaginatedResult } from '../_interfaces/pagination';
+import { IUser } from '../_interfaces/user';
 
 
 @Injectable({

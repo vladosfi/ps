@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
-import { IPhoto } from 'src/app/_models/photo';
+import { IPhoto } from 'src/app/_interfaces/photo';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ToastService } from 'src/app/_services/toast.service';
 import { UserService } from 'src/app/_services/user.service';

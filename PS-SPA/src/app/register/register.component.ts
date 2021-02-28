@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { IUser } from '../_models/user';
+import { IUser } from '../_interfaces/user';
 import { AuthService } from '../_services/auth.service';
 import { ToastService } from '../_services/toast.service';
 
