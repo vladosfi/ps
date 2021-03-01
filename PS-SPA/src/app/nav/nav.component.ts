@@ -14,6 +14,7 @@ export class NavComponent implements OnInit {
   photoUrl: string;
   selectedLanguage: string;
   languagesToShow: any;
+  isCollapsed = true;
   
   constructor(
     public authService: AuthService,

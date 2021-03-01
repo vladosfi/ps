@@ -37,6 +37,7 @@ import { PhotoEditorComponent } from './gallery/photo-editor/photo-editor.compon
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ListsComponent } from './lists/lists.component';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { HomeComponent } from './home/home.component';
@@ -80,6 +81,7 @@ export function HttpLoaderFactory(http: HttpClient){
     FormsModule,
     ReactiveFormsModule,
     NgxGalleryModule,
+    CollapseModule.forRoot(),
     TranslateModule.forRoot({
       loader:{
         provide: TranslateLoader,

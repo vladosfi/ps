@@ -1,6 +1,9 @@
 {
     "NAV": {
-        "HOME": "Home"
+        "HOME": "Home",
+        "LISTS": "Lists",
+        "EVENTS": "Events",
+        "CONTACTS": "Contacts"
     },
     "TRANSLATE":{
         "LANGUAGE": "English",

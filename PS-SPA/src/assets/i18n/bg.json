@@ -1,6 +1,9 @@
 {
     "NAV": {
-        "HOME": "Начало"
+        "HOME": "Начало",
+        "LISTS": "Списъци",
+        "EVENTS": "Събития",
+        "CONTACTS": "Контакти"
     },
     "TRANSLATE":{
         "LANGUAGE": "Български",

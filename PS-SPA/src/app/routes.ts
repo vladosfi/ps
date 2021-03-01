@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent }, //home
+    { path: 'home', component: HomeComponent }, //home
     {
         path: '',
         runGuardsAndResolvers: 'always',
