@@ -1,0 +1,12 @@
+{
+    "NAV": {
+        "HOME": "Начало"
+    },
+    "TRANSLATE":{
+        "LANGUAGE": "Русский",
+        "gb": "English",
+        "bg": "Български",
+        "ru": "Русский",
+        "de": "Deutsch"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "NAV": {
+        "HOME": "Anfang"
+    },
+    "TRANSLATE":{
+        "LANGUAGE": "Deutsch",
+        "gb": "English",
+        "bg": "Български",
+        "ru": "Русский",
+        "de": "Deutsch"
+    }
+}
