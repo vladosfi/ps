@@ -1,23 +1,14 @@
-nav a{
+nav a {
     color: #21539C;
-    font-size:large;
-}
-nav.navbar.navbar-expand-md.navbar-dark.bg-dark > div > ul > div > a{
-    color: white;
-}
-/* 
-ul > div > a{
-    color: white;
-} */
-.active { 
-    background:#21539c; 
+    font-size: large;
 }
 
-.active a{
-    color:white;
+nav.navbar.navbar-expand-md.navbar-dark.bg-dark>div>ul>div>a {
+    color: white;
 }
 
-div > a > img{
+
+div>a>img {
     max-height: 60px;
 }
 
@@ -29,32 +20,206 @@ div > a > img{
     text-decoration: none;
 }
 
-
-ul > div > span > img{
+ul>div>span>img {
     max-height: 30px;
-    border: 2px solid white;    
+    border: 2px solid white;
 }
 
-.flag-icon{
+.flag-icon {
     margin-right: 3px;
+    font-size: 16px;
 }
 
-
-
-
-
-
-
-.collapsed{
-    display:none !important;
+.navbar {
+    justify-content: center;
 }
 
-.navbar-collapse{
+/* .collapsed {
+    display: none !important;
+}
+.collapse {
     display: flex;
+} */
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #21539C;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover{
+    color: white;
+}
+
+.nav-link:hover {
+    background-color: #21539C;
+    color: white;
+}
+
+
+a.dropdown-item:active{
+    background-color: white;
+}
+
+.nav-item.active{
+    border-bottom: 5px solid#21539C;
+    padding-bottom: 0px;
+}
+
+@media (max-width: 768px) {
+    .navbar-toggler {
+        background-color: #21539C;
+        width: 100%;
+        color: white;
+        border-radius: 0;
+    }
+    .navbar-brand {
+        display: none;
+    }
+    .app-nav>div {
+        background-color: #0C1923;
+    }
+    .active {
+        background: #253039;
+    }
+    .active a {
+        color: white;
+    }
+    .navbar-nav li a {
+        width: 100%;
+        padding-left: 30px;
+        border-bottom: 1px solid #253039;
+        /* text-align: center; */
+    }
+    
+    ul.navbar-nav.ml-auto {
+        background-color: #0C1923;
+    }
+    .navbar-dark .navbar-nav .nav-link {
+        color: white;
+    }
+    div.dropdown-menu {
+        background-color: #0C1923;
+        margin-right: 30px;
+    }
+    nav a {
+        color: white;
+    }
+    nav a:hover {
+        background-color: #21539C;
+        color: white;
+    }
+    a.nav-link:hover {
+        color: #21539C;
+    }
+    ul>li.nav-item.dropdown>a:hover {
+        color: #21539C;
+    }
+    a.navlink:hover {
+        color: #21539C;
+    }
+    div.dropdown span {
+        margin-left: 30px;
+    }
+    .dropdown-item {
+        padding: 5px 0;
+    }
+    .dropdown-item:hover {
+        color: white;
+    }
+    .dropdown-item.active, .dropdown-item:active {
+        background-color: #0C1923;
+    }
+    a.dropdown-item:hover {
+        background-color: #21539C;
+    }
+    a.dropdown-item {
+        width: 100%;
+        padding: 5px 0;
+    }
+    div.dropdown-divider {
+        display: none;
+    }
 }
 
 @media (max-width: 992px) {
-    .collapsed{
-        display:block !important;
+    .navbar-toggler {
+        background-color: #21539C;
+        width: 100%;
+        color: white;
+        border-radius: 0;
+    }
+    .navbar-brand {
+        display: none;
+    }
+    .app-nav>div {
+        background-color: #0C1923;
+    }
+    .active {
+        background: #253039;
+    }
+    .active a {
+        color: white;
+    }
+    .navbar-nav li a {
+        width: 100%;
+        padding-left: 30px;
+        border-bottom: 1px solid #253039;
+        /* text-align: center; */
+    }
+    ul.navbar-nav.ml-auto {
+        background-color: #0C1923;
+    }
+    .navbar-dark .navbar-nav .nav-link {
+        color: white;
+    }
+    div.dropdown-menu {
+        background-color: #0C1923;
+        margin-right: 30px;
+    }
+    nav a {
+        color: white;
+    }
+    nav a:hover {
+        background-color: #21539C;
+        color: white;
+    }
+    a.nav-link:hover {
+        color: #21539C;
+    }
+    ul>li.nav-item.dropdown>a:hover {
+        color: #21539C;
+    }
+    a.navlink:hover {
+        color: #21539C;
+    }
+    div.dropdown span {
+        margin-left: 30px;
+    }
+    .dropdown-item {
+        padding: 5px 0;
+    }
+    .dropdown-item:hover {
+        color: white;
+    }
+    .dropdown-item.active, .dropdown-item:active {
+        background-color: #0C1923;
+    }
+    a.dropdown-item:hover {
+        background-color: #21539C;
+    }
+    a.dropdown-item {
+        width: 100%;
+        padding: 5px 0;
+    }
+    div.dropdown-divider {
+        display: none;
     }
 }
+
+@media (min-width: 992px) {
+    .navbar-brand {
+        display: flex;
+    }
+}
+
+/* 
+@media (min-width: 1200px) { ... } */
