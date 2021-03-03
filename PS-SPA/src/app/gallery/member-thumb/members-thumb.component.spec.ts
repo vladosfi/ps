@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GalleryMixedComponent } from './gallery-mixed.component';
+import { MemberThumbComponent } from './members-thumb.component';
 
-describe('GalleryMixedComponent', () => {
-  let component: GalleryMixedComponent;
-  let fixture: ComponentFixture<GalleryMixedComponent>;
+describe('MemberThumbComponent', () => {
+  let component: MemberThumbComponent;
+  let fixture: ComponentFixture<MemberThumbComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GalleryMixedComponent ]
+      declarations: [ MemberThumbComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GalleryMixedComponent);
+    fixture = TestBed.createComponent(MemberThumbComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

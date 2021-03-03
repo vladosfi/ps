@@ -6,17 +6,17 @@ import { ToastService } from '../../_services/toast.service';
 import { UserService } from '../../_services/user.service';
 
 @Component({
-  selector: 'app-gallery-mixed',
-  templateUrl: './gallery-mixed.component.html',
-  styleUrls: ['./gallery-mixed.component.css']
+  selector: 'app-members',
+  templateUrl: './members.component.html',
+  styleUrls: ['./members.component.css']
 })
-export class GalleryMixedComponent implements OnInit {
+export class MembersComponent implements OnInit {
   users: IUser[];
   user: IUser = JSON.parse(localStorage.getItem('user'));
   genderList = [{ value: 'male', display: 'Males' }, { value: 'female', display: 'Female' }];
   userParams: any = {};
   pagination: Pagination;
-  
+    
   constructor(
     private userService: UserService,
     private toast: ToastService,

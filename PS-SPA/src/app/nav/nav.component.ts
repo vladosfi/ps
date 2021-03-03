@@ -15,7 +15,7 @@ export class NavComponent implements OnInit {
   selectedLanguage: string;
   languagesToShow: any;
   isCollapsed = true;
-  
+   
   constructor(
     public authService: AuthService,
     private toast: ToastService,

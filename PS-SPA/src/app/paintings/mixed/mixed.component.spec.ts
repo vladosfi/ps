@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GallerySeaComponent } from './gallery-sea.component';
+import { MixedComponent } from './mixed.component';
 
-describe('GallerySeaComponent', () => {
-  let component: GallerySeaComponent;
-  let fixture: ComponentFixture<GallerySeaComponent>;
+describe('MixedComponent', () => {
+  let component: MixedComponent;
+  let fixture: ComponentFixture<MixedComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GallerySeaComponent ]
+      declarations: [ MixedComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GallerySeaComponent);
+    fixture = TestBed.createComponent(MixedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

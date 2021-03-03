@@ -64,6 +64,14 @@ a.dropdown-item:active{
     padding-bottom: 0px;
 }
 
+/* li.nav-item{
+    text-transform: uppercase;
+}
+
+a.nav-link.dropdown-toggle{
+    text-transform: uppercase;
+} */
+
 @media (max-width: 768px) {
     .navbar-toggler {
         background-color: #21539C;

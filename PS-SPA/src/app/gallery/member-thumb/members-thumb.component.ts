@@ -1,4 +1,3 @@
-import { unsupported } from '@angular/compiler/src/render3/view/util';
 import { Component, Input, OnInit } from '@angular/core';
 import { IUser } from 'src/app/_interfaces/user';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -6,11 +5,11 @@ import { ToastService } from 'src/app/_services/toast.service';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
-  selector: 'app-thumb',
-  templateUrl: './thumb.component.html',
-  styleUrls: ['./thumb.component.css']
+  selector: 'app-members-thumb',
+  templateUrl: './members-thumb.component.html',
+  styleUrls: ['./members-thumb.component.css']
 })
-export class ThumbComponent implements OnInit {
+export class MemberThumbComponent implements OnInit {
   @Input() user: IUser;
 
   constructor(

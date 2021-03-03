@@ -8,7 +8,7 @@ import { ToastService } from '../_services/toast.service';
 
 
 @Injectable()
-export class GalleryMixedResolver implements Resolve<IUser[]>{
+export class MembersResolver implements Resolve<IUser[]>{
     pageNumber = 1;
     pageSize = 5;
 

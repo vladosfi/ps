@@ -20,16 +20,13 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { appRoutes } from './routes';
 import { ContactsComponent } from './contacts/contacts.component';
 import { EventsComponent } from './events/events.component';
-import { GalleryMixedComponent } from './gallery/gallery-mixed/gallery-mixed.component';
-import { GallerySeaComponent } from './gallery/gallery-sea/gallery-sea.component';
-import { GalleryMarineComponent } from './gallery/gallery-marine/gallery-marine.component';
-import { ThumbComponent } from './gallery/thumb/thumb.component';
+import { MemberThumbComponent } from './gallery/member-thumb/members-thumb.component';
 import { DetailComponent } from './gallery/detail/detail.component';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 import { AuthGuard } from './_guards/auth.guard';
 import { DetailResolver } from './_resolvers/detail.resolver';
 import { TimeagoModule } from 'ngx-timeago';
-import { GalleryMixedResolver } from './_resolvers/gallery-mixed.resolver';
+import { MembersResolver } from './_resolvers/members.resolver';
 import { DetailEditComponent } from './gallery/detail-edit/gallery-detail-edit.component';
 import { DetailEditResolver } from './_resolvers/detail-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes';
@@ -44,6 +41,9 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MixedComponent } from './paintings/mixed/mixed.component';
+import { ThumbComponent } from './paintings/thumb/thumb.component';
+import { MembersComponent } from './gallery/members/members.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -61,16 +61,16 @@ export function HttpLoaderFactory(http: HttpClient){
     RegisterComponent,
     ContactsComponent,
     EventsComponent,
-    GalleryMixedComponent,
-    GallerySeaComponent,
-    GalleryMarineComponent,
-    ThumbComponent,
+    MemberThumbComponent,
+    MembersComponent,
     DetailComponent,
     DetailEditComponent,
     PhotoEditorComponent,
     ListsComponent,
     HomeComponent,
     FooterComponent,
+    MixedComponent,
+    ThumbComponent
   ],
   imports: [
     BrowserModule,
@@ -110,7 +110,7 @@ export function HttpLoaderFactory(http: HttpClient){
     AuthGuard,
     ErrorInterceptorProvider,
     DetailResolver,
-    GalleryMixedResolver,
+    MembersResolver,
     DetailEditResolver,
     PreventUnsavedChanges,
     ListsResolver,

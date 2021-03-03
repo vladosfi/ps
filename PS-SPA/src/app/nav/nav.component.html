@@ -49,12 +49,15 @@
       <li class="nav-item dropdown" routerLinkActive="active" dropdown>
         <a class="nav-link dropdown-toggle" dropdownToggle>Gallery</a>
         <div class="dropdown-menu" *dropdownMenu>
-          <a class="dropdown-item" [routerLink]="['/gallery-mixed']">Mixed Tehnique</a>
+          <a class="dropdown-item" [routerLink]="['/members']">Mixed Tehnique</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" [routerLink]="['/gallery-sea']">Sea mosaic</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" [routerLink]="['/gallery-marine']">Marine-themed wall panels</a>
         </div>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/mixed']">Mixed</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/lists']">{{
