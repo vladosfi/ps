@@ -14,9 +14,10 @@
 .card-img-wrapper {
   overflow: hidden;
   position: relative;
+  cursor: pointer;
 }
 
-.member-icons {
+.like-icon {
   position: absolute;
   bottom: -30%;
   left: 0;
@@ -24,6 +25,50 @@
   margin-right: auto;
   margin-left: auto;
   opacity: 0;
+  margin-left: 70%;
+}
+
+.card-img-wrapper:hover .like-icon {
+  bottom: 0;
+  opacity: 1;
+}
+
+.painting-title {
+  position: absolute;
+  bottom: 80%;
+  top: -80%;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  padding: 20px;
+  margin: 0 auto;
+  font-size: medium;
+  font-weight: 700;
+}
+
+.list-inline-item:active,
+.list-inline-item:focus,
+.list-inline-item:focus-within,
+.list-inline-item:hover {
+  box-shadow: 0 0 0 0.1rem rgb(33 83 156 / 20%);
+}
+
+.center-title {
+  background-color: rgba(255, 255, 255, 0.3);
+  width: 90%;
+  box-shadow: 0 0 0 0.1rem rgb(255 255 255 / 50%);
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.card-img-wrapper:hover .painting-title {
+  top: 1%;
+  opacity: 1;
+}
+
+.animate {
+  transition: all 0.3s ease-in-out;
 }
 
 .btn.btn-primary,
@@ -32,23 +77,18 @@
 .btn.btn-primary:focus-within,
 .btn.btn-primary:hover {
   background-color: #21539c;
+  border-color: #21539c;
 }
 
-.button-primary,
-.button-primary:active,
-.button-primary:focus,
-.button-primary:focus-within,
-.button-primary:hover,
-.button-primary:visited,
-.button-primary:focus-visible {
-  background-color: #21539c;
+.btn.btn-primary:active,
+.btn.btn-primary:focus,
+.btn.btn-primary:focus-within,
+.btn.btn-primary:hover {
+  box-shadow: 0 0 0 0.2rem rgb(33 83 156 / 50%);
 }
 
-.card-img-wrapper:hover .member-icons {
-  bottom: 0;
-  opacity: 1;
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgb(33 83 156 / 70%);
 }
-
-.animate {
-  transition: all 0.3s ease-in-out;
-} 
