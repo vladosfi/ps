@@ -1,3 +1,7 @@
 <div class="container">
-<app-thumb [paintings]="paintingSource"></app-thumb>
+    <div class="row">
+        <div *ngFor="let painting of paintings" class="col-lg-2 col-md-3 col-sm-6">
+          <app-thumb [paintingSource]="painting"></app-thumb>
+        </div>
+      </div>
 </div>

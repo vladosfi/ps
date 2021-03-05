@@ -77,6 +77,8 @@ namespace PS.API
                 });
             }
 
+            app.UseStaticFiles();
+
             //app.UseHttpsRedirection();
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());

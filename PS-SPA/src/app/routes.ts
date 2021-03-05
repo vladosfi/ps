@@ -14,6 +14,7 @@ import { ListsResolver } from './_resolvers/lists.resolver';
 import { DetailComponent } from './gallery/detail/detail.component';
 import { HomeComponent } from './home/home.component';
 import { MixedComponent } from './paintings/mixed/mixed.component';
+import { PaintingsResolver } from './_resolvers/paintings.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent }, //home
@@ -39,7 +40,7 @@ export const appRoutes: Routes = [
             },
         ]
     },
-    { path: 'mixed', component: MixedComponent },
+    { path: 'mixed', component: MixedComponent, resolve: {paintings: PaintingsResolver} },
     { path: 'start', component: StartComponent },
     { path: 'events', component: EventsComponent },
     { path: 'lists', component: ListsComponent, resolve: {users: ListsResolver} },

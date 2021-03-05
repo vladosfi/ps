@@ -21,5 +21,7 @@ namespace PS.API.Data
         Task<Photo> GetMainPhotoForUser(int userId);
 
         Task<Like> GetLike(int userId,int recipientId);
+
+        Task<PagedList<Painting>> GetPapintings(PaintingParams paintingParams);
     }
 }

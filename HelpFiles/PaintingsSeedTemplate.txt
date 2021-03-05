@@ -1,0 +1,21 @@
+https://www.json-generator.com/
+
+[
+  '{{repeat(15,15)}}',
+  {
+        Name: '{{firstName("female")}}',
+		Description: '{{lorem()}}',	
+        CategoryId: function(num) {
+             return num.integer(1,3);
+        },
+        Images: [
+        {
+            isMain: true,  
+            SrcPath: function(num) {
+             return 'images/' + num.integer(1,5) + '.jpg';
+        }
+      }
+    ]
+     
+  }
+]

@@ -20,7 +20,7 @@ namespace PS.API
                 try{
                     var context = services.GetRequiredService<DataContext>();
                     context.Database.Migrate();
-                    Seed.SeedUsers(context);
+                    Seed.MakeSeed(context);
                 }
                 catch(Exception ex){
                     var logger = services.GetRequiredService<ILogger<Program>>();

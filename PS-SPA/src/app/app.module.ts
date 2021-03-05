@@ -44,6 +44,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MixedComponent } from './paintings/mixed/mixed.component';
 import { ThumbComponent } from './paintings/thumb/thumb.component';
 import { MembersComponent } from './gallery/members/members.component';
+import { PaintingsResolver } from './_resolvers/paintings.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -114,6 +115,7 @@ export function HttpLoaderFactory(http: HttpClient){
     DetailEditResolver,
     PreventUnsavedChanges,
     ListsResolver,
+    PaintingsResolver,
   ],
   bootstrap: [AppComponent]
 })

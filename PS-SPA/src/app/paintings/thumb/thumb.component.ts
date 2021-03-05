@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IPainting } from 'src/app/_interfaces/painting';
 
 @Component({
   selector: 'app-thumb',
@@ -6,7 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./thumb.component.css']
 })
 export class ThumbComponent implements OnInit {
-  @Input() paintings: any;
+  @Input() paintingSource: IPainting;
+  imagesUrl = 'http://localhost:5000/';
   
   constructor() { }
 

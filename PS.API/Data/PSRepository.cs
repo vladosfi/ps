@@ -13,6 +13,7 @@ namespace PS.API.Data
         private const string orderByCreated = "created";
         private const int userMaxAge = 99;
         private const int userMinAge = 1;
+
         private readonly DataContext context;
 
         public PSRepository(DataContext context)
@@ -52,6 +53,15 @@ namespace PS.API.Data
             var user = await this.context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
+        }
+
+        public async Task<PagedList<Painting>> GetPapintings(PaintingParams paintingParams)
+        {
+            var paintings = this.context.Paintings.Include(p => p.Images).OrderByDescending(p => p.CreatedOn).AsQueryable();
+
+            paintings = paintings.Where(p => p.CategoryId == paintingParams.CategoryId);
+
+            return await PagedList<Painting>.CreateAsync(paintings, paintingParams.PageNumber, paintingParams.PageSize);
         }
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)

@@ -7,7 +7,13 @@ namespace PS.API.Data
 {
     public class Seed
     {
-        public static void SeedUsers(DataContext context)
+        public static void MakeSeed(DataContext context)
+        {
+            SeedUsers(context);
+            SeedPaintingCategories(context);
+        }
+
+        private static void SeedUsers(DataContext context)
         {
             if (!context.Users.Any())
             {
@@ -23,6 +29,27 @@ namespace PS.API.Data
                     user.PasswordSalt = passwordSalt;
                     user.Username = user.Username.ToLower();
                     context.Users.Add(user);
+                }
+
+                context.SaveChanges();
+            }
+        }
+        private static void SeedPaintingCategories(DataContext context)
+        {
+            if (!context.Categories.Any())
+            {
+                var categoriesData = System.IO.File.ReadAllText("Data/CategorySeedData.json");
+                var paintingsData = System.IO.File.ReadAllText("Data/PaintingSeedData.json");
+                var categories = JsonConvert.DeserializeObject<List<Category>>(categoriesData);
+                var paintings = JsonConvert.DeserializeObject<List<Painting>>(paintingsData);
+
+                foreach (var category in categories)
+                {
+                    context.Categories.Add(category);
+
+                    foreach(var painting in paintings.Where(p => p.CategoryId == category.Id)){
+                        context.Paintings.Add(painting);
+                    }
                 }
 
                 context.SaveChanges();

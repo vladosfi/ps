@@ -22,6 +22,9 @@ namespace PS.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
@@ -36,14 +39,17 @@ namespace PS.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Name")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PaintingId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("PaintingId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("SrcPath")
                         .HasColumnType("TEXT");
@@ -72,12 +78,20 @@ namespace PS.API.Migrations
 
             modelBuilder.Entity("PS.API.Models.Painting", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
@@ -186,8 +200,7 @@ namespace PS.API.Migrations
                     b.HasOne("PS.API.Models.Painting", "Painting")
                         .WithMany("Images")
                         .HasForeignKey("PaintingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Painting");
                 });
