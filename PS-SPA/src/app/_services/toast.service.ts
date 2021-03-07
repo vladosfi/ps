@@ -27,6 +27,7 @@ export class ToastService {
 
   success(message: string, title?: string,) {
     this.toastr.success(message, title, this.toastrOptions);
+    console.log(message);
   }
 
   info(message: string, title?: string,) {

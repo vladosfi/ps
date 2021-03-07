@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastService } from '../_services/toast.service';
-import { AuthService } from '../_services/auth.service';
+import { ToastService } from '../../_services/toast.service';
+import { AuthService } from '../../_services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 

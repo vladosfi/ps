@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MixedComponent } from './mixed.component';
+import { PaintingListComponent } from './painting-list.component';
 
 describe('MixedComponent', () => {
-  let component: MixedComponent;
-  let fixture: ComponentFixture<MixedComponent>;
+  let component: PaintingListComponent;
+  let fixture: ComponentFixture<PaintingListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MixedComponent ]
+      declarations: [ PaintingListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MixedComponent);
+    fixture = TestBed.createComponent(PaintingListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,22 +1,24 @@
-<div class="card mb-4">
-  <div class="card-img-wrapper">
-    <img
-      class="card-img-top"
-      src="{{imagesUrl}}{{paintingSource.mainImageUrl}}"
-      alt="{{ paintingSource.name }}"
-    />
-    <!-- <div class="card-img-overlay">
+<div class="card mb-4 align-self-center">
+  <a [routerLink]="['/paintings/details',paintingSource?.id]">
+    <div class="card-img-wrapper">
+      <img
+        class="card-img-top mx-auto d-block img-fluid"
+        src="{{ imagesUrl }}{{ paintingSource?.mainImageUrl }}"
+        alt="{{ paintingSource?.name }}"
+      />
+      <!-- <div class="card-img-overlay">
       <h5 class="card-title">{{ paintings }}</h5>
     </div> -->
-    <ul class="list-inline painting-title animate text-center">
+      <ul class="list-inline painting-title animate text-center">
         <li class="list-inline-item center-title">
-          {{ paintingSource.name }} 
+          {{ paintingSource?.name }}
         </li>
-    </ul>
-    <ul class="list-inline like-icon animate text-center">
-      <li class="list-inline-item">
-        <button class="btn btn-primary"><i class="fa fa-heart"></i></button>
-      </li>
-    </ul>
-  </div>
+      </ul>
+      <ul class="list-inline like-icon animate text-center">
+        <li class="list-inline-item">
+          <button class="btn btn-primary"><i class="fa fa-heart"></i></button>
+        </li>
+      </ul>
+    </div>
+  </a>
 </div>

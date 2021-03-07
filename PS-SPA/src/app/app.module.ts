@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { AppComponent } from './app.component';
-import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
 import { StartComponent } from './start/start.component';
 import { RegisterComponent } from './register/register.component';
@@ -38,13 +37,14 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ListsComponent } from './lists/lists.component';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { HomeComponent } from './home/home.component';
-import { FooterComponent } from './footer/footer.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MixedComponent } from './paintings/mixed/mixed.component';
+import { PaintingListComponent } from './paintings/painting-list/painting-list.component';
 import { ThumbComponent } from './paintings/thumb/thumb.component';
 import { MembersComponent } from './gallery/members/members.component';
 import { PaintingsResolver } from './_resolvers/paintings.resolver';
+import { CoreModule } from './core/core.module';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { PaintingDetailsComponent } from './paintings/details/details.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -54,10 +54,10 @@ export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
 }
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
     StartComponent,
     RegisterComponent,
     ContactsComponent,
@@ -69,9 +69,9 @@ export function HttpLoaderFactory(http: HttpClient){
     PhotoEditorComponent,
     ListsComponent,
     HomeComponent,
-    FooterComponent,
-    MixedComponent,
-    ThumbComponent
+    PaintingListComponent,
+    ThumbComponent,
+    PaintingDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +82,7 @@ export function HttpLoaderFactory(http: HttpClient){
     FormsModule,
     ReactiveFormsModule,
     NgxGalleryModule,
-    CollapseModule.forRoot(),
+    CoreModule,
     TranslateModule.forRoot({
       loader:{
         provide: TranslateLoader,
@@ -90,6 +90,7 @@ export function HttpLoaderFactory(http: HttpClient){
         deps: [HttpClient]
       }
     }),
+    CollapseModule.forRoot(),
     PaginationModule.forRoot(),
     FileUploadModule,
     TimeagoModule.forRoot(),
@@ -117,6 +118,12 @@ export function HttpLoaderFactory(http: HttpClient){
     ListsResolver,
     PaintingsResolver,
   ],
+  exports: [
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+

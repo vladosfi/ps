@@ -1,12 +1,17 @@
-.card{
-  height: 250px;
+img {
+  max-height: 250px;
+  width: auto;
 }
 
 .card:hover img {
   transform: scale(1.2, 1.2);
   transition-duration: 500ms;
   transition-timing-function: ease-out;
-  opacity: 0.7;
+  opacity: 0.5;
+}
+
+.card {
+  border: none;
 }
 
 .card img {
@@ -19,6 +24,15 @@
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  background-color: #a9d3e9;
+}
+
+.card-img-wrapper:hover {
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+  /* opacity: 0.5; */
+  background-color: aqua;
+  border-radius: 2px;
 }
 
 .like-icon {
@@ -29,7 +43,7 @@
   margin-right: auto;
   margin-left: auto;
   opacity: 0;
-  margin-left: 70%;
+  margin-left: 60%;
 }
 
 .card-img-wrapper:hover .like-icon {
@@ -46,8 +60,9 @@
   opacity: 0;
   padding: 20px;
   margin: 0 auto;
-  font-size: medium;
+  font-size:large;
   font-weight: 700;
+  color: #21539c;
 }
 
 .list-inline-item:active,
@@ -58,9 +73,9 @@
 }
 
 .center-title {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.6);
   width: 90%;
-  box-shadow: 0 0 0 0.1rem rgb(255 255 255 / 50%);
+  box-shadow: 33 83 156 0.1rem rgb(255 255 255 / 80%);
   border-radius: 2px;
   cursor: pointer;
   padding: 10px;

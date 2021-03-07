@@ -59,7 +59,9 @@ namespace PS.API.Data
         {
             var paintings = this.context.Paintings.Include(p => p.Images).OrderByDescending(p => p.CreatedOn).AsQueryable();
 
-            paintings = paintings.Where(p => p.CategoryId == paintingParams.CategoryId);
+            if(paintingParams.CategoryId != 0){
+                paintings = paintings.Where(p => p.CategoryId == paintingParams.CategoryId);
+            }
 
             return await PagedList<Painting>.CreateAsync(paintings, paintingParams.PageNumber, paintingParams.PageSize);
         }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PaginatedResult, Pagination } from 'src/app/_interfaces/pagination';
 import { IPainting } from 'src/app/_interfaces/painting';
@@ -6,19 +6,20 @@ import { PaintingService } from 'src/app/_services/painting.service';
 import { ToastService } from 'src/app/_services/toast.service';
 
 @Component({
-  selector: 'app-mixed',
-  templateUrl: './mixed.component.html',
-  styleUrls: ['./mixed.component.css']
+  selector: 'app-painting-list',
+  templateUrl: './painting-list.component.html',
+  styleUrls: ['./painting-list.component.css']
 })
-export class MixedComponent implements OnInit {
+export class PaintingListComponent implements OnInit , OnDestroy {
   paintings: IPainting[];
-  userParams: any = {};
+  paintingParams: any = {};
   pagination: Pagination;
-  paintingSource: string = 'Name of image';
-
+  
   constructor(private paintingService: PaintingService,
     private toast: ToastService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) {
+      document.body.style.backgroundColor  = "#A9D3E9";
+     }
 
     ngOnInit(): void {
       this.route.data.subscribe(data => {
@@ -26,7 +27,7 @@ export class MixedComponent implements OnInit {
         this.pagination = data['paintings'].pagination;
       });
   
-      this.userParams.categoryId = 1;
+      //this.paintingParams.categoryId = 1;
     }
   
     pageChanged(event: any): void {
@@ -35,12 +36,16 @@ export class MixedComponent implements OnInit {
     }
   
     loadPaintings() {
-      this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
+      this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage)
         .subscribe((res: PaginatedResult<IPainting[]>) => {
           this.paintings = res.result;
           this.pagination = res.pagination;
         }, error => {
           this.toast.error(error);
         })
+    }
+
+    ngOnDestroy(){
+      document.body.style.backgroundColor  = "#ffffff";
     }
 }

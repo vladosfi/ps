@@ -10,10 +10,8 @@ import { PaintingService } from '../_services/painting.service';
 @Injectable()
 export class PaintingsResolver implements Resolve<IPainting[]>{
     pageNumber = 1;
-    pageSize = 5;
-    paintingParams = {
-        categoryId: 1
-    }
+    pageSize = 12;
+    paintingParams;
 
     constructor(
         private paintingService: PaintingService,
@@ -21,7 +19,7 @@ export class PaintingsResolver implements Resolve<IPainting[]>{
         private toast: ToastService) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<IPainting[]> {
-        return this.paintingService.getPaintings(this.pageNumber, this.pageSize, this.paintingParams).pipe(
+        return this.paintingService.getPaintings(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.toast.error('Problem retreiving paintings');
                 this.router.navigate(['/home']);

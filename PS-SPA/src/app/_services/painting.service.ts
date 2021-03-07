@@ -24,7 +24,9 @@ export class PaintingService {
       params = params.append('pageSize', itemsPerPage);
     }
 
-    params = params.append('categoryId', paintingParams.categoryId);
+    if (paintingParams?.categoryId) {
+      params = params.append('categoryId', paintingParams.categoryId);
+    }
 
 
 

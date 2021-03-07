@@ -13,12 +13,13 @@ import { ListsComponent } from './lists/lists.component';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { DetailComponent } from './gallery/detail/detail.component';
 import { HomeComponent } from './home/home.component';
-import { MixedComponent } from './paintings/mixed/mixed.component';
+import { PaintingListComponent } from './paintings/painting-list/painting-list.component';
 import { PaintingsResolver } from './_resolvers/paintings.resolver';
+import { PaintingDetailsComponent } from './paintings/details/details.component';
 
 export const appRoutes: Routes = [
+    //{ path: 'home', redirectTo: '' },
     { path: '', component: HomeComponent }, //home
-    { path: 'home', component: HomeComponent }, //home
     {
         path: '',
         runGuardsAndResolvers: 'always',
@@ -39,11 +40,23 @@ export const appRoutes: Routes = [
                 resolve: { user: DetailEditResolver }, canDeactivate: [PreventUnsavedChanges]
             },
         ]
-    },
-    { path: 'mixed', component: MixedComponent, resolve: {paintings: PaintingsResolver} },
+    },  
+    {
+        path: '',
+        children: [
+            {
+                path: 'paintings', component: PaintingListComponent,
+                resolve: { paintings: PaintingsResolver }
+            },
+            {
+                path: 'paintings/details/:id', component: PaintingDetailsComponent,
+            }
+        ]
+    },  
+    //{ path: 'paintings', component: PaintingListComponent, resolve: { paintings: PaintingsResolver } },
     { path: 'start', component: StartComponent },
     { path: 'events', component: EventsComponent },
-    { path: 'lists', component: ListsComponent, resolve: {users: ListsResolver} },
+    { path: 'lists', component: ListsComponent, resolve: { users: ListsResolver } },
     //{path: 'events', component: EventsComponent, canActivate:[AuthGuard]},
     { path: 'contacts', component: ContactsComponent },
     { path: '**', redirectTo: '', pathMatch: 'full' },

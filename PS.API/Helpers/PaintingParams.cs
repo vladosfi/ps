@@ -12,6 +12,6 @@ namespace PS.API.Helpers
             set { pageSize = (value > MaxPageSize) ? MaxPageSize : value; }
         }
 
-        public int CategoryId { get; set; } = 1;
+        public int CategoryId { get; set; }
     }
 }
