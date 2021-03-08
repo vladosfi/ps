@@ -5,6 +5,7 @@ import { PaginatedResult } from '../_interfaces/pagination';
 import { IPainting } from '../_interfaces/painting';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
+import { IPaintingDetails } from '../_interfaces/painting-details';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,16 @@ export class PaintingService {
           }
           return paginatedResult;
         }));
+  }
+
+  getPainting(id: string): Observable<IPaintingDetails> {
+    
+
+    return this.http.get<IPaintingDetails>(this.baseUrl + 'paintings/' + id, { observe: 'response'})
+    .pipe(
+      map( response => {
+        return response.body;
+      })
+    );
   }
 }

@@ -34,6 +34,9 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ListsComponent } from './lists/lists.component';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { HomeComponent } from './home/home.component';
@@ -42,9 +45,8 @@ import { ThumbComponent } from './paintings/thumb/thumb.component';
 import { MembersComponent } from './gallery/members/members.component';
 import { PaintingsResolver } from './_resolvers/paintings.resolver';
 import { CoreModule } from './core/core.module';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PaintingDetailsComponent } from './paintings/details/details.component';
+import { PaintingResolver } from './_resolvers/painting.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -82,6 +84,7 @@ export function HttpLoaderFactory(http: HttpClient){
     FormsModule,
     ReactiveFormsModule,
     NgxGalleryModule,
+    ModalModule.forRoot(),
     CoreModule,
     TranslateModule.forRoot({
       loader:{
@@ -117,6 +120,7 @@ export function HttpLoaderFactory(http: HttpClient){
     PreventUnsavedChanges,
     ListsResolver,
     PaintingsResolver,
+    PaintingResolver
   ],
   exports: [
     

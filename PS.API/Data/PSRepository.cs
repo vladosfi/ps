@@ -65,6 +65,12 @@ namespace PS.API.Data
 
             return await PagedList<Painting>.CreateAsync(paintings, paintingParams.PageNumber, paintingParams.PageSize);
         }
+        public async Task<Painting> GetPaintingById(string id)
+        {
+            var painting = await this.context.Paintings.Include(p => p.Images).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
+
+            return painting;
+        }
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
@@ -130,5 +136,7 @@ namespace PS.API.Data
                 return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
             }
         }
+
+
     }
 }

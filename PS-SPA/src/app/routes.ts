@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { PaintingListComponent } from './paintings/painting-list/painting-list.component';
 import { PaintingsResolver } from './_resolvers/paintings.resolver';
 import { PaintingDetailsComponent } from './paintings/details/details.component';
+import { PaintingResolver } from './_resolvers/painting.resolver';
 
 export const appRoutes: Routes = [
     //{ path: 'home', redirectTo: '' },
@@ -49,7 +50,8 @@ export const appRoutes: Routes = [
                 resolve: { paintings: PaintingsResolver }
             },
             {
-                path: 'paintings/details/:id', component: PaintingDetailsComponent,
+                path: 'paintings/:id', component: PaintingDetailsComponent,
+                resolve: { painting: PaintingResolver }
             }
         ]
     },  

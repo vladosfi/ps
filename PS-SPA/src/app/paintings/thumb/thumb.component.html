@@ -1,11 +1,8 @@
 <div class="card mb-4 align-self-center">
-  <a [routerLink]="['/paintings/details',paintingSource?.id]">
+  <!-- <a [routerLink]="['/paintings', paintingSource?.id]"> -->
     <div class="card-img-wrapper">
-      <img
-        class="card-img-top mx-auto d-block img-fluid"
-        src="{{ imagesUrl }}{{ paintingSource?.mainImageUrl }}"
-        alt="{{ paintingSource?.name }}"
-      />
+      <img class="card-img-top mx-auto d-block img-fluid" src="{{ imagesUrl }}{{ paintingSource?.mainImageUrl }}"
+        alt="{{ paintingSource?.name }}" />
       <!-- <div class="card-img-overlay">
       <h5 class="card-title">{{ paintings }}</h5>
     </div> -->
@@ -20,5 +17,5 @@
         </li>
       </ul>
     </div>
-  </a>
+  <!-- </a> -->
 </div>

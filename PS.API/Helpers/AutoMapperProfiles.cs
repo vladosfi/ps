@@ -22,6 +22,9 @@ namespace PS.API.Helpers
             CreateMap<UserForRegisterDto, User>();
             CreateMap<Painting, PaintingForListDto>()
                 .ForMember(dest => dest.MainImageUrl, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).SrcPath));
+            CreateMap<Painting, PaintingForDetailsDto>()
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).SrcPath));
         }
     }
 }

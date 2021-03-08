@@ -1,0 +1,18 @@
+.modal-content {
+    background-color: #221F1F;
+    color: #E7E7E7;
+}
+
+.modal-dialog {
+    max-width: 60%;
+    margin: 1.75rem auto;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.close {
+    color: #fff;
+    text-shadow: 0 1px 0 #fff;
+}

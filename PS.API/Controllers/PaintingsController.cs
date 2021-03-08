@@ -42,5 +42,15 @@ namespace PS.API.Controllers
 
             return Ok(pantingsToReturn);
         }
+
+        [HttpGet("{id}")]        
+        public async Task<IActionResult> GetPainting(string id){
+
+            var painting = await this.repo.GetPaintingById(id);
+
+            var paintingToReturn = this.mapper.Map<PaintingForDetailsDto>(painting);
+
+            return Ok(paintingToReturn);
+        }
     }
 }
