@@ -42,8 +42,7 @@ export class PaintingService {
         }));
   }
 
-  getPainting(id: string): Observable<IPaintingDetails> {
-    
+  getPainting(id: string): Observable<IPaintingDetails> {   
 
     return this.http.get<IPaintingDetails>(this.baseUrl + 'paintings/' + id, { observe: 'response'})
     .pipe(

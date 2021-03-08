@@ -73,7 +73,7 @@ export function HttpLoaderFactory(http: HttpClient){
     HomeComponent,
     PaintingListComponent,
     ThumbComponent,
-    PaintingDetailsComponent
+    PaintingDetailsComponent,
   ],
   imports: [
     BrowserModule,
