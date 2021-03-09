@@ -13,25 +13,25 @@ export class PaintingAddComponent implements OnInit {
 
   constructor(fb: FormBuilder) {
     this.paintingForm = new FormGroup({
-      nameBg: new FormControl(),
-      descBg: new FormControl(),
-      available: new FormControl(),
-      category: new FormControl(),
+      nameBg: new FormControl('',[Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
+      //descBg: new FormControl('',[Validators.required, Validators.minLength(4), Validators.maxLength(200)]),
+      available: new FormControl('',[Validators.required]),
+      category: new FormControl('',[Validators.required]),
     });
 
-     fb.group({
-      nameBg:['Name in BG', [Validators.required]],
-      descBg:['', [Validators.required]],
-      available:['', [Validators.required]],
-      category:['Category', [Validators.required]],
-    });
+    //  fb.group({
+    //   nameBg:['Name in BG', [Validators.required]],
+    //   descBg:['', [Validators.required]],
+    //   available:['', [Validators.required]],
+    //   category:['Category', [Validators.required]],
+    // });
    }
 
   ngOnInit(): void {
   }
 
   addPainting(){
-    console.log(this.model);
+    console.log(this.paintingForm);
   }
 
 }
