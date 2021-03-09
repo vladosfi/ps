@@ -10,6 +10,7 @@ pagination{
 .modal-content {
     background-color: #221F1F;
     color: #E7E7E7;
+    border: 3px solid #474747;
 }
 
 .modal-dialog {
@@ -19,9 +20,50 @@ pagination{
 
 .modal-header {
     border-bottom: none;
+    padding-bottom: 0;
 }
 
 .close {
     color: #fff;
     text-shadow: 0 1px 0 #fff;
+}
+
+img{
+    max-height: 70vh;
+}
+
+.propName{
+    font-weight: bold;
+}
+
+.btn-primary{
+    background-color: #222F2F;    
+    color: #1E66A6;
+    border: none;
+    border-radius: 2px;
+    font-size: small;
+}
+
+.btn.btn-primary,
+.btn.btn-primary:active,
+.btn.btn-primary:focus,
+.btn.btn-primary:focus-within,
+.btn.btn-primary:hover {
+  background-color: #21539c;
+  background-color: #222F2F;
+}
+
+
+.btn.btn-primary:active,
+.btn.btn-primary:focus,
+.btn.btn-primary:focus-within,
+.btn.btn-primary:hover {
+  box-shadow: 0 0 0 0.1rem rgb(33 83 156 / 50%);
+  color: white;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.1rem rgb(33 83 156 / 70%);
 }

@@ -8,6 +8,9 @@ namespace PS.API.Dtos
         public string Name { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
-        public string Image { get; set; }
+        public bool Available { get; set; }
+        public float SizeX { get; set; }
+        public float SizeY { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

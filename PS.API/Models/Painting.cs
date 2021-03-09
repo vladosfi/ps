@@ -15,12 +15,25 @@ namespace PS.API.Models
         }
 
         public string Id { get; set; }
+
         public string Name { get; set; }
+
         public string Description { get; set; }
+
+        public bool Available { get; set; }
+
+        public float SizeX { get; set; }
+
+        public float SizeY { get; set; }
+
         public DateTime CreatedOn { get; set; }
+
         public DateTime? ModifiedOn { get; set; }
+
         public Category Category { get; set; }
+
         public int CategoryId { get; set; }
+
         public ICollection<Image> Images { get; set; }
     }
 }

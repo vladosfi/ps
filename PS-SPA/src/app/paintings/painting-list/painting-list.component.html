@@ -1,90 +1,56 @@
+<!-- (click)="getPainting(painting.id); lgModal.show();" -->
 <div class="container mt-5 mb-5">
   <div class="row d-flex justify-content-center">
-    <div
-      *ngFor="let painting of paintings"
-      class="col-lg-3 col-md-3 col-sm-6"
-      (click)="getPainting(painting.id)"
-    >
+    <div *ngFor="let painting of paintings" class="col-lg-3 col-md-3 col-sm-6" (click)="getPainting(painting.id); ">
       <app-thumb [paintingSource]="painting"></app-thumb>
     </div>
   </div>
 </div>
 
 <div class="d-flex justify-content-center">
-  <pagination
-    [boundaryLinks]="true"
-    [totalItems]="pagination.totalItems"
-    [itemsPerPage]="pagination.itemsPerPage"
-    [(ngModel)]="pagination.currentPage"
-    (pageChanged)="pageChanged($event)"
-    previousText="&lsaquo;"
-    nextText="&rsaquo;"
-    firstText="&laquo;"
-    lastText="&raquo;"
-  >
+  <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+    firstText="&laquo;" lastText="&raquo;">
   </pagination>
 </div>
 
-
-
-<h1>Modal will be shown after 5 seconds</h1>
-<ng-template #template>
-  <div
-
-    role="dialog"
-    aria-labelledby="dialog-sizes-name1"
-  >
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 id="dialog-sizes-name1" class="modal-title pull-left">
-            Large modal - {{ this.paintings[0].name }}
-          </h4>
-          <button
-            type="button"
-            class="close pull-right"
-            (click)="lgModal.hide()"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">...</div>
-      </div>
-    </div>
-  </div>
-</ng-template>
-
-Large modal
-<button class="btn btn-primary" (click)="lgModal.openModal()">
-  Large modal
-</button>
-
-<div
-  bsModal
-  #lgModal="bs-modal"
-  class="modal fade"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="dialog-sizes-name1"
-  (onShow)="handler('onShow', $event)"
->
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 id="dialog-sizes-name1" class="modal-title pull-left">
-          Large modal - {{ this.paintings[0].name }}
-        </h4>
-        <button
-          type="button"
-          class="close pull-right"
-          (click)="lgModal.hide()"
-          aria-label="Close"
-        >
+        <li class="list-inline-item">
+          <!-- <h4 id="dialog-sizes-name1" class="modal-title pull-left">{{paintingModal?.name}}</h4> -->
+          <button class="btn btn-primary" [disabled]="!paintingModal?.pervImageUrl" (click)="getPainting(paintingModal?.pervImageUrl);">
+            <i class="fa fa-arrow-left"></i>
+          </button>
+        </li>
+        <li class="list-inline-item">
+          <button class="btn btn-primary" [disabled]="!paintingModal?.nextImageUrl" (click)="getPainting(paintingModal?.nextImageUrl);">
+            <i class="fa fa-arrow-right"></i>
+          </button>
+        </li>
+        <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">...</div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-8">
+            <img class="img-fluid mx-auto d-block" src="{{paintingModal?.imageUrl}}" alt="{{paintingModal?.name}}">
+          </div>
+          <div class="col-4">
+            <div class="row justify-content-start">
+              <div class="col-12">
+                <h1>{{paintingModal?.name}}</h1>
+                <p><span class="propName">Size:</span> {{paintingModal?.sizeY}} x {{paintingModal?.sizeX}}</p>
+                <p>{{paintingModal?.category}}</p>
+                <p>{{paintingModal?.available}}</p>
+                <p>{{paintingModal?.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

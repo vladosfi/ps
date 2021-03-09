@@ -10,6 +10,7 @@
         </a>
         <div class="dropdown-menu mt-1 ml-1" *dropdownMenu>
           <a class="dropdown-item" [routerLink]="['/gallery-detail-edit']"><i class="fa fa-user"></i> Edit Profile</a>
+          <a class="dropdown-item" [routerLink]="['/paintings/add']"><i class="fa fa-user"></i> Add Painting</a>          
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
         </div>
@@ -39,7 +40,7 @@
     <a class="navbar-brand" [routerLink]="['/']">
       <img src="../../assets/logo.jpg" alt="logo" />
     </a>
-    <ul *ngIf="loggedIn()" class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <a class="nav-link" [routerLink]="['']">{{ "NAV.HOME" | translate }}</a>
       </li>

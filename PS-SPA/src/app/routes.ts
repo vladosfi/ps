@@ -17,6 +17,7 @@ import { PaintingListComponent } from './paintings/painting-list/painting-list.c
 import { PaintingsResolver } from './_resolvers/paintings.resolver';
 import { PaintingDetailsComponent } from './paintings/details/details.component';
 import { PaintingResolver } from './_resolvers/painting.resolver';
+import { PaintingAddComponent } from './paintings/painting-add/painting-add.component';
 
 export const appRoutes: Routes = [
     //{ path: 'home', redirectTo: '' },
@@ -48,6 +49,9 @@ export const appRoutes: Routes = [
             {
                 path: 'paintings', component: PaintingListComponent,
                 resolve: { paintings: PaintingsResolver }
+            },
+            {
+                path: 'paintings/add', component: PaintingAddComponent
             },
             {
                 path: 'paintings/:id', component: PaintingDetailsComponent,

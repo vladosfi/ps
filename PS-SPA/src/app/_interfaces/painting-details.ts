@@ -3,5 +3,10 @@ export interface IPaintingDetails {
     name: string;
     description: string;
     category: string;
-    image: string;
+    sizeX: number;
+    sizeY: number;
+    available: boolean;
+    imageUrl: string;
+    pervImageUrl: string;
+    nextImageUrl: string;
 }

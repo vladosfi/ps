@@ -47,6 +47,7 @@ import { PaintingsResolver } from './_resolvers/paintings.resolver';
 import { CoreModule } from './core/core.module';
 import { PaintingDetailsComponent } from './paintings/details/details.component';
 import { PaintingResolver } from './_resolvers/painting.resolver';
+import { PaintingAddComponent } from './paintings/painting-add/painting-add.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -74,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient){
     PaintingListComponent,
     ThumbComponent,
     PaintingDetailsComponent,
+    PaintingAddComponent,
   ],
   imports: [
     BrowserModule,
