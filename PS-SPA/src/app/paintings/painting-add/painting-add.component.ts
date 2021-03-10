@@ -36,4 +36,7 @@ export class PaintingAddComponent implements OnInit {
     console.log(this.paintingForm);
   }
 
+  updateMainPhoto(photoUrl) {
+    //this.user.photoUrl = photoUrl;
+  }
 }

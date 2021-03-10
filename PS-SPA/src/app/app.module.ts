@@ -49,6 +49,8 @@ import { PaintingDetailsComponent } from './paintings/details/details.component'
 import { PaintingResolver } from './_resolvers/painting.resolver';
 import { PaintingAddComponent } from './paintings/painting-add/painting-add.component';
 import { DecimalNumericDirective } from './shared/decimal-numeric.directive';
+import { ImageEditComponent } from './paintings/image-edit/image-edit.component';
+import { ImageEditorComponent } from './paintings/image-editor/image-editor.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -78,6 +80,7 @@ export function HttpLoaderFactory(http: HttpClient){
     PaintingDetailsComponent,
     PaintingAddComponent,
     DecimalNumericDirective,
+    ImageEditorComponent,
   ],
   imports: [
     BrowserModule,

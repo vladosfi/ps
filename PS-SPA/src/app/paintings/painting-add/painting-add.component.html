@@ -128,6 +128,8 @@
             </div>
         </div>
 
+        <app-image-editor [photos]="user.photos" (getMemberPhotoChange)="updateMainPhoto($event)"></app-image-editor>
+
 
         <div class="form-group text-center">
             <button class="btn btn-success" [disabled]="!paintingForm.valid" type="submit">
