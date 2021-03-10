@@ -66,10 +66,6 @@ export class ImageEditorComponent implements OnInit {
         if (photo.isMain) {
           this.authService.changeMemberPhoto(photo.url);
           this.authService.currentUser.photoUrl = photo.url;
-          localStorage.setItem(
-            'user',
-            JSON.stringify(this.authService.currentUser)
-          );
         }
       }
     };
@@ -86,10 +82,7 @@ export class ImageEditorComponent implements OnInit {
           this.getMemberPhotoChange.emit(photo.url);
           this.authService.changeMemberPhoto(photo.url);
           this.authService.currentUser.photoUrl = photo.url;
-          localStorage.setItem(
-            'user',
-            JSON.stringify(this.authService.currentUser)
-          );
+          
         },
         (error) => {
           this.toast.error(error);

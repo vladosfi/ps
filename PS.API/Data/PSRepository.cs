@@ -75,6 +75,16 @@ namespace PS.API.Data
             return painting;
         }
 
+        
+        public async Task<Painting> AddPainting(Painting painting)
+        {
+            await this.context.Paintings.AddAsync(painting);
+
+            await this.context.SaveChangesAsync();
+
+            return painting;
+        }
+
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
             var users = this.context.Users.Include(p => p.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
@@ -139,7 +149,5 @@ namespace PS.API.Data
                 return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
             }
         }
-
-
     }
 }

@@ -25,5 +25,7 @@ namespace PS.API.Data
         Task<PagedList<Painting>> GetPapintings(PaintingParams paintingParams);
         
         Task<Painting> GetPaintingById(string id);
+
+        Task<Painting> AddPainting(Painting painting);
     }
 }
