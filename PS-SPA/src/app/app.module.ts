@@ -48,6 +48,7 @@ import { CoreModule } from './core/core.module';
 import { PaintingDetailsComponent } from './paintings/details/details.component';
 import { PaintingResolver } from './_resolvers/painting.resolver';
 import { PaintingAddComponent } from './paintings/painting-add/painting-add.component';
+import { DecimalNumericDirective } from './shared/decimal-numeric.directive';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -76,6 +77,7 @@ export function HttpLoaderFactory(http: HttpClient){
     ThumbComponent,
     PaintingDetailsComponent,
     PaintingAddComponent,
+    DecimalNumericDirective,
   ],
   imports: [
     BrowserModule,

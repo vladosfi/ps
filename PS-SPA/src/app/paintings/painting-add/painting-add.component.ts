@@ -14,9 +14,11 @@ export class PaintingAddComponent implements OnInit {
   constructor(fb: FormBuilder) {
     this.paintingForm = new FormGroup({
       nameBg: new FormControl('',[Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-      //descBg: new FormControl('',[Validators.required, Validators.minLength(4), Validators.maxLength(200)]),
+      descBg: new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
       available: new FormControl('',[Validators.required]),
       category: new FormControl('',[Validators.required]),
+      sizeX: new FormControl('',[Validators.required]),
+      sizeY: new FormControl('',[Validators.required]),
     });
 
     //  fb.group({

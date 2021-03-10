@@ -13,13 +13,16 @@
                                 [ngClass]="{
                                     'is-invalid':
                                     paintingForm.get('category').errors &&
-                                    paintingForm.get('category').touched
+                                    paintingForm.get('category').touched,
+                                    'is-valid': !paintingForm.get('category').errors &&
+                                    paintingForm.get('category').statusChanges
                                   }">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option selected></option>
+                                <option value="1">Mixed Tehnique</option>
+                                <option value="2">Sea mosaic</option>
+                                <option value="3">Marine-themed wall panels</option>
                             </select>
+                            <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Please enter a category for painting</div>
                         </div>
                     </div>
@@ -42,14 +45,84 @@
         <div class="row">
             <div class="col-sm">
                 <div class="form-group">
+                    <input appDecimalNumeric decimals="2" type="text" [ngClass]="{
+                        'is-invalid':
+                        paintingForm.get('sizeX').errors &&
+                        paintingForm.get('sizeX').touched,
+                        'is-valid': !paintingForm.get('sizeX').errors &&
+                        paintingForm.get('sizeX').statusChanges
+                      }"
+                       class="form-control" formControlName="sizeX" placeholder="Enter a Width of the painting" />
+                      <div class="valid-feedback"></div>
+                    <div class="invalid-feedback" 
+                        *ngIf="paintingForm.get('sizeX').hasError('required') 
+                        && paintingForm.get('sizeX').touched">Please Enter a Width of the painting
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-group">
+                    <input appDecimalNumeric decimals="2" type="text" [ngClass]="{
+                        'is-invalid':
+                        paintingForm.get('sizeY').errors &&
+                        paintingForm.get('sizeY').touched,
+                        'is-valid': !paintingForm.get('sizeY').errors &&
+                        paintingForm.get('sizeY').statusChanges
+                      }"
+                       class="form-control" formControlName="sizeY" placeholder="Enter a Height of the painting" />
+                      <div class="valid-feedback"></div>
+                    <div class="invalid-feedback" 
+                        *ngIf="paintingForm.get('sizeY').hasError('required') 
+                        && paintingForm.get('sizeY').touched">Please Enter a Height of the painting
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group">
                     <input type="text" [ngClass]="{
                         'is-invalid':
                         paintingForm.get('nameBg').errors &&
-                        paintingForm.get('nameBg').touched
-                      }" class="form-control" formControlName="nameBg" placeholder="Enter a name for painting" />
+                        paintingForm.get('nameBg').touched,
+                        'is-valid': !paintingForm.get('nameBg').errors &&
+                        paintingForm.get('nameBg').statusChanges
+                      }"
+                       class="form-control" formControlName="nameBg" placeholder="Enter a name for painting" />
+                      <div class="valid-feedback"></div>
                     <div class="invalid-feedback" 
-                        *ngIf="paintingForm.get('nameBg').hasError('required')
+                        *ngIf="paintingForm.get('nameBg').hasError('required') 
                         && paintingForm.get('nameBg').touched">Please enter a name for painting
+                    </div>
+                    <div class="invalid-feedback" 
+                        *ngIf="paintingForm.get('nameBg').hasError('minlength')
+                        || paintingForm.get('nameBg').hasError('maxlength')
+                        && paintingForm.get('nameBg').touched">Please enter a name between 2 and 50 characters
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group">
+                    <textarea name="interests" 
+                    [ngClass]="{
+                        'is-invalid':
+                        paintingForm.get('descBg').errors && paintingForm.get('descBg').touched,
+                        'is-valid': !paintingForm.get('descBg').errors && paintingForm.get('descBg').statusChanges
+                      }"
+                    class="form-control" formControlName="descBg" placeholder="Enter a description for painting" ></textarea>
+                    <div class="valid-feedback"></div>
+                    <div class="invalid-feedback" 
+                        *ngIf="paintingForm.get('descBg').hasError('required') 
+                        && paintingForm.get('descBg').touched">Please enter a description for painting
+                    </div>
+                    <div class="invalid-feedback" 
+                        *ngIf="paintingForm.get('descBg').hasError('minlength')
+                        || paintingForm.get('descBg').hasError('maxlength')
+                        && paintingForm.get('descBg').touched">Please enter a name between 10 and 200 characters
                     </div>
                 </div>
             </div>
@@ -58,11 +131,11 @@
 
         <div class="form-group text-center">
             <button class="btn btn-success" [disabled]="!paintingForm.valid" type="submit">
-                Add Painting
+                Save Painting
             </button>
         </div>
     </form>
 </div>
 
-<p>Form: {{paintingForm.value | json}}</p>
+
 <p>Form Status: {{paintingForm.status | json}}</p>

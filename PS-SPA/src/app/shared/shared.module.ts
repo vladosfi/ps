@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DecimalNumericDirective } from './decimal-numeric.directive';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [DecimalNumericDirective],
   imports: [
     CommonModule
   ]
