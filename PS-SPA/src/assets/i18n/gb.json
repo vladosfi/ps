@@ -5,6 +5,10 @@
         "EVENTS": "Events",
         "CONTACTS": "Contacts"
     },
+    "GENERAL": {
+        "AVAILABLE": "Available",
+        "UNAVAILABLE": "Unavailable"
+    },
     "HOME": {
         "INTRO-HEADER": "Hello friends!",
         "INTRO-P1": "This is where you can enjoy my works of art. It is a little bit of magic, some passion and an amazing love for sea shells and pebbles. Delighting in their varied shapes and colours. A homage to the grandeur of nature. It is my joy of long walks on the beach, a heap of patience and piles of hard work. Finally the pleasure which emerges from a new picture, born from the waves. Complete happiness is when what you like to do is enjoyed by others (like you).",
@@ -17,13 +21,12 @@
         "MIXED-TECHNIQUE-P1": "The mosaic works of art are created by a process called mixed technique which is exceptional and unique hence each painting possesses its own charm and character. Each painting weaves various marine materials together– shells, mussel shells, parts of shells, crushed shells, small pebbles and sand. The great diversity of colour and variety comes from the wealth of colours and forms mother nature herself presents. Each work of art is exotic and has its own individual character with a breeze off the sea, eluding to waves and warm sun-dappled days. Reminding you of nostalgic, carefree holidays at the coast.",
         "MIXED-TECHNIQUE-P2": "At first glance, mixed technique paintings seem easily constructed but in fact are not at all easy to create. Only once sufficient material has been sourced by combing the beaches for a particular shade or shape, can work commence. Sometimes a search for specific items takes days or weeks and then maybe is never found. For this reason oodles of patience and long walks along the shore are required to complete just one painting.In most cases inspiration comes from findings. The good thing is that nothing can ever be repeated. The next step in the process is precise adhering of materials with tweezers according to the colours and shapes. Some focus is then required to apply the sand for the background. Then comes the final stage of varnishing which seals the colour and lustre. This is when the picture really comes to life. The work of art is then mounted into a suitable frame which further enhances the effect.",
         "MIXED-TECHNIQUE-P3": "Everyone who appreciates beauty and harmony will enjoy these paintings. Art is limitless, styles vary, techniques and artistic devices are individualistic which makes a work of art interesting, inspiring and provoking simultaneously. I believe each person will find something that touches a chord in them, something that appeals to them or brings them pleasure. Why not own a piece of art that stirs something inside of you?"
-      },
-    "TRANSLATE":{
+    },
+    "TRANSLATE": {
         "LANGUAGE": "English",
         "gb": "English",
         "bg": "Български",
         "ru": "Русский",
         "de": "Deutsch"
     }
-    
 }

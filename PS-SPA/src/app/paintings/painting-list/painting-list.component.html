@@ -1,5 +1,23 @@
-<!-- (click)="getPainting(painting.id); lgModal.show();" -->
-<div class="container mt-5 mb-5">
+
+
+<div class="container mt-4 mb-5">
+  <div class="btn-group mb-3">
+    <label class="btn btn-info mr-1" [(ngModel)]="this.paintingParams.categoryId"
+           btnRadio="1" tabindex="0" role="button"  (click)="loadPaintings();">{{ "GALLERY.CATEGORY-MIX" | translate }}</label>
+    <label class="btn btn-info mr-1" [(ngModel)]="this.paintingParams.categoryId"
+           btnRadio="2" tabindex="0" role="button" (click)="loadPaintings();">{{ "GALLERY.CATEGORY-SEA" | translate }}</label>
+    <label class="btn btn-info" [(ngModel)]="this.paintingParams.categoryId"
+           btnRadio="3" tabindex="0" role="button" (click)="loadPaintings();">{{ "GALLERY.CATEGORY-MARINE" | translate }}</label>
+  </div>
+  
+  <div class="btn-group ml-5 mb-3">
+    <label class="btn btn-info mr-1" [(ngModel)]="this.paintingParams.available"
+           btnRadio="true" tabindex="0" role="button"  (click)="loadPaintings();">{{ "GENERAL.AVAILABLE" | translate }}</label>
+    <label class="btn btn-info" [(ngModel)]="this.paintingParams.available"
+           btnRadio="false" tabindex="0" role="button" (click)="loadPaintings();">{{ "GENERAL.UNAVAILABLE" | translate }}</label>
+  </div>
+
+
   <div class="row d-flex justify-content-center">
     <div *ngFor="let painting of paintings" class="col-lg-3 col-md-3 col-sm-6" (click)="getPainting(painting.id); ">
       <app-thumb [paintingSource]="painting"></app-thumb>

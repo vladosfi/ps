@@ -29,6 +29,9 @@ export class PaintingService {
       params = params.append('categoryId', paintingParams.categoryId);
     }
 
+    if (paintingParams?.available) {
+      params = params.append('available', paintingParams.available);
+    }
 
 
     return this.http.get<IPainting[]>(this.baseUrl + 'paintings', { observe: 'response', params })

@@ -19,6 +19,7 @@ export class PaintingListComponent implements OnInit, OnDestroy {
   paintingParams: any = {};
   pagination: Pagination;
   baseUrl = environment.serverUrl;
+  categoryModel: any;
   @ViewChild('lgModal') lgModal;
 
   constructor(private paintingService: PaintingService,
@@ -63,7 +64,7 @@ export class PaintingListComponent implements OnInit, OnDestroy {
   }
 
   loadPaintings() {
-    this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage)
+    this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage, this.paintingParams)
       .subscribe((res: PaginatedResult<IPainting[]>) => {
         this.paintings = res.result;
         this.pagination = res.pagination;

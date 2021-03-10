@@ -63,6 +63,9 @@ namespace PS.API.Data
                 paintings = paintings.Where(p => p.CategoryId == paintingParams.CategoryId);
             }
 
+            if(paintingParams.Available != null){
+                paintings = paintings.Where(p => p.Available == paintingParams.Available);
+            }
             return await PagedList<Painting>.CreateAsync(paintings, paintingParams.PageNumber, paintingParams.PageSize);
         }
         public async Task<Painting> GetPaintingById(string id)
