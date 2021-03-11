@@ -9,8 +9,8 @@ using PS.API.Data;
 namespace PS.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210309081915_AddedPropertiesToPaintingDetailsEntity")]
-    partial class AddedPropertiesToPaintingDetailsEntity
+    [Migration("20210311143816_AddedCategoryPaintingsAndImagesEntities")]
+    partial class AddedCategoryPaintingsAndImagesEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -93,12 +93,15 @@ namespace PS.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
+                        .HasMaxLength(500)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<float>("SizeX")

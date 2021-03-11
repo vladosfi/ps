@@ -79,10 +79,13 @@ namespace PS.API.Data
         public async Task<Painting> AddPainting(Painting painting)
         {
             await this.context.Paintings.AddAsync(painting);
-
-            await this.context.SaveChangesAsync();
-
-            return painting;
+            
+            if(await this.SaveAll())
+            {
+                return painting;
+            }
+            
+            return null;
         }
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)

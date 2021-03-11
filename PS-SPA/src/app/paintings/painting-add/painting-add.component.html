@@ -1,5 +1,5 @@
 <div class="container">
-    <form [formGroup]="paintingForm" (ngSubmit)="addPainting()">
+    <form class="mb-5" [formGroup]="paintingForm" (ngSubmit)="addPainting()">
         <h2 class="text-center text-primary">Add Painting</h2>
         <hr />
 
@@ -128,16 +128,21 @@
             </div>
         </div>
 
-        <app-image-editor [photos]="user.photos" (getMemberPhotoChange)="updateMainPhoto($event)"></app-image-editor>
-
-
         <div class="form-group text-center">
             <button class="btn btn-success" [disabled]="!paintingForm.valid" type="submit">
                 Save Painting
             </button>
         </div>
     </form>
+
+    <h2 class="text-center text-primary">Upload Images</h2>
+        <hr />
+
+<app-image-editor></app-image-editor>
+
 </div>
+
+
 
 
 <p>Form Status: {{paintingForm.status | json}}</p>

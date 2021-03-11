@@ -18,7 +18,7 @@ namespace PS.API.Controllers
     [ApiController]
     public class PaintingsController : ControllerBase
     {
-        private const string imagesUplaoadFolderPath = "uploads/images";
+        private string imagesUplaoadFolderPath = "uploads/images";
 
         private const string couldNotAddPainting = "Could not add the painting!";
 
@@ -62,12 +62,37 @@ namespace PS.API.Controllers
 
         [Authorize]
         [HttpPost("{userId}")]
-        public async Task<IActionResult> AddImagesForPainting(int userId, [FromForm] PaintingForAddPaintingDto paintingForAddPaintingDto)
+        public async Task<IActionResult> AddPainting(int userId, [FromBody]  PaintingForAddPaintingDto paintingForAddPaintingDto)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {
                 return Unauthorized();
             }
+
+            var paintingToAdd = this.mapper.Map<Painting>(paintingForAddPaintingDto);
+
+            var createdPainting = await this.repo.AddPainting(paintingToAdd);
+
+            if (createdPainting != null)
+            {
+                var paintingToReturn = this.mapper.Map<PaintingForDetailsDto>(createdPainting);
+
+                return CreatedAtAction(nameof(this.GetPainting), new { controller = "Paintings", id = paintingToReturn.Id }, paintingToReturn);
+            }
+
+            return BadRequest(couldNotAddPainting);
+        }
+
+        [Authorize]
+        [HttpPost("{userId}/images")]
+        public async Task<IActionResult> AddImagesForPainting(int userId, [FromForm] ImageForAddPaintingDto imageForAddPaintingDto)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            imagesUplaoadFolderPath += $"/{DateTime.Now.Year.ToString()}/{DateTime.Now.Month.ToString()}";
 
             var uploadsFolderPath = Path.Combine(host.WebRootPath, imagesUplaoadFolderPath);
 
@@ -76,12 +101,15 @@ namespace PS.API.Controllers
                 Directory.CreateDirectory(uploadsFolderPath);
             }
 
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(paintingForAddPaintingDto.File.FileName);
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageForAddPaintingDto.File.FileName);
             var filePath = Path.Combine(uploadsFolderPath, fileName);
 
-            using (var stream = new FileStream(filePath, FileMode.Create))
+            if (imageForAddPaintingDto.File.Length > 0)
             {
-                await paintingForAddPaintingDto.File.CopyToAsync(stream);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imageForAddPaintingDto.File.CopyToAsync(stream);
+                }
             }
 
             //Create Thumbnail table for images connected to images one to many
@@ -89,17 +117,22 @@ namespace PS.API.Controllers
             // Image thumb = image.GetThumbnailImage(120, 120, ()=>false, IntPtr.Zero);
             // thumb.Save(Path.ChangeExtension(fileName, "thumb"));
 
-            var paintingToAdd = this.mapper.Map<Painting>(paintingForAddPaintingDto);
+            var imageToAdd = this.mapper.Map<Image>(imageForAddPaintingDto);
+            //var createdPainting = await this.repo.AddImage(imageToAdd);
 
-            var createdPainting = await this.repo.AddPainting(paintingToAdd);
+
+            //imageToAdd.Name = "123wd1e";
+            // imageToAdd.Description = "asdasdasdasdasd";
+            // imageToAdd.Available = true;
 
 
-            if (createdPainting != null)
-            {
-                var paintingToReturn = this.mapper.Map<PaintingForDetailsDto>(createdPainting);
 
-                return CreatedAtAction(nameof(this.GetPainting), new { controller="Paintings", id = paintingToReturn.Id }, paintingToReturn);
-            }
+            // if (createdPainting != null)
+            // {
+            //     var paintingToReturn = this.mapper.Map<PaintingForDetailsDto>(createdPainting);
+
+            //     return CreatedAtAction(nameof(this.GetPainting), new { controller="Paintings", id = paintingToReturn.Id }, paintingToReturn);
+            // }
 
             return BadRequest(couldNotAddPainting);
         }

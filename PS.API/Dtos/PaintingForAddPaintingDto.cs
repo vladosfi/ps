@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
@@ -5,25 +6,31 @@ namespace PS.API.Dtos
 {
     public class PaintingForAddPaintingDto
     {
+
+        public PaintingForAddPaintingDto()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
         public string Id { get; set; }
 
-        // [Required]
+        [Required]
         public string Name { get; set; }
 
-        //[Required]
+        [Required]
         public string Description { get; set; }
 
-        public string Category { get; set; }
+        [Required]
+        public int CategoryId { get; set; }
 
-        //[Required]
+        [Required]
         public bool Available { get; set; }
 
-        public IFormFile File { get; set; }
-
+        [Required]
         public float SizeX { get; set; }
 
+        [Required]
         public float SizeY { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string MainImageUrl { get; set; }
     }
 }

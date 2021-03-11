@@ -91,12 +91,15 @@ namespace PS.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
+                        .HasMaxLength(500)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<float>("SizeX")

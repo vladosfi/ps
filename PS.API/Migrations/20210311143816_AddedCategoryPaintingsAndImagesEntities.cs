@@ -26,8 +26,11 @@ namespace PS.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    Available = table.Column<bool>(type: "INTEGER", nullable: false),
+                    SizeX = table.Column<float>(type: "REAL", nullable: false),
+                    SizeY = table.Column<float>(type: "REAL", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
                     CategoryId = table.Column<int>(type: "INTEGER", nullable: false)

@@ -4,4 +4,5 @@ export interface IPainting {
     description: string;
     mainImageUrl: string;
     createdOn: Date;
+    isMain: boolean;
 }

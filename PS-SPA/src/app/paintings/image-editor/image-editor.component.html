@@ -1,36 +1,31 @@
 <div class="row">
-    <div class="col-sm-2" *ngFor="let photo of photos">
-      <img src="{{photo.url}}" class="img-thumbnail p-1" alt="">
+    <div class="col-sm-2" *ngFor="let painting of paintings">
+      <img src="{{painting.mainImageUrl}}" class="img-thumbnail p-1" alt="">
       <div class="text-center">
         <button type="button" class="btn btn-sm mr-1" 
-          [ngClass]="photo.isMain ? 'btn-success active' : 'btn-secondary'"
-          (click)="setMainPhoto(photo)" 
-          [disabled]="photo.isMain">Main</button>
+          [ngClass]="painting.isMain ? 'btn-success active' : 'btn-secondary'"
+          [disabled]="painting.isMain">Main</button>
         <button type="button" class="btn btn-sm btn-danger" 
-          [disabled]="photo.isMain"
-          (click)="deletePhoto(photo.id)"><i class="fa fa-trash-o"></i></button>
+          [disabled]="painting.isMain"
+          (click)="deletePhoto(painting.id)"><i class="fa fa-trash-o"></i></button>
       </div>
     </div>
   </div>
   
-  <div class="row mt-3">
-   
-      <div class="col-md-3">
-  
-          <h3>Add Photos</h3>
-  
+  <div class="row mt-3">   
+      <div class="col-md-3">  
+          <h3>Add Images</h3>  
           <div ng2FileDrop
                [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
                (fileOver)="fileOverBase($event)"
                [uploader]="uploader"
                class="card bg-faded p-3 text-center mb-3 my-drop-zone">
                <i class="fa fa-upload fa-3x"></i>
-              Drop Photos Here
+              Drop Images Here
           </div>
   
           Multiple
-          <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
-  
+          <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>  
           Single
           <input type="file" ng2FileSelect [uploader]="uploader" />
       </div>

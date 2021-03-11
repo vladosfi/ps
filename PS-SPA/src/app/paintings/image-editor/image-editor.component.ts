@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
-import { IPhoto } from 'src/app/_interfaces/photo';
+import { IPainting } from 'src/app/_interfaces/painting';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ToastService } from 'src/app/_services/toast.service';
-import { UserService } from 'src/app/_services/user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -12,15 +11,14 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./image-editor.component.css']
 })
 export class ImageEditorComponent implements OnInit {
-  @Input() photos: IPhoto[];
+  @Input() paintings: IPainting[];
   @Output() getMemberPhotoChange = new EventEmitter<string>();
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
-  currentMain: IPhoto;
+  currentMain: IPainting;
 
   constructor(private authService: AuthService,
-    private userService: UserService,
     private toast: ToastService,) { }
 
   ngOnInit(): void {
@@ -35,9 +33,8 @@ export class ImageEditorComponent implements OnInit {
     this.uploader = new FileUploader({
       url:
         this.baseUrl +
-        'users/' +
-        this.authService.decodedToken.nameid +
-        '/photos',
+        'paintings/' +
+        this.authService.decodedToken.nameid,
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
       allowedFileType: ['image'],
@@ -52,59 +49,60 @@ export class ImageEditorComponent implements OnInit {
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
-        const res: IPhoto = JSON.parse(response);
-        const photo = {
+        const res: IPainting = JSON.parse(response);
+        const painting = {
           id: res.id,
-          url: res.url,
-          dateAdded: res.dateAdded,
+          name: res.name,
+          mainImageUrl: res.mainImageUrl,
+          createdOn: res.createdOn,
           description: res.description,
           isMain: res.isMain,
         };
+        
+        this.paintings.push(painting);
 
-        this.photos.push(photo);
-
-        if (photo.isMain) {
-          this.authService.changeMemberPhoto(photo.url);
-          this.authService.currentUser.photoUrl = photo.url;
+        if (painting.isMain) {
+          this.authService.changeMemberPhoto(painting.mainImageUrl);
+          this.authService.currentUser.photoUrl = painting.mainImageUrl;
         }
       }
     };
   }
 
-  setMainPhoto(photo: IPhoto) {
-    this.userService
-      .setMainPhoto(this.authService.decodedToken.nameid, photo.id)
-      .subscribe(
-        () => {
-          this.currentMain = this.photos.filter((p) => p.isMain === true)[0];
-          this.currentMain.isMain = false;
-          photo.isMain = true;
-          this.getMemberPhotoChange.emit(photo.url);
-          this.authService.changeMemberPhoto(photo.url);
-          this.authService.currentUser.photoUrl = photo.url;
+  setMainPhoto(image: IPainting) {
+    // this.userService
+    //   .setMainPhoto(this.authService.decodedToken.nameid, image.mainImageUrl)
+    //   .subscribe(
+    //     () => {
+    //       this.currentMain = this.paintings.filter((p) => p.isMain === true)[0];
+    //       this.currentMain.isMain = false;
+    //       image.isMain = true;
+    //       this.getMemberPhotoChange.emit(image.url);
+    //       this.authService.changeMemberPhoto(image.url);
+    //       this.authService.currentUser.photoUrl = image.url;
           
-        },
-        (error) => {
-          this.toast.error(error);
-        }
-      );
+    //     },
+    //     (error) => {
+    //       this.toast.error(error);
+    //     }
+    //   );
   }
 
-  deletePhoto(id: number) {
+  deletePhoto(id: string) {
 
-    if (confirm('Are you sure you want to delete this photo?')) {
-      this.userService
-        .deletePhoto(this.authService.decodedToken.nameid, id)
-        .subscribe(
-          () => {
-            this.photos.splice(this.photos.findIndex((p) => p.id === id), 1);
-            this.toast.success('Photo has been deleted');
-          },
-          (error) => {
-            this.toast.error('Failed to delete photo');
-          }
-        );
-    }
+    // if (confirm('Are you sure you want to delete this photo?')) {
+    //   this.userService
+    //     .deletePhoto(this.authService.decodedToken.nameid, id)
+    //     .subscribe(
+    //       () => {
+    //         this.paintings.splice(this.paintings.findIndex((p) => p.id === id), 1);
+    //         this.toast.success('Photo has been deleted');
+    //       },
+    //       (error) => {
+    //         this.toast.error('Failed to delete photo');
+    //       }
+    //     );
+    // }
   }
 
 }

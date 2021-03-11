@@ -26,6 +26,7 @@ namespace PS.API.Helpers
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).SrcPath));
             CreateMap<PaintingForAddPaintingDto, Painting>();
+            CreateMap<ImageForAddPaintingDto, Image>();            
         }
     }
 }

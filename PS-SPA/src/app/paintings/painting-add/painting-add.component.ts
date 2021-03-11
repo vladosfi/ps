@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-
 @Component({
   selector: 'app-painting-add',
   templateUrl: './painting-add.component.html',
@@ -13,12 +12,12 @@ export class PaintingAddComponent implements OnInit {
 
   constructor(fb: FormBuilder) {
     this.paintingForm = new FormGroup({
-      nameBg: new FormControl('',[Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-      descBg: new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
-      available: new FormControl('',[Validators.required]),
-      category: new FormControl('',[Validators.required]),
-      sizeX: new FormControl('',[Validators.required]),
-      sizeY: new FormControl('',[Validators.required]),
+      nameBg: new FormControl('nameBg',[Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
+      descBg: new FormControl('descBgdescBgdescBg',[Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
+      available: new FormControl('male',[Validators.required]),
+      category: new FormControl('1',[Validators.required]),
+      sizeX: new FormControl('3',[Validators.required]),
+      sizeY: new FormControl('4',[Validators.required]),
     });
 
     //  fb.group({
