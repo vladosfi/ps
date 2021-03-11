@@ -2,7 +2,7 @@ export interface IPaintingDetails {
     id: string;
     name: string;
     description: string;
-    category: string;
+    categoryId: number;
     sizeX: number;
     sizeY: number;
     available: boolean;

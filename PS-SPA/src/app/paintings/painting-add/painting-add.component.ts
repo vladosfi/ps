@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { IPaintingDetails } from 'src/app/_interfaces/painting-details';
+import { PaintingService } from 'src/app/_services/painting.service';
+import { ToastService } from 'src/app/_services/toast.service';
 
 @Component({
   selector: 'app-painting-add',
@@ -9,15 +12,16 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class PaintingAddComponent implements OnInit {
   paintingForm: FormGroup;
   model: any = {};
+  paintingDetails: IPaintingDetails;
 
-  constructor(fb: FormBuilder) {
+  constructor(private paintingService: PaintingService, fb: FormBuilder, private toast: ToastService) {
     this.paintingForm = new FormGroup({
-      nameBg: new FormControl('nameBg',[Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-      descBg: new FormControl('descBgdescBgdescBg',[Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
-      available: new FormControl('male',[Validators.required]),
-      category: new FormControl('1',[Validators.required]),
-      sizeX: new FormControl('3',[Validators.required]),
-      sizeY: new FormControl('4',[Validators.required]),
+      name: new FormControl('nameBg', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
+      description: new FormControl('descBgdescBgdescBg', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
+      available: new FormControl(true, [Validators.required]),
+      categoryId: new FormControl(1, [Validators.required]),
+      sizeX: new FormControl('3', [Validators.required]),
+      sizeY: new FormControl('4', [Validators.required]),
     });
 
     //  fb.group({
@@ -26,13 +30,25 @@ export class PaintingAddComponent implements OnInit {
     //   available:['', [Validators.required]],
     //   category:['Category', [Validators.required]],
     // });
-   }
+  }
 
   ngOnInit(): void {
   }
 
-  addPainting(){
+  addPainting() {
     console.log(this.paintingForm);
+
+    if (this.paintingForm.valid) {
+      this.paintingDetails = Object.assign({}, this.paintingForm.value);
+      this.paintingService.addPainting(this.paintingDetails).subscribe(
+        () => {
+          this.toast.success('Painting added successfully');
+        },
+        (error) => {
+          this.toast.error(error);
+        }
+      );
+    }
   }
 
   updateMainPhoto(photoUrl) {

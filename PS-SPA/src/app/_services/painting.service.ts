@@ -6,6 +6,7 @@ import { IPainting } from '../_interfaces/painting';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { IPaintingDetails } from '../_interfaces/painting-details';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ import { IPaintingDetails } from '../_interfaces/painting-details';
 export class PaintingService {
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getPaintings(page?, itemsPerPage?, paintingParams?): Observable<PaginatedResult<IPainting[]>> {
     const paginatedResult: PaginatedResult<IPainting[]> = new PaginatedResult<IPainting[]>();
@@ -53,5 +54,9 @@ export class PaintingService {
         return response.body;
       })
     );
+  }
+
+  addPainting(painting: IPaintingDetails) {
+    return this.http.post(this.baseUrl + 'paintings/' + this.authService.decodedToken.nameid, painting);
   }
 }

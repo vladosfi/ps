@@ -9,13 +9,13 @@
                     <div class="form-group">
                         <div class="form-floating">
                             <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-                                formControlName="category"
+                                formControlName="categoryId"
                                 [ngClass]="{
                                     'is-invalid':
-                                    paintingForm.get('category').errors &&
-                                    paintingForm.get('category').touched,
-                                    'is-valid': !paintingForm.get('category').errors &&
-                                    paintingForm.get('category').statusChanges
+                                    paintingForm.get('categoryId').errors &&
+                                    paintingForm.get('categoryId').touched,
+                                    'is-valid': !paintingForm.get('categoryId').errors &&
+                                    paintingForm.get('categoryId').statusChanges
                                   }">
                                 <option selected></option>
                                 <option value="1">Mixed Tehnique</option>
@@ -33,10 +33,10 @@
                 <div class="col-sm">
                     <label class="control-label" style="margin-right: 10px">The painting is: </label>
                     <label class="radio-inline">
-                        <input class="mr-3" type="radio" value="male" formControlName="available" />Available
+                        <input class="mr-3" type="radio" value=true formControlName="available" />Available
                     </label>
                     <label class="radio-inline ml-3">
-                        <input class="mr-3" type="radio" value="female" formControlName="available" />Unavailable
+                        <input class="mr-3" type="radio" value=false formControlName="available" />Unavailable
                     </label>
                 </div>
             </div>
@@ -84,21 +84,21 @@
                 <div class="form-group">
                     <input type="text" [ngClass]="{
                         'is-invalid':
-                        paintingForm.get('nameBg').errors &&
-                        paintingForm.get('nameBg').touched,
-                        'is-valid': !paintingForm.get('nameBg').errors &&
-                        paintingForm.get('nameBg').statusChanges
+                        paintingForm.get('name').errors &&
+                        paintingForm.get('name').touched,
+                        'is-valid': !paintingForm.get('name').errors &&
+                        paintingForm.get('name').statusChanges
                       }"
-                       class="form-control" formControlName="nameBg" placeholder="Enter a name for painting" />
+                       class="form-control" formControlName="name" placeholder="Enter a name for painting" />
                       <div class="valid-feedback"></div>
                     <div class="invalid-feedback" 
-                        *ngIf="paintingForm.get('nameBg').hasError('required') 
-                        && paintingForm.get('nameBg').touched">Please enter a name for painting
+                        *ngIf="paintingForm.get('name').hasError('required') 
+                        && paintingForm.get('name').touched">Please enter a name for painting
                     </div>
                     <div class="invalid-feedback" 
-                        *ngIf="paintingForm.get('nameBg').hasError('minlength')
-                        || paintingForm.get('nameBg').hasError('maxlength')
-                        && paintingForm.get('nameBg').touched">Please enter a name between 2 and 50 characters
+                        *ngIf="paintingForm.get('name').hasError('minlength')
+                        || paintingForm.get('name').hasError('maxlength')
+                        && paintingForm.get('name').touched">Please enter a name between 2 and 50 characters
                     </div>
                 </div>
             </div>
@@ -110,19 +110,19 @@
                     <textarea name="interests" 
                     [ngClass]="{
                         'is-invalid':
-                        paintingForm.get('descBg').errors && paintingForm.get('descBg').touched,
-                        'is-valid': !paintingForm.get('descBg').errors && paintingForm.get('descBg').statusChanges
+                        paintingForm.get('description').errors && paintingForm.get('description').touched,
+                        'is-valid': !paintingForm.get('description').errors && paintingForm.get('description').statusChanges
                       }"
-                    class="form-control" formControlName="descBg" placeholder="Enter a description for painting" ></textarea>
+                    class="form-control" formControlName="description" placeholder="Enter a description for painting" ></textarea>
                     <div class="valid-feedback"></div>
                     <div class="invalid-feedback" 
-                        *ngIf="paintingForm.get('descBg').hasError('required') 
-                        && paintingForm.get('descBg').touched">Please enter a description for painting
+                        *ngIf="paintingForm.get('description').hasError('required') 
+                        && paintingForm.get('description').touched">Please enter a description for painting
                     </div>
                     <div class="invalid-feedback" 
-                        *ngIf="paintingForm.get('descBg').hasError('minlength')
-                        || paintingForm.get('descBg').hasError('maxlength')
-                        && paintingForm.get('descBg').touched">Please enter a name between 10 and 200 characters
+                        *ngIf="paintingForm.get('description').hasError('minlength')
+                        || paintingForm.get('description').hasError('maxlength')
+                        && paintingForm.get('description').touched">Please enter a name between 10 and 200 characters
                     </div>
                 </div>
             </div>
