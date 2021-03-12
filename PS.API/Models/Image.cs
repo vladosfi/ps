@@ -7,9 +7,10 @@ namespace PS.API.Models
         public Image()
         {
             this.CreatedOn = DateTime.Now;    
+            this.Id = Guid.NewGuid().ToString();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
         public bool IsMain { get; set; }

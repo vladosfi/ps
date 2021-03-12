@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using PS.API.Data;
@@ -21,6 +20,7 @@ namespace PS.API.Controllers
         private string imagesUplaoadFolderPath = "uploads/images";
         private const string couldNotAddPainting = "Could not add the painting!";
         private const string couldNotAddImage = "Could not add the image!";
+        private const string invalidFileLength = "Could not add the image. Invalid file length!";
 
         private readonly IPSRepository repo;
         private readonly IMapper mapper;
@@ -85,7 +85,7 @@ namespace PS.API.Controllers
 
         [HttpGet("image/{id}")]
         [ActionName(nameof(GetImage))]
-        public async Task<IActionResult> GetImage(int id)
+        public async Task<IActionResult> GetImage(string id)
         {
             var imageFromRepo = await this.repo.GetImage(id);
 
@@ -103,6 +103,11 @@ namespace PS.API.Controllers
                 return BadRequest(couldNotAddImage);
             }
 
+            if (ImageForCreateDto.File.Length <= 0)
+            {
+                return BadRequest(invalidFileLength);
+            }
+
             imagesUplaoadFolderPath += $"/{DateTime.Now.Year.ToString()}/{DateTime.Now.Month.ToString()}";
 
             var uploadsFolderPath = Path.Combine(host.WebRootPath, imagesUplaoadFolderPath);
@@ -112,15 +117,18 @@ namespace PS.API.Controllers
                 Directory.CreateDirectory(uploadsFolderPath);
             }
 
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageForCreateDto.File.FileName);
+            var imageToAdd = new Image();
+            var uploadedFileExtension = Path.GetExtension(ImageForCreateDto.File.FileName);
+            imageToAdd.Url = imagesUplaoadFolderPath + "/" + imageToAdd.Id + uploadedFileExtension;
+            imageToAdd.Name = currentPainting.Name;
+
+            var fileName = imageToAdd.Id + uploadedFileExtension;
             var filePath = Path.Combine(uploadsFolderPath, fileName);
 
-            if (ImageForCreateDto.File.Length > 0)
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await ImageForCreateDto.File.CopyToAsync(stream);
-                }
+                await ImageForCreateDto.File.CopyToAsync(stream);
             }
 
             //Create Thumbnail table for images connected to images one to many
@@ -128,9 +136,12 @@ namespace PS.API.Controllers
             // Image thumb = image.GetThumbnailImage(120, 120, ()=>false, IntPtr.Zero);
             // thumb.Save(Path.ChangeExtension(fileName, "thumb"));
 
-            var imageToAdd = this.mapper.Map<Image>(ImageForCreateDto);
-            imageToAdd.Url = filePath;
-            imageToAdd.Name = currentPainting.Name;
+            if (await this.repo.GetMainImageForPainting(paintingId) == null)
+            {
+                imageToAdd.IsMain = true;
+            }
+
+            //imageToAdd.IsMain 
             currentPainting.Images.Add(imageToAdd);
 
             if (await this.repo.SaveAll())

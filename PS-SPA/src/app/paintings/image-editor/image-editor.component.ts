@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { IPainting } from 'src/app/_interfaces/painting';
+import { IPaintingDetails } from 'src/app/_interfaces/painting-details';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ToastService } from 'src/app/_services/toast.service';
 import { environment } from 'src/environments/environment';
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ImageEditorComponent implements OnInit {
   @Input() paintings: IPainting[];
+  @Input() painting: IPaintingDetails;
   @Output() getMemberPhotoChange = new EventEmitter<string>();
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
@@ -34,7 +36,8 @@ export class ImageEditorComponent implements OnInit {
       url:
         this.baseUrl +
         'paintings/' +
-        this.authService.decodedToken.nameid,
+        this.painting?.id +
+        '/images',
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
       allowedFileType: ['image'],
@@ -59,7 +62,7 @@ export class ImageEditorComponent implements OnInit {
           isMain: res.isMain,
         };
         
-        this.paintings.push(painting);
+        //this.paintings.push(painting);
 
         if (painting.isMain) {
           this.authService.changeMemberPhoto(painting.mainImageUrl);

@@ -48,11 +48,16 @@ namespace PS.API.Data
             return photo;
         }
 
-        public async Task<Image> GetImage(int id)
+        public async Task<Image> GetImage(string id)
         {
             var image = await this.context.Images.FirstOrDefaultAsync(i => i.Id == id);
 
             return image;
+        }
+
+        public async Task<Image> GetMainImageForPainting(string paintingId)
+        {
+            return await this.context.Images.Where(i => i.PaintingId == paintingId).FirstOrDefaultAsync(i => i.IsMain == true);
         }
 
         public async Task<User> GetUser(int id)

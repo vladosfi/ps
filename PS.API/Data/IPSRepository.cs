@@ -20,12 +20,14 @@ namespace PS.API.Data
 
         Task<Photo> GetMainPhotoForUser(int userId);
 
-        Task<Like> GetLike(int userId,int recipientId);
+        Task<Image> GetMainImageForPainting(string paintingId);
+
+        Task<Like> GetLike(int userId, int recipientId);
 
         Task<PagedList<Painting>> GetPapintings(PaintingParams paintingParams);
 
-        Task<Image> GetImage(int id);
-        
+        Task<Image> GetImage(string id);
+
         Task<Painting> GetPaintingById(string id);
 
         Task<Painting> AddPainting(Painting painting);

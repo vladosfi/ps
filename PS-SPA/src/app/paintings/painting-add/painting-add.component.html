@@ -1,5 +1,5 @@
 <div class="container">
-    <form class="mb-5" [formGroup]="paintingForm" (ngSubmit)="addPainting()">
+    <form class="mb-5" [formGroup]="paintingModel" (ngSubmit)="addPainting()">
         <h2 class="text-center text-primary">Add Painting</h2>
         <hr />
 
@@ -9,13 +9,12 @@
                     <div class="form-group">
                         <div class="form-floating">
                             <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-                                formControlName="categoryId"
-                                [ngClass]="{
+                                formControlName="categoryId" [ngClass]="{
                                     'is-invalid':
-                                    paintingForm.get('categoryId').errors &&
-                                    paintingForm.get('categoryId').touched,
-                                    'is-valid': !paintingForm.get('categoryId').errors &&
-                                    paintingForm.get('categoryId').statusChanges
+                                    paintingModel.get('categoryId').errors &&
+                                    paintingModel.get('categoryId').touched,
+                                    'is-valid': !paintingModel.get('categoryId').errors &&
+                                    paintingModel.get('categoryId').statusChanges
                                   }">
                                 <option selected></option>
                                 <option value="1">Mixed Tehnique</option>
@@ -47,16 +46,14 @@
                 <div class="form-group">
                     <input appDecimalNumeric decimals="2" type="text" [ngClass]="{
                         'is-invalid':
-                        paintingForm.get('sizeX').errors &&
-                        paintingForm.get('sizeX').touched,
-                        'is-valid': !paintingForm.get('sizeX').errors &&
-                        paintingForm.get('sizeX').statusChanges
-                      }"
-                       class="form-control" formControlName="sizeX" placeholder="Enter a Width of the painting" />
-                      <div class="valid-feedback"></div>
-                    <div class="invalid-feedback" 
-                        *ngIf="paintingForm.get('sizeX').hasError('required') 
-                        && paintingForm.get('sizeX').touched">Please Enter a Width of the painting
+                        paintingModel.get('sizeX').errors &&
+                        paintingModel.get('sizeX').touched,
+                        'is-valid': !paintingModel.get('sizeX').errors &&
+                        paintingModel.get('sizeX').statusChanges
+                      }" class="form-control" formControlName="sizeX" placeholder="Enter a Width of the painting" />
+                    <div class="valid-feedback"></div>
+                    <div class="invalid-feedback" *ngIf="paintingModel.get('sizeX').hasError('required') 
+                        && paintingModel.get('sizeX').touched">Please Enter a Width of the painting
                     </div>
                 </div>
             </div>
@@ -64,16 +61,14 @@
                 <div class="form-group">
                     <input appDecimalNumeric decimals="2" type="text" [ngClass]="{
                         'is-invalid':
-                        paintingForm.get('sizeY').errors &&
-                        paintingForm.get('sizeY').touched,
-                        'is-valid': !paintingForm.get('sizeY').errors &&
-                        paintingForm.get('sizeY').statusChanges
-                      }"
-                       class="form-control" formControlName="sizeY" placeholder="Enter a Height of the painting" />
-                      <div class="valid-feedback"></div>
-                    <div class="invalid-feedback" 
-                        *ngIf="paintingForm.get('sizeY').hasError('required') 
-                        && paintingForm.get('sizeY').touched">Please Enter a Height of the painting
+                        paintingModel.get('sizeY').errors &&
+                        paintingModel.get('sizeY').touched,
+                        'is-valid': !paintingModel.get('sizeY').errors &&
+                        paintingModel.get('sizeY').statusChanges
+                      }" class="form-control" formControlName="sizeY" placeholder="Enter a Height of the painting" />
+                    <div class="valid-feedback"></div>
+                    <div class="invalid-feedback" *ngIf="paintingModel.get('sizeY').hasError('required') 
+                        && paintingModel.get('sizeY').touched">Please Enter a Height of the painting
                     </div>
                 </div>
             </div>
@@ -84,21 +79,18 @@
                 <div class="form-group">
                     <input type="text" [ngClass]="{
                         'is-invalid':
-                        paintingForm.get('name').errors &&
-                        paintingForm.get('name').touched,
-                        'is-valid': !paintingForm.get('name').errors &&
-                        paintingForm.get('name').statusChanges
-                      }"
-                       class="form-control" formControlName="name" placeholder="Enter a name for painting" />
-                      <div class="valid-feedback"></div>
-                    <div class="invalid-feedback" 
-                        *ngIf="paintingForm.get('name').hasError('required') 
-                        && paintingForm.get('name').touched">Please enter a name for painting
+                        paintingModel.get('name').errors &&
+                        paintingModel.get('name').touched,
+                        'is-valid': !paintingModel.get('name').errors &&
+                        paintingModel.get('name').statusChanges
+                      }" class="form-control" formControlName="name" placeholder="Enter a name for painting" />
+                    <div class="valid-feedback"></div>
+                    <div class="invalid-feedback" *ngIf="paintingModel.get('name').hasError('required') 
+                        && paintingModel.get('name').touched">Please enter a name for painting
                     </div>
-                    <div class="invalid-feedback" 
-                        *ngIf="paintingForm.get('name').hasError('minlength')
-                        || paintingForm.get('name').hasError('maxlength')
-                        && paintingForm.get('name').touched">Please enter a name between 2 and 50 characters
+                    <div class="invalid-feedback" *ngIf="paintingModel.get('name').hasError('minlength')
+                        || paintingModel.get('name').hasError('maxlength')
+                        && paintingModel.get('name').touched">Please enter a name between 2 and 50 characters
                     </div>
                 </div>
             </div>
@@ -107,42 +99,40 @@
         <div class="row">
             <div class="col-sm">
                 <div class="form-group">
-                    <textarea name="interests" 
-                    [ngClass]="{
+                    <textarea name="interests" [ngClass]="{
                         'is-invalid':
-                        paintingForm.get('description').errors && paintingForm.get('description').touched,
-                        'is-valid': !paintingForm.get('description').errors && paintingForm.get('description').statusChanges
-                      }"
-                    class="form-control" formControlName="description" placeholder="Enter a description for painting" ></textarea>
+                        paintingModel.get('description').errors && paintingModel.get('description').touched,
+                        'is-valid': !paintingModel.get('description').errors && paintingModel.get('description').statusChanges
+                      }" class="form-control" formControlName="description"
+                        placeholder="Enter a description for painting"></textarea>
                     <div class="valid-feedback"></div>
-                    <div class="invalid-feedback" 
-                        *ngIf="paintingForm.get('description').hasError('required') 
-                        && paintingForm.get('description').touched">Please enter a description for painting
+                    <div class="invalid-feedback" *ngIf="paintingModel.get('description').hasError('required') 
+                        && paintingModel.get('description').touched">Please enter a description for painting
                     </div>
-                    <div class="invalid-feedback" 
-                        *ngIf="paintingForm.get('description').hasError('minlength')
-                        || paintingForm.get('description').hasError('maxlength')
-                        && paintingForm.get('description').touched">Please enter a name between 10 and 200 characters
+                    <div class="invalid-feedback" *ngIf="paintingModel.get('description').hasError('minlength')
+                        || paintingModel.get('description').hasError('maxlength')
+                        && paintingModel.get('description').touched">Please enter a name between 10 and 200 characters
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="form-group text-center">
-            <button class="btn btn-success" [disabled]="!paintingForm.valid" type="submit">
+            <button class="btn btn-success" [disabled]="!paintingModel.valid" type="submit">
                 Save Painting
             </button>
         </div>
     </form>
 
+    <div *ngIf="paintingDetails?.id">
     <h2 class="text-center text-primary">Upload Images</h2>
-        <hr />
-
-<app-image-editor></app-image-editor>
+    <hr />
+        <app-image-editor [painting]="paintingDetails"></app-image-editor>
+    </div>
 
 </div>
 
 
 
 
-<p>Form Status: {{paintingForm.status | json}}</p>
+<p>Form Status: {{paintingModel.status | json}}</p>

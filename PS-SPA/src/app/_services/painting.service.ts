@@ -46,17 +46,17 @@ export class PaintingService {
         }));
   }
 
-  getPainting(id: string): Observable<IPaintingDetails> {   
+  getPainting(id: string): Observable<IPaintingDetails> {
 
-    return this.http.get<IPaintingDetails>(this.baseUrl + 'paintings/' + id, { observe: 'response'})
-    .pipe(
-      map( response => {
-        return response.body;
-      })
-    );
+    return this.http.get<IPaintingDetails>(this.baseUrl + 'paintings/' + id, { observe: 'response' })
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      );
   }
 
-  addPainting(painting: IPaintingDetails) {
+  addPainting(painting: IPaintingDetails):any {
     return this.http.post(this.baseUrl + 'paintings/' + this.authService.decodedToken.nameid, painting);
   }
 }

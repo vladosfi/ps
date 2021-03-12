@@ -10,12 +10,12 @@ import { ToastService } from 'src/app/_services/toast.service';
   styleUrls: ['./painting-add.component.css']
 })
 export class PaintingAddComponent implements OnInit {
-  paintingForm: FormGroup;
+  paintingModel: FormGroup;
   model: any = {};
   paintingDetails: IPaintingDetails;
 
   constructor(private paintingService: PaintingService, fb: FormBuilder, private toast: ToastService) {
-    this.paintingForm = new FormGroup({
+    this.paintingModel = new FormGroup({
       name: new FormControl('nameBg', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
       description: new FormControl('descBgdescBgdescBg', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
       available: new FormControl(true, [Validators.required]),
@@ -36,14 +36,17 @@ export class PaintingAddComponent implements OnInit {
   }
 
   addPainting() {
-    console.log(this.paintingForm);
+    console.log(this.paintingModel);
 
-    if (this.paintingForm.valid) {
-      this.paintingDetails = Object.assign({}, this.paintingForm.value);
+
+    if (this.paintingModel.valid) {
+      this.paintingDetails = Object.assign({}, this.paintingModel.value);
       this.paintingService.addPainting(this.paintingDetails).subscribe(
-        () => {
-          this.toast.success('Painting added successfully');
-        },
+        (response) => {       
+          if (response) {
+            this.paintingDetails = Object.assign({}, response);            
+            this.toast.success('Painting added successfully');
+        }},
         (error) => {
           this.toast.error(error);
         }
