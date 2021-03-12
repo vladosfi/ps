@@ -23,6 +23,8 @@ namespace PS.API.Data
         Task<Like> GetLike(int userId,int recipientId);
 
         Task<PagedList<Painting>> GetPapintings(PaintingParams paintingParams);
+
+        Task<Image> GetImage(int id);
         
         Task<Painting> GetPaintingById(string id);
 

@@ -9,7 +9,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/2.jpg"
+        "Url": "uploads/images/2.jpg"
       }
     ]
   },
@@ -23,7 +23,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/1.jpg"
+        "Url": "uploads/images/1.jpg"
       }
     ]
   },
@@ -37,7 +37,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/2.jpg"
+        "Url": "uploads/images/2.jpg"
       }
     ]
   },
@@ -51,7 +51,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/5.jpg"
+        "Url": "uploads/images/5.jpg"
       }
     ]
   },
@@ -65,7 +65,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/2.jpg"
+        "Url": "uploads/images/2.jpg"
       }
     ]
   },
@@ -79,7 +79,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/1.jpg"
+        "Url": "uploads/images/1.jpg"
       }
     ]
   },
@@ -93,7 +93,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/3.jpg"
+        "Url": "uploads/images/3.jpg"
       }
     ]
   },
@@ -107,7 +107,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/4.jpg"
+        "Url": "uploads/images/4.jpg"
       }
     ]
   },
@@ -121,7 +121,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/1.jpg"
+        "Url": "uploads/images/1.jpg"
       }
     ]
   },
@@ -135,7 +135,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/1.jpg"
+        "Url": "uploads/images/1.jpg"
       }
     ]
   },
@@ -149,7 +149,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/5.jpg"
+        "Url": "uploads/images/5.jpg"
       }
     ]
   },
@@ -163,7 +163,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/5.jpg"
+        "Url": "uploads/images/5.jpg"
       }
     ]
   },
@@ -177,7 +177,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/1.jpg"
+        "Url": "uploads/images/1.jpg"
       }
     ]
   },
@@ -191,7 +191,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/4.jpg"
+        "Url": "uploads/images/4.jpg"
       }
     ]
   },
@@ -205,7 +205,7 @@
     "Images": [
       {
         "isMain": true,
-        "SrcPath": "uploads/images/4.jpg"
+        "Url": "uploads/images/4.jpg"
       }
     ]
   }

@@ -48,6 +48,13 @@ namespace PS.API.Data
             return photo;
         }
 
+        public async Task<Image> GetImage(int id)
+        {
+            var image = await this.context.Images.FirstOrDefaultAsync(i => i.Id == id);
+
+            return image;
+        }
+
         public async Task<User> GetUser(int id)
         {
             var user = await this.context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
@@ -59,11 +66,13 @@ namespace PS.API.Data
         {
             var paintings = this.context.Paintings.Include(p => p.Images).OrderByDescending(p => p.CreatedOn).AsQueryable();
 
-            if(paintingParams.CategoryId != 0){
+            if (paintingParams.CategoryId != 0)
+            {
                 paintings = paintings.Where(p => p.CategoryId == paintingParams.CategoryId);
             }
 
-            if(paintingParams.Available != null){
+            if (paintingParams.Available != null)
+            {
                 paintings = paintings.Where(p => p.Available == paintingParams.Available);
             }
             return await PagedList<Painting>.CreateAsync(paintings, paintingParams.PageNumber, paintingParams.PageSize);
@@ -75,16 +84,16 @@ namespace PS.API.Data
             return painting;
         }
 
-        
+
         public async Task<Painting> AddPainting(Painting painting)
         {
             await this.context.Paintings.AddAsync(painting);
-            
-            if(await this.SaveAll())
+
+            if (await this.SaveAll())
             {
                 return painting;
             }
-            
+
             return null;
         }
 

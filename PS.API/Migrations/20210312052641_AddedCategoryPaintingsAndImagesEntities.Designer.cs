@@ -9,7 +9,7 @@ using PS.API.Data;
 namespace PS.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210311143816_AddedCategoryPaintingsAndImagesEntities")]
+    [Migration("20210312052641_AddedCategoryPaintingsAndImagesEntities")]
     partial class AddedCategoryPaintingsAndImagesEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,13 +47,13 @@ namespace PS.API.Migrations
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("ModifiedOn")
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PaintingId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("SrcPath")
+                    b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

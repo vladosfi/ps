@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace PS.API.Dtos
 {
-    public class ImageForAddPaintingDto
+    public class ImageForCreateDto
     {
 
-        public ImageForAddPaintingDto()
+        public ImageForCreateDto()
         {
             this.Id = Guid.NewGuid().ToString();
         }
@@ -17,7 +17,5 @@ namespace PS.API.Dtos
 
         [Required]
         public IFormFile File { get; set; }
-
-        public string ImageUrl { get; set; }
     }
 }

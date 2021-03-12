@@ -19,8 +19,8 @@ namespace PS.API.Controllers
     public class PaintingsController : ControllerBase
     {
         private string imagesUplaoadFolderPath = "uploads/images";
-
         private const string couldNotAddPainting = "Could not add the painting!";
+        private const string couldNotAddImage = "Could not add the image!";
 
         private readonly IPSRepository repo;
         private readonly IMapper mapper;
@@ -62,12 +62,12 @@ namespace PS.API.Controllers
 
         [Authorize]
         [HttpPost("{userId}")]
-        public async Task<IActionResult> AddPainting(int userId, [FromBody]  PaintingForAddPaintingDto paintingForAddPaintingDto)
+        public async Task<IActionResult> AddPainting(int userId, [FromBody] PaintingForAddPaintingDto paintingForAddPaintingDto)
         {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-            {
-                return Unauthorized();
-            }
+            // if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            // {
+            //     return Unauthorized();
+            // }
 
             var paintingToAdd = this.mapper.Map<Painting>(paintingForAddPaintingDto);
 
@@ -83,13 +83,24 @@ namespace PS.API.Controllers
             return BadRequest(couldNotAddPainting);
         }
 
-        [Authorize]
-        [HttpPost("{userId}/images")]
-        public async Task<IActionResult> AddImagesForPainting(int userId, [FromForm] ImageForAddPaintingDto imageForAddPaintingDto)
+        [HttpGet("image/{id}")]
+        [ActionName(nameof(GetImage))]
+        public async Task<IActionResult> GetImage(int id)
         {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            var imageFromRepo = await this.repo.GetImage(id);
+
+            return Ok(imageFromRepo);
+        }
+
+        [Authorize]
+        [HttpPost("{paintingId}/images")]
+        public async Task<IActionResult> AddImagesForPainting(string paintingId, [FromForm] ImageForCreateDto ImageForCreateDto)
+        {
+            var currentPainting = await this.repo.GetPaintingById(paintingId);
+
+            if (currentPainting == null)
             {
-                return Unauthorized();
+                return BadRequest(couldNotAddImage);
             }
 
             imagesUplaoadFolderPath += $"/{DateTime.Now.Year.ToString()}/{DateTime.Now.Month.ToString()}";
@@ -101,14 +112,14 @@ namespace PS.API.Controllers
                 Directory.CreateDirectory(uploadsFolderPath);
             }
 
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageForAddPaintingDto.File.FileName);
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageForCreateDto.File.FileName);
             var filePath = Path.Combine(uploadsFolderPath, fileName);
 
-            if (imageForAddPaintingDto.File.Length > 0)
+            if (ImageForCreateDto.File.Length > 0)
             {
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await imageForAddPaintingDto.File.CopyToAsync(stream);
+                    await ImageForCreateDto.File.CopyToAsync(stream);
                 }
             }
 
@@ -117,22 +128,16 @@ namespace PS.API.Controllers
             // Image thumb = image.GetThumbnailImage(120, 120, ()=>false, IntPtr.Zero);
             // thumb.Save(Path.ChangeExtension(fileName, "thumb"));
 
-            var imageToAdd = this.mapper.Map<Image>(imageForAddPaintingDto);
-            //var createdPainting = await this.repo.AddImage(imageToAdd);
+            var imageToAdd = this.mapper.Map<Image>(ImageForCreateDto);
+            imageToAdd.Url = filePath;
+            imageToAdd.Name = currentPainting.Name;
+            currentPainting.Images.Add(imageToAdd);
 
+            if (await this.repo.SaveAll())
+            {
+                return CreatedAtAction(nameof(this.GetImage), new { controller = "Paintings", id = imageToAdd.Id }, imageToAdd);
+            }
 
-            //imageToAdd.Name = "123wd1e";
-            // imageToAdd.Description = "asdasdasdasdasd";
-            // imageToAdd.Available = true;
-
-
-
-            // if (createdPainting != null)
-            // {
-            //     var paintingToReturn = this.mapper.Map<PaintingForDetailsDto>(createdPainting);
-
-            //     return CreatedAtAction(nameof(this.GetPainting), new { controller="Paintings", id = paintingToReturn.Id }, paintingToReturn);
-            // }
 
             return BadRequest(couldNotAddPainting);
         }
