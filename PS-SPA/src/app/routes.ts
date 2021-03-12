@@ -51,7 +51,8 @@ export const appRoutes: Routes = [
                 resolve: { paintings: PaintingsResolver }
             },
             {
-                path: 'paintings/add', component: PaintingAddComponent
+                path: 'paintings/add', component: PaintingAddComponent,
+                canActivate: [AuthGuard],
             },
             {
                 path: 'paintings/:id', component: PaintingDetailsComponent,
