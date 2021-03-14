@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Renderer2 } from '@angular/core';
 import { ToastService } from '../../_services/toast.service';
 import { AuthService } from '../../_services/auth.service';
 import { Router } from '@angular/router';
@@ -21,6 +21,7 @@ export class NavComponent implements OnInit {
     private toast: ToastService,
     private router: Router,
     public translate: TranslateService,
+    private renderer: Renderer2
   ) { 
     translate.addLangs(['gb', 'bg', 'ru', 'de']);
     translate.setDefaultLang('gb');
@@ -28,6 +29,7 @@ export class NavComponent implements OnInit {
     translate.use(browserLang.match(/gb|bg|ru|de/) ? browserLang: 'gb');
     this.selectedLanguage = browserLang;
     this.languagesToShow = translate.getLangs().filter(l => l !== this.selectedLanguage);
+    this.renderer.setAttribute(document.querySelector('html'), 'lang', this.selectedLanguage);
   }
 
   ngOnInit() {
@@ -53,6 +55,7 @@ export class NavComponent implements OnInit {
     this.translate.use(lang)
     this.selectedLanguage = lang;
     this.languagesToShow = this.translate.getLangs().filter(l => l !== this.selectedLanguage);
+    this.renderer.setAttribute(document.querySelector('html'), 'lang', this.selectedLanguage);
   }
 
   logout() {

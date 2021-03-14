@@ -13,7 +13,7 @@ export class PaintingAddComponent implements OnInit {
   paintingModel: FormGroup;
   model: any = {};
   paintingDetails: IPaintingDetails;
-
+  
   constructor(private paintingService: PaintingService, fb: FormBuilder, private toast: ToastService) {
     this.paintingModel = new FormGroup({
       name: new FormControl('nameBg', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
@@ -36,9 +36,6 @@ export class PaintingAddComponent implements OnInit {
   }
 
   addPainting() {
-    console.log(this.paintingModel);
-
-
     if (this.paintingModel.valid) {
       this.paintingDetails = Object.assign({}, this.paintingModel.value);
       this.paintingService.addPainting(this.paintingDetails).subscribe(
@@ -53,8 +50,5 @@ export class PaintingAddComponent implements OnInit {
       );
     }
   }
-
-  updateMainPhoto(photoUrl) {
-    //this.user.photoUrl = photoUrl;
-  }
 }
+

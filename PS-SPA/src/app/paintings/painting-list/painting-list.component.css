@@ -2,8 +2,25 @@
     min-height: 65vh;
 }
 
+p{
+    font-size: 1rem;
+}
+
 pagination{
     margin: 50px 0 50px 0;
+}
+
+.fa-check-circle{
+    font-size: larger;
+    margin-right: 8px;
+    color: #FFA600;
+}
+
+.fa-times-circle
+{
+    font-size: larger;
+    margin-right: 8px;
+    color: #FF0000;
 }
 
 /* Modal */
@@ -32,7 +49,7 @@ img{
     max-height: 70vh;
 }
 
-.propName{
+.bolded{
     font-weight: bold;
 }
 

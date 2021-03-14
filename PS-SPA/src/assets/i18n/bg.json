@@ -8,7 +8,8 @@
   },
   "GENERAL":{
     "AVAILABLE": "Налични",
-    "UNAVAILABLE": "Неналични"
+    "UNAVAILABLE": "Неналични",
+    "TECHNIQUE": "Техника"
   },
   "HOME": {
     "INTRO-HEADER": "Здравейте приятели!",

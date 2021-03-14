@@ -13,6 +13,7 @@ namespace PS.API.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
+        public string ImageFileName { get; set; }
         public bool IsMain { get; set; }
         public DateTime CreatedOn { get; set; }
         public Painting Painting { get; set; }

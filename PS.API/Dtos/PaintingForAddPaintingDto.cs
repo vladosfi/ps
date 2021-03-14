@@ -31,6 +31,6 @@ namespace PS.API.Dtos
         [Required]
         public float SizeY { get; set; }
 
-        public string MainImageUrl { get; set; }
+        //public string MainImageUrl { get; set; }
     }
 }

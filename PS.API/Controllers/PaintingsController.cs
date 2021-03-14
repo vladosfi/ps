@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using System;
 using PS.API.Models;
+using System.Linq;
 
 namespace PS.API.Controllers
 {
@@ -21,6 +22,13 @@ namespace PS.API.Controllers
         private const string couldNotAddPainting = "Could not add the painting!";
         private const string couldNotAddImage = "Could not add the image!";
         private const string invalidFileLength = "Could not add the image. Invalid file length!";
+        private const string alreadyMainImage = "This is already the main image";
+        private const string couldNotSetMainImage = "Could not set image to main";
+        private const string couldNotDeleteImage = "Could not delete image";
+        private const string cannotDeleteMainImage = "You cannot delete main image";
+        private const string failedToDeleteImage = "Failed to delete image";
+        private const string thumbnailFolder = "thumbnail";
+        private const int maxThumbnailSize = 250;
 
         private readonly IPSRepository repo;
         private readonly IMapper mapper;
@@ -83,6 +91,7 @@ namespace PS.API.Controllers
             return BadRequest(couldNotAddPainting);
         }
 
+
         [HttpGet("image/{id}")]
         [ActionName(nameof(GetImage))]
         public async Task<IActionResult> GetImage(string id)
@@ -119,7 +128,8 @@ namespace PS.API.Controllers
 
             var imageToAdd = new Image();
             var uploadedFileExtension = Path.GetExtension(ImageForCreateDto.File.FileName);
-            imageToAdd.Url = imagesUplaoadFolderPath + "/" + imageToAdd.Id + uploadedFileExtension;
+            imageToAdd.ImageFileName = imageToAdd.Id + uploadedFileExtension;
+            imageToAdd.Url = imagesUplaoadFolderPath;
             imageToAdd.Name = currentPainting.Name;
 
             var fileName = imageToAdd.Id + uploadedFileExtension;
@@ -131,17 +141,13 @@ namespace PS.API.Controllers
                 await ImageForCreateDto.File.CopyToAsync(stream);
             }
 
-            //Create Thumbnail table for images connected to images one to many
-            // Image image = Image.FromFile(fileName);
-            // Image thumb = image.GetThumbnailImage(120, 120, ()=>false, IntPtr.Zero);
-            // thumb.Save(Path.ChangeExtension(fileName, "thumb"));
+            ThumbnailGenerator.GenerateThumbnail(uploadsFolderPath, fileName, thumbnailFolder, maxThumbnailSize);
 
             if (await this.repo.GetMainImageForPainting(paintingId) == null)
             {
                 imageToAdd.IsMain = true;
             }
 
-            //imageToAdd.IsMain 
             currentPainting.Images.Add(imageToAdd);
 
             if (await this.repo.SaveAll())
@@ -151,6 +157,87 @@ namespace PS.API.Controllers
 
 
             return BadRequest(couldNotAddPainting);
+        }
+
+        [Authorize]
+        [HttpPost("{paintingId}/setMainImage/{imageId}")]
+        public async Task<IActionResult> SetMainPhoto(string paintingId, string imageId)
+        {
+            var paintingFromRepo = await this.repo.GetPaintingById(paintingId);
+
+            if (paintingFromRepo == null)
+            {
+                return BadRequest(couldNotSetMainImage);
+            }
+
+            if (!paintingFromRepo.Images.Any(i => i.Id == imageId))
+            {
+                return BadRequest(couldNotSetMainImage);
+            }
+
+            var imageFromRepo = await this.repo.GetImage(imageId);
+
+            if (imageFromRepo.IsMain)
+            {
+                return BadRequest(alreadyMainImage);
+            }
+
+            var currentManImage = await this.repo.GetMainImageForPainting(paintingId);
+            currentManImage.IsMain = false;
+            imageFromRepo.IsMain = true;
+
+            if (await this.repo.SaveAll())
+            {
+                return NoContent();
+            }
+
+            return BadRequest(couldNotSetMainImage);
+
+        }
+
+        [Authorize]
+        [HttpDelete("{paintingId}/delete/{imageId}")]
+        public async Task<IActionResult> DeletePhoto(string paintingId, string imageId)
+        {
+            var paintingFromRepo = await this.repo.GetPaintingById(paintingId);
+
+            if (paintingFromRepo == null)
+            {
+                return BadRequest(couldNotDeleteImage);
+            }
+
+            if (!paintingFromRepo.Images.Any(i => i.Id == imageId))
+            {
+                return BadRequest(couldNotDeleteImage);
+            }
+
+            var imageFromRepo = await this.repo.GetImage(imageId);
+
+            if (imageFromRepo.IsMain)
+            {
+                return BadRequest(cannotDeleteMainImage);
+            }
+
+            var imagePath = Path.Combine(imageFromRepo.Url, imageFromRepo.ImageFileName);
+            imagePath = Path.Combine(host.WebRootPath, imagePath);
+            var thumbnailImage = Path.Combine(host.WebRootPath, imageFromRepo.Url);
+            thumbnailImage = Path.Combine(thumbnailImage, thumbnailFolder);
+            thumbnailImage = Path.Combine(thumbnailImage, imageFromRepo.ImageFileName);
+
+            if (System.IO.File.Exists(imagePath) && System.IO.File.Exists(thumbnailImage))
+            {
+                System.IO.File.Delete(imagePath);
+                System.IO.File.Delete(thumbnailImage);
+
+                this.repo.Delete(imageFromRepo);
+
+                if (await this.repo.SaveAll())
+                {
+                    return Ok();
+                }
+            }
+
+            return BadRequest(failedToDeleteImage);
         }
     }
 }

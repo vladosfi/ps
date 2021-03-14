@@ -21,12 +21,12 @@ namespace PS.API.Controllers
     {
         private const string alreadyMainPhoto = "This is already the main photo";
         private const string couldNotSetMainPhoto = "Could not set photo to main";
-        private const string failedToDeletePhoto = "Failed to delete the photo";
         private const string couldNotAddPhoto = "Could not add the photo!";
         private const string cloudinaryFolderPath = "ps-api";
         private const string cloudinaryCorpOption = "fill";
         private const string cloudinaryGravityOption = "face";
         private const string cannotDeleteMainPhoto = "You cannot delete your main photo";
+        private const string failedToDeletePhoto = "Failed to delete the photo";
         private const string cloudinaryOk = "ok";
 
 

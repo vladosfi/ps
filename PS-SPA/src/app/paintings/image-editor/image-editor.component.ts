@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
-import { IPainting } from 'src/app/_interfaces/painting';
+import { IImage } from 'src/app/_interfaces/image';
 import { IPaintingDetails } from 'src/app/_interfaces/painting-details';
-import { AuthService } from 'src/app/_services/auth.service';
+import { PaintingService } from 'src/app/_services/painting.service';
 import { ToastService } from 'src/app/_services/toast.service';
 import { environment } from 'src/environments/environment';
 
@@ -12,15 +12,14 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./image-editor.component.css']
 })
 export class ImageEditorComponent implements OnInit {
-  @Input() paintings: IPainting[];
   @Input() painting: IPaintingDetails;
-  @Output() getMemberPhotoChange = new EventEmitter<string>();
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
-  currentMain: IPainting;
+  localhost = environment.localhost;
+  currentMainImage: IImage;
 
-  constructor(private authService: AuthService,
+  constructor(private paintingService: PaintingService,
     private toast: ToastService,) { }
 
   ngOnInit(): void {
@@ -52,60 +51,51 @@ export class ImageEditorComponent implements OnInit {
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
-        const res: IPainting = JSON.parse(response);
-        const painting = {
+        const res: IImage = JSON.parse(response);
+        const image = {
           id: res.id,
-          name: res.name,
-          mainImageUrl: res.mainImageUrl,
-          createdOn: res.createdOn,
+          url: this.localhost + res.url,
           description: res.description,
+          imageFileName: res.imageFileName,
           isMain: res.isMain,
         };
-        
-        //this.paintings.push(painting);
 
-        if (painting.isMain) {
-          this.authService.changeMemberPhoto(painting.mainImageUrl);
-          this.authService.currentUser.photoUrl = painting.mainImageUrl;
-        }
+        this.painting.images.push(image);
       }
     };
   }
 
-  setMainPhoto(image: IPainting) {
-    // this.userService
-    //   .setMainPhoto(this.authService.decodedToken.nameid, image.mainImageUrl)
-    //   .subscribe(
-    //     () => {
-    //       this.currentMain = this.paintings.filter((p) => p.isMain === true)[0];
-    //       this.currentMain.isMain = false;
-    //       image.isMain = true;
-    //       this.getMemberPhotoChange.emit(image.url);
-    //       this.authService.changeMemberPhoto(image.url);
-    //       this.authService.currentUser.photoUrl = image.url;
-          
-    //     },
-    //     (error) => {
-    //       this.toast.error(error);
-    //     }
-    //   );
+  setMainPhoto(image: IImage) {
+    this.paintingService
+      .setMainImage(this.painting.id, image.id)
+      .subscribe(
+        () => {
+          this.currentMainImage = this.painting.images.filter((i) => i.isMain === true)[0];
+          this.currentMainImage.isMain = false;
+          image.isMain = true;
+          this.toast.success(`Image ${image.id} isset to main!`)
+        },
+        (error) => {
+          this.toast.error(error);
+        }
+      );
   }
 
-  deletePhoto(id: string) {
+  deletePhoto(image: IImage) {
 
-    // if (confirm('Are you sure you want to delete this photo?')) {
-    //   this.userService
-    //     .deletePhoto(this.authService.decodedToken.nameid, id)
-    //     .subscribe(
-    //       () => {
-    //         this.paintings.splice(this.paintings.findIndex((p) => p.id === id), 1);
-    //         this.toast.success('Photo has been deleted');
-    //       },
-    //       (error) => {
-    //         this.toast.error('Failed to delete photo');
-    //       }
-    //     );
-    // }
+    if (confirm('Are you sure you want to delete this image?')) {
+      this.paintingService
+        .deleteImage(this.painting.id, image.id)
+        .subscribe(
+          () => {
+            this.painting.images.splice(this.painting.images.findIndex((i) => i.id === image.id), 1);
+            this.toast.success('Image has been deleted');
+          },
+          (error) => {
+            this.toast.error('Failed to delete image');
+          }
+        );
+    }
   }
 
 }

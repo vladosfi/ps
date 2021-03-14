@@ -1,3 +1,5 @@
+import { IImage } from './image';
+
 export interface IPaintingDetails {
     id: string;
     name: string;
@@ -6,8 +8,12 @@ export interface IPaintingDetails {
     category: string;
     sizeX: number;
     sizeY: number;
+    sizeXIn: number;
+    sizeYIn: number;
     available: boolean;
-    imageUrl: string;
+    url: string;
+    imageFileName: string;
+    images?: IImage[];
     pervImageUrl: string;
     nextImageUrl: string;
 }

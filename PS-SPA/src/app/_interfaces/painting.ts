@@ -2,7 +2,8 @@ export interface IPainting {
     id: string;
     name: string;
     description: string;
-    mainImageUrl: string;
+    url: string;
+    imageFileName: string;
     createdOn: Date;
     isMain: boolean;
 }

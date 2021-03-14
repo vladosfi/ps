@@ -53,16 +53,26 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-8">
-            <img class="img-fluid mx-auto d-block" src="{{paintingModal?.imageUrl}}" alt="{{paintingModal?.name}}">
+          <!-- <div class="col-8">
+            <img class="img-fluid mx-auto d-block" src="{{paintingModal?.url}}/{{paintingModal?.imageFileName}}" alt="{{paintingModal?.name}}">
+          </div> -->
+          <div class="col-lg-8 col-md-12">
+            <ngx-gallery
+              [options]="galleryOptions"
+              [images]="galleryImages"
+            ></ngx-gallery>
           </div>
-          <div class="col-4">
+          <div class="col-lg-4 col-md-12">
             <div class="row justify-content-start">
               <div class="col-12">
                 <h1>{{paintingModal?.name}}</h1>
-                <p><span class="propName">Size:</span> {{paintingModal?.sizeY}} x {{paintingModal?.sizeX}}</p>
-                <p>{{paintingModal?.category}}</p>
-                <p>{{paintingModal?.available}}</p>
+                
+                <p><span class="bolded">Format:</span> {{paintingModal?.sizeY}} x {{paintingModal?.sizeX}} cm / {{paintingModal?.sizeYIn}} x {{paintingModal?.sizeXIn}} inches</p>
+                <p *ngIf="paintingModal?.category == 'mixed'"><span class="bolded">{{ "GENERAL.TECHNIQUE" | translate }}: </span> {{ "GALLERY.CATEGORY-MIX" | translate }}</p>
+                <p *ngIf="paintingModal?.category == 'sea'"><span class="bolded">{{ "GENERAL.TECHNIQUE" | translate }}: </span> {{ "GALLERY.CATEGORY-SEA" | translate }}</p>
+                <p *ngIf="paintingModal?.category == 'marine'"><span class="bolded">{{ "GENERAL.TECHNIQUE" | translate }}: </span> {{ "GALLERY.CATEGORY-MARINE" | translate }}</p>
+                <p *ngIf="paintingModal?.available"><i class="fa fa-check-circle"></i>{{ "GENERAL.AVAILABLE" | translate }}</p>
+                <p *ngIf="!paintingModal?.available"><i class="fa fa-times-circle"></i>{{ "GENERAL.UNAVAILABLE" | translate }}</p>
                 <p>{{paintingModal?.description}}</p>
               </div>
             </div>
@@ -72,3 +82,4 @@
     </div>
   </div>
 </div>
+
