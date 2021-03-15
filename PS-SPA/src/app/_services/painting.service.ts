@@ -56,7 +56,7 @@ export class PaintingService {
       );
   }
 
-  addPainting(painting: IPaintingDetails):any {
+  addPainting(painting: IPaintingDetails): any {
     return this.http.post(this.baseUrl + 'paintings/' + this.authService.decodedToken.nameid, painting);
   }
 
@@ -66,5 +66,9 @@ export class PaintingService {
 
   deleteImage(paintingId: string, imageId: string) {
     return this.http.delete(this.baseUrl + `paintings/${paintingId}/delete/${imageId}`);
+  }
+
+  updatePainting(painting: IPaintingDetails): any {
+    return this.http.put(this.baseUrl + 'paintings/' + painting.id, painting);
   }
 }

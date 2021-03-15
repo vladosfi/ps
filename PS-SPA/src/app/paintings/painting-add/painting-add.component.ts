@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { IPaintingDetails } from 'src/app/_interfaces/painting-details';
 import { PaintingService } from 'src/app/_services/painting.service';
 import { ToastService } from 'src/app/_services/toast.service';
@@ -14,7 +15,11 @@ export class PaintingAddComponent implements OnInit {
   model: any = {};
   paintingDetails: IPaintingDetails;
   
-  constructor(private paintingService: PaintingService, fb: FormBuilder, private toast: ToastService) {
+  constructor(
+    private paintingService: PaintingService, 
+    fb: FormBuilder, 
+    private toast: ToastService,
+    private route: ActivatedRoute,) {
     this.paintingModel = new FormGroup({
       name: new FormControl('nameBg', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
       description: new FormControl('descBgdescBgdescBg', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
@@ -33,6 +38,7 @@ export class PaintingAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   addPainting() {

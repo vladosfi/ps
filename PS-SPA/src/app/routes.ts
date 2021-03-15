@@ -57,7 +57,7 @@ export const appRoutes: Routes = [
             {
                 path: 'paintings/:id', component: PaintingDetailsComponent,
                 resolve: { painting: PaintingResolver }
-            }
+            },
         ]
     },  
     //{ path: 'paintings', component: PaintingListComponent, resolve: { paintings: PaintingsResolver } },

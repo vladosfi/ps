@@ -13,7 +13,7 @@ export class PaintingResolver implements Resolve<IPaintingDetails>{
         private paintingService: PaintingService,
         private router: Router,
         private toast: ToastService) { }
-
+                                          
     resolve(route: ActivatedRouteSnapshot): Observable<IPaintingDetails> {
         return this.paintingService.getPainting(route.params['id']).pipe(
             catchError(error => {

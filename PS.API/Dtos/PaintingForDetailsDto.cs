@@ -12,6 +12,8 @@ namespace PS.API.Dtos
         public string Description { get; set; }
 
         public string Category { get; set; }
+        
+        public string CategoryId { get; set; }
 
         public bool Available { get; set; }
 

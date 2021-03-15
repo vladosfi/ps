@@ -27,6 +27,9 @@ namespace PS.API.Controllers
         private const string couldNotDeleteImage = "Could not delete image";
         private const string cannotDeleteMainImage = "You cannot delete main image";
         private const string failedToDeleteImage = "Failed to delete image";
+        private const string failedToUpdatePainting = "Failed to update painting";
+        private const string paintingUpdatingFailed = "Updating painting {0} failed on save";
+
         private const string thumbnailFolder = "thumbnail";
         private const int maxThumbnailSize = 250;
 
@@ -239,5 +242,27 @@ namespace PS.API.Controllers
 
             return BadRequest(failedToDeleteImage);
         }
+
+        [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePainting(string id, PaintingForDetailsDto paintingForDetailsDto)
+        {
+            var paintingFromRepo = await this.repo.GetPaintingById(id);
+
+            if (paintingFromRepo == null)
+            {
+                return BadRequest(failedToUpdatePainting);
+            }
+
+            this.mapper.Map(paintingForDetailsDto, paintingFromRepo);
+
+            if (await this.repo.SaveAll())
+            {
+                return NoContent();
+            }
+
+            throw new Exception(string.Format(paintingUpdatingFailed, id));
+        }
+
     }
 }
