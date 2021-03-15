@@ -245,7 +245,7 @@ namespace PS.API.Controllers
 
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePainting(string id, PaintingForDetailsDto paintingForDetailsDto)
+        public async Task<IActionResult> UpdatePainting(string id, PaintingForUpdateDto paintingForDetailsDto)
         {
             var paintingFromRepo = await this.repo.GetPaintingById(id);
 
@@ -255,6 +255,8 @@ namespace PS.API.Controllers
             }
 
             this.mapper.Map(paintingForDetailsDto, paintingFromRepo);
+
+            paintingFromRepo.ModifiedOn = DateTime.UtcNow;
 
             if (await this.repo.SaveAll())
             {

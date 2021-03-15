@@ -1,18 +1,9 @@
-using System;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
 
 namespace PS.API.Dtos
 {
-    public class PaintingForAddPaintingDto
+    public class PaintingForUpdateDto
     {
-
-        public PaintingForAddPaintingDto()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
-        public string Id { get; set; }
-
         [Required]
         public string Name { get; set; }
 

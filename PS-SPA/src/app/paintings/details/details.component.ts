@@ -16,21 +16,21 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class PaintingDetailsComponent implements OnInit {
   paintingModel: FormGroup;
   paintingDetails: IPaintingDetails;
-  
+
 
   constructor(private paintingService: PaintingService,
     private toast: ToastService,
     private route: ActivatedRoute,
-    fb: FormBuilder ) { 
-      this.paintingModel = new FormGroup({
-        name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-        description: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
-        available: new FormControl('', [Validators.required]),
-        categoryId: new FormControl('', [Validators.required]),
-        sizeX: new FormControl('', [Validators.required]),
-        sizeY: new FormControl('', [Validators.required]),
-      });
-    }
+    fb: FormBuilder) {
+    this.paintingModel = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
+      available: new FormControl('', [Validators.required]),
+      categoryId: new FormControl('', [Validators.required]),
+      sizeX: new FormControl('', [Validators.required]),
+      sizeY: new FormControl('', [Validators.required]),
+    });
+  }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
@@ -45,20 +45,15 @@ export class PaintingDetailsComponent implements OnInit {
     });
   }
 
-  updatePainting(){
+  updatePainting() {
     if (this.paintingModel.valid) {
-      this.paintingDetails = Object.assign({id: this.paintingDetails.id}, this.paintingModel.value);
-      this.paintingService.updatePainting(this.paintingDetails).subscribe(
-        (response) => {       
-          if (response) {
-            this.paintingDetails = Object.assign({}, response);            
-            this.toast.success('Painting added successfully');
-        }},
-        (error) => {
-          this.toast.error(error);
-        }
-      );
+      var updatedPainting = Object.assign({}, this.paintingModel.value);
+      this.paintingService.updatePainting(this.paintingDetails.id, updatedPainting).subscribe(next => {
+        this.toast.success('Painting updated successfully');
+      }, error => {
+        this.toast.error(error);
+      });
     }
   }
-  
+
 }

@@ -68,7 +68,7 @@ export class PaintingService {
     return this.http.delete(this.baseUrl + `paintings/${paintingId}/delete/${imageId}`);
   }
 
-  updatePainting(painting: IPaintingDetails): any {
-    return this.http.put(this.baseUrl + 'paintings/' + painting.id, painting);
+  updatePainting(paintingId: string, painting: IPaintingDetails): any {
+    return this.http.put(this.baseUrl + 'paintings/' + paintingId, painting);
   }
 }
