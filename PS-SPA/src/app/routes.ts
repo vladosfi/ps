@@ -18,6 +18,8 @@ import { PaintingsResolver } from './_resolvers/paintings.resolver';
 import { PaintingDetailsComponent } from './paintings/details/details.component';
 import { PaintingResolver } from './_resolvers/painting.resolver';
 import { PaintingAddComponent } from './paintings/painting-add/painting-add.component';
+import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
+import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
 
 export const appRoutes: Routes = [
     //{ path: 'home', redirectTo: '' },
@@ -57,6 +59,15 @@ export const appRoutes: Routes = [
             {
                 path: 'paintings/:id', component: PaintingDetailsComponent,
                 resolve: { painting: PaintingResolver }
+            },
+        ]
+    },  
+    {
+        path: '',
+        children: [
+            {
+                path: 'admin', component: AdminPaintingListComponent,
+                resolve: { paintings: AdminPaintingsResolver }
             },
         ]
     },  

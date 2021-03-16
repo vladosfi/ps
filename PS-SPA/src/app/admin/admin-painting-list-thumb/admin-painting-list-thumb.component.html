@@ -1,0 +1,23 @@
+
+<div class="col-md-12">
+    <section class="search-result-item mt-3">
+        <a class="image-link" href="#"><img class="image" src="{{ localhost + paintingDetails?.url }}/thumbnail/{{paintingDetails?.imageFileName}}">
+        </a>
+        <div class="search-result-item-body">
+            <div class="row">
+                <div class="col-sm-9">
+                    <h4 class="search-result-item-heading"><a href="#">{{ paintingDetails?.name }}</a> <span
+                            class="badge bg-danger fw-normal pull-right">{{paintingDetails?.isMain}}</span></h4>
+                    <p class="info">CreatedOn: {{paintingDetails?.createdOn}}</p>
+                    <p class="description">{{paintingDetails?.description}}</p>
+                </div>
+                <div class="col-sm-3 text-align-center">
+                    <p class="value3 mt-sm">$10, 300</p>
+                    <p class="fs-mini text-muted">PER WEEK</p>
+                    <a class="btn btn-primary btn-info btn-sm" routerLink="/paintings/{{paintingDetails?.id}}">Edit</a>
+                    <p class="fs-mini text-muted">PER WEEK</p><a class="btn btn-primary btn-info btn-sm" href="#">Delete</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

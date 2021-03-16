@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PaginatedResult, Pagination } from 'src/app/_interfaces/pagination';
 import { IPainting } from 'src/app/_interfaces/painting';
@@ -26,7 +26,7 @@ export class PaintingListComponent implements OnInit, OnDestroy {
 
   constructor(private paintingService: PaintingService,
     private toast: ToastService,
-    private route: ActivatedRoute,) {
+    private route: ActivatedRoute) {
     document.body.style.backgroundColor = "#A9D3E9";
   }
 

@@ -12,25 +12,25 @@ import { AuthService } from './_services/auth.service';
 import { StartComponent } from './start/start.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
-import { ToastrModule } from 'ngx-toastr';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { appRoutes } from './routes';
 import { ContactsComponent } from './contacts/contacts.component';
 import { EventsComponent } from './events/events.component';
 import { MemberThumbComponent } from './gallery/member-thumb/members-thumb.component';
 import { DetailComponent } from './gallery/detail/detail.component';
-import { NgxGalleryModule } from 'ngx-gallery-9';
 import { AuthGuard } from './_guards/auth.guard';
 import { DetailResolver } from './_resolvers/detail.resolver';
-import { TimeagoModule } from 'ngx-timeago';
 import { MembersResolver } from './_resolvers/members.resolver';
 import { DetailEditComponent } from './gallery/detail-edit/gallery-detail-edit.component';
 import { DetailEditResolver } from './_resolvers/detail-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes';
 import { PhotoEditorComponent } from './gallery/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ToastrModule } from 'ngx-toastr';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { NgxGalleryModule } from 'ngx-gallery-9';
+import { TimeagoModule } from 'ngx-timeago';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
@@ -50,6 +50,9 @@ import { PaintingResolver } from './_resolvers/painting.resolver';
 import { PaintingAddComponent } from './paintings/painting-add/painting-add.component';
 import { DecimalNumericDirective } from './shared/decimal-numeric.directive';
 import { ImageEditorComponent } from './paintings/image-editor/image-editor.component';
+import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
+import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
+import { AdminPaintingListThumbComponent } from './admin/admin-painting-list-thumb/admin-painting-list-thumb.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -80,18 +83,20 @@ export function HttpLoaderFactory(http: HttpClient){
     PaintingAddComponent,
     DecimalNumericDirective,
     ImageEditorComponent,
+    AdminPaintingListComponent,
+    AdminPaintingListThumbComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule, // required animations module
     CommonModule,
-    ToastrModule.forRoot(), // ToastrModule added
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     NgxGalleryModule,
+    FileUploadModule,
+    ToastrModule.forRoot(), // ToastrModule added
     ModalModule.forRoot(),
-    CoreModule,
     TranslateModule.forRoot({
       loader:{
         provide: TranslateLoader,
@@ -101,7 +106,6 @@ export function HttpLoaderFactory(http: HttpClient){
     }),
     CollapseModule.forRoot(),
     PaginationModule.forRoot(),
-    FileUploadModule,
     TimeagoModule.forRoot(),
     TabsModule.forRoot(),
     ButtonsModule.forRoot(),
@@ -115,6 +119,7 @@ export function HttpLoaderFactory(http: HttpClient){
         disallowedRoutes: ['localhost:5000/api/auth'],
       }
     }),
+    CoreModule,
   ],
   providers: [
     AuthService,
@@ -126,10 +131,10 @@ export function HttpLoaderFactory(http: HttpClient){
     PreventUnsavedChanges,
     ListsResolver,
     PaintingsResolver,
-    PaintingResolver
+    PaintingResolver,
+    AdminPaintingsResolver
   ],
   exports: [
-    
   ],
   bootstrap: [AppComponent]
 })
