@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class AdminPaintingListThumbComponent implements OnInit {
   @Input() paintingDetails: IPainting;
   localhost = environment.localhost;
-  
+    
   constructor() { }
 
   ngOnInit(): void {

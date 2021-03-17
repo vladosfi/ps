@@ -53,6 +53,7 @@ import { ImageEditorComponent } from './paintings/image-editor/image-editor.comp
 import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
 import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
 import { AdminPaintingListThumbComponent } from './admin/admin-painting-list-thumb/admin-painting-list-thumb.component';
+import { AdminConfirmModalComponent } from './admin/admin-confirm-modal/admin-confirm-modal.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -84,7 +85,8 @@ export function HttpLoaderFactory(http: HttpClient){
     DecimalNumericDirective,
     ImageEditorComponent,
     AdminPaintingListComponent,
-    AdminPaintingListThumbComponent
+    AdminPaintingListThumbComponent,
+    AdminConfirmModalComponent
   ],
   imports: [
     BrowserModule,
