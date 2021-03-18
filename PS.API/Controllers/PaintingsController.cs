@@ -29,6 +29,9 @@ namespace PS.API.Controllers
         private const string failedToDeleteImage = "Failed to delete image";
         private const string failedToUpdatePainting = "Failed to update painting";
         private const string paintingUpdatingFailed = "Updating painting {0} failed on save";
+        private const string couldNotDeletePainting = "You cannot delete painting";
+        private const string failedToDeletePainting = "Failed to delete painting";
+
 
         private const string thumbnailFolder = "thumbnail";
         private const int maxThumbnailSize = 250;
@@ -266,5 +269,42 @@ namespace PS.API.Controllers
             throw new Exception(string.Format(paintingUpdatingFailed, id));
         }
 
+        [Authorize]
+        [HttpDelete("{paintingId}/delete")]
+        public async Task<IActionResult> DeletePainting(string paintingId)
+        {
+            var paintingFromRepo = await this.repo.GetPaintingById(paintingId);
+
+            if (paintingFromRepo == null)
+            {
+                return BadRequest(couldNotDeletePainting);
+            }
+
+            foreach (var image in paintingFromRepo.Images)
+            {
+                var imagePath = Path.Combine(image.Url, image.ImageFileName);
+                imagePath = Path.Combine(host.WebRootPath, imagePath);
+                var thumbnailImage = Path.Combine(host.WebRootPath, image.Url);
+                thumbnailImage = Path.Combine(thumbnailImage, thumbnailFolder);
+                thumbnailImage = Path.Combine(thumbnailImage, image.ImageFileName);
+
+                if (System.IO.File.Exists(imagePath) && System.IO.File.Exists(thumbnailImage))
+                {
+                    System.IO.File.Delete(imagePath);
+                    System.IO.File.Delete(thumbnailImage);
+                }
+
+                this.repo.Delete(image);
+            }
+
+            this.repo.Delete(paintingFromRepo);
+
+            if (await this.repo.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest(failedToDeletePainting);
+        }
     }
 }

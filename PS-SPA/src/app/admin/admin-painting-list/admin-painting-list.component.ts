@@ -18,8 +18,8 @@ export class AdminPaintingListComponent implements OnInit {
   constructor(private paintingService: PaintingService,
     private toast: ToastService,
     private route: ActivatedRoute) {
-      document.body.style.backgroundColor = "#A9D3E9";
-     }
+    document.body.style.backgroundColor = "#A9D3E9";
+  }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
@@ -27,7 +27,7 @@ export class AdminPaintingListComponent implements OnInit {
       this.pagination = data['paintings'].pagination;
     });
 
-    this.toast.success(this.paintings[0].description);
+    //this.toast.success(this.paintings[0].description);
   }
 
   pageChanged(event: any): void {
@@ -43,6 +43,10 @@ export class AdminPaintingListComponent implements OnInit {
       }, error => {
         this.toast.error(error);
       })
+  }
+
+  deleteItem(paintingId: string) {
+    this.paintings.splice(this.paintings.findIndex((i) => i.id === paintingId), 1);
   }
 
   ngOnDestroy() {

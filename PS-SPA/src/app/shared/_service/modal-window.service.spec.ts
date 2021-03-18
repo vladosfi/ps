@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AdminModalService } from './admin-modal.service';
+import { ModalWindowService } from './modal-window.service';
 
 describe('AdminModalService', () => {
-  let service: AdminModalService;
+  let service: ModalWindowService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AdminModalService);
+    service = TestBed.inject(ModalWindowService);
   });
 
   it('should be created', () => {

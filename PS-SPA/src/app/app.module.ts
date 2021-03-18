@@ -34,7 +34,7 @@ import { TimeagoModule } from 'ngx-timeago';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { BsModalRef, ModalModule } from 'ngx-bootstrap/modal';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ListsComponent } from './lists/lists.component';
@@ -53,8 +53,7 @@ import { ImageEditorComponent } from './paintings/image-editor/image-editor.comp
 import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
 import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
 import { AdminPaintingListThumbComponent } from './admin/admin-painting-list-thumb/admin-painting-list-thumb.component';
-import { AdminConfirmModalComponent } from './admin/admin-confirm-modal/admin-confirm-modal.component';
-import { AdminModalService } from './admin/_service/admin-modal.service';
+import { ModalWindowService } from './shared/_service/modal-window.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -87,7 +86,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ImageEditorComponent,
     AdminPaintingListComponent,
     AdminPaintingListThumbComponent,
-    AdminConfirmModalComponent
   ],
   imports: [
     BrowserModule,
@@ -124,9 +122,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     CoreModule,
   ],
-  entryComponents: [
-    AdminConfirmModalComponent
-  ],
   providers: [
     AuthService,
     AuthGuard,
@@ -139,8 +134,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PaintingsResolver,
     PaintingResolver,
     AdminPaintingsResolver,
-    AdminModalService,
-    BsModalRef
+    ModalWindowService
   ],
   exports: [
   ],

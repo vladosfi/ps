@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { ModalWindowService } from 'src/app/shared/_service/modal-window.service';
 import { IPainting } from 'src/app/_interfaces/painting';
+import { PaintingService } from 'src/app/_services/painting.service';
+import { ToastService } from 'src/app/_services/toast.service';
 import { environment } from 'src/environments/environment';
-import { AdminModalService } from '../_service/admin-modal.service';
 
 @Component({
   selector: 'app-admin-painting-list-thumb',
@@ -10,19 +11,39 @@ import { AdminModalService } from '../_service/admin-modal.service';
   styleUrls: ['./admin-painting-list-thumb.component.css']
 })
 export class AdminPaintingListThumbComponent implements OnInit {
-  @Input() paintingDetails: IPainting;
   localhost = environment.localhost;
+  @Input() paintingDetails: IPainting;
+  @Output() deletePaintingEvent = new EventEmitter<string>();
+  @ViewChild("template") template: TemplateRef<any>;
+  textMessage: string = "Are you sure you want to delete?";
 
-  modalRef: BsModalRef;
+  constructor(
+    private modalService: ModalWindowService,
+    private paintingService: PaintingService,
+    private toast: ToastService) { }
 
-  constructor(private adminModalService: AdminModalService) { }
+  ngOnInit() { }
 
-  ngOnInit() {
-
+  openConfirmModal() {
+    this.modalService.openModal(this.template);
   }
 
-  show() {
-    this.adminModalService.showYourModal();
+  confirm() {
+    this.modalService.confirm();
+
+    this.paintingService.deletePainting(this.paintingDetails.id)
+      .subscribe(
+        () => {
+          this.deletePaintingEvent.emit(this.paintingDetails.id);
+          this.toast.success('Painting has been deleted');
+        },
+        (error) => {
+          this.toast.error('Failed to delete painting');
+    });
+  }
+
+  decline() {
+    this.modalService.decline();
   }
 
 }

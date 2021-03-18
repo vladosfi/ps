@@ -64,6 +64,8 @@ export const appRoutes: Routes = [
     },  
     {
         path: '',
+        runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'admin', component: AdminPaintingListComponent,
