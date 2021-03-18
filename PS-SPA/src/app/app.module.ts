@@ -34,8 +34,8 @@ import { TimeagoModule } from 'ngx-timeago';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import { BsModalRef, ModalModule } from 'ngx-bootstrap/modal';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ListsComponent } from './lists/lists.component';
 import { ListsResolver } from './_resolvers/lists.resolver';
@@ -54,12 +54,13 @@ import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-pa
 import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
 import { AdminPaintingListThumbComponent } from './admin/admin-painting-list-thumb/admin-painting-list-thumb.component';
 import { AdminConfirmModalComponent } from './admin/admin-confirm-modal/admin-confirm-modal.component';
+import { AdminModalService } from './admin/_service/admin-modal.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
-export function HttpLoaderFactory(http: HttpClient){
+export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
@@ -100,7 +101,7 @@ export function HttpLoaderFactory(http: HttpClient){
     ToastrModule.forRoot(), // ToastrModule added
     ModalModule.forRoot(),
     TranslateModule.forRoot({
-      loader:{
+      loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
@@ -123,6 +124,9 @@ export function HttpLoaderFactory(http: HttpClient){
     }),
     CoreModule,
   ],
+  entryComponents: [
+    AdminConfirmModalComponent
+  ],
   providers: [
     AuthService,
     AuthGuard,
@@ -134,7 +138,9 @@ export function HttpLoaderFactory(http: HttpClient){
     ListsResolver,
     PaintingsResolver,
     PaintingResolver,
-    AdminPaintingsResolver
+    AdminPaintingsResolver,
+    AdminModalService,
+    BsModalRef
   ],
   exports: [
   ],
