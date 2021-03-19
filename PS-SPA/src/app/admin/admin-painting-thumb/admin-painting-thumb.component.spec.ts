@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminPaintingListThumbComponent } from './admin-painting-list-thumb.component';
+import { AdminPaintingThumbComponent } from './admin-painting-thumb.component';
 
 describe('AdminPaintingListThumbComponent', () => {
-  let component: AdminPaintingListThumbComponent;
-  let fixture: ComponentFixture<AdminPaintingListThumbComponent>;
+  let component: AdminPaintingThumbComponent;
+  let fixture: ComponentFixture<AdminPaintingThumbComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminPaintingListThumbComponent ]
+      declarations: [ AdminPaintingThumbComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminPaintingListThumbComponent);
+    fixture = TestBed.createComponent(AdminPaintingThumbComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

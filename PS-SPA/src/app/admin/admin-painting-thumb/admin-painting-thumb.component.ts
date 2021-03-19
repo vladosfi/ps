@@ -6,11 +6,11 @@ import { ToastService } from 'src/app/_services/toast.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-admin-painting-list-thumb',
-  templateUrl: './admin-painting-list-thumb.component.html',
-  styleUrls: ['./admin-painting-list-thumb.component.css']
+  selector: 'app-admin-painting-thumb',
+  templateUrl: './admin-painting-thumb.component.html',
+  styleUrls: ['./admin-painting-thumb.component.css']
 })
-export class AdminPaintingListThumbComponent implements OnInit {
+export class AdminPaintingThumbComponent implements OnInit {
   localhost = environment.localhost;
   @Input() paintingDetails: IPainting;
   @Output() deletePaintingEvent = new EventEmitter<string>();

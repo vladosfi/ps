@@ -1,18 +1,40 @@
 <div class="container">
-    <div class="row ng-scope">
-        <div class="col-md-12">
-            <h4>Results <span class="fw-semi-bold">Filtering</span></h4>
-            <p class="text-muted fs-mini">Listed content is categorized by the following groups:</p>
+    <div class="container mt-4 mb-5">
+        <div class="btn-group mb-3">
+          <label class="btn btn-info mr-1" [(ngModel)]="this.paintingParams.categoryId"
+                 btnRadio="1" tabindex="0" role="button"  (click)="loadPaintings();">{{ "GALLERY.CATEGORY-MIX" | translate }}</label>
+          <label class="btn btn-info mr-1" [(ngModel)]="this.paintingParams.categoryId"
+                 btnRadio="2" tabindex="0" role="button" (click)="loadPaintings();">{{ "GALLERY.CATEGORY-SEA" | translate }}</label>
+          <label class="btn btn-info" [(ngModel)]="this.paintingParams.categoryId"
+                 btnRadio="3" tabindex="0" role="button" (click)="loadPaintings();">{{ "GALLERY.CATEGORY-MARINE" | translate }}</label>
         </div>
-        <div *ngFor="let painting of paintings" class="col-md-12">
-            <app-admin-painting-list-thumb [paintingDetails]="painting" (deletePaintingEvent)="deleteItem($event)"></app-admin-painting-list-thumb>
+        
+        <div class="btn-group ml-5 mb-3">
+          <label class="btn btn-info mr-1" [(ngModel)]="this.paintingParams.available"
+                 btnRadio="true" tabindex="0" role="button"  (click)="loadPaintings();">{{ "GENERAL.AVAILABLE" | translate }}</label>
+          <label class="btn btn-info" [(ngModel)]="this.paintingParams.available"
+                 btnRadio="false" tabindex="0" role="button" (click)="loadPaintings();">{{ "GENERAL.UNAVAILABLE" | translate }}</label>
         </div>
-    </div>
+      
+        <div class="row ng-scope">
+            <div class="col-md-12">
+                <h4>Results <span class="fw-semi-bold">Filtering</span></h4>
+                <p class="text-muted fs-mini">Listed content is categorized by the following groups:</p>
+            </div>
+            <div *ngFor="let painting of paintings" class="col-md-12">
+                <app-admin-painting-thumb [paintingDetails]="painting" (deletePaintingEvent)="deleteItem($event)"></app-admin-painting-thumb>
+            </div>
+        </div>
+    
+        <div class="d-flex justify-content-center mt-5">
+            <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
+                [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+                nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+            </pagination>
+        </div>
+        
+      </div>
 
-    <div class="d-flex justify-content-center mt-5">
-        <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
-            [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
-            nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
-        </pagination>
-    </div>
+
+
 </div>

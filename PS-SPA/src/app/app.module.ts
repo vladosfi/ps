@@ -52,7 +52,7 @@ import { DecimalNumericDirective } from './shared/decimal-numeric.directive';
 import { ImageEditorComponent } from './paintings/image-editor/image-editor.component';
 import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
 import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
-import { AdminPaintingListThumbComponent } from './admin/admin-painting-list-thumb/admin-painting-list-thumb.component';
+import { AdminPaintingThumbComponent } from './admin/admin-painting-thumb/admin-painting-thumb.component';
 import { ModalWindowService } from './shared/_service/modal-window.service';
 
 export function tokenGetter() {
@@ -85,7 +85,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DecimalNumericDirective,
     ImageEditorComponent,
     AdminPaintingListComponent,
-    AdminPaintingListThumbComponent,
+    AdminPaintingThumbComponent,
   ],
   imports: [
     BrowserModule,
