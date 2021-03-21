@@ -25,6 +25,6 @@ export class PaintingsResolver implements Resolve<IPainting[]>{
                 this.router.navigate(['/home']);
                 return of(null);
             })
-        )
+        );
     }
 }

@@ -21,6 +21,8 @@ import { PaintingAddComponent } from './paintings/painting-add/painting-add.comp
 import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
 import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
 
+
+
 export const appRoutes: Routes = [
     //{ path: 'home', redirectTo: '' },
     { path: '', component: HomeComponent }, //home
@@ -44,7 +46,7 @@ export const appRoutes: Routes = [
                 resolve: { user: DetailEditResolver }, canDeactivate: [PreventUnsavedChanges]
             },
         ]
-    },  
+    },
     {
         path: '',
         children: [
@@ -61,7 +63,14 @@ export const appRoutes: Routes = [
                 resolve: { painting: PaintingResolver }
             },
         ]
-    },  
+    },
+    // {
+    //     path: 'admin',
+    //     runGuardsAndResolvers: 'always',
+    //     canActivate: [AuthGuard],
+    //     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    //     resolve: { paintings: AdminPaintingsResolver }
+    // },
     {
         path: '',
         runGuardsAndResolvers: 'always',
@@ -72,7 +81,7 @@ export const appRoutes: Routes = [
                 resolve: { paintings: AdminPaintingsResolver }
             },
         ]
-    },  
+    },
     //{ path: 'paintings', component: PaintingListComponent, resolve: { paintings: PaintingsResolver } },
     { path: 'start', component: StartComponent },
     { path: 'events', component: EventsComponent },

@@ -1,34 +1,169 @@
 <div class="col-md-12">
-    <section class="search-result-item mt-3">
-        <a class="image-link"><img class="image"
-                src="{{ localhost + paintingDetails?.url }}/thumbnail/{{paintingDetails?.imageFileName}}">
-        </a>
-        <div class="search-result-item-body">
-            <div class="row">
-                <div class="col-sm-9">
-                    <h4 class="search-result-item-heading">{{ paintingDetails?.name }} <span
-                            class="badge bg-danger fw-normal pull-right">{{paintingDetails?.isMain}}</span></h4>
-                    <p class="info">Created On: {{ paintingDetails?.createdOn | date: "mediumDate" }}</p>
-                    <p class="description">{{paintingDetails?.description}}</p>
-                </div>
-                <div class="col-sm-3 text-align-center">
-                    <p class="value3 mt-sm">$10, 300</p>
-                    <p class="fs-mini text-muted">PER WEEK</p>
-                    <a class="btn btn-success  btn-sm" routerLink="/paintings/{{paintingDetails?.id}}">
-                        <i class="fa fa-edit"></i> Edit</a>
-                    <a class="btn btn-danger btn-sm" (click)="openConfirmModal()"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
-                </div>
-            </div>
+  <section class="search-result-item mt-3">
+    <a class="image-link"
+      ><img
+        (click)="getPainting(paintingDetails?.id)"
+        class="image"
+        src="{{ localhost + paintingDetails?.url }}/thumbnail/{{
+          paintingDetails?.imageFileName
+        }}"
+      />
+    </a>
+    <div class="search-result-item-body">
+      <div class="row">
+        <div class="col-sm-9">
+          <h4
+            class="search-result-item-heading"
+            (click)="getPainting(paintingDetails?.id)"
+          >
+            {{ paintingDetails?.name }}
+            <span class="badge bg-danger fw-normal pull-right">{{
+              paintingDetails?.isMain
+            }}</span>
+          </h4>
+          <p class="info">
+            <span class="bold">Created On:</span>
+            {{ paintingDetails?.createdOn | date: "mediumDate" }}
+          </p>
+          <p class="description">
+            {{ paintingDetails?.description.substring(0, 250) }}
+          </p>
         </div>
-    </section>
+        <div class="col-sm-3 text-align-center">
+          <p
+            class="value3 mt-sm fs-mini text-muted"
+            *ngIf="paintingDetails?.available"
+          >
+            <i class="fa fa-check-circle"></i
+            >{{ "GENERAL.AVAILABLE" | translate }}
+          </p>
+          <p
+            class="value3 mt-sm fs-mini text-muted"
+            *ngIf="!paintingDetails?.available"
+          >
+            <i class="fa fa-times-circle"></i
+            >{{ "GENERAL.UNAVAILABLE" | translate }}
+          </p>
+          <a
+            class="btn btn-success btn-sm"
+            routerLink="/paintings/{{ paintingDetails?.id }}"
+          >
+            <i class="fa fa-edit"></i> Edit</a
+          >
+          <a class="btn btn-danger btn-sm" (click)="openConfirmModal()"
+            ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a
+          >
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
-
-
 
 <ng-template #template>
   <div class="modal-body text-center">
-    <p>{{textMessage}}</p>
-    <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
-    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+    <p>{{ textMessage }}</p>
+    <button type="button" class="btn btn-default" (click)="confirm()">
+      Yes
+    </button>
+    <button type="button" class="btn btn-primary" (click)="decline()">
+      No
+    </button>
   </div>
 </ng-template>
+
+<div
+  bsModal
+  #lgModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="dialog-sizes-name1"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <li class="list-inline-item">
+          <!-- <h4 id="dialog-sizes-name1" class="modal-title pull-left">{{paintingModal?.name}}</h4> -->
+          <button
+            class="btn btn-primary"
+            [disabled]="!paintingModal?.pervImageUrl"
+            (click)="getPainting(paintingModal?.pervImageUrl)"
+          >
+            <i class="fa fa-arrow-left"></i>
+          </button>
+        </li>
+        <li class="list-inline-item">
+          <button
+            class="btn btn-primary"
+            [disabled]="!paintingModal?.nextImageUrl"
+            (click)="getPainting(paintingModal?.nextImageUrl)"
+          >
+            <i class="fa fa-arrow-right"></i>
+          </button>
+        </li>
+        <button
+          type="button"
+          class="close pull-right"
+          (click)="lgModal.hide()"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- <div class="col-8">
+              <img class="img-fluid mx-auto d-block" src="{{paintingModal?.url}}/{{paintingModal?.imageFileName}}" alt="{{paintingModal?.name}}">
+            </div> -->
+          <div class="col-lg-8 col-md-12">
+            <ngx-gallery
+              [options]="galleryOptions"
+              [images]="galleryImages"
+            ></ngx-gallery>
+          </div>
+          <div class="col-lg-4 col-md-12">
+            <div class="row justify-content-start">
+              <div class="col-12">
+                <h1>{{ paintingModal?.name }}</h1>
+
+                <p>
+                  <span class="bolded">Format:</span>
+                  {{ paintingModal?.sizeY }} x {{ paintingModal?.sizeX }} cm /
+                  {{ paintingModal?.sizeYIn }} x
+                  {{ paintingModal?.sizeXIn }} inches
+                </p>
+                <p *ngIf="paintingModal?.category == 'mixed'">
+                  <span class="bolded"
+                    >{{ "GENERAL.TECHNIQUE" | translate }}:
+                  </span>
+                  {{ "GALLERY.CATEGORY-MIX" | translate }}
+                </p>
+                <p *ngIf="paintingModal?.category == 'sea'">
+                  <span class="bolded"
+                    >{{ "GENERAL.TECHNIQUE" | translate }}:
+                  </span>
+                  {{ "GALLERY.CATEGORY-SEA" | translate }}
+                </p>
+                <p *ngIf="paintingModal?.category == 'marine'">
+                  <span class="bolded"
+                    >{{ "GENERAL.TECHNIQUE" | translate }}:
+                  </span>
+                  {{ "GALLERY.CATEGORY-MARINE" | translate }}
+                </p>
+                <p *ngIf="paintingModal?.available">
+                  <i class="fa fa-check-circle"></i
+                  >{{ "GENERAL.AVAILABLE" | translate }}
+                </p>
+                <p *ngIf="!paintingModal?.available">
+                  <i class="fa fa-times-circle"></i
+                  >{{ "GENERAL.UNAVAILABLE" | translate }}
+                </p>
+                <p>{{ paintingModal?.description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

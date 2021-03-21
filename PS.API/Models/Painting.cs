@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
+using PS.API.Data.Common.Base;
+
 namespace PS.API.Models
 {
-    public class Painting
+    public class Painting: BaseModel<string>
     {
         public Painting()
         {
@@ -12,8 +13,6 @@ namespace PS.API.Models
             this.Images = new HashSet<Image>();
             this.CreatedOn = DateTime.Now;
         }
-
-        public string Id { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -28,10 +27,6 @@ namespace PS.API.Models
         public float SizeX { get; set; }
 
         public float SizeY { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-
-        public DateTime? ModifiedOn { get; set; }
 
         public Category Category { get; set; }
         

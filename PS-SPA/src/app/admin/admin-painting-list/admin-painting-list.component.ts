@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, forwardRef, OnInit, ViewChild } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PaginatedResult, Pagination } from 'src/app/_interfaces/pagination';
 import { IPainting } from 'src/app/_interfaces/painting';
@@ -15,20 +16,20 @@ export class AdminPaintingListComponent implements OnInit {
   paintings: IPainting[];
   paintingParams: any = {};
 
+
   constructor(private paintingService: PaintingService,
     private toast: ToastService,
     private route: ActivatedRoute) {
-    document.body.style.backgroundColor = "#A9D3E9";
-  }
 
-  ngOnInit(): void {
+    document.body.style.backgroundColor = "#A9D3E9";
+
     this.route.data.subscribe(data => {
       this.paintings = data['paintings'].result;
       this.pagination = data['paintings'].pagination;
     });
-
-    //this.toast.success(this.paintings[0].description);
   }
+
+  ngOnInit(): void { }
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
@@ -53,4 +54,9 @@ export class AdminPaintingListComponent implements OnInit {
     document.body.style.backgroundColor = "#ffffff";
   }
 
+  search(){
+    //this.paintingService.getPaintings(this.route.snapshot.params.name);
+    // this.paintingParams.searchText;
+    // console.log(this.paintingParams.searchText);
+  }
 }

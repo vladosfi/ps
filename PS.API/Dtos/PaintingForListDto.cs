@@ -9,6 +9,7 @@ namespace PS.API.Dtos
         public string Description { get; set; }
         public string Url { get; set; }
         public string ImageFileName { get; set; }
+        public bool Available { get; set; }
         public DateTime CreatedOn { get; set; }
     }
 }

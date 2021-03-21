@@ -73,7 +73,6 @@ namespace PS.API.Controllers
             return Ok(paintingToReturn);
         }
 
-
         [Authorize]
         [HttpPost("{userId}")]
         public async Task<IActionResult> AddPainting(int userId, [FromBody] PaintingForAddPaintingDto paintingForAddPaintingDto)

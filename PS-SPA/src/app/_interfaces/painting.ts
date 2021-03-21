@@ -6,4 +6,5 @@ export interface IPainting {
     imageFileName: string;
     createdOn: Date;
     isMain: boolean;
+    available:boolean;
 }

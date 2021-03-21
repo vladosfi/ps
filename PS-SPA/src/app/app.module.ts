@@ -35,7 +35,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ListsComponent } from './lists/lists.component';
 import { ListsResolver } from './_resolvers/lists.resolver';
@@ -50,10 +50,13 @@ import { PaintingResolver } from './_resolvers/painting.resolver';
 import { PaintingAddComponent } from './paintings/painting-add/painting-add.component';
 import { DecimalNumericDirective } from './shared/decimal-numeric.directive';
 import { ImageEditorComponent } from './paintings/image-editor/image-editor.component';
-import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
-import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
-import { AdminPaintingThumbComponent } from './admin/admin-painting-thumb/admin-painting-thumb.component';
 import { ModalWindowService } from './shared/_service/modal-window.service';
+import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
+import { AdminPaintingThumbComponent } from './admin/admin-painting-thumb/admin-painting-thumb.component';
+import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
+//import { AdminModule } from './admin/admin.module';
+//import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
+
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -84,8 +87,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PaintingAddComponent,
     DecimalNumericDirective,
     ImageEditorComponent,
-    AdminPaintingListComponent,
     AdminPaintingThumbComponent,
+    AdminPaintingListComponent
   ],
   imports: [
     BrowserModule,
@@ -121,6 +124,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     CoreModule,
+    //AdminModule,
   ],
   providers: [
     AuthService,
@@ -133,8 +137,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ListsResolver,
     PaintingsResolver,
     PaintingResolver,
-    AdminPaintingsResolver,
-    ModalWindowService
+    ModalWindowService,
+    TranslateService,
+    AdminPaintingsResolver
   ],
   exports: [
   ],
