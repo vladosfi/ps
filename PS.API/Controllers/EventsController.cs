@@ -32,11 +32,12 @@ namespace PS.API.Controllers
         public async Task<IActionResult> GetEvents([FromQuery] EventParams eventParams)
         {
             var eventsFromRepo = await this.repo.GetEvents(eventParams);
-            var pantingsToReturn = this.mapper.Map<IEnumerable<EventsForListDto>>(eventsFromRepo);
+            var eventsToReturn = this.mapper.Map<IEnumerable<EventsForListDto>>(eventsFromRepo);
 
-            if (pantingsToReturn != null)
+            if (eventsToReturn != null)
             {
-                return Ok(eventsFromRepo);
+                Response.AddPagination(eventsFromRepo.CurrentPage, eventsFromRepo.PageSize, eventsFromRepo.TotalCount, eventsFromRepo.TotalPages);
+                return Ok(eventsToReturn);
             }
 
             return BadRequest(notFound);
