@@ -14,7 +14,6 @@ import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { appRoutes } from './routes';
 import { ContactsComponent } from './contacts/contacts.component';
-import { EventsComponent } from './events/events.component';
 import { MemberThumbComponent } from './gallery/member-thumb/members-thumb.component';
 import { DetailComponent } from './gallery/detail/detail.component';
 import { AuthGuard } from './_guards/auth.guard';
@@ -73,7 +72,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     StartComponent,
     RegisterComponent,
     ContactsComponent,
-    EventsComponent,
     MemberThumbComponent,
     MembersComponent,
     DetailComponent,

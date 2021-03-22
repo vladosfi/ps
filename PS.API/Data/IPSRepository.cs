@@ -31,5 +31,11 @@ namespace PS.API.Data
         Task<Painting> GetPaintingById(string id);
 
         Task<Painting> AddPainting(Painting painting);
+
+        Task<PagedList<Event>> GetEvents(EventParams eventParams);
+
+        Task<Event> GetEventById(int id);
+
+        Task<Event> AddEvent(Event eventEntity);
     }
 }

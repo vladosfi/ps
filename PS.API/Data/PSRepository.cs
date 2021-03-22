@@ -67,6 +67,14 @@ namespace PS.API.Data
             return user;
         }
 
+
+        public async Task<PagedList<Event>> GetEvents(EventParams eventParams)
+        {
+            var events = this.context.Events.OrderByDescending(e => e.CreatedOn).AsQueryable();
+
+            return await PagedList<Event>.CreateAsync(events, eventParams.PageNumber, eventParams.PageSize);
+        }
+
         public async Task<PagedList<Painting>> GetPapintings(PaintingParams paintingParams)
         {
             var paintings = this.context.Paintings.Include(p => p.Images).OrderByDescending(p => p.CreatedOn).AsQueryable();
@@ -82,6 +90,13 @@ namespace PS.API.Data
             }
             return await PagedList<Painting>.CreateAsync(paintings, paintingParams.PageNumber, paintingParams.PageSize);
         }
+
+        public async Task<Event> GetEventById(int id)
+        {
+            var eventEntity = await this.context.Events.FirstOrDefaultAsync(e => e.Id == id);
+            return eventEntity;
+        }
+
         public async Task<Painting> GetPaintingById(string id)
         {
             var painting = await this.context.Paintings.Include(p => p.Images).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
@@ -89,6 +104,17 @@ namespace PS.API.Data
             return painting;
         }
 
+        public async Task<Event> AddEvent(Event eventEntity)
+        {
+            await this.context.Events.AddAsync(eventEntity);
+            
+            if (await this.SaveAll())
+            {
+                return eventEntity;
+            }
+
+            return null;
+        }
 
         public async Task<Painting> AddPainting(Painting painting)
         {

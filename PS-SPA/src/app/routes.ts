@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { StartComponent } from './start/start.component';
-import { EventsComponent } from './events/events.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { MembersComponent } from './gallery/members/members.component';
 import { AuthGuard } from './_guards/auth.guard';
@@ -82,11 +81,14 @@ export const appRoutes: Routes = [
             },
         ]
     },
+    {
+        path: 'events',
+        loadChildren: () => import('./events/event.module').then(m => m.EventModule)
+    },
+    //{path: 'events', component: EventsComponent, canActivate:[AuthGuard]},
     //{ path: 'paintings', component: PaintingListComponent, resolve: { paintings: PaintingsResolver } },
     { path: 'start', component: StartComponent },
-    { path: 'events', component: EventsComponent },
     { path: 'lists', component: ListsComponent, resolve: { users: ListsResolver } },
-    //{path: 'events', component: EventsComponent, canActivate:[AuthGuard]},
     { path: 'contacts', component: ContactsComponent },
     { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

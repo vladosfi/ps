@@ -1,13 +1,12 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
 
 namespace PS.API.Dtos
 {
-    public class PaintingForAddPaintingDto
+    public class PaintingForCreationDto
     {
 
-        public PaintingForAddPaintingDto()
+        public PaintingForCreationDto()
         {
             this.Id = Guid.NewGuid().ToString();
         }

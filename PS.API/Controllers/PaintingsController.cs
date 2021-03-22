@@ -75,14 +75,14 @@ namespace PS.API.Controllers
 
         [Authorize]
         [HttpPost("{userId}")]
-        public async Task<IActionResult> AddPainting(int userId, [FromBody] PaintingForAddPaintingDto paintingForAddPaintingDto)
+        public async Task<IActionResult> AddPainting(int userId, [FromBody] PaintingForCreationDto paintingForCreationDto)
         {
             // if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             // {
             //     return Unauthorized();
             // }
 
-            var paintingToAdd = this.mapper.Map<Painting>(paintingForAddPaintingDto);
+            var paintingToAdd = this.mapper.Map<Painting>(paintingForCreationDto);
 
             var createdPainting = await this.repo.AddPainting(paintingToAdd);
 
