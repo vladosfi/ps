@@ -1,14 +1,11 @@
-<div class="row" id="gallery" data-toggle="modal" data-target="#exampleModal">
-    <!-- <div class="col-12 col-sm-6 col-lg-3">
-      <img class="w-100" src="/image-1.jpg" data-target="#carouselExample" data-slide-to="0">
+<div class="blog-single">
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-lg-8 m-15px-tb">
+        <app-events-article *ngFor="let event of events" [currentEvent]="event"></app-events-article>
+      </div>
+      <div class="col-lg-4 m-15px-tb blog-aside">
+        <app-events-aside></app-events-aside>
+      </div>
     </div>
-    <div class="col-12 col-sm-6 col-lg-3">
-      <img class="w-100" src="/image-2.jpg" data-target="#carouselExample" data-slide-to="1">
-    </div>
-    <div class="col-12 col-sm-6 col-lg-3">
-      <img class="w-100" src="/image-3.jpg" data-target="#carouselExample" data-slide-to="2">
-    </div>
-    <div class="col-12 col-sm-6 col-lg-3">
-      <img class="w-100" src="/image-4.jpg" data-target="#carouselExample" data-slide-to="3">
-    </div> -->
   </div>
