@@ -2,10 +2,14 @@
   <div class="container">
     <div class="row align-items-start">
       <div class="col-lg-8 m-15px-tb">
-        <app-events-article *ngFor="let event of events" [currentEvent]="event"></app-events-article>
+        <app-events-article
+          *ngFor="let event of events"
+          [currentEvent]="event"
+        ></app-events-article>
       </div>
       <div class="col-lg-4 m-15px-tb blog-aside">
         <app-events-aside></app-events-aside>
       </div>
     </div>
   </div>
+</div>

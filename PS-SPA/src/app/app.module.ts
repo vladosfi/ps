@@ -47,12 +47,12 @@ import { CoreModule } from './core/core.module';
 import { PaintingDetailsComponent } from './paintings/details/details.component';
 import { PaintingResolver } from './_resolvers/painting.resolver';
 import { PaintingAddComponent } from './paintings/painting-add/painting-add.component';
-import { DecimalNumericDirective } from './shared/decimal-numeric.directive';
 import { ImageEditorComponent } from './paintings/image-editor/image-editor.component';
 import { ModalWindowService } from './shared/_service/modal-window.service';
 import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
 import { AdminPaintingThumbComponent } from './admin/admin-painting-thumb/admin-painting-thumb.component';
 import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
+import { SharedModule } from './shared/shared.module';
 //import { AdminModule } from './admin/admin.module';
 //import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
 
@@ -83,7 +83,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ThumbComponent,
     PaintingDetailsComponent,
     PaintingAddComponent,
-    DecimalNumericDirective,
     ImageEditorComponent,
     AdminPaintingThumbComponent,
     AdminPaintingListComponent
@@ -123,6 +122,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     CoreModule,
     //AdminModule,
+    SharedModule
   ],
   providers: [
     AuthService,

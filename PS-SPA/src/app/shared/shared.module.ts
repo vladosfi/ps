@@ -11,10 +11,11 @@ import { ModalWindowService } from './_service/modal-window.service';
     ModalWindowService
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports:[
-    ModalWindowService
+    ModalWindowService,
+    DecimalNumericDirective
   ]
 })
 export class SharedModule { }
