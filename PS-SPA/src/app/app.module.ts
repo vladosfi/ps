@@ -53,6 +53,7 @@ import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-pa
 import { AdminPaintingThumbComponent } from './admin/admin-painting-thumb/admin-painting-thumb.component';
 import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
 import { SharedModule } from './shared/shared.module';
+import { NgxEditorModule } from 'ngx-editor';
 //import { AdminModule } from './admin/admin.module';
 //import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
 
@@ -122,7 +123,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     CoreModule,
     //AdminModule,
-    SharedModule
+    SharedModule,
+    NgxEditorModule 
   ],
   providers: [
     AuthService,

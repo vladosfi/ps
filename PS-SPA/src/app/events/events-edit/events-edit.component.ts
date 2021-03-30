@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup } from "@angular/forms";
-
 import { Validators, Editor, Toolbar } from "ngx-editor";
 
 import jsonDoc from "./doc";
@@ -13,7 +12,7 @@ import jsonDoc from "./doc";
 })
 export class EventsEditComponent implements OnInit, OnDestroy {
   editor: Editor;
-  html: '<p>Hello World!</p>';
+  html: '';
 
   ngOnInit(): void {
     this.editor = new Editor();
