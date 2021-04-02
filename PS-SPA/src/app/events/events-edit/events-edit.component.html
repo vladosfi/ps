@@ -1,16 +1,58 @@
 <div class="container">
-  <h2 class="title">Full featured editor demo</h2>
 
-  <div class="NgxEditor__Wrapper">
-    <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-    <ngx-editor
-      [editor]="editor"
-      [ngModel]="html"
-      [editable]="true"
-      [placeholder]="Type here..."
-    ></ngx-editor>
-  </div>
+  <form class="mb-5" [formGroup]="eventModel" (ngSubmit)="addEvent()">
+    <h2 class="text-center text-primary">Add Event</h2>
+    <p>Form Status: {{ eventModel.status | json }}</p>
+    <hr />
+
+    <form [formGroup]="eventModel">
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group">
+            <input type="text" [ngClass]="{
+              'is-invalid':
+                eventModel.get('name').errors &&
+                eventModel.get('name').touched,
+              'is-valid':
+                !eventModel.get('name').errors &&
+                eventModel.get('name').statusChanges
+            }" class="form-control" formControlName="name" placeholder="Enter a name for painting" />
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback" *ngIf="
+              eventModel.get('name').hasError('required') &&
+              eventModel.get('name').touched
+            ">
+              Please enter a name for painting
+            </div>
+            <div class="invalid-feedback" *ngIf="
+              eventModel.get('name').hasError('minlength') ||
+              (eventModel.get('name').hasError('maxlength') &&
+                eventModel.get('name').touched)
+            ">
+              Please enter a name between 2 and 50 characters
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="NgxEditor__Wrapper mb-5">
+
+        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+        <ngx-editor [editor]="editor" [(ngModel)]="html"></ngx-editor>
+
+      </div>
+
+
+    </form>
+
+
+
+
+
+    <div class="form-group text-center">
+      <button class="btn btn-success" [disabled]="!eventModel.valid" type="submit">
+        Save Painting
+      </button>
+    </div>
+  </form>
 </div>
-
-
-//https://github.com/Sibiraj-S/ngx-editor/issues/71
