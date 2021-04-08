@@ -3,6 +3,7 @@
   <form class="mb-5" [formGroup]="eventModel" (ngSubmit)="addEvent()">
     <h2 class="text-center text-primary">Add Event</h2>
     <p>Form Status: {{ eventModel.status | json }}</p>
+    
     <hr />
 
     <form [formGroup]="eventModel">
@@ -16,7 +17,7 @@
               'is-valid':
                 !eventModel.get('name').errors &&
                 eventModel.get('name').statusChanges
-            }" class="form-control" formControlName="name" placeholder="Enter a name for painting" />
+            }" class="form-control" formControlName="name" placeholder="Enter a name for event" />
             <div class="valid-feedback"></div>
             <div class="invalid-feedback" *ngIf="
               eventModel.get('name').hasError('required') &&
@@ -35,10 +36,10 @@
         </div>
       </div>
 
-      <div class="NgxEditor__Wrapper mb-5">
+      <div class="NgxEditor__Wrapper mb-5 form-group">
 
         <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-        <ngx-editor [editor]="editor" [(ngModel)]="html"></ngx-editor>
+        <ngx-editor [editor]="editor" [(ngModel)]="html" formControlName="editorContent"></ngx-editor>
 
       </div>
 
