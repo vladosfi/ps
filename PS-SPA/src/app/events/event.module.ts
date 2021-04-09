@@ -10,6 +10,7 @@ import { EventsDetailsComponent } from './events-details/events-details.componen
 import { EventsEditComponent } from './events-edit/events-edit.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,12 +27,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     EventRoutingModule,
     NgxEditorModule,
-    //SharedModule
+    SharedModule
   ],
   providers:[
     EventsService,
-    EventsResolver,
-    
+    EventsResolver,    
   ]
 })
 export class EventModule {

@@ -2,7 +2,7 @@
 
   <form class="mb-5" [formGroup]="eventModel" (ngSubmit)="addEvent()">
     <h2 class="text-center text-primary">Add Event</h2>
-    <p>Form Status: {{ eventModel.status | json }}</p>
+    <!-- <p>Form Status: {{ eventModel.status | json }}</p> -->
     
     <hr />
 
@@ -36,13 +36,14 @@
         </div>
       </div>
 
-      <div class="NgxEditor__Wrapper mb-5 form-group">
+      <!-- <div class="NgxEditor__Wrapper mb-5 form-group">
 
         <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
         <ngx-editor [editor]="editor" [(ngModel)]="html" formControlName="editorContent"></ngx-editor>
 
-      </div>
+      </div> -->
 
+      <app-editor></app-editor>
 
     </form>
 
