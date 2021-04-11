@@ -2,28 +2,32 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DecimalNumericDirective } from './decimal-numeric.directive';
 import { ModalWindowService } from './_service/modal-window.service';
-import { EditorComponent } from './edit/editor.component';
+import { EditorComponent } from './components/text-editor/editor.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 @NgModule({
   declarations: [
     DecimalNumericDirective,
     ModalWindowService,
-    EditorComponent
+    EditorComponent,
+    ImageUploaderComponent,
   ],
   imports: [
     CommonModule,
     NgxEditorModule,
     FormsModule,
     ReactiveFormsModule,
+    FileUploadModule
   ],
   exports:[
     ModalWindowService,
     DecimalNumericDirective,
-    EditorComponent
+    EditorComponent,
+    ImageUploaderComponent
   ]
 })
 export class SharedModule { }

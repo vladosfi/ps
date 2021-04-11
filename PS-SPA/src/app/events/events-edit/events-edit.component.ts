@@ -11,22 +11,22 @@ import jsonDoc from "./doc";
 })
 export class EventsEditComponent implements OnInit, OnDestroy {
   editor: Editor;
-  html: '';
-  eventModel: FormGroup;
+  html: string = 'sdfsdf';
+  parentForm: FormGroup;
 
 
   ngOnInit(): void {
     this.editor = new Editor();
 
-    this.eventModel = new FormGroup({
+    this.parentForm = new FormGroup({
       name: new FormControl('', [FormValidators.required, FormValidators.minLength(2), Validators.maxLength(50)]),
-      // description: new FormControl('', [FormValidators.required, FormValidators.minLength(10), FormValidators.maxLength(200)]),
       editorContent: new FormControl('', [Validators.required(),Validators.minLength(50)]),
+      // description: new FormControl('', [FormValidators.required, FormValidators.minLength(10), FormValidators.maxLength(200)]),
     });
   }
 
   addEvent(){
-    console.log(this.html);
+    console.log(this.parentForm.get("editorContent")?.value);
   }
 
   // make sure to destory the editor
