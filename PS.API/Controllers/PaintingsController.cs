@@ -1,16 +1,16 @@
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 using PS.API.Data;
 using PS.API.Dtos;
 using PS.API.Helpers;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
-using System;
 using PS.API.Models;
-using System.Linq;
 
 namespace PS.API.Controllers
 {
@@ -161,7 +161,7 @@ namespace PS.API.Controllers
             }
 
 
-            return BadRequest(couldNotAddPainting);
+            return BadRequest(couldNotAddImage);
         }
 
         [Authorize]

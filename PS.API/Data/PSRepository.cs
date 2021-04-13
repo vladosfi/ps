@@ -55,9 +55,21 @@ namespace PS.API.Data
             return image;
         }
 
+        public async Task<EventImage> GetEventImage(int imageId)
+        {
+            var image = await this.context.EventImages.FirstOrDefaultAsync(i => i.Id == imageId);
+
+            return image;
+        }
+
         public async Task<Image> GetMainImageForPainting(string paintingId)
         {
             return await this.context.Images.Where(i => i.PaintingId == paintingId).FirstOrDefaultAsync(i => i.IsMain == true);
+        }
+
+        public async Task<EventImage> GetMainImageForEvent(int eventId)
+        {
+            return await this.context.EventImages.Where(e => e.EventId == eventId).FirstOrDefaultAsync(i => i.IsMain == true);
         }
 
         public async Task<User> GetUser(int id)

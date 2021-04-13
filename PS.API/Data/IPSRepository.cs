@@ -22,11 +22,15 @@ namespace PS.API.Data
 
         Task<Image> GetMainImageForPainting(string paintingId);
 
+        Task<EventImage> GetMainImageForEvent(int eventId);
+
         Task<Like> GetLike(int userId, int recipientId);
 
         Task<PagedList<Painting>> GetPapintings(PaintingParams paintingParams);
 
         Task<Image> GetImage(string id);
+
+        Task<EventImage> GetEventImage(int imageId);        
 
         Task<Painting> GetPaintingById(string id);
 

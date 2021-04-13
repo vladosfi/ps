@@ -17,6 +17,7 @@ namespace PS.API.Data
         public DbSet<Painting> Paintings { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<EventImage> EventImages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -45,6 +46,12 @@ namespace PS.API.Data
                 .HasMany(p => p.Images)
                 .WithOne(i => i.Painting)
                 .HasForeignKey(i => i.PaintingId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Event>()
+                .HasMany(e => e.Images)
+                .WithOne(i => i.Event)
+                .HasForeignKey(i => i.EventId)
                 .OnDelete(DeleteBehavior.Cascade);
 
         }
