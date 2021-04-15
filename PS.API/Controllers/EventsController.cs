@@ -168,7 +168,6 @@ namespace PS.API.Controllers
             var fileName = imageToAdd.Id + uploadedFileExtension;
             var filePath = Path.Combine(uploadsFolderPath, fileName);
 
-
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await ImageForCreateDto.File.CopyToAsync(stream);
@@ -185,7 +184,7 @@ namespace PS.API.Controllers
 
             if (await this.repo.SaveAll())
             {
-                return CreatedAtAction(nameof(this.GetImage), new { controller = "Events", id = imageToAdd.Id }, imageToAdd);
+                return CreatedAtAction(nameof(this.GetImage), new { controller = "Events", imageId = imageToAdd.Id }, imageToAdd);
             }
 
             return BadRequest(couldNotAddImage);
