@@ -55,7 +55,7 @@ namespace PS.API.Data
             return image;
         }
 
-        public async Task<EventImage> GetEventImage(int imageId)
+        public async Task<EventImage> GetEventImage(string imageId)
         {
             var image = await this.context.EventImages.FirstOrDefaultAsync(i => i.Id == imageId);
 

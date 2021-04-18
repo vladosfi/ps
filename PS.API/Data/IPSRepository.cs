@@ -30,7 +30,7 @@ namespace PS.API.Data
 
         Task<Image> GetImage(string id);
 
-        Task<EventImage> GetEventImage(int imageId);        
+        Task<EventImage> GetEventImage(string imageId);        
 
         Task<Painting> GetPaintingById(string id);
 
