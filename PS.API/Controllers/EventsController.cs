@@ -187,14 +187,14 @@ namespace PS.API.Controllers
                 return CreatedAtAction(nameof(this.GetImage), new { controller = "Events", imageId = imageToAdd.Id }, imageToAdd);
             }
 
-            //await stream.DisposeAsync();
+             
 
             return BadRequest(couldNotAddImage);
         }
 
         [HttpGet("image/{imageId}")]
         [ActionName(nameof(GetImage))]
-        public async Task<IActionResult> GetImage(int imageId)
+        public async Task<IActionResult> GetImage(string imageId)
         {
             var imageFromRepo = await this.repo.GetEventImage(imageId);
 
