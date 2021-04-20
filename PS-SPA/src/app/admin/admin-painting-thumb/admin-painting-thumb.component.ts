@@ -1,5 +1,4 @@
 import { Component, EventEmitter, forwardRef, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryImageSize, NgxGalleryOptions } from 'ngx-gallery-9';
 import { ModalWindowService } from 'src/app/shared/_service/modal-window.service';
 import { IPainting } from 'src/app/_interfaces/painting';
@@ -91,7 +90,6 @@ export class AdminPaintingThumbComponent implements OnInit {
         small: this.baseUrl + this.paintingModal.images[i].url + '/' + this.paintingModal.images[i].imageFileName,
         medium: this.baseUrl + this.paintingModal.images[i].url + '/' + this.paintingModal.images[i].imageFileName,
         big: this.baseUrl + this.paintingModal.images[i].url + '/' + this.paintingModal.images[i].imageFileName,
-        description: this.paintingModal.images[i].description
       };
 
       if (image.small && image.medium && image.big) {

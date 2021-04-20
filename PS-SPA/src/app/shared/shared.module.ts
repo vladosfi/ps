@@ -7,6 +7,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ImageService } from './_service/image.service';
 
 
 @NgModule({
@@ -27,7 +28,16 @@ import { FileUploadModule } from 'ng2-file-upload';
     ModalWindowService,
     DecimalNumericDirective,
     EditorComponent,
-    ImageUploaderComponent
+    ImageUploaderComponent,
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+  static forRoot() {
+    return {
+      ngModule: SharedModule,
+      providers: [
+        ImageService
+      ],
+    };
+ }
+ }

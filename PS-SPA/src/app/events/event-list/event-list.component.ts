@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IEvent } from 'src/app/shared/_interfaces/Event';
+import { IEvent } from 'src/app/shared/_interfaces/event';
 import { Pagination } from 'src/app/_interfaces/pagination';
 import { ToastService } from 'src/app/_services/toast.service';
-import { EventsService } from '../events.service';
+import { EventService } from '../event.service';
 
 @Component({
   selector: 'app-event-list',
@@ -14,7 +14,7 @@ export class EventListComponent implements OnInit {
   events: IEvent[];
   pagination: Pagination;
 
-  constructor(private eventsService: EventsService,
+  constructor(private eventsService: EventService,
     private toast: ToastService,
     private route: ActivatedRoute) { }
 

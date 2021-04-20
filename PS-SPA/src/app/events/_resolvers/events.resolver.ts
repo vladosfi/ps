@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { IEvent } from 'src/app/shared/_interfaces/Event';
+import { IEvent } from 'src/app/shared/_interfaces/event';
 import { ToastService } from 'src/app/_services/toast.service';
-import { EventsService } from '../events.service';
+import { EventService } from '../event.service';
 
 
 @Injectable()
@@ -14,7 +14,7 @@ export class EventsResolver implements Resolve<IEvent[]>{
     paintingParams;
 
     constructor(
-        private eventService: EventsService,
+        private eventService: EventService,
         private router: Router,
         private toast: ToastService) { }
 

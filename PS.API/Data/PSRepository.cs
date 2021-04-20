@@ -105,7 +105,7 @@ namespace PS.API.Data
 
         public async Task<Event> GetEventById(int id)
         {
-            var eventEntity = await this.context.Events.FirstOrDefaultAsync(e => e.Id == id);
+            var eventEntity = await this.context.Events.Include(p => p.Images).FirstOrDefaultAsync(e => e.Id == id);
             return eventEntity;
         }
 

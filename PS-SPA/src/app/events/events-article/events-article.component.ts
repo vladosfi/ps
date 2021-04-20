@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IEvent } from 'src/app/shared/_interfaces/Event';
+import { IEvent } from 'src/app/shared/_interfaces/event';
 
 @Component({
   selector: 'app-events-article',

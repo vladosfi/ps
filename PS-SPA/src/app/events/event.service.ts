@@ -3,19 +3,20 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { IEvent } from '../shared/_interfaces/Event';
+import { IEvent } from '../shared/_interfaces/event';
 import { PaginatedResult } from '../_interfaces/pagination';
+import { AuthService } from '../_services/auth.service';
 
 @Injectable()
-export class EventsService {
+export class EventService {
   baseUrl = environment.apiUrl;
 
   constructor(
     private http: HttpClient,
+    private authService: AuthService
   ) { }
 
-
-  getEvents(page?, itemsPerPage?, paintingParams?): Observable<PaginatedResult<IEvent[]>>  {
+  getEvents(page?, itemsPerPage?, eventParams?): Observable<PaginatedResult<IEvent[]>>  {
 
     const paginatedResult: PaginatedResult<IEvent[]> = new PaginatedResult<IEvent[]>();
     let params = new HttpParams();
@@ -34,5 +35,9 @@ export class EventsService {
           }
           return paginatedResult;
         }));
+  }
+
+  addEvent(event: IEvent): any {
+    return this.http.post(this.baseUrl + 'events', event);
   }
 }

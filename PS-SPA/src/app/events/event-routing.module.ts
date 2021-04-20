@@ -1,7 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { EventListComponent } from './event-list/event-list.component';
 import { EventsDetailsComponent } from './events-details/events-details.component';
-import { EventsEditComponent } from './events-edit/events-edit.component';
+import { EventsAddComponent} from './events-add/events-add.component';
 import { EventsResolver } from './_resolvers/events.resolver';
 
 const routes: Routes = [
@@ -12,8 +12,8 @@ const routes: Routes = [
         // canActivate:[AuthGuard]
     },
     {
-        path: 'edit',
-        component: EventsEditComponent,
+        path: 'add',
+        component: EventsAddComponent,
     },
     {
         path: 'details',

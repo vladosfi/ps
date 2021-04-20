@@ -1,4 +1,4 @@
-import { IImage } from './image';
+import { IImage } from '../shared/_interfaces/image';
 
 export interface IPaintingDetails {
     id: string;

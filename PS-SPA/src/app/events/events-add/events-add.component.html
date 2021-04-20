@@ -42,7 +42,7 @@
       </div> -->
 
       <app-editor [parentForm]="parentForm"></app-editor>
-      <app-image-uploader></app-image-uploader>
+      <app-image-uploader *ngIf="event?.id" [event]="event"></app-image-uploader>
     </form>
 
 

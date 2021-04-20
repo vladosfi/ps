@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
-import { IImage } from 'src/app/_interfaces/image';
+import { IImage } from 'src/app/shared/_interfaces/image';
 import { IPaintingDetails } from 'src/app/_interfaces/painting-details';
 import { PaintingService } from 'src/app/_services/painting.service';
 import { ToastService } from 'src/app/_services/toast.service';
@@ -55,7 +55,6 @@ export class ImageEditorComponent implements OnInit {
         const image = {
           id: res.id,
           url: res.url,
-          description: res.description,
           imageFileName: res.imageFileName,
           isMain: res.isMain,
         };
@@ -81,7 +80,7 @@ export class ImageEditorComponent implements OnInit {
       );
   }
 
-  deletePhoto(image: IImage) {
+  deleteImage(image: IImage) {
 
     if (confirm('Are you sure you want to delete this image?')) {
       this.paintingService

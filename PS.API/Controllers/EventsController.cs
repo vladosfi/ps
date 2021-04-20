@@ -10,6 +10,7 @@ using PS.API.Data;
 using PS.API.Dtos;
 using PS.API.Helpers;
 using PS.API.Models;
+using System.Linq;
 
 namespace PS.API.Controllers
 {
@@ -187,7 +188,6 @@ namespace PS.API.Controllers
                 return CreatedAtAction(nameof(this.GetImage), new { controller = "Events", imageId = imageToAdd.Id }, imageToAdd);
             }
 
-             
 
             return BadRequest(couldNotAddImage);
         }
@@ -199,6 +199,92 @@ namespace PS.API.Controllers
             var imageFromRepo = await this.repo.GetEventImage(imageId);
 
             return Ok(imageFromRepo);
+        }
+
+        [Authorize]
+        [HttpPost("{eventId}/setMainImage/{imageId}")]
+        public async Task<IActionResult> SetMainImage(int eventId, string imageId)
+        {
+            var eventFromRepo = await this.repo.GetEventById(eventId);
+
+            if (eventFromRepo == null)
+            {
+                return BadRequest(couldNotSetMainImage);
+            }
+
+            if (!eventFromRepo.Images.Any(i => i.Id == imageId))
+            {
+                return BadRequest(couldNotSetMainImage);
+            }
+
+            var imageFromRepo = await this.repo.GetEventImage(imageId);
+
+            if (imageFromRepo.IsMain)
+            {
+                return BadRequest(alreadyMainImage);
+            }
+
+            var currentManImage = await this.repo.GetMainImageForEvent(eventId);
+            currentManImage.IsMain = false;
+            imageFromRepo.IsMain = true;
+
+            if (await this.repo.SaveAll())
+            {
+                return NoContent();
+            }
+
+            return BadRequest(couldNotSetMainImage);
+
+        }
+
+        [Authorize]
+        [HttpDelete("{eventId}/delete/{imageId}")]
+        public async Task<IActionResult> DeletePhoto(int eventId, string imageId)
+        {
+            var eventFromRepo = await this.repo.GetEventById(eventId);
+
+            if (eventFromRepo == null)
+            {
+                return BadRequest(couldNotDeleteImage);
+            }
+
+            if (!eventFromRepo.Images.Any(i => i.Id == imageId))
+            {
+                return BadRequest(couldNotDeleteImage);
+            }
+
+            var imageFromRepo = await this.repo.GetEventImage(imageId);
+
+            if (imageFromRepo.IsMain)
+            {
+                return BadRequest(cannotDeleteMainImage);
+            }
+
+            var imagePath = Path.Combine(imageFromRepo.Url, imageFromRepo.ImageFileName);
+            imagePath = Path.Combine(host.WebRootPath, imagePath);
+            var thumbnailImage = Path.Combine(host.WebRootPath, imageFromRepo.Url);
+            thumbnailImage = Path.Combine(thumbnailImage, thumbnailFolder);
+            thumbnailImage = Path.Combine(thumbnailImage, imageFromRepo.ImageFileName);
+
+            if (System.IO.File.Exists(imagePath) && System.IO.File.Exists(thumbnailImage))
+            {
+                var imageFile = new FileInfo(imagePath);
+                imageFile.Delete();
+                var thumbnailFile = new FileInfo(thumbnailImage);
+                thumbnailFile.Delete();
+
+                // System.IO.File.Delete(imagePath);
+                // System.IO.File.Delete(thumbnailImage);
+
+                this.repo.Delete(imageFromRepo);
+            }
+
+            if (await this.repo.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest(failedToDeleteImage);
         }
     }
 }

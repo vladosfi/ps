@@ -291,6 +291,11 @@ namespace PS.API.Controllers
                 {
                     System.IO.File.Delete(imagePath);
                     System.IO.File.Delete(thumbnailImage);
+
+                    var imageFile = new FileInfo(imagePath);
+                    imageFile.Delete();
+                    var thumbnailFile = new FileInfo(thumbnailImage);
+                    thumbnailFile.Delete();
                 }
 
                 this.repo.Delete(image);

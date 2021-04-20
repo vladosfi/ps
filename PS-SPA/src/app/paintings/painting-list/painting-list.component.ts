@@ -58,7 +58,7 @@ export class PaintingListComponent implements OnInit, OnDestroy {
         small: this.baseUrl + this.paintingModal.images[i].url + '/' + this.paintingModal.images[i].imageFileName,
         medium: this.baseUrl + this.paintingModal.images[i].url + '/' + this.paintingModal.images[i].imageFileName,
         big: this.baseUrl + this.paintingModal.images[i].url + '/' + this.paintingModal.images[i].imageFileName,
-        description: this.paintingModal.images[i].description
+        //description: this.paintingModal.images[i].description
       };
 
       if (image.small && image.medium && image.big) {
