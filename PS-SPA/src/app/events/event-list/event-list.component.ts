@@ -24,7 +24,9 @@ export class EventListComponent implements OnInit {
       this.pagination = data['events'].pagination;
     });
 
-    this.toast.info(JSON.stringify(this.events));
+    //this.toast.info(JSON.stringify(this.events));
+
+    console.log((JSON.stringify(this.events)));
   }
 
 }

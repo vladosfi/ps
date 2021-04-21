@@ -11,6 +11,7 @@ import { EventsAddComponent } from './events-add/events-add.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { EventsEditComponent } from './events-edit/events-edit.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SharedModule } from '../shared/shared.module';
     EventsAsideComponent,
     EventsDetailsComponent,
     EventsAddComponent,
+    EventsEditComponent,
   ],
   imports: [
     CommonModule,

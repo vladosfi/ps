@@ -3,6 +3,8 @@ import { EventListComponent } from './event-list/event-list.component';
 import { EventsDetailsComponent } from './events-details/events-details.component';
 import { EventsAddComponent} from './events-add/events-add.component';
 import { EventsResolver } from './_resolvers/events.resolver';
+import { EventsEditComponent } from './events-edit/events-edit.component';
+
 
 const routes: Routes = [
     {
@@ -14,6 +16,10 @@ const routes: Routes = [
     {
         path: 'add',
         component: EventsAddComponent,
+    },
+    {
+        path: 'edit',
+        component: EventsEditComponent,
     },
     {
         path: 'details',

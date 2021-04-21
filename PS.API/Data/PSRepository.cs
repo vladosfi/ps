@@ -82,7 +82,7 @@ namespace PS.API.Data
 
         public async Task<PagedList<Event>> GetEvents(EventParams eventParams)
         {
-            var events = this.context.Events.OrderByDescending(e => e.CreatedOn).AsQueryable();
+            var events = this.context.Events.Include(p => p.Images).OrderByDescending(e => e.CreatedOn).AsQueryable();
 
             return await PagedList<Event>.CreateAsync(events, eventParams.PageNumber, eventParams.PageSize);
         }

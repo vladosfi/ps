@@ -5,5 +5,6 @@ export interface IEvent {
     name: string;
     text: string;
     createdOn: string;
+    mainImage?: IImage;
     images?: IImage[];
 }

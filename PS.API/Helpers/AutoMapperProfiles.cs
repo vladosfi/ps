@@ -30,7 +30,9 @@ namespace PS.API.Helpers
             CreateMap<PaintingForCreationDto, Painting>();
             CreateMap<ImageForCreateDto, Image>();
             CreateMap<PaintingForUpdateDto, Painting>();
-            CreateMap<Event, EventsForListDto>();
+            CreateMap<Event, EventsForListDto>()
+                .ForMember(dest => dest.MainImage, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).Url))   
+                .ForMember(dest => dest.ImageFileName, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).ImageFileName));
             CreateMap<EventForCreationDto, Event>();
             CreateMap<Event,EventDetailsDto>();
         }
