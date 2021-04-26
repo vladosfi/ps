@@ -7,4 +7,5 @@ export interface IEvent {
     createdOn: string;
     mainImage?: IImage;
     images?: IImage[];
+    imageFileName: string;
 }

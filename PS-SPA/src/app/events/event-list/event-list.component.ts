@@ -26,7 +26,7 @@ export class EventListComponent implements OnInit {
 
     //this.toast.info(JSON.stringify(this.events));
 
-    console.log((JSON.stringify(this.events)));
+    //console.log((JSON.stringify(this.events)));
   }
 
 }

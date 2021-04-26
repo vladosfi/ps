@@ -1,14 +1,13 @@
 <div class="col-lg-12 m-15px-tb">
     <article class="article">
-        <div class="article-img">
-            <img src="https://via.placeholder.com/800x350/87CEFA/000000" title="" alt="">
+        <div class="article-img ">
+            <img class="img-fluid" src="{{localhost + currentEvent.mainImage}}/{{currentEvent.imageFileName}}" alt="{{currentEvent.name}}">
         </div>
         <div class="article-title">
-            <h6><a href="#">Lifestyle</a></h6>
             <h2>{{currentEvent.name}}</h2>
             <div class="media">
                 <div class="avatar">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" title="" alt="">
+                    <a href="{{frontEndUrl}}"><img src="../../../assets/profile/mariq-maneva.jpg" alt="Мariya Maneva – Miriyam"></a>
                 </div>
                 <div class="media-body">
                     <label>Мariya Maneva – Miriyam</label>
