@@ -61,6 +61,22 @@ namespace PS.API.Controllers
             return BadRequest(notFound);
         }
 
+        [HttpGet]
+         [Route("Events/Latest")]
+        public async Task<IActionResult> GetLatestEvents()
+        {
+            var eventsFromRepo = await this.repo.GetLatestEvents();
+            var eventsToReturn = this.mapper.Map<IEnumerable<EventsLatestDto>>(eventsFromRepo);
+
+            if (eventsToReturn != null)
+            {
+                return Ok(eventsToReturn);
+            }
+
+            return BadRequest(notFound);
+        }
+
+
         [HttpGet("{eventId}")]
         public async Task<IActionResult> GetEventById(int eventId)
         {

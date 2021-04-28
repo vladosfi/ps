@@ -14,6 +14,8 @@ namespace PS.API.Data
         private const int userMaxAge = 99;
         private const int userMinAge = 1;
 
+        private const int latestEvents = 3;
+
         private readonly DataContext context;
 
         public PSRepository(DataContext context)
@@ -80,9 +82,14 @@ namespace PS.API.Data
         }
 
 
+        public async Task<ICollection<Event>> GetLatestEvents()
+        {
+            return await this.context.Events.Include(e => e.Images).OrderByDescending(e => e.CreatedOn).Take(latestEvents).ToListAsync();
+        }
+
         public async Task<PagedList<Event>> GetEvents(EventParams eventParams)
         {
-            var events = this.context.Events.Include(p => p.Images).OrderByDescending(e => e.CreatedOn).AsQueryable();
+            var events = this.context.Events.Include(e => e.Images).OrderByDescending(e => e.CreatedOn).AsQueryable();
 
             return await PagedList<Event>.CreateAsync(events, eventParams.PageNumber, eventParams.PageSize);
         }
@@ -204,5 +211,6 @@ namespace PS.API.Data
                 return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
             }
         }
+
     }
 }
