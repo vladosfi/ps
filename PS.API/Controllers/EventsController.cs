@@ -62,7 +62,7 @@ namespace PS.API.Controllers
         }
 
         [HttpGet]
-         [Route("Events/Latest")]
+        [Route("Latest")]
         public async Task<IActionResult> GetLatestEvents()
         {
             var eventsFromRepo = await this.repo.GetLatestEvents();

@@ -107,10 +107,23 @@
   margin-bottom: 25px;
   font-size: 22px;
 }
+
+/* [1] The container */
 .article-img {
   height: 300px;
   overflow: hidden;
 }
+
+/* [2] Transition property for smooth transformation of images */
+.article-img img {
+  transition: transform .5s ease;
+}
+
+/* [3] Finally, transforming the image when container gets hovered */
+.article-img:hover img {
+  transform: scale(1.5);
+}
+
 
 img {
   max-width: 100%;
@@ -119,6 +132,7 @@ img {
   vertical-align: middle;
   border-style: none;
 }
+
 
 /* Contact Us
 ---------------------*/

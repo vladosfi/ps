@@ -1,3 +1,4 @@
+
 <div class="col-lg-12 m-15px-tb blog-aside">
     <!-- Author -->
     <div class="widget widget-author">
@@ -13,7 +14,11 @@
                     <h6>Hello, I'm<br> Мariya Maneva – Miriyam</h6>
                 </div>
             </div>
-            <p>This is where you can enjoy my works of art. It is a little bit of magic, some passion and an amazing love for sea shells and pebbles. Delighting in their varied shapes and colours. A homage to the grandeur of nature. It is my joy of long walks on the beach, a heap of patience and piles of hard work. Finally the pleasure which emerges from a new picture, born from the waves. Complete happiness is when what you like to do is enjoyed by others (like you).</p>
+            <p>This is where you can enjoy my works of art. It is a little bit of magic, some passion and an amazing
+                love for sea shells and pebbles. Delighting in their varied shapes and colours. A homage to the grandeur
+                of nature. It is my joy of long walks on the beach, a heap of patience and piles of hard work. Finally
+                the pleasure which emerges from a new picture, born from the waves. Complete happiness is when what you
+                like to do is enjoyed by others (like you).</p>
         </div>
     </div>
     <!-- End Author -->
@@ -23,86 +28,49 @@
         <div class="widget-title">
             <h3>Latest Post</h3>
         </div>
+
         <div class="widget-body">
-            <div class="latest-post-aside media">
+            <div class="latest-post-aside media" *ngFor="let event of events">
                 <div class="lpa-left media-body">
                     <div class="lpa-title">
-                        <h5><a href="#">Prevent 75% of visitors from google analytics</a></h5>
+                        <h5><a href="#">{{event.name}}</a></h5>
                     </div>
                     <div class="lpa-meta">
                         <a class="name" href="#">
-                            Rachel Roth
+                            {{event.author}}
                         </a>
                         <a class="date" href="#">
-                            26 FEB 2020
+                            {{event.createdOn | date: "mediumDate"}}
+
                         </a>
                     </div>
                 </div>
                 <div class="lpa-right">
                     <a href="#">
-                        <img src="https://via.placeholder.com/400x200/FFB6C1/000000" title="" alt="">
-                    </a>
-                </div>
-            </div>
-            <div class="latest-post-aside media">
-                <div class="lpa-left media-body">
-                    <div class="lpa-title">
-                        <h5><a href="#">Prevent 75% of visitors from google analytics</a></h5>
-                    </div>
-                    <div class="lpa-meta">
-                        <a class="name" href="#">
-                            Rachel Roth
-                        </a>
-                        <a class="date" href="#">
-                            26 FEB 2020
-                        </a>
-                    </div>
-                </div>
-                <div class="lpa-right">
-                    <a href="#">
-                        <img src="https://via.placeholder.com/400x200/FFB6C1/000000" title="" alt="">
-                    </a>
-                </div>
-            </div>
-            <div class="latest-post-aside media">
-                <div class="lpa-left media-body">
-                    <div class="lpa-title">
-                        <h5><a href="#">Prevent 75% of visitors from google analytics</a></h5>
-                    </div>
-                    <div class="lpa-meta">
-                        <a class="name" href="#">
-                            Rachel Roth
-                        </a>
-                        <a class="date" href="#">
-                            26 FEB 2020
-                        </a>
-                    </div>
-                </div>
-                <div class="lpa-right">
-                    <a href="#">
-                        <img src="https://via.placeholder.com/400x200/FFB6C1/000000" title="" alt="">
+                        <!-- <img src="https://via.placeholder.com/400x200/FFB6C1/000000" title="" alt=""> -->
+                        <img src="{{event.mainImageUrl}}/{{event.imageFileName}}" alt="{{event.name}}">
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Latest Post -->
-    <!-- widget Tags -->
-    <div class="widget widget-tags">
-        <div class="widget-title">
-            <h3>Latest Tags</h3>
-        </div>
-        <div class="widget-body">
-            <div class="nav tag-cloud">
-                <a href="#">Design</a>
-                <a href="#">Development</a>
-                <a href="#">Travel</a>
-                <a href="#">Web Design</a>
-                <a href="#">Marketing</a>
-                <a href="#">Research</a>
-                <a href="#">Managment</a>
+        <!-- End Latest Post -->
+        <!-- widget Tags -->
+        <!-- <div class="widget widget-tags">
+            <div class="widget-title">
+                <h3>Latest Tags</h3>
             </div>
-        </div>
+            <div class="widget-body">
+                <div class="nav tag-cloud">
+                    <a href="#">Design</a>
+                    <a href="#">Development</a>
+                    <a href="#">Travel</a>
+                    <a href="#">Web Design</a>
+                    <a href="#">Marketing</a>
+                    <a href="#">Research</a>
+                    <a href="#">Managment</a>
+                </div>
+            </div>
+        </div> -->
+        <!-- End widget Tags -->
     </div>
-    <!-- End widget Tags -->
-</div>

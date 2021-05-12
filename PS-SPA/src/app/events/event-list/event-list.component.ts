@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IEvent } from 'src/app/shared/_interfaces/event';
-import { Pagination } from 'src/app/_interfaces/pagination';
+import { PaginatedResult, Pagination } from 'src/app/_interfaces/pagination';
 import { ToastService } from 'src/app/_services/toast.service';
 import { EventService } from '../event.service';
 
@@ -14,19 +14,31 @@ export class EventListComponent implements OnInit {
   events: IEvent[];
   pagination: Pagination;
 
-  constructor(private eventsService: EventService,
-    private toast: ToastService,
-    private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private eventService: EventService,
+    private toast: ToastService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.events = data['events'].result;
       this.pagination = data['events'].pagination;
     });
+  }
 
-    //this.toast.info(JSON.stringify(this.events));
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadEvents();
+  }
 
-    //console.log((JSON.stringify(this.events)));
+  loadEvents() {
+    this.eventService.getEvents(this.pagination.currentPage, this.pagination.itemsPerPage)
+      .subscribe((res: PaginatedResult<IEvent[]>) => {
+        this.events = res.result;
+        this.pagination = res.pagination;
+      }, error => {
+        this.toast.error(error);
+      })
   }
 
 }

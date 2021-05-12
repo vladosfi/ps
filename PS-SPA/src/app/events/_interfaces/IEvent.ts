@@ -4,6 +4,7 @@ export interface IEvent {
     id: number;
     name: string;
     text: string;
+    author: string;
     createdOn: Date;
     isMain: boolean;
     images?: IImage[];

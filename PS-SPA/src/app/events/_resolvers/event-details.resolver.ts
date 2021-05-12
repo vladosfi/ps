@@ -8,21 +8,17 @@ import { IEvent } from '../_interfaces/IEvent';
 
 
 @Injectable()
-export class EventsResolver implements Resolve<IEvent>{
-    pageNumber = 1;
-    pageSize = 6;
-    eventParams;
-
+export class EventDetailsResolver implements Resolve<IEvent>{
     constructor(
         private eventService: EventService,
         private router: Router,
         private toast: ToastService) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<IEvent> {
-        return this.eventService.getEvents(this.pageNumber, this.pageSize).pipe(
+        return this.eventService.getEvents().pipe(
             catchError(error => {
-                this.toast.error('Problem retreiving events');
-                this.router.navigate(['/home']);
+                this.toast.error('Problem retreiving event details');
+                //this.router.navigate(['/events']);
                 return of(null);
             })
         );
