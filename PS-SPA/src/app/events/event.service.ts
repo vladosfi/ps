@@ -37,6 +37,25 @@ export class EventService {
         }));
   }
 
+  getLatestEvents(): Observable<IEvent[]>{
+    let latestEvents: IEvent[];
+
+    return this.http.get<IEvent[]>(this.baseUrl + 'events/latest', { observe: 'response' })
+    .pipe(
+      map(response => {
+        latestEvents = response.body;
+        return latestEvents;
+      }));
+  }
+
+  getEventById(id: string): Observable<IEvent>{
+    return this.http.get<IEvent>(this.baseUrl + 'events/', { observe: 'response' })
+    .pipe(
+      map(response => {;
+        return response.body;
+      }));
+  }
+
   addEvent(event: IEvent): any {
     return this.http.post(this.baseUrl + 'events', event);
   }

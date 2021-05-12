@@ -19,6 +19,8 @@ namespace PS.API.Models
         [Required]
         public string Text { get; set; }
 
+        public string Author { get; set; }
+
         public ICollection<EventImage> Images { get; set; }
     }
 }

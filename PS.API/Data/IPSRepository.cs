@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using PS.API.Helpers;
 using PS.API.Models;
@@ -37,6 +38,9 @@ namespace PS.API.Data
         Task<Painting> AddPainting(Painting painting);
 
         Task<PagedList<Event>> GetEvents(EventParams eventParams);
+
+        Task<ICollection<Event>> GetLatestEvents();
+        
 
         Task<Event> GetEventById(int id);
 

@@ -31,10 +31,13 @@ namespace PS.API.Helpers
             CreateMap<ImageForCreateDto, Image>();
             CreateMap<PaintingForUpdateDto, Painting>();
             CreateMap<Event, EventsForListDto>()
-                .ForMember(dest => dest.MainImage, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).Url))   
+                .ForMember(dest => dest.MainImageUrl, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).Url))
                 .ForMember(dest => dest.ImageFileName, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).ImageFileName));
             CreateMap<EventForCreationDto, Event>();
-            CreateMap<Event,EventDetailsDto>();
+            CreateMap<Event, EventDetailsDto>();
+            CreateMap<Event, EventsLatestDto>()
+                            .ForMember(dest => dest.MainImageUrl, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).Url))
+                            .ForMember(dest => dest.ImageFileName, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).ImageFileName));
         }
     }
 }

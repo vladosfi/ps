@@ -9,7 +9,6 @@ import { ImageUploaderComponent } from './components/image-uploader/image-upload
 import { FileUploadModule } from 'ng2-file-upload';
 import { ImageService } from './_service/image.service';
 
-
 @NgModule({
   declarations: [
     DecimalNumericDirective,
@@ -22,7 +21,7 @@ import { ImageService } from './_service/image.service';
     NgxEditorModule,
     FormsModule,
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
   ],
   exports:[
     ModalWindowService,

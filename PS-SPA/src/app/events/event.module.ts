@@ -12,6 +12,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { EventsEditComponent } from './events-edit/events-edit.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EventsEditComponent } from './events-edit/events-edit.component';
     ReactiveFormsModule,
     EventRoutingModule,
     NgxEditorModule,
-    SharedModule
+    SharedModule,
+    PaginationModule
   ],
   providers:[
     EventService,
