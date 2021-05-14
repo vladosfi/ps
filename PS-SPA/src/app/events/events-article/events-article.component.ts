@@ -12,7 +12,8 @@ export class EventsArticleComponent implements OnInit {
   localhost = environment.localhost;
   frontEndUrl = environment.frontEndUrl;
   textContentLength = 250;
-  
+  eventUrl: string;
+
   constructor() { 
     
   }
@@ -24,12 +25,13 @@ export class EventsArticleComponent implements OnInit {
       : (this.currentEvent.text);      
 
       if(this.currentEvent.mainImageUrl === null){
-        this.currentEvent.imageFileName = 'default-event.jpg';
-        this.currentEvent.mainImageUrl = '../../../assets/dafault-images';
+        this.eventUrl = '../../../assets/dafault-images/default-event.jpg';
       }
       else{
-        this.currentEvent.mainImageUrl = this.localhost + this.currentEvent.mainImageUrl;
+        this.eventUrl = this.localhost + this.currentEvent.mainImageUrl + '/' + this.currentEvent.imageFileName;
       }
+
+      console.log(this.currentEvent);
   }
 
 }

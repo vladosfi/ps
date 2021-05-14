@@ -1,11 +1,11 @@
 <div class="col-lg-12 m-15px-tb">
     <article class="article">
         <div class="article-img ">
-            <img class="img-fluid" src="{{currentEvent.mainImageUrl}}/{{currentEvent.imageFileName}}" alt="{{currentEvent.name}}" 
-            [routerLink]="['/events/', currentEvent.name]">
+            <img class="img-fluid" src="{{eventUrl}}" alt="{{currentEvent.name}}" 
+            [routerLink]="['/events/', currentEvent.id]" >
         </div>
         <div class="article-title">
-            <h2>{{currentEvent.name}}</h2>
+            <h2 [routerLink]="['/events/', currentEvent.id]">{{currentEvent.name}}</h2>
             <div class="media">
                 <div class="avatar">
                     <a href="{{frontEndUrl}}"><img src="../../../assets/profile/mariq-maneva.jpg" alt="Мariya Maneva – Miriyam"></a>
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="article-content" [innerHTML]="currentEvent.text">
+        <div [routerLink]="['/events/', currentEvent.id]" class="article-content" [innerHTML]="currentEvent.text">
             
         </div>
         <!-- <div class="nav tag-cloud">
