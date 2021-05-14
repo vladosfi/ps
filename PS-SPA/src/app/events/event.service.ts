@@ -49,7 +49,7 @@ export class EventService {
   }
 
   getEventById(id: string): Observable<IEvent>{
-    return this.http.get<IEvent>(this.baseUrl + 'events/', { observe: 'response' })
+    return this.http.get<IEvent>(this.baseUrl + 'events/' + id, { observe: 'response' })
     .pipe(
       map(response => {;
         return response.body;

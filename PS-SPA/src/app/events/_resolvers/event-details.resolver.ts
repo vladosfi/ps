@@ -15,10 +15,9 @@ export class EventDetailsResolver implements Resolve<IEvent>{
         private toast: ToastService) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<IEvent> {
-        return this.eventService.getEvents().pipe(
+        return this.eventService.getEventById(route.params['id']).pipe(
             catchError(error => {
                 this.toast.error('Problem retreiving event details');
-                //this.router.navigate(['/events']);
                 return of(null);
             })
         );

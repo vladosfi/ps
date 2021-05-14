@@ -38,6 +38,7 @@
 .article .article-title h2 {
   color: #20247b;
   font-weight: 600;
+  cursor: pointer;
 }
 .article .article-title .media {
   padding-top: 15px;
@@ -62,6 +63,11 @@
   display: block;
   font-size: 12px;
 }
+
+.article-content{
+  cursor: pointer;
+}
+
 .article .article-content h1,
 .article .article-content h2,
 .article .article-content h3,
@@ -112,6 +118,7 @@
 .article-img {
   height: 300px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 /* [2] Transition property for smooth transformation of images */
