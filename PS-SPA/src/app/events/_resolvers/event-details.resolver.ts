@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { IEvent } from 'src/app/shared/_interfaces/event';
 import { ToastService } from 'src/app/_services/toast.service';
 import { EventService } from '../event.service';
-import { IEvent } from '../_interfaces/IEvent';
+//import { IEvent } from '../_interfaces/event';
 
 
 @Injectable()
 export class EventDetailsResolver implements Resolve<IEvent>{
     constructor(
         private eventService: EventService,
-        private router: Router,
         private toast: ToastService) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<IEvent> {

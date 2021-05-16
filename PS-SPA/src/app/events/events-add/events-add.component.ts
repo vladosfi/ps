@@ -26,8 +26,8 @@ export class EventsAddComponent implements OnInit, OnDestroy {
     this.editor = new Editor();
 
     this.parentForm = new FormGroup({
-      name: new FormControl('', [FormValidators.required, FormValidators.minLength(2), Validators.maxLength(50)]),
-      text: new FormControl('', [Validators.required(),Validators.minLength(50)]),
+      name: new FormControl('', [FormValidators.required, FormValidators.minLength(5), Validators.maxLength(50)]),
+      text: new FormControl('', [Validators.required(),Validators.minLength(300)]),
       // description: new FormControl('', [FormValidators.required, FormValidators.minLength(10), FormValidators.maxLength(200)]),
     });
   }

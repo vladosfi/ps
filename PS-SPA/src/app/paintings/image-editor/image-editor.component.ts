@@ -54,6 +54,7 @@ export class ImageEditorComponent implements OnInit {
         const res: IImage = JSON.parse(response);
         const image = {
           id: res.id,
+          name: res.name,
           url: res.url,
           imageFileName: res.imageFileName,
           isMain: res.isMain,

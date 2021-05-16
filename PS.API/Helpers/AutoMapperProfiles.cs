@@ -34,9 +34,10 @@ namespace PS.API.Helpers
                 .ForMember(dest => dest.MainImageUrl, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).Url))
                 .ForMember(dest => dest.ImageFileName, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).ImageFileName));
             CreateMap<EventForCreationDto, Event>();
+            CreateMap<EventImage, EventImageForDetailedDto>();
             CreateMap<Event, EventDetailsDto>()
-                            .ForMember(dest => dest.ImagesUrl, opt => opt.MapFrom(src => src.Images.Select(i => i.Url + "/" + i.ImageFileName).ToArray()))
                             .ForMember(dest => dest.MainImageUrl, opt => opt.MapFrom(src => src.Images.Where(i => i.IsMain == true).Select(i => i.Url + "/" + i.ImageFileName).FirstOrDefault()));
+            //.ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Images.Select(i => i.Url + "/" + i.ImageFileName).ToArray()))
             CreateMap<Event, EventsLatestDto>()
                             .ForMember(dest => dest.MainImageUrl, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).Url))
                             .ForMember(dest => dest.ImageFileName, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).ImageFileName));

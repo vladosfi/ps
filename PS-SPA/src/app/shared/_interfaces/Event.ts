@@ -9,5 +9,7 @@ export interface IEvent {
     //mainImage?: IImage;
     mainImageUrl: string;
     images?: IImage[];
+    imagesUrl: string[];
     imageFileName: string;
+    isMain: boolean;
 }

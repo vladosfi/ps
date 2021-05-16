@@ -1,4 +1,28 @@
 
+/* [1] The container */
+.article-img {
+  height: 300px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* [2] Transition property for smooth transformation of images */
+.article-img img {
+  transition: transform .5s ease;
+}
+
+/* [3] Finally, transforming the image when container gets hovered */
+.article-img:hover img {
+  transform: scale(1.5);
+}
+
+.list-inline-item:active,
+.list-inline-item:focus,
+.list-inline-item:focus-within,
+.list-inline-item:hover {
+  box-shadow: 0 0 0 0.1rem rgb(33 83 156 / 20%);
+}
+
 /* Blog Sidebar
 -------------------*/
 .tag-cloud a {

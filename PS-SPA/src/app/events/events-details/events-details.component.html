@@ -4,14 +4,19 @@
         <div class="col-lg-8 m-15px-tb">
             <article class="article">
                 <div class="article-img ">
-                    <img class="img-fluid" src="{{eventUrl}}" alt="{{currentEvent.name}}" 
-                    [routerLink]="['/events/', currentEvent.id]" >
+                    <img *ngIf="currentEvent.mainImageUrl != null" class="img-fluid" src="{{localhost + currentEvent.mainImageUrl}}" alt="{{currentEvent.name}}" [routerLink]="['/events/', currentEvent.id]">
+                    <img *ngIf="currentEvent.mainImageUrl === null" class="img-fluid" src="../../../assets/dafault-images/default-event.jpg" alt="{{currentEvent.name}}" [routerLink]="['/events/', currentEvent.id]">
                 </div>
+                <ul *ngIf="loggedIn()" class="text-right">
+                  <li class="list-inline-item">
+                    <a [routerLink]="['/events/edit/', currentEvent.id]">Edit Event</a>
+                  </li>
+                </ul>
                 <div class="article-title">
                     <h2 [routerLink]="['/events/', currentEvent.id]">{{currentEvent.name}}</h2>
                     <div class="media">
                         <div class="avatar">
-                            <a href="{{frontEndUrl}}"><img src="../../../assets/profile/mariq-maneva.jpg" alt="{{currentEvent.author}}"></a>
+                            <a [routerLink]="[frontEndUrl]"><img src="../../../assets/profile/mariq-maneva.jpg" alt="{{currentEvent.author}}"></a>
                         </div>
                         <div class="media-body">
                             <label>{{currentEvent.author}}</label>

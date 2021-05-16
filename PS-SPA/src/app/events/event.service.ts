@@ -59,4 +59,8 @@ export class EventService {
   addEvent(event: IEvent): any {
     return this.http.post(this.baseUrl + 'events', event);
   }
+
+  updateEvent(event: IEvent): any {
+    return this.http.put(this.baseUrl + 'events/' + event.id, event);
+  }
 }

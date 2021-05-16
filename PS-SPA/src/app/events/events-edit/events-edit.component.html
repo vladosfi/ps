@@ -1,1 +1,64 @@
-<p>events-edit works!</p>
+<div class="container">
+    <form #editForm="ngForm" id="editForm" class="mb-5" [formGroup]="parentForm" (ngSubmit)="editEvent()">
+      <h2 class="text-center text-primary">Edit Event</h2>
+      <!-- <p>Form Status: {{ eventModel.status | json }}</p> -->
+      
+      <hr />
+
+      <div class="col-sm-12">
+        <div *ngIf="editForm.dirty" class="alert alert-info"><strong>Information:</strong>
+          You have mage changes. Any unsaved changes will be lost!
+        </div>
+      </div>
+  
+      <form [formGroup]="parentForm">
+        <div class="row">
+          <div class="col-sm">
+            <div class="form-group">
+              <input type="text" [ngClass]="{
+                'is-invalid':
+                parentForm.get('name').errors &&
+                parentForm.get('name').touched,
+                'is-valid':
+                  !parentForm.get('name').errors &&
+                  parentForm.get('name').statusChanges
+              }" class="form-control" formControlName="name" placeholder="Enter a name for event" />
+              <div class="valid-feedback"></div>
+              <div class="invalid-feedback" *ngIf="
+                parentForm.get('name').hasError('required') &&
+                parentForm.get('name').touched
+              ">
+                Please enter a name for painting
+              </div>
+              <div class="invalid-feedback" *ngIf="
+                parentForm.get('name').hasError('minlength') ||
+                (parentForm.get('name').hasError('maxlength') &&
+                  parentForm.get('name').touched)
+              ">
+                Please enter a name between 2 and 50 characters
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- <div class="NgxEditor__Wrapper mb-5 form-group">
+          <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+          <ngx-editor [editor]="editor" [(ngModel)]="html" formControlName="editorContent"></ngx-editor>
+        </div> -->
+  
+        <app-editor [parentForm]="parentForm"></app-editor>
+        <app-image-uploader *ngIf="currentEvent?.id" [event]="currentEvent"></app-image-uploader>
+        <!-- <app-photo-editor [photos]="user.photos" (getMemberPhotoChange)="updateMainPhoto($event)"></app-photo-editor> -->
+      </form>
+  
+  
+  
+  
+  
+      <div class="form-group text-center">
+        <button class="btn btn-success"  [disabled]='!editForm.dirty' form="editForm"  type="submit">
+          Save Event
+        </button>
+      </div>
+    </form>
+  </div>

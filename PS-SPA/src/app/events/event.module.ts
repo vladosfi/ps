@@ -14,6 +14,7 @@ import { SharedModule } from '../shared/shared.module';
 import { EventsEditComponent } from './events-edit/events-edit.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { EventDetailsResolver } from './_resolvers/event-details.resolver';
+import { EventEditResolver } from './_resolvers/event-edit.resolver';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { EventDetailsResolver } from './_resolvers/event-details.resolver';
   providers:[
     EventService,
     EventsResolver,
-    EventDetailsResolver
+    EventDetailsResolver,
+    EventEditResolver
   ]
 })
 export class EventModule {

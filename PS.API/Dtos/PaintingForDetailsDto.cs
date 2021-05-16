@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using PS.API.Models;
 
 namespace PS.API.Dtos

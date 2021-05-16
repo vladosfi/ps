@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
-import { IEvent } from 'src/app/events/_interfaces/IEvent';
 import { IImage } from 'src/app/shared/_interfaces/image';
 import { ToastService } from 'src/app/_services/toast.service';
 import { environment } from 'src/environments/environment';
+import { IEvent } from '../../_interfaces/event';
+//import { IEvent } from '../../_interfaces/event';
 import { ImageService } from '../../_service/image.service';
 
 @Component({
@@ -31,7 +32,7 @@ export class ImageUploaderComponent implements OnInit {
   }
 
   initializeUploader() {
-    this.event.images = [];
+    //this.event.images = [];
     
     this.uploader = new FileUploader({
       url:
@@ -56,6 +57,7 @@ export class ImageUploaderComponent implements OnInit {
         const res: IImage = JSON.parse(response);
         const image = {
           id: res.id,
+          name: res.name,
           url: res.url,
           imageFileName: res.imageFileName,
           isMain: res.isMain,
