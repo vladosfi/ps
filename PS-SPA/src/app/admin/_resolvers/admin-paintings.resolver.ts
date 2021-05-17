@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ToastService } from '../_services/toast.service';
-import { IPainting } from '../_interfaces/painting';
-import { PaintingService } from '../_services/painting.service';
+import { ToastService } from '../../_services/toast.service';
+import { IPainting } from '../../_interfaces/painting';
+import { PaintingService } from '../../_services/painting.service';
 
 
 @Injectable()

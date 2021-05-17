@@ -31,7 +31,7 @@ export class EventsArticleComponent implements OnInit {
         this.eventUrl = this.localhost + this.currentEvent.mainImageUrl + '/' + this.currentEvent.imageFileName;
       }
 
-      console.log(this.currentEvent);
+    
   }
 
 }

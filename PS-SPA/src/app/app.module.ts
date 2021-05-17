@@ -49,13 +49,12 @@ import { PaintingResolver } from './_resolvers/painting.resolver';
 import { PaintingAddComponent } from './paintings/painting-add/painting-add.component';
 import { ImageEditorComponent } from './paintings/image-editor/image-editor.component';
 import { ModalWindowService } from './shared/_service/modal-window.service';
-import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
-import { AdminPaintingThumbComponent } from './admin/admin-painting-thumb/admin-painting-thumb.component';
-import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
 import { SharedModule } from './shared/shared.module';
 import { NgxEditorModule } from 'ngx-editor';
 //import { AdminModule } from './admin/admin.module';
 //import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
+//import { AdminPaintingsResolver } from './admin/_resolvers/admin-paintings.resolver';
+//import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
 
 
 export function tokenGetter() {
@@ -85,8 +84,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     PaintingDetailsComponent,
     PaintingAddComponent,
     ImageEditorComponent,
-    AdminPaintingThumbComponent,
-    AdminPaintingListComponent
   ],
   imports: [
     BrowserModule,
@@ -139,7 +136,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     PaintingResolver,
     ModalWindowService,
     TranslateService,
-    AdminPaintingsResolver
   ],
   exports: [
   ],

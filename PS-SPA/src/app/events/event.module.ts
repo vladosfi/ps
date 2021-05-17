@@ -45,6 +45,6 @@ import { NgxGalleryModule } from 'ngx-gallery-9';
 })
 export class EventModule {
   constructor() {
-    //console.log('Lazily Loaded : LazyModule');
+    console.log('Lazily Loaded : LazyModule - Event');
   }
 }

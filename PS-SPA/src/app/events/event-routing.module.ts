@@ -37,3 +37,4 @@ const routes: Routes = [
 ];
 
 export const EventRoutingModule = RouterModule.forChild(routes);
+

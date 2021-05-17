@@ -18,7 +18,7 @@ import { PaintingDetailsComponent } from './paintings/details/details.component'
 import { PaintingResolver } from './_resolvers/painting.resolver';
 import { PaintingAddComponent } from './paintings/painting-add/painting-add.component';
 import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
-import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
+import { AdminPaintingsResolver } from './admin/_resolvers/admin-paintings.resolver';
 
 
 
@@ -34,8 +34,6 @@ export const appRoutes: Routes = [
                 path: 'members', component: MembersComponent,
                 resolve: { users: MembersResolver }
             },
-            // { path: 'gallery-sea', component: GallerySeaComponent },
-            // { path: 'gallery-marine', component: GalleryMarineComponent },
             {
                 path: 'gallery/:id', component: DetailComponent,
                 resolve: { user: DetailResolver }
@@ -63,30 +61,30 @@ export const appRoutes: Routes = [
             },
         ]
     },
-    // {
-    //     path: 'admin',
-    //     runGuardsAndResolvers: 'always',
-    //     canActivate: [AuthGuard],
-    //     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
-    //     resolve: { paintings: AdminPaintingsResolver }
-    // },
-    {
-        path: '',
-        runGuardsAndResolvers: 'always',
-        canActivate: [AuthGuard],
-        children: [
-            {
-                path: 'admin', component: AdminPaintingListComponent,
-                resolve: { paintings: AdminPaintingsResolver }
-            },
-        ]
-    },
     {
         path: 'events',
         loadChildren: () => import('./events/event.module').then(m => m.EventModule)
     },
-    //{path: 'events', component: EventsComponent, canActivate:[AuthGuard]},
-    //{ path: 'paintings', component: PaintingListComponent, resolve: { paintings: PaintingsResolver } },
+    {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    //     path: '',
+    //     runGuardsAndResolvers: 'always',
+    //     canActivate: [AuthGuard],
+    //     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    //     resolve: { paintings: AdminPaintingsResolver }
+    },
+    // {
+    //     path: '',
+    //     runGuardsAndResolvers: 'always',
+    //     canActivate: [AuthGuard],
+    //     children: [
+    //         {
+    //             path: 'admin', component: AdminPaintingListComponent,
+    //             resolve: { paintings: AdminPaintingsResolver }
+    //         },
+    //     ]
+    // },
     { path: 'start', component: StartComponent },
     { path: 'lists', component: ListsComponent, resolve: { users: ListsResolver } },
     { path: 'contacts', component: ContactsComponent },

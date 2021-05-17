@@ -1,5 +1,4 @@
 import { Component, forwardRef, OnInit, ViewChild } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PaginatedResult, Pagination } from 'src/app/_interfaces/pagination';
 import { IPainting } from 'src/app/_interfaces/painting';
@@ -24,6 +23,8 @@ export class AdminPaintingListComponent implements OnInit {
     document.body.style.backgroundColor = "#A9D3E9";
 
     this.route.data.subscribe(data => {
+      console.log(data);
+
       this.paintings = data['paintings'].result;
       this.pagination = data['paintings'].pagination;
     });
