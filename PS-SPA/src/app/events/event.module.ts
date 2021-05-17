@@ -15,6 +15,7 @@ import { EventsEditComponent } from './events-edit/events-edit.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { EventDetailsResolver } from './_resolvers/event-details.resolver';
 import { EventEditResolver } from './_resolvers/event-edit.resolver';
+import { NgxGalleryModule } from 'ngx-gallery-9';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { EventEditResolver } from './_resolvers/event-edit.resolver';
     ReactiveFormsModule,
     EventRoutingModule,
     NgxEditorModule,
+    NgxGalleryModule,
     SharedModule,
     PaginationModule
   ],

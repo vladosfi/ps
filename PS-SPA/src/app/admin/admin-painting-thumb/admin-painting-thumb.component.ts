@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AdminPaintingThumbComponent implements OnInit {
   localhost = environment.localhost;
+  baseUrl = environment.localhost;
   @Input() paintingDetails: IPainting;
   @Output() deletePaintingEvent = new EventEmitter<string>();
   @ViewChild("template") template: TemplateRef<any>;
@@ -23,7 +24,6 @@ export class AdminPaintingThumbComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   paintingModal: IPaintingDetails;
-  baseUrl = environment.localhost;
   
   
   constructor(

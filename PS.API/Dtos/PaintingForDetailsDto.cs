@@ -22,6 +22,6 @@ namespace PS.API.Dtos
         public string Url { get; set; }
         public string ImageFileName { get; set; }
 
-        public Image[] Images { get; set; }
+        public PaintingImageForDetailedDto[] Images { get; set; }
     }
 }

@@ -67,7 +67,7 @@
               <div class="col-12">
                 <h1>{{paintingModal?.name}}</h1>
                 
-                <p><span class="bolded">Format:</span> {{paintingModal?.sizeY}} x {{paintingModal?.sizeX}} cm / {{paintingModal?.sizeYIn}} x {{paintingModal?.sizeXIn}} inches</p>
+                <p><span class="bolded">{{ "GENERAL.SIZE" | translate }}:</span> {{paintingModal?.sizeY}} x {{paintingModal?.sizeX}} cm / {{paintingModal?.sizeYIn}} x {{paintingModal?.sizeXIn}} inches</p>
                 <p *ngIf="paintingModal?.category == 'mixed'"><span class="bolded">{{ "GENERAL.TECHNIQUE" | translate }}: </span> {{ "GALLERY.CATEGORY-MIX" | translate }}</p>
                 <p *ngIf="paintingModal?.category == 'sea'"><span class="bolded">{{ "GENERAL.TECHNIQUE" | translate }}: </span> {{ "GALLERY.CATEGORY-SEA" | translate }}</p>
                 <p *ngIf="paintingModal?.category == 'marine'"><span class="bolded">{{ "GENERAL.TECHNIQUE" | translate }}: </span> {{ "GALLERY.CATEGORY-MARINE" | translate }}</p>

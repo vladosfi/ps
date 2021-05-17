@@ -20,6 +20,7 @@ namespace PS.API.Helpers
             CreateMap<Photo, PhotoForReturnDto>();
             CreateMap<PhotoForCreationDto, Photo>();
             CreateMap<UserForRegisterDto, User>();
+            CreateMap<Image, PaintingImageForDetailedDto>();
             CreateMap<Painting, PaintingForListDto>()
                 .ForMember(dest => dest.Url, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).Url))
                 .ForMember(dest => dest.ImageFileName, opt => opt.MapFrom(src => src.Images.FirstOrDefault(i => i.IsMain).ImageFileName));

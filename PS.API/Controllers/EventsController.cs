@@ -112,7 +112,7 @@ namespace PS.API.Controllers
         [Authorize]
         public async Task<IActionResult> UpdateEvent(int eventId, [FromBody] EventForCreationDto eventForUpdate)
         {
-            var eventFromRepo = await this.repo.GetEventById(113);
+            var eventFromRepo = await this.repo.GetEventById(eventId);
 
             if (eventFromRepo == null)
             {

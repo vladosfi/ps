@@ -1,6 +1,16 @@
 {
     "NAV": {
-        "HOME": "Anfang"
+        "HOME": "Anfang",
+        "EVENTS": "Ereignisse",
+        "CONTACTS": "Kontakte",
+        "GALLERY": "Galerie"
+    },
+    "GENERAL": {
+        "AVAILABLE": "Verfügbar",
+        "UNAVAILABLE": "Nicht mehr verfuegbar",
+        "TECHNIQUE": "Technik",
+        "SIZE": "Format",
+        "ABOUTME": "About me"
     },
     "HOME": {
         "INTRO-HEADER": "Hallo Freunde!",
@@ -15,8 +25,13 @@
         "MIXED-TECHNIQUE-P2": "Die Wandbilder sind eine gemischte Technik, vom ersten Blick schauen so, als ob sie leichte Kompositionen sind, allerdings sind sie nicht so leicht herzustellen.Jedes einzelne Material wird an der Meeresküste nach Farbe und Form gesammelt und wenn genügend Menge vorhanden ist, erst dann kann man arbeiten anfangen.Manchmal sucht man nach bestimmten Materialien Tage oder Wochen lang, es kann aber auch sein, dass man diese nicht mal findet.Für diesen Zweck wird viel Geduld und lange Spaziergänge an der Küste benötigt.In den meisten Fällen bestimmt der Fund die Sujets der Wandbilder.Aber das Gute daran ist, dass niemals zur Wiederholung kommt.",
         "MIXED-TECHNIQUE-P3": "Der nächste Schritt ist präzises Aufkleben mit Pinzette, berücksichtigend Formen und Farben.Danach wird betont mit dem Farbenauftragen und der letzte Schritt, das Lackieren der natürlichen Materialien, womit die Farbe und der Glanz festgehalten werden.Das Wandbild wird zum Leben gebracht.Der passende Bildrahmen mit Passepartout noch dazu verstärken das Effekt des Werkes.",
         "MIXED-TECHNIQUE-P4": "Jeder, der die Schönheit und die Harmonie mag, kann diese Wandbilder genießen.Die Kunst ist unermesslich, die Arbeitstechniken sind unterschiedlich, die Methoden sind individuell und das macht die Kunst so interessant und herausfordernd.Ich bin mir sicher, dass jeder etwas für sich findet, etwas was ihn berührt und ihm Genuss verschafft.Warum auch nicht ein Werk besitzen kann."
-      },
-    "TRANSLATE":{
+    },
+    "GALLERY": {
+        "CATEGORY-MIX": "Gemischte Technik",
+        "CATEGORY-SEA": "Meeresmosaik",
+        "CATEGORY-MARINE": "Wandbild mit Meeresmotiven"
+    },
+    "TRANSLATE": {
         "LANGUAGE": "Deutsch",
         "gb": "English",
         "bg": "Български",

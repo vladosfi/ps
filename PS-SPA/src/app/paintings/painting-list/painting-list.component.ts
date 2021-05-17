@@ -37,17 +37,27 @@ export class PaintingListComponent implements OnInit, OnDestroy {
     });
 
     this.galleryOptions = [{
-      width: '100%',
-      height: '800px',
+      width: '600px',
+      height: '600px',
       imageSize: NgxGalleryImageSize.Contain,
       imagePercent: 85,
       thumbnailsColumns: 4,
-      thumbnailSize: NgxGalleryImageSize.Cover,
-      thumbnailsPercent: 20,
-      //thumbnailsAutoHide: true, 
       imageAnimation: NgxGalleryAnimation.Slide,
-      preview: false,
+      //preview: false,
     }];
+
+    // this.galleryOptions = [{
+    //   width: '100%',
+    //   height: '800px',
+    //   imageSize: NgxGalleryImageSize.Contain,
+    //   imagePercent: 85,
+    //   thumbnailsColumns: 4,
+    //   thumbnailSize: NgxGalleryImageSize.Cover,
+    //   thumbnailsPercent: 20,
+    //   //thumbnailsAutoHide: true, 
+    //   imageAnimation: NgxGalleryAnimation.Slide,
+    //   preview: false,
+    // }];
   }
 
   getImages() {

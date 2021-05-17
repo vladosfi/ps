@@ -6,10 +6,12 @@
     "CONTACTS": "Контакти",
     "GALLERY": "Галерия"
   },
-  "GENERAL":{
+  "GENERAL": {
     "AVAILABLE": "Налични",
     "UNAVAILABLE": "Неналични",
-    "TECHNIQUE": "Техника"
+    "TECHNIQUE": "Техника",
+    "SIZE": "Размер",
+    "ABOUTME": "За мен"
   },
   "HOME": {
     "INTRO-HEADER": "Здравейте приятели!",

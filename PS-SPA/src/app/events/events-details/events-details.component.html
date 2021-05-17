@@ -1,37 +1,47 @@
 <div class="blog-single">
-    <div class="container">
-      <div class="row align-items-start">
-        <div class="col-lg-8 m-15px-tb">
-            <article class="article">
-                <div class="article-img ">
-                    <img *ngIf="currentEvent.mainImageUrl != null" class="img-fluid" src="{{localhost + currentEvent.mainImageUrl}}" alt="{{currentEvent.name}}" [routerLink]="['/events/', currentEvent.id]">
-                    <img *ngIf="currentEvent.mainImageUrl === null" class="img-fluid" src="../../../assets/dafault-images/default-event.jpg" alt="{{currentEvent.name}}" [routerLink]="['/events/', currentEvent.id]">
-                </div>
-                <ul *ngIf="loggedIn()" class="text-right">
-                  <li class="list-inline-item">
-                    <a [routerLink]="['/events/edit/', currentEvent.id]">Edit Event</a>
-                  </li>
-                </ul>
-                <div class="article-title">
-                    <h2 [routerLink]="['/events/', currentEvent.id]">{{currentEvent.name}}</h2>
-                    <div class="media">
-                        <div class="avatar">
-                            <a [routerLink]="[frontEndUrl]"><img src="../../../assets/profile/mariq-maneva.jpg" alt="{{currentEvent.author}}"></a>
-                        </div>
-                        <div class="media-body">
-                            <label>{{currentEvent.author}}</label>
-                            <span>{{currentEvent.createdOn | date: "mediumDate"}}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="article-content" [innerHTML]="currentEvent.text">
-                </div>
-            </article>
-        </div>
-        <div class="col-lg-4 m-15px-tb blog-aside">
-          <app-events-aside></app-events-aside>
-        </div>
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-lg-8 m-15px-tb">
+        <article class="article">
+          <div class="article-img ">
+            <img *ngIf="currentEvent.mainImageUrl != null" class="img-fluid"
+              src="{{localhost + currentEvent.mainImageUrl}}" alt="{{currentEvent.name}}"
+              [routerLink]="['/events/', currentEvent.id]">
+            <img *ngIf="currentEvent.mainImageUrl === null" class="img-fluid"
+              src="../../../assets/dafault-images/default-event.jpg" alt="{{currentEvent.name}}"
+              [routerLink]="['/events/', currentEvent.id]">
+          </div>
+          <ul *ngIf="loggedIn()" class="text-right">
+            <li class="list-inline-item">
+              <a [routerLink]="['/events/edit/', currentEvent.id]">Edit Event</a>
+            </li>
+          </ul>
+          <div class="article-title">
+            <h2 [routerLink]="['/events/', currentEvent.id]">{{currentEvent.name}}</h2>
+            <div class="media">
+              <div class="avatar">
+                <a [routerLink]="[frontEndUrl]"><img src="../../../assets/profile/mariq-maneva.jpg"
+                    alt="{{currentEvent.author}}"></a>
+              </div>
+              <div class="media-body">
+                <label>{{currentEvent.author}}</label>
+                <span>{{currentEvent.createdOn | date: "mediumDate"}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="article-content" [innerHTML]="currentEvent.text">
+          </div>
+          <div class="row justify-content-center mt-5 ">
+            <div class="pt-3">
+              <ngx-gallery class="justify-content-center align-self-center" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+            </div>
+          </div>          
+        </article>        
       </div>
-  
+      <div class="col-lg-4 m-15px-tb blog-aside">
+        <app-events-aside></app-events-aside>
+      </div>
     </div>
+
   </div>
+</div>
