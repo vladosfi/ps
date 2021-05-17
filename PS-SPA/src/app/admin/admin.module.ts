@@ -9,8 +9,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { AdminRouterModule } from './admin-routing.module';
 import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
+import { AdminRoutingModule } from './admin-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -25,7 +26,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     CommonModule,
     FormsModule,
-    AdminRouterModule,
+    ReactiveFormsModule,
+    AdminRoutingModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -36,11 +38,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxGalleryModule,
     ModalModule,
     PaginationModule,
+    SharedModule,
   ],
   providers: [
     AdminPaintingsResolver
-  ],
-  exports: [
   ]
 })
 export class AdminModule {

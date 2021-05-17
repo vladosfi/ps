@@ -11,5 +11,5 @@ const routes: Routes = [
     }
 ];
 
-export const AdminRouterModule = RouterModule.forChild(routes);
+export const AdminRoutingModule = RouterModule.forChild(routes);
 

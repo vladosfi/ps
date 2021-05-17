@@ -55,6 +55,8 @@ export class AdminPaintingListComponent implements OnInit {
   }
 
   loadPaintings() {
+    console.log(this.paintingParams);
+    
     this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage, this.paintingParams)
       .subscribe((res: PaginatedResult<IPainting[]>) => {
         this.paintings = res.result;
