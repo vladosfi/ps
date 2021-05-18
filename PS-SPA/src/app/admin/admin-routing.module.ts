@@ -12,4 +12,3 @@ const routes: Routes = [
 ];
 
 export const AdminRoutingModule = RouterModule.forChild(routes);
-

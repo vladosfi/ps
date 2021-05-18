@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminPaintingListComponent } from './admin-painting-list/admin-painting-list.component';
 import { AdminPaintingThumbComponent } from './admin-painting-thumb/admin-painting-thumb.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -12,6 +12,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { AdminService } from './admin.service';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -26,7 +27,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     AdminRoutingModule,
     TranslateModule.forChild({
       loader: {
@@ -38,10 +38,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxGalleryModule,
     ModalModule,
     PaginationModule,
-    SharedModule,
+    //SharedModule,
   ],
   providers: [
-    AdminPaintingsResolver
+    AdminPaintingsResolver,
+    AdminService,
   ]
 })
 export class AdminModule {

@@ -36,6 +36,9 @@ export class PaintingListComponent implements OnInit, OnDestroy {
       this.pagination = data['paintings'].pagination;
     });
 
+    // const mainImageIndex = this.paintings.findIndex(i=> i.isMain === true);
+    // console.log(mainImageIndex);
+
     this.galleryOptions = [{
       width: '600px',
       height: '600px',
@@ -43,6 +46,7 @@ export class PaintingListComponent implements OnInit, OnDestroy {
       imagePercent: 85,
       thumbnailsColumns: 4,
       imageAnimation: NgxGalleryAnimation.Slide,
+      //startIndex: mainImageIndex,
       //preview: false,
     }];
 
@@ -112,6 +116,8 @@ export class PaintingListComponent implements OnInit, OnDestroy {
   }
 
   loadPaintings() {
+    console.log(this.paintingParams);
+    
     this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage, this.paintingParams)
       .subscribe((res: PaginatedResult<IPainting[]>) => {
         this.paintings = res.result;

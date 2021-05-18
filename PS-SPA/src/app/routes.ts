@@ -17,13 +17,9 @@ import { PaintingsResolver } from './_resolvers/paintings.resolver';
 import { PaintingDetailsComponent } from './paintings/details/details.component';
 import { PaintingResolver } from './_resolvers/painting.resolver';
 import { PaintingAddComponent } from './paintings/painting-add/painting-add.component';
-import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
-import { AdminPaintingsResolver } from './admin/_resolvers/admin-paintings.resolver';
-
 
 
 export const appRoutes: Routes = [
-    //{ path: 'home', redirectTo: '' },
     { path: '', component: HomeComponent }, //home
     {
         path: '',

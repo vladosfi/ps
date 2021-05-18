@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PaginatedResult, Pagination } from 'src/app/_interfaces/pagination';
@@ -7,18 +7,20 @@ import { PaintingService } from 'src/app/_services/painting.service';
 import { ToastService } from 'src/app/_services/toast.service';
 import { AdminService } from '../admin.service';
 import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-painting-list',
   templateUrl: './admin-painting-list.component.html',
   styleUrls: ['./admin-painting-list.component.css']
 })
-export class AdminPaintingListComponent implements OnInit {
+export class AdminPaintingListComponent implements OnInit, OnDestroy {
   // @ViewChild('filter', { static: true }) searchInput: ElementRef;
   pagination: Pagination;
   paintings: IPainting[];
   paintingParams: any = {};
   users$: Observable<any[]>;
+  
 
 
   constructor(private paintingService: PaintingService,
@@ -55,15 +57,14 @@ export class AdminPaintingListComponent implements OnInit {
   }
 
   loadPaintings() {
-    console.log(this.paintingParams);
-    
     this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage, this.paintingParams)
       .subscribe((res: PaginatedResult<IPainting[]>) => {
         this.paintings = res.result;
         this.pagination = res.pagination;
       }, error => {
         this.toast.error(error);
-      })
+      });
+      console.log(this.paintingParams);
   }
 
   deleteItem(paintingId: string) {
@@ -79,4 +80,32 @@ export class AdminPaintingListComponent implements OnInit {
     // this.paintingParams.searchText;
     // console.log(this.paintingParams.searchText);
   }
+
+
+  isValidFormSubmitted = false;
+	user: any = {};
+	
+	onFormSubmit(form: NgForm) {
+	   this.isValidFormSubmitted = false;
+	   if(form.invalid){
+		  return;	
+	   } 	
+	   this.isValidFormSubmitted = true;
+	   this.user.userName = form.controls['uname'].value;
+	   this.user.gender = form.controls['gender'].value;
+	   this.user.isMarried = form.controls['married'].value;
+	   this.user.isTCAccepted = form.controls['tc'].value;
+	   this.resetForm(form);
+	}
+	resetForm(form: NgForm) {;	
+	   form.resetForm({
+		   married: false
+	   }); 
+	}
+	setDefaultValues() {
+	   this.user.userName = 'Krishna';
+	   this.user.gender = 'male';
+	   this.user.isMarried = true;
+	   this.user.isTCAccepted = false;
+	}
 }

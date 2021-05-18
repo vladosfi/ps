@@ -33,8 +33,8 @@ import { NgxGalleryModule } from 'ngx-gallery-9';
     EventRoutingModule,
     NgxEditorModule,
     NgxGalleryModule,
+    PaginationModule,
     SharedModule,
-    PaginationModule
   ],
   providers:[
     EventService,
