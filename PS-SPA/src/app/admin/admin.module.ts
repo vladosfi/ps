@@ -13,6 +13,10 @@ import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { AdminService } from './admin.service';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -38,6 +42,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxGalleryModule,
     ModalModule,
     PaginationModule,
+    ButtonsModule,
     //SharedModule,
   ],
   providers: [

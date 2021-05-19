@@ -1,159 +1,53 @@
-<h3>Template Driven Form</h3>
-<p *ngIf="isValidFormSubmitted" [ngClass] = "'success'">
-    Form submitted successfully.
-</p>
-<form #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
-  <table>
-	 <tr> 
-	   <td>Name:</td>
-	   <td> 
-	           <input name="uname" [ngModel]="user.userName" required #uname="ngModel">
-		   <div *ngIf="uname.invalid && userForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
-			  Name required. 
-		   </div>
-	   </td>
-	 </tr> 
-	 <tr>
-	    <td>Gender:</td>
-	    <td> 
-	         <input type="radio" value="male" name="gender" [ngModel]="user.gender" required #gender="ngModel"> Male
-                 <input type="radio" value="female" name="gender" [ngModel]="user.gender" required #gender="ngModel"> Female
-		 <div *ngIf="gender.invalid && userForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
-			  Gender required. 
-		 </div>
-	    </td> 
-	 </tr>	  
-	 <tr>
-	  <td>Are you married? </td>
-	  <td>
-	   <input type="checkbox" name="married" [ngModel]="user.isMarried">
-	  </td>
-	 </tr>	 
-	 <tr>
-	  <td>Accept T & C </td>
-	  <td>
-	         <input type="checkbox" name="tc" [ngModel]="user.isTCAccepted" required #tc="ngModel">
-		 <div *ngIf="tc.invalid && userForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
-		     Accept T & C.
-		 </div>
-	  </td>
-	 </tr>		 
-	 <tr> 	  
-	   <td colspan="2">
-	          <button>Submit</button>
-		  <button type="button" (click)="setDefaultValues()">Set Default</button>
-		  <button type="button" (click)="resetForm(userForm)">Reset</button>		  
-	   </td>
-	 </tr>	   
-  </table>  
-</form> 
-
-
-
-
-
-
 <div class="container">
   <div class="container mt-4 mb-5">
-    
+
+
     <div class="row ng-scope col-md-12">
       <!-- Actual search box -->
       <div class="form-group has-search mr-5">
-        <span class="fa fa-search form-control-feedback" ></span>
+        <span class="fa fa-search form-control-feedback"></span>
         <input #filter type="text" class="form-control" placeholder="Search" />
-      </div>      
-      
+      </div>
+
 
       <div class="btn-group mb-3 mr-5">
-        <!-- <input [(ngModel)]="this.paintingParams.categoryId" type="text" (click)="loadPaintings()"> -->
-        <!-- https://stackoverflow.com/questions/34435491/use-ng-model-with-label-element -->
-        
-        <label
-          class="btn btn-info mr-1 "
-          ngDefaultControl  
-          [(ngModel)]="this.paintingParams.categoryId"
-          btnRadio="1"
-          tabindex="0"
-          role="button"
-          (click)="loadPaintings()"
-          >{{ "GALLERY.CATEGORY-MIX" | translate }}</label
-        >
-        <label
-          class="btn btn-info mr-1"
-          ngDefaultControl 
-          [(ngModel)]="this.paintingParams.categoryId"
-          btnRadio="2"
-          tabindex="0"
-          role="button"
-          (click)="loadPaintings()"
-          >{{ "GALLERY.CATEGORY-SEA" | translate }}</label
-        >
-        <label
-          class="btn btn-info"
-          ngDefaultControl 
-          [(ngModel)]="this.paintingParams.categoryId"
-          btnRadio="3"
-          tabindex="0"
-          role="button"
-          (click)="loadPaintings()"
-          >{{ "GALLERY.CATEGORY-MARINE" | translate }}</label
-        >
+
+        <label class="btn btn-info mr-1" ngDefaultControl [(ngModel)]="this.paintingParams.categoryId" btnRadio="1"
+          tabindex="0" role="button">{{ "GALLERY.CATEGORY-MIX" | translate }}</label>
+        <label class="btn btn-info mr-1" ngDefaultControl [(ngModel)]="this.paintingParams.categoryId" btnRadio="2"
+          tabindex="0" role="button" (click)="loadPaintings()">{{ "GALLERY.CATEGORY-SEA" | translate }}</label>
+        <label class="btn btn-info" ngDefaultControl [(ngModel)]="this.paintingParams.categoryId" btnRadio="3"
+          tabindex="0" role="button" (click)="loadPaintings()">{{ "GALLERY.CATEGORY-MARINE" | translate }}</label>
       </div>
 
       <div class="btn-group mb-3">
-        <label
-          class="btn btn-info mr-1"
-          ngDefaultControl 
-          [(ngModel)]="this.paintingParams.available"
-          btnRadio="true"
-          tabindex="0"
-          role="button"
-          (click)="loadPaintings()"
-          >{{ "GENERAL.AVAILABLE" | translate }}</label
-        >
-        <label
-          class="btn btn-info"
-          ngDefaultControl 
-          [(ngModel)]="this.paintingParams.available"
-          name="available"
-          btnRadio="false"
-          tabindex="0"
-          role="button"
-          (click)="loadPaintings()"
-          >{{ "GENERAL.UNAVAILABLE" | translate }}</label
-        >
+        <label class="btn btn-info mr-1" ngDefaultControl [(ngModel)]="this.paintingParams.available" btnRadio="true"
+          tabindex="0" role="button" (click)="loadPaintings()">{{ "GENERAL.AVAILABLE" | translate }}</label>
+        <label class="btn btn-info" ngDefaultControl [(ngModel)]="this.paintingParams.available" name="available"
+          btnRadio="false" tabindex="0" role="button" (click)="loadPaintings()">{{ "GENERAL.UNAVAILABLE" | translate
+          }}</label>
       </div>
     </div>
+
 
     <div class="row ng-scope">
       <div class="col-md-12">
         <h4>Results <span class="fw-semi-bold">Filtering</span></h4>
-        <!-- <p class="text-muted fs-mini">
-          Listed content is categorized by the following groups:
-        </p> -->
+        <p class="text-muted fs-mini">
+          Your matches - {{pagination.totalItems}} found
+        </p>
       </div>
       <div *ngFor="let painting of paintings" class="col-md-12">
-        <app-admin-painting-thumb
-          [paintingDetails]="painting"
-          (deletePaintingEvent)="deleteItem($event)"
-        ></app-admin-painting-thumb>
+        <app-admin-painting-thumb [paintingDetails]="painting" (deletePaintingEvent)="deleteItem($event)">
+        </app-admin-painting-thumb>
       </div>
     </div>
 
     <div class="d-flex justify-content-center mt-5">
-      <pagination  
-        [boundaryLinks]="true"
-        [totalItems]="pagination?.totalItems"
-        [itemsPerPage]="pagination?.itemsPerPage"
-        [(ngModel)]="pagination.currentPage"
-        (pageChanged)="pageChanged($event)"
-        previousText="&lsaquo;"
-        nextText="&rsaquo;"
-        firstText="&laquo;"
-        lastText="&raquo;"
-      >
+      <pagination [boundaryLinks]="true" [totalItems]="pagination?.totalItems" [itemsPerPage]="pagination?.itemsPerPage"
+        [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+        nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
       </pagination>
     </div>
   </div>
 </div>
-

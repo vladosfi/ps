@@ -20,7 +20,7 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy {
   paintings: IPainting[];
   paintingParams: any = {};
   users$: Observable<any[]>;
-  
+
 
 
   constructor(private paintingService: PaintingService,
@@ -57,6 +57,7 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy {
   }
 
   loadPaintings() {
+
     this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage, this.paintingParams)
       .subscribe((res: PaginatedResult<IPainting[]>) => {
         this.paintings = res.result;
@@ -64,8 +65,8 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy {
       }, error => {
         this.toast.error(error);
       });
-      console.log(this.paintingParams);
   }
+
 
   deleteItem(paintingId: string) {
     this.paintings.splice(this.paintings.findIndex((i) => i.id === paintingId), 1);
