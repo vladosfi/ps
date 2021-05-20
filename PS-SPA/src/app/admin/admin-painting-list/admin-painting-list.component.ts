@@ -15,7 +15,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./admin-painting-list.component.css']
 })
 export class AdminPaintingListComponent implements OnInit, OnDestroy {
-  // @ViewChild('filter', { static: true }) searchInput: ElementRef;
+  @ViewChild('filter', { static: true }) searchInput: ElementRef;
   pagination: Pagination;
   paintings: IPainting[];
   paintingParams: any = {};
@@ -37,18 +37,20 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.users$ = fromEvent<KeyboardEvent>(this.searchInput.nativeElement, 'keyup').pipe(
-    //   map(e => (e.target as HTMLInputElement).value),
-    //   startWith(''),
-    //   debounceTime(300),
-    //   distinctUntilChanged(),
-    //   switchMap((inputValue: string) => {
-    //     if (inputValue) {
-    //       console.log(this.searchInput);
-    //       return this.adminService.searchPainting(`?name_like=${inputValue}`)
-    //     }
-    //   })
-    // );
+    console.log("this.searchInput");
+    console.log(this.searchInput);
+    
+    this.users$ = fromEvent<KeyboardEvent>(this.searchInput.nativeElement, 'keyup').pipe(
+      map(e => (e.target as HTMLInputElement).value),
+      startWith(''),
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((inputValue: string) => {
+        if (inputValue) {
+          return this.adminService.searchPainting(`?name_like=${inputValue}`)
+        }
+      })
+    );
   }
 
   pageChanged(event: any): void {
@@ -83,30 +85,4 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy {
   }
 
 
-  isValidFormSubmitted = false;
-	user: any = {};
-	
-	onFormSubmit(form: NgForm) {
-	   this.isValidFormSubmitted = false;
-	   if(form.invalid){
-		  return;	
-	   } 	
-	   this.isValidFormSubmitted = true;
-	   this.user.userName = form.controls['uname'].value;
-	   this.user.gender = form.controls['gender'].value;
-	   this.user.isMarried = form.controls['married'].value;
-	   this.user.isTCAccepted = form.controls['tc'].value;
-	   this.resetForm(form);
-	}
-	resetForm(form: NgForm) {;	
-	   form.resetForm({
-		   married: false
-	   }); 
-	}
-	setDefaultValues() {
-	   this.user.userName = 'Krishna';
-	   this.user.gender = 'male';
-	   this.user.isMarried = true;
-	   this.user.isTCAccepted = false;
-	}
 }
