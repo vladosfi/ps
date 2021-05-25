@@ -107,6 +107,12 @@ namespace PS.API.Data
             {
                 paintings = paintings.Where(p => p.Available == paintingParams.Available);
             }
+
+            if (paintingParams.Name != string.Empty)
+            {
+                paintings = paintings.Where(p => p.Name.ToLower().Contains(paintingParams.Name.ToLower()));
+            }
+
             return await PagedList<Painting>.CreateAsync(paintings, paintingParams.PageNumber, paintingParams.PageSize);
         }
 
@@ -118,7 +124,7 @@ namespace PS.API.Data
 
         public async Task<Painting> GetPaintingById(string id)
         {
-            var painting = await this.context.Paintings.Include(p => p.Images).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
+            var painting = await this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
 
             return painting;
         }
@@ -126,7 +132,7 @@ namespace PS.API.Data
         public async Task<Event> AddEvent(Event eventEntity)
         {
             await this.context.Events.AddAsync(eventEntity);
-            
+
             if (await this.SaveAll())
             {
                 return eventEntity;

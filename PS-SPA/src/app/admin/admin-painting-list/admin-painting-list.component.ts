@@ -1,25 +1,25 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PaginatedResult, Pagination } from 'src/app/_interfaces/pagination';
 import { IPainting } from 'src/app/_interfaces/painting';
 import { PaintingService } from 'src/app/_services/painting.service';
 import { ToastService } from 'src/app/_services/toast.service';
+import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { AdminService } from '../admin.service';
-import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
-import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-admin-painting-list',
   templateUrl: './admin-painting-list.component.html',
   styleUrls: ['./admin-painting-list.component.css']
 })
-export class AdminPaintingListComponent implements OnInit, OnDestroy {
-  @ViewChild('filter', { static: true }) searchInput: ElementRef;
+export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('filter', { static: false }) input: ElementRef;
   pagination: Pagination;
   paintings: IPainting[];
   paintingParams: any = {};
-  users$: Observable<any[]>;
+  paintinsObservable$: Observable<any>;
 
 
 
@@ -36,21 +36,30 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngAfterViewInit(): void {
+
+    this.paintinsObservable$ = fromEvent(this.input.nativeElement, 'keyup')
+      .pipe(
+        //tap(console.log),
+        debounceTime(300),
+        distinctUntilChanged(),
+        map((e: KeyboardEvent) => (e.target as HTMLInputElement).value),
+        switchMap(query => {
+          if (query) {
+            console.log(query);
+            //this.paintingParams.name = query;
+            //return this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage, this.paintingParams)
+            //return this.paintingService.getPaintings(`?name_like=${query}`)
+            //return this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage, this.paintingParams)
+            return this.adminService.searchPainting(`?name_like=${query}`)
+          }
+        })
+      );
+
+  }
+
   ngOnInit(): void {
-    console.log("this.searchInput");
-    console.log(this.searchInput);
-    
-    this.users$ = fromEvent<KeyboardEvent>(this.searchInput.nativeElement, 'keyup').pipe(
-      map(e => (e.target as HTMLInputElement).value),
-      startWith(''),
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((inputValue: string) => {
-        if (inputValue) {
-          return this.adminService.searchPainting(`?name_like=${inputValue}`)
-        }
-      })
-    );
+
   }
 
   pageChanged(event: any): void {

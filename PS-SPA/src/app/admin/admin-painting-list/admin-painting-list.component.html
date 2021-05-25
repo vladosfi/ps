@@ -9,6 +9,9 @@
         <input #filter type="text" class="form-control" placeholder="Search" />
       </div>
 
+      <div *ngFor="let paint of paintinsObservable$ | async">
+        <p>{{paint | json}}</p>
+      </div>
 
       <div class="btn-group mb-3 mr-5">
 

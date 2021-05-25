@@ -35,7 +35,11 @@ export class PaintingService {
     }
 
 
-    return this.http.get<IPainting[]>(this.baseUrl + 'paintings', { observe: 'response', params })
+    // if (paintingParams?.name) {
+    //   params = params.append('name', paintingParams.name);
+    // }
+
+    return this.http.get<any[]>(this.baseUrl + 'paintings', { observe: 'response', params })
       .pipe(
         map(response => {
           paginatedResult.result = response.body;
@@ -67,7 +71,7 @@ export class PaintingService {
   deleteImage(paintingId: string, imageId: string) {
     return this.http.delete(this.baseUrl + `paintings/${paintingId}/delete/${imageId}`);
   }
-  
+
   deletePainting(paintingId: string) {
     return this.http.delete(this.baseUrl + `paintings/${paintingId}/delete`);
   }
