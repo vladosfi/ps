@@ -19,7 +19,7 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
   pagination: Pagination;
   paintings: IPainting[];
   paintingParams: any = {};
-  paintinsObservable$: Observable<any>;
+  paintinsObservable$: Observable<PaginatedResult<IPainting[]>>;
 
 
 
@@ -45,17 +45,11 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
         distinctUntilChanged(),
         map((e: KeyboardEvent) => (e.target as HTMLInputElement).value),
         switchMap(query => {
-          if (query) {
-            console.log(query);
-            //this.paintingParams.name = query;
-            //return this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage, this.paintingParams)
-            //return this.paintingService.getPaintings(`?name_like=${query}`)
-            //return this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage, this.paintingParams)
-            return this.adminService.searchPainting(`?name_like=${query}`)
-          }
+            this.paintingParams.name = query;
+            return this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage, this.paintingParams)
+            //return this.adminService.searchPainting(`?name_like=${query}`)
         })
       );
-
   }
 
   ngOnInit(): void {
@@ -68,9 +62,9 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   loadPaintings() {
-
     this.paintingService.getPaintings(this.pagination.currentPage, this.pagination.itemsPerPage, this.paintingParams)
       .subscribe((res: PaginatedResult<IPainting[]>) => {
+        console.log(res);
         this.paintings = res.result;
         this.pagination = res.pagination;
       }, error => {

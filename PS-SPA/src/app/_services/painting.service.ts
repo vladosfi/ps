@@ -35,9 +35,9 @@ export class PaintingService {
     }
 
 
-    // if (paintingParams?.name) {
-    //   params = params.append('name', paintingParams.name);
-    // }
+    if (paintingParams?.name) {
+      params = params.append('name', paintingParams.name);
+    }
 
     return this.http.get<any[]>(this.baseUrl + 'paintings', { observe: 'response', params })
       .pipe(

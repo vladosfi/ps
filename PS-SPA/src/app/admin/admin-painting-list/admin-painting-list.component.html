@@ -9,9 +9,10 @@
         <input #filter type="text" class="form-control" placeholder="Search" />
       </div>
 
-      <div *ngFor="let paint of paintinsObservable$ | async">
+      <div *ngFor="let paint of (paintinsObservable$ | async)?.result as PaginatedResult">
         <p>{{paint | json}}</p>
       </div>
+
 
       <div class="btn-group mb-3 mr-5">
 
@@ -37,7 +38,7 @@
       <div class="col-md-12">
         <h4>Results <span class="fw-semi-bold">Filtering</span></h4>
         <p class="text-muted fs-mini">
-          Your matches - {{pagination.totalItems}} found
+          Your matches - {{(paintinsObservable$ | async)?.pagination?.totalItems}} found
         </p>
       </div>
       <div *ngFor="let painting of paintings" class="col-md-12">
@@ -47,10 +48,14 @@
     </div>
 
     <div class="d-flex justify-content-center mt-5">
-      <pagination [boundaryLinks]="true" [totalItems]="pagination?.totalItems" [itemsPerPage]="pagination?.itemsPerPage"
+      <pagination [boundaryLinks]="true" [totalItems]="(paintinsObservable$ | async)?.pagination?.totalItems" [itemsPerPage]="(paintinsObservable$ | async)?.pagination?.itemsPerPage"
         [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
         nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
       </pagination>
+      <!-- <pagination [boundaryLinks]="true" [totalItems]="pagination?.totalItems" [itemsPerPage]="pagination?.itemsPerPage"
+        [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+        nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+      </pagination> -->
     </div>
   </div>
 </div>
