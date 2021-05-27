@@ -13,7 +13,6 @@ import { StartComponent } from './start/start.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { appRoutes } from './routes';
-import { ContactsComponent } from './contacts/contacts.component';
 import { MemberThumbComponent } from './gallery/member-thumb/members-thumb.component';
 import { DetailComponent } from './gallery/detail/detail.component';
 import { AuthGuard } from './_guards/auth.guard';
@@ -51,10 +50,6 @@ import { ImageEditorComponent } from './paintings/image-editor/image-editor.comp
 import { ModalWindowService } from './shared/_service/modal-window.service';
 import { SharedModule } from './shared/shared.module';
 import { NgxEditorModule } from 'ngx-editor';
-//import { AdminModule } from './admin/admin.module';
-//import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
-//import { AdminPaintingsResolver } from './admin/_resolvers/admin-paintings.resolver';
-//import { AdminPaintingListComponent } from './admin/admin-painting-list/admin-painting-list.component';
 
 
 export function tokenGetter() {
@@ -71,7 +66,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     StartComponent,
     RegisterComponent,
-    ContactsComponent,
     MemberThumbComponent,
     MembersComponent,
     DetailComponent,

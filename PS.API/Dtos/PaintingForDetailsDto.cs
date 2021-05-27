@@ -19,6 +19,7 @@ namespace PS.API.Dtos
         public float SizeX { get; set; }
 
         public float SizeY { get; set; }
+        public long ViewCount { get; set; }
         public string Url { get; set; }
         public string ImageFileName { get; set; }
 

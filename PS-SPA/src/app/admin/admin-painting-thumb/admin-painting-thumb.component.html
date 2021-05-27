@@ -23,7 +23,9 @@
           </h4>
           <p class="info">
             <span class="bold">Created On:</span>
-            {{ paintingDetails?.createdOn | date: "mediumDate" }}
+            {{ paintingDetails?.createdOn | date: "mediumDate" }} | 
+            <span class="bold">Painting views:</span>
+            {{ paintingDetails?.viewCount }}
           </p>
           <p class="description">
             {{ paintingDetails?.description.substring(0, 250) }}

@@ -85,6 +85,7 @@ namespace PS.API.Controllers
 
             if (eventToReturn != null)
             {
+                await this.repo.IncreaseEventViews(eventId);
                 return Ok(eventToReturn);
             }
 

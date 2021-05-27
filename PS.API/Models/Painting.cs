@@ -27,6 +27,8 @@ namespace PS.API.Models
         public float SizeX { get; set; }
 
         public float SizeY { get; set; }
+        
+        public long ViewCount { get; set; }
 
         public Category Category { get; set; }
         

@@ -6,21 +6,21 @@
       <!-- Actual search box -->
       <div class="form-group has-search mr-5">
         <span class="fa fa-search form-control-feedback"></span>
-        <input #filter type="text" class="form-control" placeholder="Search" />
+        <input #filter type="text" class="form-control" placeholder="Search" [formControl]="searchControl" />
       </div>
 
-      <div *ngFor="let paint of (paintinsObservable$ | async)?.result as PaginatedResult">
-        <p>{{paint | json}}</p>
-      </div>
+      <!-- <div *ngFor="let paint of (paintinsObservable$ | async)?.result as PaginatedResult">
+        <p>{{paint.name | json}}</p>
+      </div> -->
 
 
       <div class="btn-group mb-3 mr-5">
 
         <label class="btn btn-info mr-1" ngDefaultControl [(ngModel)]="this.paintingParams.categoryId" btnRadio="1"
-          tabindex="0" role="button">{{ "GALLERY.CATEGORY-MIX" | translate }}</label>
+          tabindex="0" role="button" (click)="loadPaintings()">{{ "GALLERY.CATEGORY-MIX" | translate }}</label>
         <label class="btn btn-info mr-1" ngDefaultControl [(ngModel)]="this.paintingParams.categoryId" btnRadio="2"
           tabindex="0" role="button" (click)="loadPaintings()">{{ "GALLERY.CATEGORY-SEA" | translate }}</label>
-        <label class="btn btn-info" ngDefaultControl [(ngModel)]="this.paintingParams.categoryId" btnRadio="3"
+        <label class="btn btn-info mr-1" ngDefaultControl [(ngModel)]="this.paintingParams.categoryId" btnRadio="3"
           tabindex="0" role="button" (click)="loadPaintings()">{{ "GALLERY.CATEGORY-MARINE" | translate }}</label>
       </div>
 
@@ -38,7 +38,8 @@
       <div class="col-md-12">
         <h4>Results <span class="fw-semi-bold">Filtering</span></h4>
         <p class="text-muted fs-mini">
-          Your matches - {{(paintinsObservable$ | async)?.pagination?.totalItems}} found
+          <!-- Your matches - {{(paintinsObservable$ | async)?.pagination?.totalItems}} found -->
+          Your matches -{{ pagination?.totalItems}} found
         </p>
       </div>
       <div *ngFor="let painting of paintings" class="col-md-12">
@@ -48,14 +49,14 @@
     </div>
 
     <div class="d-flex justify-content-center mt-5">
-      <pagination [boundaryLinks]="true" [totalItems]="(paintinsObservable$ | async)?.pagination?.totalItems" [itemsPerPage]="(paintinsObservable$ | async)?.pagination?.itemsPerPage"
+      <!-- <pagination [boundaryLinks]="true" [totalItems]="(paintinsObservable$ | async)?.pagination?.totalItems" [itemsPerPage]="(paintinsObservable$ | async)?.pagination?.itemsPerPage"
+        [ngModel]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+        nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+      </pagination> -->
+      <pagination [boundaryLinks]="true" [totalItems]="pagination?.totalItems" [itemsPerPage]="pagination?.itemsPerPage"
         [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
         nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
       </pagination>
-      <!-- <pagination [boundaryLinks]="true" [totalItems]="pagination?.totalItems" [itemsPerPage]="pagination?.itemsPerPage"
-        [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
-        nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
-      </pagination> -->
     </div>
   </div>
 </div>

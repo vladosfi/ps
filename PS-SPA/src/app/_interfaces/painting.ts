@@ -7,4 +7,5 @@ export interface IPainting {
     createdOn: Date;
     isMain: boolean;
     available:boolean;
+    viewCount: number;
 }

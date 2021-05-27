@@ -21,6 +21,8 @@ namespace PS.API.Models
 
         public string Author { get; set; }
 
+        public long ViewCount { get; set; }
+
         public ICollection<EventImage> Images { get; set; }
     }
 }

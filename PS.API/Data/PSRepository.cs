@@ -122,11 +122,26 @@ namespace PS.API.Data
             return eventEntity;
         }
 
+        public async Task IncreaseEventViews(int id)
+        {
+            var eventEntity = await this.context.Events.FirstOrDefaultAsync(e => e.Id == id);
+            ++eventEntity.ViewCount;
+            await SaveAll();
+        }
+
+
         public async Task<Painting> GetPaintingById(string id)
         {
             var painting = await this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
 
             return painting;
+        }
+
+        public async Task IncreasePaintingViews(string id)
+        {
+            var paintingEntity = await this.context.Paintings.FirstOrDefaultAsync(e => e.Id == id);
+            ++paintingEntity.ViewCount;
+            await SaveAll();
         }
 
         public async Task<Event> AddEvent(Event eventEntity)
@@ -217,6 +232,5 @@ namespace PS.API.Data
                 return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
             }
         }
-
     }
 }

@@ -18,6 +18,7 @@ namespace PS.API.Controllers
     [ApiController]
     public class PaintingsController : ControllerBase
     {
+        private const int notFound = 404;
         private string imagesUplaoadFolderPath = "uploads/images";
         private const string couldNotAddPainting = "Could not add the painting!";
         private const string couldNotAddImage = "Could not add the image!";
@@ -70,7 +71,16 @@ namespace PS.API.Controllers
 
             var paintingToReturn = this.mapper.Map<PaintingForDetailsDto>(painting);
 
-            return Ok(paintingToReturn);
+            
+            if (paintingToReturn != null)
+            {
+                await this.repo.IncreasePaintingViews(id);
+                return Ok(paintingToReturn);
+            }
+
+            return BadRequest(notFound);
+
+            
         }
 
         [Authorize]

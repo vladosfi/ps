@@ -70,6 +70,10 @@ export const appRoutes: Routes = [
     //     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     //     resolve: { paintings: AdminPaintingsResolver }
     },
+    {
+        path: 'contacts',
+        loadChildren: () => import('./contacts/contact.module').then(m => m.ContactsModule)
+    },
     // {
     //     path: '',
     //     runGuardsAndResolvers: 'always',

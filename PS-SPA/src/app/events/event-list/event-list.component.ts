@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IEvent } from 'src/app/shared/_interfaces/event';
 import { PaginatedResult, Pagination } from 'src/app/_interfaces/pagination';
