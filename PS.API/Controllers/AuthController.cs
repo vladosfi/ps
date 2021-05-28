@@ -10,6 +10,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PS.API.Controllers
 {
@@ -34,10 +35,17 @@ namespace PS.API.Controllers
         }
 
         [HttpPost("register")]
+        [Authorize]
         public async Task<IActionResult> Regietr(UserForRegisterDto userForRegisterDto)
         {
-            //validate result
+            //Only logedin users can register new user
+            if (User.FindFirst(ClaimTypes.NameIdentifier).Value == null)
+            {
+                return Unauthorized();
+            }
 
+            
+            //validate result
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
             if (await this.repo.UserExist(userForRegisterDto.Username))
@@ -51,7 +59,7 @@ namespace PS.API.Controllers
 
             var userToReturn = this.mapper.Map<UserForDetailedDto>(createdUser);
 
-            return CreatedAtAction(nameof(UsersController.GetUser), new { controller="Users", id = createdUser.Id }, userToReturn);
+            return CreatedAtAction(nameof(UsersController.GetUser), new { controller = "Users", id = createdUser.Id }, userToReturn);
 
         }
 

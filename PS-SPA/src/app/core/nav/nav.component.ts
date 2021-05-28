@@ -15,11 +15,11 @@ export class NavComponent implements OnInit {
   selectedLanguage: string;
   languagesToShow: any;
   isCollapsed = true;
-   
+
   constructor(
     public authService: AuthService,
     private toast: ToastService,
-    private router: Router,
+    public router: Router,
     public translate: TranslateService,
     private renderer: Renderer2
   ) { 

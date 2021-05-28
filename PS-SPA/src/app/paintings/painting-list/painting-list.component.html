@@ -1,17 +1,17 @@
 <div class="container mt-4 mb-5">
   <div class="btn-group mb-3">
-    <label class="btn btn-info mr-1" [(ngModel)]="this.paintingParams.categoryId"
+    <label class="btn btn-info mr-1" uncheckable  [(ngModel)]="this.paintingParams.categoryId"
            btnRadio="1" tabindex="0" role="button"  (click)="loadPaintings();">{{ "GALLERY.CATEGORY-MIX" | translate }}</label>
-    <label class="btn btn-info mr-1" [(ngModel)]="this.paintingParams.categoryId"
+    <label class="btn btn-info mr-1" uncheckable  [(ngModel)]="this.paintingParams.categoryId"
            btnRadio="2" tabindex="0" role="button" (click)="loadPaintings();">{{ "GALLERY.CATEGORY-SEA" | translate }}</label>
-    <label class="btn btn-info" [(ngModel)]="this.paintingParams.categoryId"
+    <label class="btn btn-info" uncheckable  [(ngModel)]="this.paintingParams.categoryId"
            btnRadio="3" tabindex="0" role="button" (click)="loadPaintings();">{{ "GALLERY.CATEGORY-MARINE" | translate }}</label>
   </div>
   
   <div class="btn-group ml-5 mb-3">
-    <label class="btn btn-info mr-1" [(ngModel)]="this.paintingParams.available"
+    <label class="btn btn-info mr-1" uncheckable  [(ngModel)]="this.paintingParams.available"
            btnRadio="true" tabindex="0" role="button"  (click)="loadPaintings();">{{ "GENERAL.AVAILABLE" | translate }}</label>
-    <label class="btn btn-info" [(ngModel)]="this.paintingParams.available"
+    <label class="btn btn-info" uncheckable  [(ngModel)]="this.paintingParams.available"
            btnRadio="false" tabindex="0" role="button" (click)="loadPaintings();">{{ "GENERAL.UNAVAILABLE" | translate }}</label>
   </div>
 

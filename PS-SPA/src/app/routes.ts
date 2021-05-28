@@ -62,17 +62,22 @@ export const appRoutes: Routes = [
         loadChildren: () => import('./events/event.module').then(m => m.EventModule)
     },
     {
+        path: 'contacts',
+        loadChildren: () => import('./contacts/contact.module').then(m => m.ContactsModule)
+    },
+    {
+        path: 'start',
+        loadChildren: () => import('./start/start.module').then(m => m.StartModule)
+    },
+    {
         path: 'admin',
-        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+        canActivate: [AuthGuard],
     //     path: '',
     //     runGuardsAndResolvers: 'always',
     //     canActivate: [AuthGuard],
     //     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     //     resolve: { paintings: AdminPaintingsResolver }
-    },
-    {
-        path: 'contacts',
-        loadChildren: () => import('./contacts/contact.module').then(m => m.ContactsModule)
     },
     // {
     //     path: '',
@@ -85,8 +90,6 @@ export const appRoutes: Routes = [
     //         },
     //     ]
     // },
-    { path: 'start', component: StartComponent },
     { path: 'lists', component: ListsComponent, resolve: { users: ListsResolver } },
-    { path: 'contacts', component: ContactsComponent },
     { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

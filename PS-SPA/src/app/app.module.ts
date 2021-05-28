@@ -9,8 +9,6 @@ import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AppComponent } from './app.component';
 import { AuthService } from './_services/auth.service';
-import { StartComponent } from './start/start.component';
-import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { appRoutes } from './routes';
 import { MemberThumbComponent } from './gallery/member-thumb/members-thumb.component';
@@ -64,8 +62,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    StartComponent,
-    RegisterComponent,
     MemberThumbComponent,
     MembersComponent,
     DetailComponent,
@@ -113,7 +109,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     CoreModule,
-    //AdminModule,
     SharedModule,
     NgxEditorModule 
   ],
