@@ -39,15 +39,17 @@ import { HomeComponent } from './home/home.component';
 import { PaintingListComponent } from './paintings/painting-list/painting-list.component';
 import { ThumbComponent } from './paintings/thumb/thumb.component';
 import { MembersComponent } from './gallery/members/members.component';
-import { PaintingsResolver } from './_resolvers/paintings.resolver';
 import { CoreModule } from './core/core.module';
+import { PaintingsResolver } from './_resolvers/paintings.resolver';
 import { PaintingDetailsComponent } from './paintings/details/details.component';
 import { PaintingResolver } from './_resolvers/painting.resolver';
 import { PaintingAddComponent } from './paintings/painting-add/painting-add.component';
+import { PaintingEditComponent } from './paintings/edit/edit.component';
 import { ImageEditorComponent } from './paintings/image-editor/image-editor.component';
 import { ModalWindowService } from './shared/_service/modal-window.service';
 import { SharedModule } from './shared/shared.module';
 import { NgxEditorModule } from 'ngx-editor';
+import { PaintingEditResolver } from './_resolvers/painting-edit.resolver';
 
 
 export function tokenGetter() {
@@ -73,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ThumbComponent,
     PaintingDetailsComponent,
     PaintingAddComponent,
+    PaintingEditComponent,
     ImageEditorComponent,
   ],
   imports: [
@@ -123,6 +126,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ListsResolver,
     PaintingsResolver,
     PaintingResolver,
+    PaintingEditResolver,
     ModalWindowService,
     TranslateService,
   ],

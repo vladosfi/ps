@@ -7,7 +7,7 @@ namespace PS.API.Models
     {
         public Image()
         {
-            this.CreatedOn = DateTime.Now;    
+            this.CreatedOn = DateTime.UtcNow;    
             this.Id = Guid.NewGuid().ToString();
         }
 

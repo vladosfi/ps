@@ -62,16 +62,17 @@ namespace PS.API.Controllers
 
             return Ok(pantingsToReturn);
         }
+        
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetPainting(string id)
+        public async Task<IActionResult> GetPainting(string id, [FromQuery] PaintingParams paintingParams)
         {
 
-            var painting = await this.repo.GetPaintingById(id);
+            var painting = await this.repo.GetPaintingById(id, paintingParams);
 
             var paintingToReturn = this.mapper.Map<PaintingForDetailsDto>(painting);
 
-            
+
             if (paintingToReturn != null)
             {
                 await this.repo.IncreasePaintingViews(id);
@@ -79,19 +80,32 @@ namespace PS.API.Controllers
             }
 
             return BadRequest(notFound);
-
-            
         }
+
+        [Authorize]
+        [HttpGet("edit/{id}")]
+        public async Task<IActionResult> GetPaintingForEdit(string id)
+        {
+
+            var painting = await this.repo.GetPaintingByIdForEdit(id);
+
+            var paintingToReturn = this.mapper.Map<PaintingForEditDetailsDto>(painting);
+
+
+            if (paintingToReturn != null)
+            {
+                await this.repo.IncreasePaintingViews(id);
+                return Ok(paintingToReturn);
+            }
+
+            return BadRequest(notFound);
+        }
+
 
         [Authorize]
         [HttpPost("{userId}")]
         public async Task<IActionResult> AddPainting(int userId, [FromBody] PaintingForCreationDto paintingForCreationDto)
         {
-            // if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-            // {
-            //     return Unauthorized();
-            // }
-
             var paintingToAdd = this.mapper.Map<Painting>(paintingForCreationDto);
 
             var createdPainting = await this.repo.AddPainting(paintingToAdd);
@@ -120,7 +134,7 @@ namespace PS.API.Controllers
         [HttpPost("{paintingId}/images")]
         public async Task<IActionResult> AddImagesForPainting(string paintingId, [FromForm] ImageForCreateDto ImageForCreateDto)
         {
-            var currentPainting = await this.repo.GetPaintingById(paintingId);
+            var currentPainting = await this.repo.GetPaintingByIdForEdit(paintingId);
 
             if (currentPainting == null)
             {
@@ -132,7 +146,7 @@ namespace PS.API.Controllers
                 return BadRequest(invalidFileLength);
             }
 
-            imagesUplaoadFolderPath += $"/{DateTime.Now.Year.ToString()}/{DateTime.Now.Month.ToString()}";
+            imagesUplaoadFolderPath += $"/{DateTime.UtcNow.Year.ToString()}/{DateTime.UtcNow.Month.ToString()}";
 
             var uploadsFolderPath = Path.Combine(host.WebRootPath, imagesUplaoadFolderPath);
 
@@ -259,7 +273,7 @@ namespace PS.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePainting(string id, PaintingForUpdateDto paintingForDetailsDto)
         {
-            var paintingFromRepo = await this.repo.GetPaintingById(id);
+            var paintingFromRepo = await this.repo.GetPaintingByIdForEdit(id);
 
             if (paintingFromRepo == null)
             {

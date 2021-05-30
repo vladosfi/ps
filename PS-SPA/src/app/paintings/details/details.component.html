@@ -125,87 +125,93 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-sm">
-          <div class="form-group">
-            <input
-              type="text"
-              [ngClass]="{
-                'is-invalid':
-                  paintingModel.get('name').errors &&
-                  paintingModel.get('name').touched,
-                'is-valid':
-                  !paintingModel.get('name').errors &&
-                  paintingModel.get('name').statusChanges
-              }"
-              class="form-control"
-              formControlName="name"
-              placeholder="Enter a name for painting"
-            />
-            <div class="valid-feedback"></div>
-            <div
-              class="invalid-feedback"
-              *ngIf="
-                paintingModel.get('name').hasError('required') &&
-                paintingModel.get('name').touched
-              "
-            >
-              Please enter a name for painting
-            </div>
-            <div
-              class="invalid-feedback"
-              *ngIf="
-                paintingModel.get('name').hasError('minlength') ||
-                (paintingModel.get('name').hasError('maxlength') &&
-                  paintingModel.get('name').touched)
-              "
-            >
-              Please enter a name between 2 and 50 characters
-            </div>
+    <!-- Bulgarian -->
+    <div class="row">
+      <div class="col-sm">
+        <div class="form-group">
+          <h4>Български</h4>
+          <input
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                paintingModel.get('name').errors &&
+                paintingModel.get('name').touched,
+              'is-valid':
+                !paintingModel.get('name').errors &&
+                paintingModel.get('name').statusChanges
+            }"
+            class="form-control"
+            formControlName="name"
+            placeholder="Enter a name for painting"
+          />
+          <div class="valid-feedback"></div>
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              paintingModel.get('name').hasError('required') &&
+              paintingModel.get('name').touched
+            "
+          >
+            Please enter a name for painting
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              paintingModel.get('name').hasError('minlength') ||
+              (paintingModel.get('name').hasError('maxlength') &&
+                paintingModel.get('name').touched)
+            "
+          >
+            Please enter a name between {{ nameMinLen }} and
+            {{ nameMaxLen }} characters
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="row">
-        <div class="col-sm">
-          <div class="form-group">
-            <textarea
-              name="interests"
-              [ngClass]="{
-                'is-invalid':
-                  paintingModel.get('description').errors &&
-                  paintingModel.get('description').touched,
-                'is-valid':
-                  !paintingModel.get('description').errors &&
-                  paintingModel.get('description').statusChanges
-              }"
-              class="form-control"
-              formControlName="description"
-              placeholder="Enter a description for painting"
-            ></textarea>
-            <div class="valid-feedback"></div>
-            <div
-              class="invalid-feedback"
-              *ngIf="
-                paintingModel.get('description').hasError('required') &&
-                paintingModel.get('description').touched
-              "
-            >
-              Please enter a description for painting
-            </div>
-            <div
-              class="invalid-feedback"
-              *ngIf="
-                paintingModel.get('description').hasError('minlength') ||
-                (paintingModel.get('description').hasError('maxlength') &&
-                  paintingModel.get('description').touched)
-              "
-            >
-              Please enter a name between 10 and 200 characters
-            </div>
+    <div class="row">
+      <div class="col-sm">
+        <div class="form-group">
+          <textarea
+            name="interests"
+            [ngClass]="{
+              'is-invalid':
+                paintingModel.get('description').errors &&
+                paintingModel.get('description').touched,
+              'is-valid':
+                !paintingModel.get('description').errors &&
+                paintingModel.get('description').statusChanges
+            }"
+            class="form-control"
+            formControlName="description"
+            placeholder="Enter a description for painting"
+          ></textarea>
+          <div class="valid-feedback"></div>
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              paintingModel.get('description').hasError('required') &&
+              paintingModel.get('description').touched
+            "
+          >
+            Please enter a description for painting
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              paintingModel.get('description').hasError('minlength') ||
+              (paintingModel.get('description').hasError('maxlength') &&
+                paintingModel.get('description').touched)
+            "
+          >
+            Please enter a description between {{ descriptionMinLen }} and
+            {{ descriptionMaxLen }} characters
           </div>
         </div>
       </div>
+    </div>
+    <!-- Bulgarian End -->
+
 
       <div class="form-group text-center">
         <button

@@ -14,7 +14,6 @@ namespace PS.API.Data
         private const int userMaxAge = 99;
         private const int userMinAge = 1;
 
-        private const int latestEvents = 3;
 
         private readonly DataContext context;
 
@@ -57,21 +56,9 @@ namespace PS.API.Data
             return image;
         }
 
-        public async Task<EventImage> GetEventImage(string imageId)
-        {
-            var image = await this.context.EventImages.FirstOrDefaultAsync(i => i.Id == imageId);
-
-            return image;
-        }
-
         public async Task<Image> GetMainImageForPainting(string paintingId)
         {
             return await this.context.Images.Where(i => i.PaintingId == paintingId).FirstOrDefaultAsync(i => i.IsMain == true);
-        }
-
-        public async Task<EventImage> GetMainImageForEvent(int eventId)
-        {
-            return await this.context.EventImages.Where(e => e.EventId == eventId).FirstOrDefaultAsync(i => i.IsMain == true);
         }
 
         public async Task<User> GetUser(int id)
@@ -79,19 +66,6 @@ namespace PS.API.Data
             var user = await this.context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
-        }
-
-
-        public async Task<ICollection<Event>> GetLatestEvents()
-        {
-            return await this.context.Events.Include(e => e.Images).OrderByDescending(e => e.CreatedOn).Take(latestEvents).ToListAsync();
-        }
-
-        public async Task<PagedList<Event>> GetEvents(EventParams eventParams)
-        {
-            var events = this.context.Events.Include(e => e.Images).OrderByDescending(e => e.CreatedOn).AsQueryable();
-
-            return await PagedList<Event>.CreateAsync(events, eventParams.PageNumber, eventParams.PageSize);
         }
 
         public async Task<PagedList<Painting>> GetPapintings(PaintingParams paintingParams)
@@ -108,6 +82,9 @@ namespace PS.API.Data
                 paintings = paintings.Where(p => p.Available == paintingParams.Available);
             }
 
+
+            paintings = GetPaintingsWithSeletedLanguage(paintings, paintingParams);
+
             if (paintingParams.Name != string.Empty)
             {
                 paintings = paintings.Where(p => p.Name.ToLower().Contains(paintingParams.Name.ToLower()));
@@ -116,44 +93,30 @@ namespace PS.API.Data
             return await PagedList<Painting>.CreateAsync(paintings, paintingParams.PageNumber, paintingParams.PageSize);
         }
 
-        public async Task<Event> GetEventById(int id)
+
+        public async Task<Painting> GetPaintingById(string id, PaintingParams paintingParams)
         {
-            var eventEntity = await this.context.Events.Include(p => p.Images).FirstOrDefaultAsync(e => e.Id == id);
-            return eventEntity;
+            //var painting = await this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
+            var painting = this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).AsQueryable();
+
+            painting = GetPaintingsWithSeletedLanguage(painting, paintingParams);
+
+            return await painting.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task IncreaseEventViews(int id)
-        {
-            var eventEntity = await this.context.Events.FirstOrDefaultAsync(e => e.Id == id);
-            ++eventEntity.ViewCount;
-            await SaveAll();
-        }
-
-
-        public async Task<Painting> GetPaintingById(string id)
+        public async Task<Painting> GetPaintingByIdForEdit(string id)
         {
             var painting = await this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
 
             return painting;
         }
+        
 
         public async Task IncreasePaintingViews(string id)
         {
             var paintingEntity = await this.context.Paintings.FirstOrDefaultAsync(e => e.Id == id);
             ++paintingEntity.ViewCount;
             await SaveAll();
-        }
-
-        public async Task<Event> AddEvent(Event eventEntity)
-        {
-            await this.context.Events.AddAsync(eventEntity);
-
-            if (await this.SaveAll())
-            {
-                return eventEntity;
-            }
-
-            return null;
         }
 
         public async Task<Painting> AddPainting(Painting painting)
@@ -231,6 +194,78 @@ namespace PS.API.Data
             {
                 return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
             }
+        }
+
+        private IQueryable<Painting> GetPaintingsWithSeletedLanguage(IQueryable<Painting> paintings, PaintingParams paintingParams)
+        {
+            var currentLanguage = paintingParams?.Language.ToLower();
+
+            if (currentLanguage == "bg")
+            {
+                paintings = paintings.Select(p => new Painting
+                {
+                    Id = p.Id,
+                    Available = p.Available,
+                    CreatedOn = p.CreatedOn,
+                    Images = p.Images,
+                    CategoryId = p.CategoryId,
+                    Name = p.Name,
+                    Description = p.Description,
+                    SizeX = p.SizeX,
+                    SizeY = p.SizeY,
+                    ViewCount = p.ViewCount
+                });
+            }
+            else if (currentLanguage == "de")
+            {
+                paintings = paintings.Select(p => new Painting
+                {
+                    Id = p.Id,
+                    Available = p.Available,
+                    CreatedOn = p.CreatedOn,
+                    Images = p.Images,
+                    CategoryId = p.CategoryId,
+                    Name = p.NameDe,
+                    Description = p.DescriptionDe,
+                    SizeX = p.SizeX,
+                    SizeY = p.SizeY,
+                    ViewCount = p.ViewCount
+                });
+            }
+            else if (currentLanguage == "ru")
+            {
+                paintings = paintings.Select(p => new Painting
+                {
+                    Id = p.Id,
+                    Available = p.Available,
+                    CreatedOn = p.CreatedOn,
+                    Images = p.Images,
+                    CategoryId = p.CategoryId,
+                    Name = p.NameRu,
+                    Description = p.DescriptionRu,
+                    SizeX = p.SizeX,
+                    SizeY = p.SizeY,
+                    ViewCount = p.ViewCount
+                });
+            }
+            else
+            {
+                paintings = paintings.Select(p => new Painting
+                {
+                    Id = p.Id,
+                    Available = p.Available,
+                    CreatedOn = p.CreatedOn,
+                    Images = p.Images,
+                    CategoryId = p.CategoryId,
+                    Name = p.NameGb,
+                    Description = p.DescriptionGb,
+                    SizeX = p.SizeX,
+                    SizeY = p.SizeY,
+                    ViewCount = p.ViewCount
+                });
+            }
+
+            return paintings;
         }
     }
 }

@@ -1,63 +1,69 @@
-
 <div class="col-lg-12 m-15px-tb blog-aside">
-    <!-- Author -->
-    <div class="widget widget-author">
-        <div class="widget-title">
-            <h3>Author</h3>
-        </div>
-        <div class="widget-body">
-            <div class="media align-items-center">
-                <div class="avatar">
-                    <img src="../../../assets/profile/mariq-maneva.jpg" title="" alt="Мariya Maneva – Miriyam">
-                </div>
-                <div class="media-body">
-                    <h6>Hello, I'm<br> Мariya Maneva – Miriyam</h6>
-                </div>
-            </div>
-            <p>This is where you can enjoy my works of art. It is a little bit of magic, some passion and an amazing
-                love for sea shells and pebbles. Delighting in their varied shapes and colours. A homage to the grandeur
-                of nature. It is my joy of long walks on the beach, a heap of patience and piles of hard work. Finally
-                the pleasure which emerges from a new picture, born from the waves. Complete happiness is when what you
-                like to do is enjoyed by others (like you).</p>
-                <p>Thank you for stopping by!</p>
-        </div>
+  <!-- Author -->
+  <div class="widget widget-author">
+    <div class="widget-title">
+      <h3>Author</h3>
     </div>
-    <!-- End Author -->
-
-    <!-- Latest Post -->
-    <div class="widget widget-latest-post">
-        <div class="widget-title">
-            <h3>Latest Post</h3>
+    <div class="widget-body">
+      <div class="media align-items-center">
+        <div class="avatar">
+          <img
+            src="../../../assets/profile/mariq-maneva.jpg"
+            title=""
+            alt="Мariya Maneva – Miriyam"
+          />
         </div>
-
-        <div class="widget-body">
-            <div class="latest-post-aside media" *ngFor="let event of events">
-                <div class="lpa-left media-body">
-                    <div class="lpa-title">
-                        <h5><a [routerLink]="['/events/', event.id]">{{event.name}}</a></h5>
-                    </div>
-                    <div class="lpa-meta">
-                        <a class="name" [routerLink]="['/events/', event.id]">
-                            {{event.author}}
-                        </a>
-                        <a class="date" [routerLink]="['/events/', event.id]">
-                            {{event.createdOn | date: "mediumDate"}}
-
-                        </a>
-                    </div>
-                </div>
-                <div class="lpa-right">
-                    <a [routerLink]="['/events/', event.id]">
-                        <!-- <img src="https://via.placeholder.com/400x200/FFB6C1/000000" title="" alt=""> -->
-                        <img src="{{event.mainImageUrl}}/{{event.imageFileName}}" alt="{{event.name}}">
-                    </a>
-                </div>
-            </div>
+        <div class="media-body">
+          <h6>
+            {{ "GENERAL.INTRO-HEADER" | translate }}
+            <br />
+          </h6>
         </div>
+      </div>
+      <p>{{ "GENERAL.INTRO-P1" | translate }}</p>
+      <p>{{ "GENERAL.INTRO-P2" | translate }}</p>
     </div>
-        <!-- End Latest Post -->
-        <!-- widget Tags -->
-        <!-- <div class="widget widget-tags">
+  </div>
+  <!-- End Author -->
+
+  <!-- Latest Post -->
+  <div class="widget widget-latest-post">
+    <div class="widget-title">
+      <h3>{{ "GENERAL.EVENTS-LAST" | translate }}</h3>
+    </div>
+
+    <div class="widget-body">
+      <div class="latest-post-aside media" *ngFor="let event of events">
+        <div class="lpa-left media-body">
+          <div class="lpa-title">
+            <h5>
+              <a [routerLink]="['/events/', event.id]">{{ event.name }}</a>
+            </h5>
+          </div>
+          <div class="lpa-meta">
+            <a class="name" [routerLink]="['/events/', event.id]">
+              {{ event.author }}
+            </a>
+            <a class="date" [routerLink]="['/events/', event.id]">
+              {{ event.createdOn | date: "mediumDate" }}
+            </a>
+          </div>
+        </div>
+        <div class="lpa-right">
+          <a [routerLink]="['/events/', event.id]">
+            <!-- <img src="https://via.placeholder.com/400x200/FFB6C1/000000" title="" alt=""> -->
+            <img
+              src="{{ event.mainImageUrl }}/{{ event.imageFileName }}"
+              alt="{{ event.name }}"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Latest Post -->
+  <!-- widget Tags -->
+  <!-- <div class="widget widget-tags">
             <div class="widget-title">
                 <h3>Latest Tags</h3>
             </div>
@@ -73,5 +79,5 @@
                 </div>
             </div>
         </div> -->
-        <!-- End widget Tags -->
-    </div>
+  <!-- End widget Tags -->
+</div>

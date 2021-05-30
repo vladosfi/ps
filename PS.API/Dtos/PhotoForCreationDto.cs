@@ -7,7 +7,7 @@ namespace PS.API.Dtos
     {
         public PhotoForCreationDto()
         {
-            DateAdded = DateTime.Now;
+            DateAdded = DateTime.UtcNow;
         }
         public string Url { get; set; }
         public IFormFile File { get; set; }

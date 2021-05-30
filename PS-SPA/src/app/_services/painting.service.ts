@@ -14,7 +14,7 @@ import { AuthService } from './auth.service';
 export class PaintingService {
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService, ) { }
 
   getPaintings(page?, itemsPerPage?, paintingParams?): Observable<PaginatedResult<IPainting[]>> {
     const paginatedResult: PaginatedResult<IPainting[]> = new PaginatedResult<IPainting[]>();
@@ -34,10 +34,13 @@ export class PaintingService {
       params = params.append('available', paintingParams.available);
     }
 
-
     if (paintingParams?.name) {
       params = params.append('name', paintingParams.name);
     }
+
+
+    params = params.append('language', localStorage.getItem('currentLang'));
+
 
     return this.http.get<any[]>(this.baseUrl + 'paintings', { observe: 'response', params })
       .pipe(
@@ -52,7 +55,22 @@ export class PaintingService {
 
   getPainting(id: string): Observable<IPaintingDetails> {
 
-    return this.http.get<IPaintingDetails>(this.baseUrl + 'paintings/' + id, { observe: 'response' })
+    let params = new HttpParams();
+    params = params.append('language', localStorage.getItem('currentLang'));
+
+    return this.http.get<IPaintingDetails>(this.baseUrl + 'paintings/' + id, { observe: 'response', params })
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      );
+  }
+
+  editPainting(id: string): Observable<IPaintingDetails> {
+
+    let params = new HttpParams();
+
+    return this.http.get<IPaintingDetails>(this.baseUrl + 'paintings/edit/' + id, { observe: 'response' })
       .pipe(
         map(response => {
           return response.body;

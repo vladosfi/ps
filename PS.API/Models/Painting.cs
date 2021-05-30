@@ -5,21 +5,46 @@ using PS.API.Data.Common.Base;
 
 namespace PS.API.Models
 {
-    public class Painting: BaseModel<string>
+    public class Painting : BaseModel<string>
     {
         public Painting()
         {
             this.Id = Guid.NewGuid().ToString();
             this.Images = new HashSet<Image>();
-            this.CreatedOn = DateTime.Now;
+            this.CreatedOn = DateTime.UtcNow;
         }
 
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
 
+        [Required]
         [StringLength(500)]
         public string Description { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string NameGb { get; set; }
+
+        [Required]
+        [StringLength(500)]
+        public string DescriptionGb { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string NameDe { get; set; }
+
+        [Required]
+        [StringLength(500)]
+        public string DescriptionDe { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string NameRu { get; set; }
+
+        [Required]
+        [StringLength(500)]
+        public string DescriptionRu { get; set; }
 
         [Required]
         public bool Available { get; set; }
@@ -27,11 +52,11 @@ namespace PS.API.Models
         public float SizeX { get; set; }
 
         public float SizeY { get; set; }
-        
+
         public long ViewCount { get; set; }
 
         public Category Category { get; set; }
-        
+
         [Required]
         public int CategoryId { get; set; }
 

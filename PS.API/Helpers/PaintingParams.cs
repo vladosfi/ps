@@ -15,5 +15,6 @@ namespace PS.API.Helpers
         public int CategoryId { get; set; }
         public bool? Available { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string Language { get; set; }
     }
 }

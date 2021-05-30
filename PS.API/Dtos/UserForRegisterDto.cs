@@ -7,8 +7,8 @@ namespace PS.API.Dtos
     {
         public UserForRegisterDto()
         {
-            this.Created = DateTime.Now;
-            this.LastActive = DateTime.Now;
+            this.Created = DateTime.UtcNow;
+            this.LastActive = DateTime.UtcNow;
         }
         
         [Required]

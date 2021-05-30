@@ -1,6 +1,6 @@
 import { Component, HostListener, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Validators as FormValidators, FormControl, FormGroup, NgForm } from "@angular/forms";
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Validators, Editor, Toolbar } from "ngx-editor";
 import { IEvent } from "src/app/shared/_interfaces/event";
 import { ToastService } from 'src/app/_services/toast.service';
@@ -31,8 +31,7 @@ export class EventsEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-      this.currentEvent = Object.assign({}, data.events);
-      console.log(this.currentEvent);
+      this.currentEvent = Object.assign({}, data.events);           
     });
     
     this.editor = new Editor();

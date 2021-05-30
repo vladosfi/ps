@@ -13,27 +13,33 @@ export class PaintingAddComponent implements OnInit {
   paintingModel: FormGroup;
   model: any = {};
   paintingDetails: IPaintingDetails;
-  
+  nameMinLen: number = 2;
+  nameMaxLen: number = 50;
+  descriptionMinLen: number = 10;
+  descriptionMaxLen: number = 200;
+
   constructor(
-    private paintingService: PaintingService, 
-    fb: FormBuilder, 
+    private paintingService: PaintingService,
+    fb: FormBuilder,
     private toast: ToastService,) {
-      
+
     this.paintingModel = new FormGroup({
-      name: new FormControl('nameBg', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-      description: new FormControl('descBgdescBgdescBg', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
-      available: new FormControl(true, [Validators.required]),
-      categoryId: new FormControl(1, [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(this.descriptionMinLen), Validators.maxLength(this.descriptionMaxLen)]),
+      nameGb: new FormControl('', [Validators.required, Validators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
+      descriptionGb: new FormControl('', [Validators.required, Validators.minLength(this.descriptionMinLen), Validators.maxLength(this.descriptionMaxLen)]),
+      nameDe: new FormControl('', [Validators.required, Validators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
+      descriptionDe: new FormControl('', [Validators.required, Validators.minLength(this.descriptionMinLen), Validators.maxLength(this.descriptionMaxLen)]),
+      nameRu: new FormControl('', [Validators.required, Validators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
+      descriptionRu: new FormControl('', [Validators.required, Validators.minLength(this.descriptionMinLen), Validators.maxLength(this.descriptionMaxLen)]),
+
+      //available: new FormControl('true', [Validators.required]),
+      //categoryId: new FormControl(1, [Validators.required]),
+      available: new FormControl('', [Validators.required]),
+      categoryId: new FormControl('', [Validators.required]),
       sizeX: new FormControl('3', [Validators.required]),
       sizeY: new FormControl('4', [Validators.required]),
     });
-
-    //  fb.group({
-    //   nameBg:['Name in BG', [Validators.required]],
-    //   descBg:['', [Validators.required]],
-    //   available:['', [Validators.required]],
-    //   category:['Category', [Validators.required]],
-    // });
   }
 
   ngOnInit(): void {
@@ -44,11 +50,12 @@ export class PaintingAddComponent implements OnInit {
     if (this.paintingModel.valid) {
       this.paintingDetails = Object.assign({}, this.paintingModel.value);
       this.paintingService.addPainting(this.paintingDetails).subscribe(
-        (response) => {       
+        (response) => {
           if (response) {
-            this.paintingDetails = Object.assign({}, response);            
+            this.paintingDetails = Object.assign({}, response);
             this.toast.success('Painting added successfully');
-        }},
+          }
+        },
         (error) => {
           this.toast.error(error);
         }

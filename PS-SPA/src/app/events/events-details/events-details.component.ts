@@ -45,7 +45,7 @@ export class EventsDetailsComponent implements OnInit {
 
   getImages() {
     const imageUrls = [];
-    for (let i = 0; i < this.currentEvent.images.length; i++) {
+    for (let i = 0; i < this.currentEvent.images?.length; i++) {
 
       let image = {
         small: this.baseUrl + this.currentEvent.images[i].url + '/' + this.currentEvent.images[i].imageFileName,

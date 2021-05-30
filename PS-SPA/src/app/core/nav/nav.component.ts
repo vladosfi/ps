@@ -3,6 +3,7 @@ import { ToastService } from '../../_services/toast.service';
 import { AuthService } from '../../_services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { getLocale } from 'ngx-bootstrap/chronos';
 
 @Component({
   selector: 'app-nav',
@@ -25,8 +26,14 @@ export class NavComponent implements OnInit {
   ) { 
     translate.addLangs(['gb', 'bg', 'ru', 'de']);
     translate.setDefaultLang('gb');
-    const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/gb|bg|ru|de/) ? browserLang: 'gb');
+
+    var browserLang = translate.getBrowserLang();
+    if(localStorage.getItem('currentLang')){
+      browserLang = localStorage.getItem('currentLang');
+      document.documentElement.lang = browserLang;
+    }
+
+    translate.use(browserLang.match(/gb|bg|ru|de/) ? browserLang : 'gb');
     this.selectedLanguage = browserLang;
     this.languagesToShow = translate.getLangs().filter(l => l !== this.selectedLanguage);
     this.renderer.setAttribute(document.querySelector('html'), 'lang', this.selectedLanguage);
@@ -51,11 +58,13 @@ export class NavComponent implements OnInit {
   }
 
   changeLanguage(lang: string){
-    //console.log(this.translate.currentLang);
     this.translate.use(lang)
     this.selectedLanguage = lang;
     this.languagesToShow = this.translate.getLangs().filter(l => l !== this.selectedLanguage);
     this.renderer.setAttribute(document.querySelector('html'), 'lang', this.selectedLanguage);
+    localStorage.setItem('currentLang', lang);
+    document.documentElement.lang = lang;
+    this.router.navigate(['/home']);
   }
 
   logout() {

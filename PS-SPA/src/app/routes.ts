@@ -17,6 +17,8 @@ import { PaintingsResolver } from './_resolvers/paintings.resolver';
 import { PaintingDetailsComponent } from './paintings/details/details.component';
 import { PaintingResolver } from './_resolvers/painting.resolver';
 import { PaintingAddComponent } from './paintings/painting-add/painting-add.component';
+import { PaintingEditResolver } from './_resolvers/painting-edit.resolver';
+import { PaintingEditComponent } from './paintings/edit/edit.component';
 
 
 export const appRoutes: Routes = [
@@ -49,6 +51,11 @@ export const appRoutes: Routes = [
             },
             {
                 path: 'paintings/add', component: PaintingAddComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'paintings/edit/:id', component: PaintingEditComponent,
+                resolve: { painting: PaintingEditResolver },
                 canActivate: [AuthGuard],
             },
             {

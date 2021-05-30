@@ -1,41 +1,33 @@
-using System.ComponentModel.DataAnnotations;
+using PS.API.Models;
 
 namespace PS.API.Dtos
 {
-    public class PaintingForUpdateDto
+    public class PaintingForEditDetailsDto
     {
-        [Required]
-        public string Name { get; set; }
+        public string Id { get; set; }
 
-        [Required]
+        public string Name { get; set; }
         public string Description { get; set; }
-        [Required]
         public string NameGb { get; set; }
-        [Required]
         public string DescriptionGb { get; set; }
-        [Required]
         public string NameDe { get; set; }
-        [Required]
         public string DescriptionDe { get; set; }
-        [Required]
         public string NameRu { get; set; }
-        [Required]
         public string DescriptionRu { get; set; }
 
-        [Required]
-        public int CategoryId { get; set; }
+        public string Category { get; set; }
 
-        [Required]
+        public string CategoryId { get; set; }
+
         public bool Available { get; set; }
 
-        [Required]
-        [Range(0, 500)]
         public float SizeX { get; set; }
 
-        [Required]
-        [Range(0, 500)]
         public float SizeY { get; set; }
+        public long ViewCount { get; set; }
+        public string Url { get; set; }
+        public string ImageFileName { get; set; }
 
-        //public string MainImageUrl { get; set; }
+        public PaintingImageForDetailedDto[] Images { get; set; }
     }
 }

@@ -4,6 +4,12 @@ export interface IPaintingDetails {
     id: string;
     name: string;
     description: string;
+    nameGb: string;
+    descriptionGb: string;
+    nameDe: string;
+    descriptionDe: string;
+    nameRu: string;
+    descriptionRu: string;
     categoryId: number;
     category: string;
     sizeX: number;

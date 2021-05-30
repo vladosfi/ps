@@ -32,16 +32,20 @@ namespace PS.API.Controllers
         private const string failedToDeleteImage = "Failed to delete image";
         private const string thumbnailFolder = "thumbnail";
         private const int maxThumbnailSize = 250;
-        private readonly IPSRepository repo;
+        private readonly IEventsRepository repo;
+        private readonly IPSRepository psRepo;
         private readonly IMapper mapper;
         private readonly IWebHostEnvironment host;
 
 
-        public EventsController(IPSRepository repo,
+        public EventsController(
+            IEventsRepository repo,
+            IPSRepository psRepo,
             IMapper mapper,
             IWebHostEnvironment host)
         {
             this.repo = repo;
+            this.psRepo = psRepo;
             this.mapper = mapper;
             this.host = host;
         }
@@ -123,7 +127,7 @@ namespace PS.API.Controllers
             this.mapper.Map(eventForUpdate, eventFromRepo);
             eventFromRepo.ModifiedOn = DateTime.UtcNow;
 
-            if (await this.repo.SaveAll())
+            if (await this.psRepo.SaveAll())
             {
                 return NoContent();
             }
@@ -142,9 +146,9 @@ namespace PS.API.Controllers
                 return BadRequest(notFound);
             }
 
-            this.repo.Delete(eventFromRepo);
+            this.psRepo.Delete(eventFromRepo);
 
-            if (await this.repo.SaveAll())
+            if (await this.psRepo.SaveAll())
             {
                 return Ok();
             }
@@ -200,7 +204,7 @@ namespace PS.API.Controllers
 
             currentEvent.Images.Add(imageToAdd);
 
-            if (await this.repo.SaveAll())
+            if (await this.psRepo.SaveAll())
             {
                 return CreatedAtAction(nameof(this.GetImage), new { controller = "Events", imageId = imageToAdd.Id }, imageToAdd);
             }
@@ -245,7 +249,7 @@ namespace PS.API.Controllers
             currentManImage.IsMain = false;
             imageFromRepo.IsMain = true;
 
-            if (await this.repo.SaveAll())
+            if (await this.psRepo.SaveAll())
             {
                 return NoContent();
             }
@@ -293,10 +297,10 @@ namespace PS.API.Controllers
                 // System.IO.File.Delete(imagePath);
                 // System.IO.File.Delete(thumbnailImage);
 
-                this.repo.Delete(imageFromRepo);
+                this.psRepo.Delete(imageFromRepo);
             }
 
-            if (await this.repo.SaveAll())
+            if (await this.psRepo.SaveAll())
             {
                 return Ok();
             }

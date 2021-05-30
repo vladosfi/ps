@@ -16,6 +16,13 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { EventDetailsResolver } from './_resolvers/event-details.resolver';
 import { EventEditResolver } from './_resolvers/event-edit.resolver';
 import { NgxGalleryModule } from 'ngx-gallery-9';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -35,6 +42,13 @@ import { NgxGalleryModule } from 'ngx-gallery-9';
     NgxGalleryModule,
     PaginationModule,
     SharedModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (HttpLoaderFactory),
+        deps: [HttpClient],
+      }
+    }),
   ],
   providers:[
     EventService,

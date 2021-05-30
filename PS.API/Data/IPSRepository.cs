@@ -29,23 +29,12 @@ namespace PS.API.Data
 
         Task<Image> GetImage(string id);
 
-        Task<Painting> GetPaintingById(string id);
+        Task<Painting> GetPaintingById(string id, PaintingParams paintingParams = null);
+
+        Task<Painting> GetPaintingByIdForEdit(string id);
+
         Task IncreasePaintingViews(string id);
 
         Task<Painting> AddPainting(Painting painting);
-
-        Task<EventImage> GetMainImageForEvent(int eventId);
-        
-        Task<EventImage> GetEventImage(string imageId);        
-
-        Task<PagedList<Event>> GetEvents(EventParams eventParams);
-        
-        Task<ICollection<Event>> GetLatestEvents();
-
-        Task<Event> GetEventById(int id);
-
-        Task IncreaseEventViews(int id);
-
-        Task<Event> AddEvent(Event eventEntity);
     }
 }
