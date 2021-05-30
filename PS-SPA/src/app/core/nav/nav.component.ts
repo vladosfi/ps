@@ -64,7 +64,8 @@ export class NavComponent implements OnInit {
     this.renderer.setAttribute(document.querySelector('html'), 'lang', this.selectedLanguage);
     localStorage.setItem('currentLang', lang);
     document.documentElement.lang = lang;
-    this.router.navigate(['/home']);
+    //this.router.navigate(['/home']);
+    window.location.reload();
   }
 
   logout() {
