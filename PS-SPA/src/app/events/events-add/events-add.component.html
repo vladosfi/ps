@@ -37,7 +37,7 @@
 
 
 
-    <div class="form-group text-center">
+    <div *ngIf="event?.id == null" class="form-group text-center">
       <button class="btn btn-success" [disabled]="!parentForm.valid" type="submit">
         Save Event
       </button>

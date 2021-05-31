@@ -11,6 +11,7 @@ using PS.API.Dtos;
 using PS.API.Helpers;
 using PS.API.Models;
 using System.Linq;
+using System.Security.Claims;
 
 namespace PS.API.Controllers
 {
@@ -101,6 +102,8 @@ namespace PS.API.Controllers
         public async Task<IActionResult> AddEvent([FromBody] EventForCreationDto eventForAddDto)
         {
             var eventForCreation = this.mapper.Map<Event>(eventForAddDto);
+            eventForCreation.Author = User.FindFirst(ClaimTypes.Name).Value;
+
             var eventFromRepo = await this.repo.AddEvent(eventForCreation);
 
             if (eventFromRepo != null)
