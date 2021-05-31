@@ -18,6 +18,7 @@ export class EventsDetailsComponent implements OnInit {
   frontEndUrl = environment.frontEndUrl;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  language = document.documentElement.lang;
 
   constructor(
     private toast: ToastService,
@@ -34,6 +35,7 @@ export class EventsDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.currentEvent = Object.assign({}, data.events);
+      this.currentEvent.createdOn = new Date(this.currentEvent?.createdOn);
       this.galleryImages = this.getImages();
     });
   }

@@ -13,25 +13,28 @@ export class EventsArticleComponent implements OnInit {
   frontEndUrl = environment.frontEndUrl;
   textContentLength = 250;
   eventUrl: string;
+  language = document.documentElement.lang;
 
-  constructor() { 
-    
+  constructor() {
+
   }
-  
+
 
   ngOnInit(): void {
-    this.currentEvent.text = this.currentEvent.text.length > this.textContentLength 
-      ? this.currentEvent.text.slice(0,this.textContentLength) +'[...]' 
-      : (this.currentEvent.text);      
+    this.currentEvent.text = this.currentEvent.text.length > this.textContentLength
+      ? this.currentEvent.text.slice(0, this.textContentLength) + '[...]'
+      : (this.currentEvent.text);
+      
+    this.currentEvent.createdOn = new Date(this.currentEvent?.createdOn);
 
-      if(this.currentEvent.mainImageUrl === null){
-        this.eventUrl = '../../../assets/dafault-images/default-event.jpg';
-      }
-      else{
-        this.eventUrl = this.localhost + this.currentEvent.mainImageUrl + '/' + this.currentEvent.imageFileName;
-      }
+    if (this.currentEvent.mainImageUrl === null) {
+      this.eventUrl = '../../../assets/dafault-images/default-event.jpg';
+    }
+    else {
+      this.eventUrl = this.localhost + this.currentEvent.mainImageUrl + '/' + this.currentEvent.imageFileName;
+    }
 
-    
+
   }
 
 }

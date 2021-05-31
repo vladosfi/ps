@@ -23,19 +23,19 @@ namespace PS.API.Models
         public string NameGb { get; set; }
 
         [Required]
-        public string DescriptionGb { get; set; }
+        public string TextGb { get; set; }
 
         [Required]
         public string NameDe { get; set; }
 
         [Required]
-        public string DescriptionDe { get; set; }
+        public string TextDe { get; set; }
 
         [Required]
         public string NameRu { get; set; }
 
         [Required]
-        public string DescriptionRu { get; set; }
+        public string TextRu { get; set; }
 
         public string Author { get; set; }
 

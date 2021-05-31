@@ -5,7 +5,7 @@ export interface IEvent {
     name: string;
     text: string;
     author: string;
-    createdOn: string;
+    createdOn: Date;
     //mainImage?: IImage;
     mainImageUrl: string;
     images?: IImage[];

@@ -1,0 +1,30 @@
+<form [formGroup]="parentForm">
+    <div class="row">
+        <div class="col-sm">
+            <div class="form-group">
+                <input type="text" [ngClass]="{
+          'is-invalid':
+          parentForm.get(inputName).errors &&
+          parentForm.get(inputName).touched,
+          'is-valid':
+            !parentForm.get(inputName).errors &&
+            parentForm.get(inputName).statusChanges
+        }" class="form-control" formControlName={{inputName}} placeholder="Enter a name for event" />
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback" *ngIf="
+          parentForm.get(inputName).hasError('required') &&
+          parentForm.get(inputName).touched
+        ">
+                    Please enter a name for painting
+                </div>
+                <div class="invalid-feedback" *ngIf="
+          parentForm.get(inputName).hasError('minlength') ||
+          (parentForm.get(inputName).hasError('maxlength') &&
+            parentForm.get(inputName).touched)
+        ">
+                    Please enter a name between {{nameMinLen}} and {{nameMaxLen}} characters
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

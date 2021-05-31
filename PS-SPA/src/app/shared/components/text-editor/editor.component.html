@@ -1,9 +1,14 @@
 <form [formGroup]="parentForm">
-<div class="NgxEditor__Wrapper mb-5 form-group">
+  <div class="NgxEditor__Wrapper mb-5 form-group">
 
-  <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-  <ngx-editor [editor]="editor" formControlName="text"></ngx-editor>
-  <!-- <ngx-editor [editor]="editor" [(ngModel)]="html" formControlName="text" (keypress)="keyPress($event)"></ngx-editor> -->
+      <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+      <ngx-editor [editor]="editor" formControlName={{conrolName}}></ngx-editor>
 
-</div>
+    <!-- <ngx-editor [editor]="editor" [(ngModel)]="html" formControlName="text" (keypress)="keyPress($event)"></ngx-editor> -->
+  </div>
+<!-- 
+  <div class="NgxEditor__Wrapper mb-5 form-group">
+    <ngx-editor-menu [editor]=editorGb> </ngx-editor-menu>
+    <ngx-editor [editor]=editorGb formControlName="textGb"></ngx-editor>
+</div> -->
 </form>

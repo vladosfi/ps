@@ -12,7 +12,7 @@
                 </div>
                 <div class="media-body">
                     <label>{{currentEvent.author}}</label>
-                    <span>{{currentEvent.createdOn | date: "mediumDate"}}</span>
+                    <span>{{ currentEvent.createdOn.toLocaleDateString(language) }}</span>
                 </div>
             </div>
         </div>

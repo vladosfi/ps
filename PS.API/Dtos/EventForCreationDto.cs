@@ -10,5 +10,23 @@ namespace PS.API.Dtos
         [Required]
         [StringLength(100000, MinimumLength = 300, ErrorMessage = "Event text must be between 300 and 100000 characters")]
         public string Text { get; set; }
+
+          [Required]
+        [StringLength(60, MinimumLength = 5, ErrorMessage = "Event name must be between 5 and 60 characters")]
+        public string NameGb { get; set; }
+
+        [Required]
+        public string TextGb { get; set; }
+
+        [Required]
+        [StringLength(60, MinimumLength = 5, ErrorMessage = "Event name must be between 5 and 60 characters")]
+        public string NameDe { get; set; }
+
+        [Required]
+        public string TextDe { get; set; }
+
+        [Required]
+        [StringLength(60, MinimumLength = 5, ErrorMessage = "Event name must be between 5 and 60 characters")]
+        public string NameRu { get; set; }
     }
 }

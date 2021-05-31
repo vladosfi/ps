@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ImageService } from './_service/image.service';
+import { InputNameComponent } from './components/input-name/input-name.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ImageService } from './_service/image.service';
     ModalWindowService,
     EditorComponent,
     ImageUploaderComponent,
+    InputNameComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,7 @@ import { ImageService } from './_service/image.service';
     ModalWindowService,
     DecimalNumericDirective,
     EditorComponent,
+    InputNameComponent,
     ImageUploaderComponent,
   ]
 })
