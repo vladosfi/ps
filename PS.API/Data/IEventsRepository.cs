@@ -13,9 +13,8 @@ namespace PS.API.Data
 
         Task<PagedList<Event>> GetEvents(EventParams eventParams);
 
-        Task<ICollection<Event>> GetLatestEvents();
-
-        Task<Event> GetEventById(int id);
+        Task<ICollection<Event>> GetLatestEvents(EventParams eventParams);
+        Task<Event> GetEventById(int id, EventParams eventParams = null);
 
         Task IncreaseEventViews(int id);
 

@@ -19,6 +19,7 @@ import { NgxGalleryModule } from 'ngx-gallery-9';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
+import { PreventUnsavedChangesForEvents } from '../_guards/prevent-unsaved-changes';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -54,7 +55,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EventService,
     EventsResolver,
     EventDetailsResolver,
-    EventEditResolver
+    EventEditResolver,
+    PreventUnsavedChangesForEvents
   ]
 })
 export class EventModule {

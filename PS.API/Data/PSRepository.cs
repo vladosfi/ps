@@ -83,7 +83,7 @@ namespace PS.API.Data
             }
 
 
-            paintings = GetPaintingsWithSeletedLanguage(paintings, paintingParams);
+            paintings = SelectPaintingsWithCorrectLanguage(paintings, paintingParams);
 
             if (paintingParams.Name != string.Empty)
             {
@@ -99,7 +99,7 @@ namespace PS.API.Data
             //var painting = await this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
             var painting = this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).AsQueryable();
 
-            painting = GetPaintingsWithSeletedLanguage(painting, paintingParams);
+            painting = SelectPaintingsWithCorrectLanguage(painting, paintingParams);
 
             return await painting.FirstOrDefaultAsync(p => p.Id == id);
         }
@@ -196,7 +196,7 @@ namespace PS.API.Data
             }
         }
 
-        private IQueryable<Painting> GetPaintingsWithSeletedLanguage(IQueryable<Painting> paintings, PaintingParams paintingParams)
+        private IQueryable<Painting> SelectPaintingsWithCorrectLanguage(IQueryable<Painting> paintings, PaintingParams paintingParams)
         {
             var currentLanguage = paintingParams?.Language.ToLower();
 

@@ -19,7 +19,7 @@ export class EventsAddComponent implements OnInit {
   nameMinLen: number = 5;
   nameMaxLen: number = 50;
   textMinLen: number = 300;
-  
+
   constructor(
     private toast: ToastService,
     private eventService: EventService) {
@@ -32,10 +32,10 @@ export class EventsAddComponent implements OnInit {
       text: new FormControl('', [Validators.required(), Validators.minLength(this.textMinLen)]),
       nameGb: new FormControl('', [FormValidators.required, FormValidators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
       textGb: new FormControl('', [Validators.required(), Validators.minLength(this.textMinLen)]),
-       nameDe: new FormControl('', [FormValidators.required, FormValidators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
-       textDe: new FormControl('', [Validators.required(), Validators.minLength(this.textMinLen)]),      
-         nameRu: new FormControl('', [FormValidators.required, FormValidators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
-      textRu: new FormControl('', [Validators.required(), Validators.minLength(this.textMinLen)]),      
+      nameDe: new FormControl('', [FormValidators.required, FormValidators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
+      textDe: new FormControl('', [Validators.required(), Validators.minLength(this.textMinLen)]),
+      nameRu: new FormControl('', [FormValidators.required, FormValidators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
+      textRu: new FormControl('', [Validators.required(), Validators.minLength(this.textMinLen)]),
       //description: new FormControl('', [FormValidators.required, FormValidators.minLength(10), FormValidators.maxLength(200)]),
     });
   }

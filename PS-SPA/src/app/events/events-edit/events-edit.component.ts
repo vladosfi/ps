@@ -1,5 +1,5 @@
-import { Component, HostListener, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { Validators as FormValidators, FormControl, FormGroup, NgForm } from "@angular/forms";
+import { Component, OnInit } from "@angular/core";
+import { Validators as FormValidators, FormControl, FormGroup } from "@angular/forms";
 import { ActivatedRoute } from '@angular/router';
 import { Validators, Editor, Toolbar } from "ngx-editor";
 import { IEvent } from "src/app/shared/_interfaces/event";
@@ -11,18 +11,13 @@ import { EventService } from '../event.service';
   templateUrl: './events-edit.component.html',
   styleUrls: ['./events-edit.component.css']
 })
-export class EventsEditComponent implements OnInit, OnDestroy {
-  @ViewChild('editForm') editForm: NgForm;
-  editor: Editor;
+export class EventsEditComponent implements OnInit {
   html: string = '';
   parentForm: FormGroup;
   currentEvent: IEvent;
-  @HostListener('window:beforeunload', ['$event'])
-    uloadNotification($event: any) {
-    if (this.editForm.dirty) {
-      $event.returnValue = true;
-    }
-  }
+  nameMinLen: number = 5;
+  nameMaxLen: number = 50;
+  textMinLen: number = 300;
 
   constructor(private route: ActivatedRoute,
     private eventService: EventService,
@@ -31,18 +26,22 @@ export class EventsEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-      this.currentEvent = Object.assign({}, data.events);           
+      this.currentEvent = Object.assign({}, data.events);
     });
-    
-    this.editor = new Editor();
+
 
     this.parentForm = new FormGroup({
-      name: new FormControl(this.currentEvent.name, [FormValidators.required, FormValidators.minLength(2), Validators.maxLength(50)]),
-      text: new FormControl(this.currentEvent.text, [Validators.required(), Validators.minLength(300)]),
-      // description: new FormControl('', [FormValidators.required, FormValidators.minLength(10), FormValidators.maxLength(200)]),
+      name: new FormControl(this.currentEvent.name, [FormValidators.required, FormValidators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
+      text: new FormControl(this.currentEvent.text, [Validators.required(), Validators.minLength(this.textMinLen)]),
+      nameGb: new FormControl(this.currentEvent.nameGb, [FormValidators.required, FormValidators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
+      textGb: new FormControl(this.currentEvent.textGb, [Validators.required(), Validators.minLength(this.textMinLen)]),
+      nameDe: new FormControl(this.currentEvent.nameDe, [FormValidators.required, FormValidators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
+      textDe: new FormControl(this.currentEvent.textDe, [Validators.required(), Validators.minLength(this.textMinLen)]),
+      nameRu: new FormControl(this.currentEvent.nameRu, [FormValidators.required, FormValidators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
+      textRu: new FormControl(this.currentEvent.textRu, [Validators.required(), Validators.minLength(this.textMinLen)])
     });
 
-    
+
   }
 
   editEvent() {
@@ -54,7 +53,7 @@ export class EventsEditComponent implements OnInit, OnDestroy {
           if (response === null) {
             //this.event = Object.assign({}, response);
             this.toast.success('Event added successfully');
-            this.editForm.reset(this.currentEvent);
+            this.parentForm.reset(this.currentEvent);
             // this.router.navigate(['/events/' + this.currentEvent.id]);            
           }
         },
@@ -63,10 +62,8 @@ export class EventsEditComponent implements OnInit, OnDestroy {
         }
       );
     }
-  }
-
-  // make sure to destory the editor
-  ngOnDestroy(): void {
-    this.editor.destroy();
+    else{
+      this.toast.warning('Invalid form data!');
+    }
   }
 }

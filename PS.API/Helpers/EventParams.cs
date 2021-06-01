@@ -11,5 +11,6 @@ namespace PS.API.Helpers
             get { return pageSize; }
             set { pageSize = (value > MaxPageSize) ? MaxPageSize : value; }
         }
+        public string Language { get; set; }
     }
 }

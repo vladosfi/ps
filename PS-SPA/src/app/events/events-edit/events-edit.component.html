@@ -12,41 +12,27 @@
       </div>
   
       <form [formGroup]="parentForm">
-        <div class="row">
-          <div class="col-sm">
-            <div class="form-group">
-              <input type="text" [ngClass]="{
-                'is-invalid':
-                parentForm.get('name').errors &&
-                parentForm.get('name').touched,
-                'is-valid':
-                  !parentForm.get('name').errors &&
-                  parentForm.get('name').statusChanges
-              }" class="form-control" formControlName="name" placeholder="Enter a name for event" />
-              <div class="valid-feedback"></div>
-              <div class="invalid-feedback" *ngIf="
-                parentForm.get('name').hasError('required') &&
-                parentForm.get('name').touched
-              ">
-                Please enter a name for painting
-              </div>
-              <div class="invalid-feedback" *ngIf="
-                parentForm.get('name').hasError('minlength') ||
-                (parentForm.get('name').hasError('maxlength') &&
-                  parentForm.get('name').touched)
-              ">
-                Please enter a name between 2 and 50 characters
-              </div>
-            </div>
-          </div>
-        </div>
-  
         <!-- <div class="NgxEditor__Wrapper mb-5 form-group">
           <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
           <ngx-editor [editor]="editor" [(ngModel)]="html" formControlName="editorContent"></ngx-editor>
         </div> -->
   
-        <app-editor [parentForm]="parentForm"></app-editor>
+        <h4>Български</h4>
+        <app-input-name [parentForm]="parentForm" [inputName]="'name'"></app-input-name>
+        <app-editor [parentForm]="parentForm" [conrolName]="'text'"></app-editor>
+  
+        <h4>Английски</h4> 
+        <app-input-name [parentForm]="parentForm" [inputName]="'nameGb'"></app-input-name>
+        <app-editor [parentForm]="parentForm"  [conrolName]="'textGb'"></app-editor>
+  
+        <h4>Немски</h4> 
+        <app-input-name [parentForm]="parentForm" [inputName]="'nameDe'"></app-input-name>
+        <app-editor [parentForm]="parentForm"  [conrolName]="'textDe'"></app-editor>
+  
+        <h4>Руски</h4> 
+        <app-input-name [parentForm]="parentForm" [inputName]="'nameRu'"></app-input-name>
+        <app-editor [parentForm]="parentForm"  [conrolName]="'textRu'"></app-editor>
+
         <app-image-uploader *ngIf="currentEvent?.id" [event]="currentEvent"></app-image-uploader>
         <!-- <app-photo-editor [photos]="user.photos" (getMemberPhotoChange)="updateMainPhoto($event)"></app-photo-editor> -->
       </form>

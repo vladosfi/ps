@@ -55,10 +55,12 @@ namespace PS.API.Controllers
         public async Task<IActionResult> GetEvents([FromQuery] EventParams eventParams)
         {
             var eventsFromRepo = await this.repo.GetEvents(eventParams);
-            var eventsToReturn = this.mapper.Map<IEnumerable<EventsForListDto>>(eventsFromRepo);
 
-            if (eventsToReturn != null)
+            IEnumerable<EventsForListDto> eventsToReturn;
+            if (eventsFromRepo != null)
             {
+                eventsToReturn = this.mapper.Map<IEnumerable<EventsForListDto>>(eventsFromRepo);
+
                 Response.AddPagination(eventsFromRepo.CurrentPage, eventsFromRepo.PageSize, eventsFromRepo.TotalCount, eventsFromRepo.TotalPages);
                 return Ok(eventsToReturn);
             }
@@ -68,9 +70,9 @@ namespace PS.API.Controllers
 
         [HttpGet]
         [Route("Latest")]
-        public async Task<IActionResult> GetLatestEvents()
+        public async Task<IActionResult> GetLatestEvents([FromQuery] EventParams eventParams)
         {
-            var eventsFromRepo = await this.repo.GetLatestEvents();
+            var eventsFromRepo = await this.repo.GetLatestEvents(eventParams);
             var eventsToReturn = this.mapper.Map<IEnumerable<EventsLatestDto>>(eventsFromRepo);
 
             if (eventsToReturn != null)
@@ -83,9 +85,9 @@ namespace PS.API.Controllers
 
 
         [HttpGet("{eventId}")]
-        public async Task<IActionResult> GetEventById(int eventId)
+        public async Task<IActionResult> GetEventById(int eventId, [FromQuery] EventParams eventParams)
         {
-            var eventFromRepo = await this.repo.GetEventById(eventId);
+            var eventFromRepo = await this.repo.GetEventById(eventId, eventParams);
             var eventToReturn = this.mapper.Map<EventDetailsDto>(eventFromRepo);
 
             if (eventToReturn != null)
@@ -310,5 +312,8 @@ namespace PS.API.Controllers
 
             return BadRequest(failedToDeleteImage);
         }
+
+
+
     }
 }

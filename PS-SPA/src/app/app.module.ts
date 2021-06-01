@@ -33,8 +33,6 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ListsComponent } from './lists/lists.component';
-import { ListsResolver } from './_resolvers/lists.resolver';
 import { HomeComponent } from './home/home.component';
 import { PaintingListComponent } from './paintings/painting-list/painting-list.component';
 import { ThumbComponent } from './paintings/thumb/thumb.component';
@@ -69,7 +67,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     DetailComponent,
     DetailEditComponent,
     PhotoEditorComponent,
-    ListsComponent,
     HomeComponent,
     PaintingListComponent,
     ThumbComponent,
@@ -123,7 +120,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MembersResolver,
     DetailEditResolver,
     PreventUnsavedChanges,
-    ListsResolver,
     PaintingsResolver,
     PaintingResolver,
     PaintingEditResolver,

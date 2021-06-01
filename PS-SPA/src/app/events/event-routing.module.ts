@@ -6,7 +6,7 @@ import { EventsResolver } from './_resolvers/events.resolver';
 import { EventsEditComponent } from './events-edit/events-edit.component';
 import { EventDetailsResolver } from './_resolvers/event-details.resolver';
 import { EventEditResolver } from './_resolvers/event-edit.resolver';
-import { PreventUnsavedChanges } from '../_guards/prevent-unsaved-changes';
+import { PreventUnsavedChangesForEvents } from '../_guards/prevent-unsaved-changes';
 import { AuthGuard } from '../_guards/auth.guard';
 
 const routes: Routes = [
@@ -26,7 +26,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         component: EventsEditComponent,
         resolve: { events: EventEditResolver },
-        canDeactivate: [PreventUnsavedChanges]
+        canDeactivate: [PreventUnsavedChangesForEvents]
     },
     {
         path: ':id',

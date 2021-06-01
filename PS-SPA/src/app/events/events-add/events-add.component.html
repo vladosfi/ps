@@ -5,27 +5,26 @@
     <!-- <p>Form Status: {{ eventModel.status | json }}</p> -->
 
     <hr />
-    <!-- Bulgarian -->
+    
     <form [formGroup]="parentForm">
-
       <!-- <div class="NgxEditor__Wrapper mb-5 form-group">
         <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
         <ngx-editor [editor]="editor" [(ngModel)]="html" formControlName="editorContent"></ngx-editor>
       </div> -->
 
-      <label>Български</label> 
+      <h4>Български</h4> 
       <app-input-name [parentForm]="parentForm" [inputName]="'name'"></app-input-name>
       <app-editor [parentForm]="parentForm" [conrolName]="'text'"></app-editor>
 
-      <label>Английски</label> 
+      <h4>Английски</h4> 
       <app-input-name [parentForm]="parentForm" [inputName]="'nameGb'"></app-input-name>
       <app-editor [parentForm]="parentForm"  [conrolName]="'textGb'"></app-editor>
 
-      <label>Немски</label> 
+      <h4>Немски</h4> 
       <app-input-name [parentForm]="parentForm" [inputName]="'nameDe'"></app-input-name>
       <app-editor [parentForm]="parentForm"  [conrolName]="'textDe'"></app-editor>
 
-      <label>Руски</label> 
+      <h4>Руски</h4> 
       <app-input-name [parentForm]="parentForm" [inputName]="'nameRu'"></app-input-name>
       <app-editor [parentForm]="parentForm"  [conrolName]="'textRu'"></app-editor>
       
@@ -33,8 +32,6 @@
       
       <app-image-uploader *ngIf="event?.id" [event]="event"></app-image-uploader>
     </form>
-    <!-- Bulgarian End-->
-
 
 
     <div *ngIf="event?.id == null" class="form-group text-center">

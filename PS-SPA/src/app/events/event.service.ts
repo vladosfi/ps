@@ -16,7 +16,7 @@ export class EventService {
     private authService: AuthService
   ) { }
 
-  getEvents(page?, itemsPerPage?, eventParams?): Observable<PaginatedResult<IEvent[]>>  {
+  getEvents(page?, itemsPerPage?, eventParams?): Observable<PaginatedResult<IEvent[]>> {
 
     const paginatedResult: PaginatedResult<IEvent[]> = new PaginatedResult<IEvent[]>();
     let params = new HttpParams();
@@ -25,6 +25,8 @@ export class EventService {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
+
+    params = params.append('language', localStorage.getItem('currentLang'));
 
     return this.http.get<IEvent[]>(this.baseUrl + 'events', { observe: 'response', params })
       .pipe(
@@ -37,23 +39,40 @@ export class EventService {
         }));
   }
 
-  getLatestEvents(): Observable<IEvent[]>{
+  getLatestEvents(): Observable<IEvent[]> {
     let latestEvents: IEvent[];
+    let params = new HttpParams();
+    params = params.append('language', localStorage.getItem('currentLang'));
 
-    return this.http.get<IEvent[]>(this.baseUrl + 'events/latest', { observe: 'response' })
-    .pipe(
-      map(response => {
-        latestEvents = response.body;
-        return latestEvents;
-      }));
+    return this.http.get<IEvent[]>(this.baseUrl + 'events/latest', { observe: 'response', params })
+      .pipe(
+        map(response => {
+          latestEvents = response.body;
+          return latestEvents;
+        }));
   }
 
-  getEventById(id: string): Observable<IEvent>{
-    return this.http.get<IEvent>(this.baseUrl + 'events/' + id, { observe: 'response' })
-    .pipe(
-      map(response => {;
-        return response.body;
-      }));
+  getEventByIdForCurrentLanguage(id: string): Observable<IEvent> {
+    let params = new HttpParams();
+    params = params.append('language', localStorage.getItem('currentLang'));
+    
+    return this.http.get<IEvent>(this.baseUrl + 'events/' + id, { observe: 'response', params  })
+      .pipe(
+        map(response => {
+          ;
+          return response.body;
+        }));
+  }
+
+  //For All Languages
+  getEventById(id: string): Observable<IEvent> {
+
+    return this.http.get<IEvent>(this.baseUrl + 'events/' + id, { observe: 'response'  })
+      .pipe(
+        map(response => {
+          ;
+          return response.body;
+        }));
   }
 
   addEvent(event: IEvent): any {

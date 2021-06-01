@@ -20,17 +20,24 @@ namespace PS.API.Data
             this.repo = repo;
         }
 
-        public async Task<ICollection<Event>> GetLatestEvents()
+        public async Task<ICollection<Event>> GetLatestEvents(EventParams eventParams)
         {
-            return await this.context.Events.Include(e => e.Images).OrderByDescending(e => e.CreatedOn).Take(latestEvents).ToListAsync();
+            var events = this.context.Events.Include(e => e.Images).OrderByDescending(e => e.CreatedOn).Take(latestEvents).AsQueryable();
+
+            events = SelectEventsWithCorrectLanguage(events, eventParams);
+
+            return await events.ToListAsync();
         }
 
         public async Task<PagedList<Event>> GetEvents(EventParams eventParams)
         {
             var events = this.context.Events.Include(e => e.Images).OrderByDescending(e => e.CreatedOn).AsQueryable();
 
+            events = SelectEventsWithCorrectLanguage(events, eventParams);
+
             return await PagedList<Event>.CreateAsync(events, eventParams.PageNumber, eventParams.PageSize);
         }
+
 
         public async Task<EventImage> GetMainImageForEvent(int eventId)
         {
@@ -43,10 +50,18 @@ namespace PS.API.Data
             return image;
         }
 
-        public async Task<Event> GetEventById(int id)
+        public async Task<Event> GetEventById(int id, EventParams eventParams)
         {
-            var eventEntity = await this.context.Events.Include(p => p.Images).FirstOrDefaultAsync(e => e.Id == id);
-            return eventEntity;
+            if (eventParams?.Language == null)
+            {
+                return await this.context.Events.Include(p => p.Images).FirstOrDefaultAsync(e => e.Id == id);
+            }
+
+            var eventEntity = this.context.Events.Include(p => p.Images).AsQueryable();
+            eventEntity = SelectEventsWithCorrectLanguage(eventEntity, eventParams);
+            var eventToReturnEntity = await eventEntity.FirstOrDefaultAsync(e => e.Id == id);
+
+            return eventToReturnEntity;
         }
 
         public async Task IncreaseEventViews(int id)
@@ -68,6 +83,65 @@ namespace PS.API.Data
             return null;
         }
 
+        private IQueryable<Event> SelectEventsWithCorrectLanguage(IQueryable<Event> events, EventParams eventParams)
+        {
+            var currentLanguage = eventParams?.Language.ToLower();
+
+            if (currentLanguage == "bg")
+            {
+                events = events.Select(e => new Event
+                {
+                    Id = e.Id,
+                    Images = e.Images,
+                    CreatedOn = e.CreatedOn,
+                    Author = e.Author,
+                    ViewCount = e.ViewCount,
+                    Name = e.Name,
+                    Text = e.Text,
+                });
+            }
+            else if (currentLanguage == "de")
+            {
+                events = events.Select(e => new Event
+                {
+                    Id = e.Id,
+                    Images = e.Images,
+                    CreatedOn = e.CreatedOn,
+                    Author = e.Author,
+                    ViewCount = e.ViewCount,
+                    Name = e.NameDe,
+                    Text = e.TextDe,
+                });
+            }
+            else if (currentLanguage == "ru")
+            {
+                events = events.Select(e => new Event
+                {
+                    Id = e.Id,
+                    Images = e.Images,
+                    CreatedOn = e.CreatedOn,
+                    Author = e.Author,
+                    ViewCount = e.ViewCount,
+                    Name = e.NameRu,
+                    Text = e.TextRu,
+                });
+            }
+            else
+            {
+                events = events.Select(e => new Event
+                {
+                    Id = e.Id,
+                    Images = e.Images,
+                    CreatedOn = e.CreatedOn,
+                    Author = e.Author,
+                    ViewCount = e.ViewCount,
+                    Name = e.NameGb,
+                    Text = e.TextGb,
+                });
+            }
+
+            return events;
+        }
 
     }
 }
