@@ -19,7 +19,7 @@ export class DetailResolver implements Resolve<IUser>{
             return this.userService.getUser(Number(route.params['id'])).pipe(
                 catchError(error => {
                     this.toast.error('Problem retreiving data');
-                    this.router.navigate(['/gallery']);
+                    this.router.navigate(['/members']);
                     return of(null);
                 })
             )

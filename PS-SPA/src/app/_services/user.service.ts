@@ -52,7 +52,7 @@ export class UserService {
         }));
   }
 
-  getUser(id: number) {
+  getUser(id: number) {            
     return this.http.get(this.baseUrl + 'users/' + id);
   }
 

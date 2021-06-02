@@ -21,7 +21,7 @@ export class DetailEditResolver implements Resolve<IUser>{
             return this.userService.getUser(this.authService.decodedToken.nameid).pipe(
                 catchError(error => {
                     this.toast.error('Problem retreiving your data');
-                    this.router.navigate(['/gallery']);
+                    this.router.navigate(['/members']);
                     return of(null);
                 })
             )

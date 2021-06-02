@@ -66,7 +66,7 @@ export class NavComponent implements OnInit {
     document.documentElement.lang = lang;
     //this.router.navigate(['/home']);
     //window.location.reload();
-    window.location.href = window.location.href;
+    //window.location.href = window.location.href;
   }
 
   logout() {

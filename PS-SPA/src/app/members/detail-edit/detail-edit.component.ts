@@ -9,8 +9,8 @@ import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-detail-edit',
-  templateUrl: './gallery-detail-edit.component.html',
-  styleUrls: ['./gallery-detail-edit.component.css']
+  templateUrl: './detail-edit.component.html',
+  styleUrls: ['./detail-edit.component.css']
 })
 export class DetailEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;

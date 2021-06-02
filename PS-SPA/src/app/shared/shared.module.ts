@@ -9,6 +9,7 @@ import { ImageUploaderComponent } from './components/image-uploader/image-upload
 import { FileUploadModule } from 'ng2-file-upload';
 import { ImageService } from './_service/image.service';
 import { InputNameComponent } from './components/input-name/input-name.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { InputNameComponent } from './components/input-name/input-name.component
     EditorComponent,
     ImageUploaderComponent,
     InputNameComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import { InputNameComponent } from './components/input-name/input-name.component
     EditorComponent,
     InputNameComponent,
     ImageUploaderComponent,
+    LoaderComponent
   ]
 })
 export class SharedModule {

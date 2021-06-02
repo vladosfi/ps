@@ -1,12 +1,5 @@
 import { Routes } from '@angular/router';
-import { MembersComponent } from './gallery/members/members.component';
 import { AuthGuard } from './_guards/auth.guard';
-import { DetailResolver } from './_resolvers/detail.resolver';
-import { MembersResolver } from './_resolvers/members.resolver';
-import { DetailEditComponent } from './gallery/detail-edit/gallery-detail-edit.component';
-import { DetailEditResolver } from './_resolvers/detail-edit.resolver';
-import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes';
-import { DetailComponent } from './gallery/detail/detail.component';
 import { HomeComponent } from './home/home.component';
 import { PaintingListComponent } from './paintings/painting-list/painting-list.component';
 import { PaintingsResolver } from './_resolvers/paintings.resolver';
@@ -19,25 +12,6 @@ import { PaintingEditComponent } from './paintings/edit/edit.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent }, //home
-    {
-        path: '',
-        runGuardsAndResolvers: 'always',
-        canActivate: [AuthGuard],
-        children: [
-            {
-                path: 'members', component: MembersComponent,
-                resolve: { users: MembersResolver }
-            },
-            {
-                path: 'gallery/:id', component: DetailComponent,
-                resolve: { user: DetailResolver }
-            },
-            {
-                path: 'gallery-detail-edit', component: DetailEditComponent,
-                resolve: { user: DetailEditResolver }, canDeactivate: [PreventUnsavedChanges]
-            },
-        ]
-    },
     {
         path: '',
         children: [
@@ -71,6 +45,10 @@ export const appRoutes: Routes = [
     {
         path: 'start',
         loadChildren: () => import('./start/start.module').then(m => m.StartModule)
+    },
+    {
+        path: 'members',
+        loadChildren: () => import('./members/members.module').then(m => m.MembersModule)
     },
     {
         path: 'admin',
