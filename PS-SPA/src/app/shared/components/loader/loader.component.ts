@@ -14,7 +14,4 @@ export class LoaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-  //https://www.amadousall.com/angular-routing-how-to-display-a-loading-indicator-when-navigating-between-routes/
-  //<!-- <app-loader [isLoading]="!paintings"></app-loader> -->
 }
