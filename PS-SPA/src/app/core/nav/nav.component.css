@@ -1,3 +1,7 @@
+nav {
+    z-index: 20;
+}
+
 nav a {
     color: #21539C;
     font-size: large;
@@ -53,6 +57,10 @@ ul>div>span>img {
 .nav-link:hover {
     background-color: #21539C;
     color: white;
+}
+
+nav.navbar.navbar-expand-md.navbar-dark.bg-dark{
+    z-index: 30;
 }
 
 

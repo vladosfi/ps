@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AppComponent } from './app.component';
 import { AuthService } from './_services/auth.service';
-import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { ErrorInterceptorProvider } from './_interceptors/error.interceptor';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -39,6 +39,8 @@ import { ModalWindowService } from './shared/_service/modal-window.service';
 import { SharedModule } from './shared/shared.module';
 import { NgxEditorModule } from 'ngx-editor';
 import { PaintingEditResolver } from './_resolvers/painting-edit.resolver';
+import { LoaderInterceptor } from './_interceptors/loader-interceptor';
+import { LoaderService } from './_services/loader.service';
 
 
 export function tokenGetter() {
@@ -107,6 +109,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PaintingEditResolver,
     ModalWindowService,
     TranslateService,
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
   exports: [
   ],

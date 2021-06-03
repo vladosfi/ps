@@ -18,7 +18,7 @@ import {
 })
 export class AppComponent implements OnInit {
   jwtHelper = new JwtHelperService();
-
+  title = "PS"
   loading = false;
   
   constructor(private authService: AuthService,private router: Router) { 

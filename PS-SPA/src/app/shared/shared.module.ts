@@ -33,7 +33,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     EditorComponent,
     InputNameComponent,
     ImageUploaderComponent,
-    LoaderComponent
+    LoaderComponent,
   ]
 })
 export class SharedModule {
