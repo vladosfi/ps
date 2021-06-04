@@ -62,7 +62,7 @@ namespace PS.API.Controllers
 
             return Ok(pantingsToReturn);
         }
-        
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPainting(string id, [FromQuery] PaintingParams paintingParams)
@@ -253,17 +253,20 @@ namespace PS.API.Controllers
             thumbnailImage = Path.Combine(thumbnailImage, thumbnailFolder);
             thumbnailImage = Path.Combine(thumbnailImage, imageFromRepo.ImageFileName);
 
-            if (System.IO.File.Exists(imagePath) && System.IO.File.Exists(thumbnailImage))
+            if (System.IO.File.Exists(imagePath))
             {
                 System.IO.File.Delete(imagePath);
+            }
+            if (System.IO.File.Exists(thumbnailImage))
+            {
                 System.IO.File.Delete(thumbnailImage);
+            }
+            
+            this.repo.Delete(imageFromRepo);
 
-                this.repo.Delete(imageFromRepo);
-
-                if (await this.repo.SaveAll())
-                {
-                    return Ok();
-                }
+            if (await this.repo.SaveAll())
+            {
+                return Ok();
             }
 
             return BadRequest(failedToDeleteImage);

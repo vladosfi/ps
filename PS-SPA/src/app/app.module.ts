@@ -41,6 +41,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { PaintingEditResolver } from './_resolvers/painting-edit.resolver';
 import { LoaderInterceptor } from './_interceptors/loader-interceptor';
 import { LoaderService } from './_services/loader.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 export function tokenGetter() {
@@ -83,6 +84,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     CollapseModule.forRoot(),
     PaginationModule.forRoot(),
+    InfiniteScrollModule,
     TimeagoModule.forRoot(),
     TabsModule.forRoot(),
     ButtonsModule.forRoot(),

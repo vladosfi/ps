@@ -88,11 +88,4 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
     document.body.style.backgroundColor = "#ffffff";
   }
 
-  search() {
-    //this.paintingService.getPaintings(this.route.snapshot.params.name);
-    // this.paintingParams.searchText;
-    // console.log(this.paintingParams.searchText);
-  }
-
-
 }

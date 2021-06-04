@@ -12,7 +12,7 @@ namespace PS.API.Helpers
             this.CurrentPage = currentPage;
             this.ItemsPerPage = itemsPerPage;
             this.TotalItems = totalItems;
-            this.TotalPages = TotalPages;
+            this.TotalPages = totalPages;
         }
     }
 }

@@ -1,35 +1,44 @@
 <div class="container mt-4 mb-5">
-  <div class="btn-group mb-3">
-    
+  <div class="row d-flex justify-content-between">
+  <div class="btn-group mb-3">    
     <label class="btn btn-info mr-1" uncheckable  [(ngModel)]="this.paintingParams.categoryId"
-           btnRadio="1" tabindex="0" role="button"  (click)="loadPaintings();">{{ "GALLERY.CATEGORY-MIX" | translate }}</label>
+           btnRadio="1" tabindex="0" role="button"  (click)="filterPaintings();">{{ "GALLERY.CATEGORY-MIX" | translate }}</label>
     <label class="btn btn-info mr-1" uncheckable  [(ngModel)]="this.paintingParams.categoryId"
-           btnRadio="2" tabindex="0" role="button" (click)="loadPaintings();">{{ "GALLERY.CATEGORY-SEA" | translate }}</label>
+           btnRadio="2" tabindex="0" role="button" (click)="filterPaintings();">{{ "GALLERY.CATEGORY-SEA" | translate }}</label>
     <label class="btn btn-info" uncheckable  [(ngModel)]="this.paintingParams.categoryId"
-           btnRadio="3" tabindex="0" role="button" (click)="loadPaintings();">{{ "GALLERY.CATEGORY-MARINE" | translate }}</label>
+           btnRadio="3" tabindex="0" role="button" (click)="filterPaintings();">{{ "GALLERY.CATEGORY-MARINE" | translate }}</label>
   </div>
   
-  <div class="btn-group ml-5 mb-3">
+  <div class="btn-group mb-3">
     <label class="btn btn-info mr-1" uncheckable  [(ngModel)]="this.paintingParams.available"
-           btnRadio="true" tabindex="0" role="button"  (click)="loadPaintings();">{{ "GENERAL.AVAILABLE" | translate }}</label>
+           btnRadio="true" tabindex="0" role="button"  (click)="filterPaintings();">{{ "GENERAL.AVAILABLE" | translate }}</label>
     <label class="btn btn-info" uncheckable  [(ngModel)]="this.paintingParams.available"
-           btnRadio="false" tabindex="0" role="button" (click)="loadPaintings();">{{ "GENERAL.UNAVAILABLE" | translate }}</label>
-  </div>
-
-
-  <div class="row d-flex justify-content-center">
-    <div *ngFor="let painting of paintings" class="col-lg-3 col-md-3 col-sm-6" (click)="getPainting(painting.id); ">
-      <app-thumb [paintingSource]="painting"></app-thumb>
-    </div>
+           btnRadio="false" tabindex="0" role="button" (click)="filterPaintings();">{{ "GENERAL.UNAVAILABLE" | translate }}</label>
   </div>
 </div>
 
-<div class="d-flex justify-content-center">
+
+  <div class="row d-flex justify-content-center mt-5">
+    <div *ngFor="let painting of paintings" class="col-lg-3 col-md-3 col-sm-6" (click)="getPainting(painting.id); ">
+      <app-thumb [paintingSource]="painting"></app-thumb>
+    </div>
+
+    <div
+      class="search-results"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="1000"
+      (scrolled)="onScroll()"
+    ></div>
+  </div>
+</div>
+
+<!-- <div class="d-flex justify-content-center">
   <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
     [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
     firstText="&laquo;" lastText="&raquo;">
   </pagination>
-</div>
+</div> -->
 
 <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
   <div class="modal-dialog modal-lg">
@@ -55,7 +64,7 @@
           <!-- <div class="col-8">
             <img class="img-fluid mx-auto d-block" src="{{paintingModal?.url}}/{{paintingModal?.imageFileName}}" alt="{{paintingModal?.name}}">
           </div> -->
-          <div class="col-lg-8 col-md-12">
+          <div class="col-lg-8 col-md-12 col-sm-12">
             <ngx-gallery
               [options]="galleryOptions"
               [images]="galleryImages"
@@ -64,7 +73,7 @@
           <div class="col-lg-4 col-md-12">
             <div class="row justify-content-start">
               <div class="col-12">
-                <h1>{{paintingModal?.name}}</h1>
+                <h2>{{paintingModal?.name}}</h2>
                 
                 <p><span class="bolded">{{ "GENERAL.SIZE" | translate }}:</span> {{paintingModal?.sizeY}} x {{paintingModal?.sizeX}} cm / {{paintingModal?.sizeYIn}} x {{paintingModal?.sizeXIn}} inches</p>
                 <p *ngIf="paintingModal?.category == 'mixed'"><span class="bolded">{{ "GENERAL.TECHNIQUE" | translate }}: </span> {{ "GALLERY.CATEGORY-MIX" | translate }}</p>

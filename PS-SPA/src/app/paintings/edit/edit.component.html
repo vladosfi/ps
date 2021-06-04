@@ -1,5 +1,6 @@
 <div class="container">
     <form class="mb-5" [formGroup]="paintingModel" (ngSubmit)="updatePainting()">
+      <a [routerLink]="['/admin']"><i class="fa fa-arrow-left"></i> Back to Admin page</a>
       <h2 class="text-center text-primary">Edit Painting</h2>
       
       <hr />

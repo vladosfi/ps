@@ -21,8 +21,6 @@ h1, h2, h3, h4, h5, h6, p {
   font-family: "Lucida Grande Regular", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif !important;
 }
 
-
-
 /* app-painting-list */
 .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle,
 .btn-primary:not(:disabled):not(.disabled).focus, .btn-primary:not(:disabled):not(.disabled):focus, .show>.btn-primary.dropdown-toggle,
