@@ -4,3 +4,4 @@ PS.API/PB.db-wal
 bin
 wwwroot
 images
+environment.prod.ts
