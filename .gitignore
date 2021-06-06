@@ -5,3 +5,4 @@ bin
 wwwroot
 images
 environment.prod.ts
+/PS-SPA/src/environments/environment.prod.ts

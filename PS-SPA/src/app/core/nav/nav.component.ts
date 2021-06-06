@@ -3,7 +3,7 @@ import { ToastService } from '../../_services/toast.service';
 import { AuthService } from '../../_services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { getLocale } from 'ngx-bootstrap/chronos';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-nav',
@@ -16,13 +16,15 @@ export class NavComponent implements OnInit {
   selectedLanguage: string;
   languagesToShow: any;
   isCollapsed = true;
+  public declarativeFormCaptchaValue: string;
 
   constructor(
     public authService: AuthService,
     private toast: ToastService,
     public router: Router,
     public translate: TranslateService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private titleService: Title,
   ) { 
     translate.addLangs(['gb', 'bg', 'ru', 'de']);
     translate.setDefaultLang('gb');
@@ -36,7 +38,9 @@ export class NavComponent implements OnInit {
     translate.use(browserLang.match(/gb|bg|ru|de/) ? browserLang : 'gb');
     this.selectedLanguage = browserLang;
     this.languagesToShow = translate.getLangs().filter(l => l !== this.selectedLanguage);
-    this.renderer.setAttribute(document.querySelector('html'), 'lang', this.selectedLanguage);
+    this.renderer.setAttribute(document.querySelector('html'), 'lang', this.selectedLanguage);    
+
+    this.setSiteTitle();
   }
 
   ngOnInit() {
@@ -67,6 +71,7 @@ export class NavComponent implements OnInit {
     //this.router.navigate(['/home']);
     //window.location.reload();
     //window.location.href = window.location.href;
+    this.setSiteTitle();
   }
 
   logout() {
@@ -76,5 +81,14 @@ export class NavComponent implements OnInit {
     this.authService.decodedToken = null;
     this.authService.currentUser = null;
     this.router.navigate(['/home']);
+  }
+
+  public setSiteTitle() {
+    //console.log(this.translate.instant('GENERAL.TITLE'));
+
+    this.translate.get('GENERAL.TITLE').subscribe( (newTitle: string) => {
+      this.titleService.setTitle(newTitle);
+    });
+    
   }
 }
