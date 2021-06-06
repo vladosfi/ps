@@ -109,6 +109,13 @@ ngx-gallery /deep/ ngx-gallery-image .ngx-gallery-arrow {
   } */
 
 
+/* Small devices (landscape phones, 200px and up) */
+@media (min-width: 200px) {
+    .modal-dialog {
+      max-width: 95%;
+    }
+  }
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   .modal-dialog {

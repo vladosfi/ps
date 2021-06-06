@@ -149,10 +149,15 @@ export class PaintingListComponent implements OnInit, OnDestroy, DoCheck {
   }
 
   onScroll() {
+    
+    if(this.pagination.currentPage > this.pagination.totalPages){
+      return;
+    }
+
     this.pagination.currentPage++;
     this.loadPaintings();
-
     console.log(`scrolled!! ${this.pagination.currentPage}`);
+    
   }
 
   pageChanged(event: any): void {
