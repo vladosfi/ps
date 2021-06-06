@@ -78,7 +78,7 @@ namespace PS.API
                 });
             }
 
-            app.UseStaticFiles();
+
 
             //app.UseHttpsRedirection();
 
@@ -87,6 +87,7 @@ namespace PS.API
 
 
             app.UseRouting();
+            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -95,11 +96,12 @@ namespace PS.API
                 endpoints.MapControllerRoute("bs", "api/", new { controller = "Photos", action = "GetPhoto" });
                 endpoints.MapControllers();
 
-                // endpoints.MapControllerRoute(
-                //     name: "spa-fallback",
-                //     pattern: "{controller=Fallback}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Fallback", action = "Index"},
+                    pattern: "{controller=Fallback}/{action=Index}/{id?}");
 
-                // endpoints.MapFallbackToController("Index", "Fallback");
+                endpoints.MapFallbackToController("Index", "Fallback");
 
             });
         }

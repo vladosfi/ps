@@ -1,11 +1,6 @@
 {
-    "NAV": {
-        "HOME": "Anfang",
-        "EVENTS": "Ereignisse",
-        "CONTACTS": "Kontakte",
-        "GALLERY": "Galerie"
-    },
     "GENERAL": {
+        "TITLE": "Мariya Maneva – Miriyam: Wandbild mit Meeresmotiven, Meeresmosaik, Gemischte Technik",
         "AVAILABLE": "Verfügbar",
         "UNAVAILABLE": "Nicht mehr verfuegbar",
         "TECHNIQUE": "Technik",
@@ -15,6 +10,12 @@
         "INTRO-HEADER": "Hallo Freunde!",
         "INTRO-P1": "Hier können Sie meine Kunst genießen. Das ist eine Magie, eine Leidenschaft, eine unglaubliche Liebe zu den Meeresmuscheln und– Steinen.  Dies ist ein Genuß der unterschiedlichsten Formen und Farben. Ein Abenteur vor der Majestät der Natur. Meine Freude von den langen Spaziergängen entlang der Meeresküste. Meine Geduld und hartnäckige Arbeit. Und zum Schluß kommt das Vergnügen von dem Entstehen eines neuen Gemäldes, das von den Meereswellen erschaffen wurde.",
         "INTRO-P2": "Aber das vollkommene Glück kommt dann, wenn das, was ich mache, Ihnen gefällt. Danke schön für Ihren Besuch!"
+    },
+    "NAV": {
+        "HOME": "Anfang",
+        "EVENTS": "Ereignisse",
+        "CONTACTS": "Kontakte",
+        "GALLERY": "Galerie"
     },
     "HOME": {
         "INTRO-HEADER": "Hallo Freunde!",

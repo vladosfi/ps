@@ -1,11 +1,6 @@
 {
-  "NAV": {
-    "HOME": "Home",
-    "EVENTS": "Events",
-    "CONTACTS": "Contacts",
-    "GALLERY": "Gallery"
-  },
   "GENERAL": {
+    "TITLE": "Мariya Maneva – Miriyam: Marine-Tthemed Wall Panels, Sea Mosaic, Mixed Tehnique",
     "AVAILABLE": "Available",
     "UNAVAILABLE": "Unavailable",
     "TECHNIQUE": "Technique",
@@ -15,6 +10,12 @@
     "INTRO-HEADER": "Hello friends!",
     "INTRO-P1": "This is where you can enjoy my works of art. It is a little bit of magic, some passion and an amazing love for sea shells and pebbles. Delighting in their varied shapes and colours. A homage to the grandeur of nature. It is my joy of long walks on the beach, a heap of patience and piles of hard work. Finally the pleasure which emerges from a new picture, born from the waves. Complete happiness is when what you like to do is enjoyed by others (like you).",
     "INTRO-P2": "Thank you for stopping by!"
+  },
+  "NAV": {
+    "HOME": "Home",
+    "EVENTS": "Events",
+    "CONTACTS": "Contacts",
+    "GALLERY": "Gallery"
   },
   "HOME": {
     "INTRO-HEADER": "Hello friends!",

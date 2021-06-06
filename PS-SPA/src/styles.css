@@ -101,3 +101,9 @@ app-painting-list a.nav-link,
 app-detail a.nav-link {
   color: #21539C;
 }
+
+
+/* Image Gallery Modal Border */
+.ngx-gallery-image.ngx-gallery-active{
+  border: 1px solid #333333;
+}

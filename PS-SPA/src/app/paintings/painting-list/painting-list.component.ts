@@ -49,13 +49,16 @@ export class PaintingListComponent implements OnInit, OnDestroy, DoCheck {
     // console.log(mainImageIndex);
 
     this.galleryOptions = [{
-      width: '100%',
+      width: '90%',
       height: '80vh',
       imageSize: NgxGalleryImageSize.Contain,
       imageAnimation: NgxGalleryAnimation.Slide,
-      preview: true,
-      thumbnails: true,
-      thumbnailsAutoHide: true,
+      thumbnails: false,
+      preview: false,
+      imageArrowsAutoHide: true,
+      arrowNextIcon: 'fa fa-chevron-right',
+      arrowPrevIcon: 'fa fa-chevron-left'
+      // thumbnailsAutoHide: true,
       //startIndex: mainImageIndex,
       //preview: false,
     },
@@ -65,17 +68,25 @@ export class PaintingListComponent implements OnInit, OnDestroy, DoCheck {
       width: '100%',
       height: '500px',
       imagePercent: 80,
-      thumbnails: true,
-      thumbnailsAutoHide: true,
+      thumbnails: false,
+      preview: false,
+      // thumbnailsAutoHide: true,
+    },
+    // max-width 580
+    {
+      breakpoint: 580,
+      height: '200px',
+      imagePercent: 50,
+      preview: false,
     },
     // max-width 400
     {
       breakpoint: 400,
       height: '300px',
       imagePercent: 50,
-      thumbnails: true,
-      thumbnailsAutoHide: true,
+      thumbnails: false,
       preview: false
+      // thumbnailsAutoHide: true,
     }];
 
     // this.galleryOptions = [{
