@@ -88,4 +88,6 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
     document.body.style.backgroundColor = "#ffffff";
   }
 
+
+
 }

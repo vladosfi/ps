@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
-
+import { BrowserModule, Meta } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,9 @@ import { FormsModule } from '@angular/forms';
     RouterModule,
     CollapseModule,
     TranslateModule.forChild(),
+    BrowserModule,
   ],
+  providers: [Meta],
   exports:[
     NavComponent,
     FooterComponent,
