@@ -88,9 +88,8 @@ namespace PS.API.Controllers
         {
 
             var painting = await this.repo.GetPaintingByIdForEdit(id);
-
+            
             var paintingToReturn = this.mapper.Map<PaintingForEditDetailsDto>(painting);
-
 
             if (paintingToReturn != null)
             {
@@ -261,7 +260,7 @@ namespace PS.API.Controllers
             {
                 System.IO.File.Delete(thumbnailImage);
             }
-            
+
             this.repo.Delete(imageFromRepo);
 
             if (await this.repo.SaveAll())

@@ -72,6 +72,7 @@ export class NavComponent implements OnInit {
     //window.location.reload();
     //window.location.href = window.location.href;
     this.setSiteTitle();
+    window.location.reload();
   }
 
   logout() {

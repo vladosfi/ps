@@ -97,7 +97,7 @@ namespace PS.API.Data
         public async Task<Painting> GetPaintingById(string id, PaintingParams paintingParams)
         {
             //var painting = await this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
-            var painting = this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).AsQueryable();
+            var painting = this.context.Paintings.Include(p => p.Images).Include(c => c.Category).AsQueryable();
 
             painting = SelectPaintingsWithCorrectLanguage(painting, paintingParams);
 

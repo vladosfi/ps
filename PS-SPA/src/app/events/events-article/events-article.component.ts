@@ -13,10 +13,10 @@ export class EventsArticleComponent implements OnInit {
   frontEndUrl = environment.frontEndUrl;
   textContentLength = 250;
   eventUrl: string;
-  language = document.documentElement.lang;
+  currentLanguage = document.documentElement.lang;
+  
 
   constructor() {
-
   }
 
 
@@ -33,8 +33,5 @@ export class EventsArticleComponent implements OnInit {
     else {
       this.eventUrl = this.localhost + this.currentEvent.mainImageUrl + '/' + this.currentEvent.imageFileName;
     }
-
-
   }
-
 }

@@ -45,7 +45,7 @@ export class PaintingListComponent implements OnInit, OnDestroy, DoCheck {
       this.pagination = data['paintings'].pagination;
     });
 
-    // const mainImageIndex = this.paintings.findIndex(i=> i.isMain === true);
+    // const mainImageIndex = this.paintingModal.images.findIndex(i=> i.isMain === true);
     // console.log(mainImageIndex);
 
     this.galleryOptions = [{
@@ -57,9 +57,9 @@ export class PaintingListComponent implements OnInit, OnDestroy, DoCheck {
       preview: false,
       imageArrowsAutoHide: true,
       arrowNextIcon: 'fa fa-chevron-right',
-      arrowPrevIcon: 'fa fa-chevron-left'
-      // thumbnailsAutoHide: true,
+      arrowPrevIcon: 'fa fa-chevron-left',
       //startIndex: mainImageIndex,
+      // thumbnailsAutoHide: true,
       //preview: false,
     },
     // max-width 1300
@@ -85,7 +85,7 @@ export class PaintingListComponent implements OnInit, OnDestroy, DoCheck {
       height: '300px',
       imagePercent: 50,
       thumbnails: false,
-      preview: false
+      preview: false,
       // thumbnailsAutoHide: true,
     }];
 
@@ -105,6 +105,8 @@ export class PaintingListComponent implements OnInit, OnDestroy, DoCheck {
 
   getImages() {
     const imageUrls = [];
+    this.paintingModal.images.sort((a, b) => a.isMain > b.isMain && -1 || 1);
+
     for (let i = 0; i < this.paintingModal.images.length; i++) {
 
       let image = {
@@ -129,6 +131,7 @@ export class PaintingListComponent implements OnInit, OnDestroy, DoCheck {
       this.paintingModal = data;
       this.galleryImages = this.getImages();
 
+      
       const currentImageIndex = this.paintings.map(e => e.id).indexOf(this.paintingModal.id);
       this.paintingModal.sizeXIn = +(this.paintingModal.sizeX * inchesFactor).toFixed(1);
       this.paintingModal.sizeYIn = +(this.paintingModal.sizeY * inchesFactor).toFixed(1);;
@@ -139,7 +142,8 @@ export class PaintingListComponent implements OnInit, OnDestroy, DoCheck {
 
       if (currentImageIndex < this.paintings.length - 1) {
         this.paintingModal.nextImageUrl = this.paintings[currentImageIndex + 1].id;
-      }
+      } 
+
 
       this.paintingModal.url = this.baseUrl + this.paintingModal.url;
       this.lgModal.show();
