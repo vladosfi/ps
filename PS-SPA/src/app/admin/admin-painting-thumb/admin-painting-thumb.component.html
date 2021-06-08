@@ -1,64 +1,46 @@
-<div class="col-md-12">
-  <section class="search-result-item mt-3">
-    <a class="image-link"
-      ><img
-        (click)="getPainting(paintingDetails?.id)"
-        class="image"
-        src="{{ localhost + paintingDetails?.url }}/thumbnail/{{
+<div class="wrapper">
+  <div class="movable">  </div>
+  <div class="col-md-12">
+    <section class="search-result-item mt-3">
+      <a class="image-link"><img (click)="getPainting(paintingDetails?.id)" class="image" src="{{ localhost + paintingDetails?.url }}/thumbnail/{{
           paintingDetails?.imageFileName
-        }}"
-      />
-    </a>
-    <div class="search-result-item-body">
-      <div class="row">
-        <div class="col-sm-9">
-          <h4
-            class="search-result-item-heading"
-            (click)="getPainting(paintingDetails?.id)"
-          >
-            {{ paintingDetails?.name }}
-            <span class="badge bg-danger fw-normal pull-right">{{
-              paintingDetails?.isMain
-            }}</span>
-          </h4>
-          <p class="info">
-            <span class="bold">Created On:</span>
-            {{ paintingDetails?.createdOn | date: "mediumDate" }} | 
-            <span class="bold">Painting views:</span>
-            {{ paintingDetails?.viewCount }}
-          </p>
-          <p class="description">
-            {{ paintingDetails?.description.substring(0, 250) }}
-          </p>
-        </div>
-        <div class="col-sm-3 text-align-center">
-          <p
-            class="value3 mt-sm fs-mini text-muted"
-            *ngIf="paintingDetails?.available"
-          >
-            <i class="fa fa-check-circle"></i
-            >{{ "GENERAL.AVAILABLE" | translate }}
-          </p>
-          <p
-            class="value3 mt-sm fs-mini text-muted"
-            *ngIf="!paintingDetails?.available"
-          >
-            <i class="fa fa-times-circle"></i
-            >{{ "GENERAL.UNAVAILABLE" | translate }}
-          </p>
-          <a
-            class="btn btn-success btn-sm"
-            routerLink="/paintings/edit/{{ paintingDetails?.id }}"
-          >
-            <i class="fa fa-edit"></i> Edit</a
-          >
-          <a class="btn btn-danger btn-sm" (click)="openConfirmModal()"
-            ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a
-          >
+        }}" />
+      </a>
+      <div class="search-result-item-body">
+        <div class="row">
+          <div class="col-sm-9">
+            <h4 class="search-result-item-heading" (click)="getPainting(paintingDetails?.id)">
+              {{ paintingDetails?.name }}
+              <span class="badge bg-danger fw-normal pull-right">{{
+                paintingDetails?.isMain
+                }}</span>
+            </h4>
+            <p class="info">
+              <span class="bold">Created On:</span>
+              {{ paintingDetails?.createdOn | date: "mediumDate" }} |
+              <span class="bold">Painting views:</span>
+              {{ paintingDetails?.viewCount }}
+            </p>
+            <p class="description">
+              {{ paintingDetails?.description.substring(0, 250) }}
+            </p>
+          </div>
+          <div class="col-sm-3 text-align-center">
+            <p class="value3 mt-sm fs-mini text-muted" *ngIf="paintingDetails?.available">
+              <i class="fa fa-check-circle"></i>{{ "GENERAL.AVAILABLE" | translate }}
+            </p>
+            <p class="value3 mt-sm fs-mini text-muted" *ngIf="!paintingDetails?.available">
+              <i class="fa fa-times-circle"></i>{{ "GENERAL.UNAVAILABLE" | translate }}
+            </p>
+            <a class="btn btn-success btn-sm" routerLink="/paintings/edit/{{ paintingDetails?.id }}">
+              <i class="fa fa-edit"></i> Edit</a>
+            <a class="btn btn-danger btn-sm" (click)="openConfirmModal()"><i class="fa fa-trash" aria-hidden="true"></i>
+              Delete</a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </div>
 
 <ng-template #template>
@@ -73,42 +55,24 @@
   </div>
 </ng-template>
 
-<div
-  bsModal
-  #lgModal="bs-modal"
-  class="modal fade"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="dialog-sizes-name1"
->
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <li class="list-inline-item">
           <!-- <h4 id="dialog-sizes-name1" class="modal-title pull-left">{{paintingModal?.name}}</h4> -->
-          <button
-            class="btn btn-primary"
-            [disabled]="!paintingModal?.pervImageUrl"
-            (click)="getPainting(paintingModal?.pervImageUrl)"
-          >
+          <button class="btn btn-primary" [disabled]="!paintingModal?.pervImageUrl"
+            (click)="getPainting(paintingModal?.pervImageUrl)">
             <i class="fa fa-arrow-left"></i>
           </button>
         </li>
         <li class="list-inline-item">
-          <button
-            class="btn btn-primary"
-            [disabled]="!paintingModal?.nextImageUrl"
-            (click)="getPainting(paintingModal?.nextImageUrl)"
-          >
+          <button class="btn btn-primary" [disabled]="!paintingModal?.nextImageUrl"
+            (click)="getPainting(paintingModal?.nextImageUrl)">
             <i class="fa fa-arrow-right"></i>
           </button>
         </li>
-        <button
-          type="button"
-          class="close pull-right"
-          (click)="lgModal.hide()"
-          aria-label="Close"
-        >
+        <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -118,10 +82,7 @@
               <img class="img-fluid mx-auto d-block" src="{{paintingModal?.url}}/{{paintingModal?.imageFileName}}" alt="{{paintingModal?.name}}">
             </div> -->
           <div class="col-lg-8 col-md-12">
-            <ngx-gallery
-              [options]="galleryOptions"
-              [images]="galleryImages"
-            ></ngx-gallery>
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
           </div>
           <div class="col-lg-4 col-md-12">
             <div class="row justify-content-start">
@@ -135,30 +96,25 @@
                   {{ paintingModal?.sizeXIn }} inches
                 </p>
                 <p *ngIf="paintingModal?.category == 'mixed'">
-                  <span class="bolded"
-                    >{{ "GENERAL.TECHNIQUE" | translate }}:
+                  <span class="bolded">{{ "GENERAL.TECHNIQUE" | translate }}:
                   </span>
                   {{ "GALLERY.CATEGORY-MIX" | translate }}
                 </p>
                 <p *ngIf="paintingModal?.category == 'sea'">
-                  <span class="bolded"
-                    >{{ "GENERAL.TECHNIQUE" | translate }}:
+                  <span class="bolded">{{ "GENERAL.TECHNIQUE" | translate }}:
                   </span>
                   {{ "GALLERY.CATEGORY-SEA" | translate }}
                 </p>
                 <p *ngIf="paintingModal?.category == 'marine'">
-                  <span class="bolded"
-                    >{{ "GENERAL.TECHNIQUE" | translate }}:
+                  <span class="bolded">{{ "GENERAL.TECHNIQUE" | translate }}:
                   </span>
                   {{ "GALLERY.CATEGORY-MARINE" | translate }}
                 </p>
                 <p *ngIf="paintingModal?.available">
-                  <i class="fa fa-check-circle"></i
-                  >{{ "GENERAL.AVAILABLE" | translate }}
+                  <i class="fa fa-check-circle"></i>{{ "GENERAL.AVAILABLE" | translate }}
                 </p>
                 <p *ngIf="!paintingModal?.available">
-                  <i class="fa fa-times-circle"></i
-                  >{{ "GENERAL.UNAVAILABLE" | translate }}
+                  <i class="fa fa-times-circle"></i>{{ "GENERAL.UNAVAILABLE" | translate }}
                 </p>
                 <p>{{ paintingModal?.description }}</p>
               </div>

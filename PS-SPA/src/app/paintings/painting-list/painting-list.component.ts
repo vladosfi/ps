@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component,  OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PaginatedResult, Pagination } from 'src/app/_interfaces/pagination';
 import { IPainting } from 'src/app/_interfaces/painting';
@@ -13,7 +13,7 @@ import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryImageSize, NgxGalleryOp
   templateUrl: './painting-list.component.html',
   styleUrls: ['./painting-list.component.css']
 })
-export class PaintingListComponent implements OnInit, OnDestroy, DoCheck {
+export class PaintingListComponent implements OnInit, OnDestroy {
   paintingModal: IPaintingDetails;
   paintings: IPainting[];
   paintingParams: any = {};
@@ -31,13 +31,13 @@ export class PaintingListComponent implements OnInit, OnDestroy, DoCheck {
     document.body.style.backgroundColor = "#A9D3E9";
   }
 
-  ngDoCheck(): void {
-    if (this.languageOnLoad != document.documentElement.lang) {
-      this.languageOnLoad = document.documentElement.lang;
-      this.paintings.length = 0;
-      this.loadPaintings();
-    }
-  }
+  // ngDoCheck(): void {
+  //   if (this.languageOnLoad != document.documentElement.lang) {
+  //     this.languageOnLoad = document.documentElement.lang;
+  //     this.paintings.length = 0;
+  //     this.loadPaintings();
+  //   }
+  // }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {

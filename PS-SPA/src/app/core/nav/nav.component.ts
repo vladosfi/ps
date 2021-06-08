@@ -74,7 +74,12 @@ export class NavComponent implements OnInit {
     //window.location.reload();
     //window.location.href = window.location.href;
     this.setSiteTitle();
-    window.location.reload();
+    //window.location.reload();
+    //this.router.navigate([window.location.href]);
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
   }
 
   logout() {

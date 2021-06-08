@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component,  OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PaginatedResult, Pagination } from 'src/app/_interfaces/pagination';
 import { IPainting } from 'src/app/_interfaces/painting';
@@ -21,6 +21,9 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
   paintingParams: any = {};
   searchControl: FormControl;
   private debounce: number = 400;
+  orderChangeCounter = 0;
+  lastEvent: string[] = [];
+   
 
   // paintinsObservable$: Observable<PaginatedResult<IPainting[]>>;
 
@@ -35,7 +38,17 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
       this.paintings = data['paintings'].result;
       this.pagination = data['paintings'].pagination;
     });
-    console.log(this.paintings);
+    //console.log(this.paintings);
+  }
+
+  onChange($event) {
+    
+    if ($event.length > 0 && !this.lastEvent.every((x, idx) => x === $event[idx])) {
+      this.orderChangeCounter++;
+      console.log($event);
+      console.log(this.paintings[0]);
+    }
+    this.lastEvent = $event.map(x => x);
   }
 
   ngAfterViewInit(): void {
