@@ -6,16 +6,14 @@ using PS.API.Data.Common.Base;
 
 namespace PS.API.Models
 {
-    public class Painting : BaseModel<string>
+    public class Painting : BaseModel<int>
     {
         public Painting()
         {
-            this.Id = Guid.NewGuid().ToString();
             this.Images = new HashSet<Image>();
             this.CreatedOn = DateTime.UtcNow;
         }
 
-        public int OrderId { get; set; }
 
         [Required]
         [StringLength(50)]

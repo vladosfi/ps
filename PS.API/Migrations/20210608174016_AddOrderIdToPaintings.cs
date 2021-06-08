@@ -2,7 +2,7 @@
 
 namespace PS.API.Migrations
 {
-    public partial class AddOrderIdForPaintingModel : Migration
+    public partial class AddOrderIdToPaintings : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,12 +18,6 @@ namespace PS.API.Migrations
                 table: "Users",
                 column: "Username",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Paintings_OrderId",
-                table: "Paintings",
-                column: "OrderId",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -31,10 +25,6 @@ namespace PS.API.Migrations
             migrationBuilder.DropIndex(
                 name: "IX_Users_Username",
                 table: "Users");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Paintings_OrderId",
-                table: "Paintings");
 
             migrationBuilder.DropColumn(
                 name: "OrderId",

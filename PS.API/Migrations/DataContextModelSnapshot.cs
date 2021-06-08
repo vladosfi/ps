@@ -240,9 +240,6 @@ namespace PS.API.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("OrderId")
-                        .IsUnique();
-
                     b.ToTable("Paintings");
                 });
 

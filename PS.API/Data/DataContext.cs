@@ -26,13 +26,9 @@ namespace PS.API.Data
                 .IsUnique();
 
             //Autoincrement
-            builder.Entity<Painting>()
-                .Property(p => p.OrderId)
-                .ValueGeneratedOnAdd();
-
-            builder.Entity<Painting>()
-                .HasIndex(u => u.OrderId)
-                .IsUnique();
+            // builder.Entity<Painting>()
+            //     .Property(p => p.OrderId)
+            //     .ValueGeneratedOnAdd();
 
             builder.Entity<Like>()
                .HasKey(k => new { k.LikerId, k.LikeeId });

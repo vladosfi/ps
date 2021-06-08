@@ -9,8 +9,8 @@ using PS.API.Data;
 namespace PS.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210608143402_AddOrderIdForPaintingModel")]
-    partial class AddOrderIdForPaintingModel
+    [Migration("20210608174016_AddOrderIdToPaintings")]
+    partial class AddOrderIdToPaintings
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -241,9 +241,6 @@ namespace PS.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("OrderId")
-                        .IsUnique();
 
                     b.ToTable("Paintings");
                 });
