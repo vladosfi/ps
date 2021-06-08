@@ -13,6 +13,7 @@ import { AdminPaintingsResolver } from './_resolvers/admin-paintings.resolver';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminService } from './admin.service';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { SortableModule, DraggableItemService } from 'ngx-bootstrap/sortable';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -40,11 +41,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalModule,
     PaginationModule,
     ButtonsModule,
+    SortableModule,
     //SharedModule,
   ],
   providers: [
     AdminPaintingsResolver,
     AdminService,
+    DraggableItemService,
   ]
 })
 export class AdminModule {

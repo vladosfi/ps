@@ -24,8 +24,8 @@ export class AdminPaintingThumbComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   paintingModal: IPaintingDetails;
-  
-  
+
+
   constructor(
     private modalService: ModalWindowService,
     private paintingService: PaintingService,

@@ -21,6 +21,19 @@ namespace PS.API.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<User>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
+
+            //Autoincrement
+            builder.Entity<Painting>()
+                .Property(p => p.OrderId)
+                .ValueGeneratedOnAdd();
+
+            builder.Entity<Painting>()
+                .HasIndex(u => u.OrderId)
+                .IsUnique();
+
             builder.Entity<Like>()
                .HasKey(k => new { k.LikerId, k.LikeeId });
 

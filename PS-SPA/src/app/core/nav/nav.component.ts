@@ -1,9 +1,9 @@
-import { Component, OnInit,Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ToastService } from '../../_services/toast.service';
 import { AuthService } from '../../_services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-nav',
@@ -25,12 +25,13 @@ export class NavComponent implements OnInit {
     public translate: TranslateService,
     private renderer: Renderer2,
     private titleService: Title,
-  ) { 
+    private metaService: Meta
+  ) {
     translate.addLangs(['gb', 'bg', 'ru', 'de']);
     translate.setDefaultLang('gb');
 
     var browserLang = translate.getBrowserLang();
-    if(localStorage.getItem('currentLang')){
+    if (localStorage.getItem('currentLang')) {
       browserLang = localStorage.getItem('currentLang');
       document.documentElement.lang = browserLang;
     }
@@ -38,9 +39,10 @@ export class NavComponent implements OnInit {
     translate.use(browserLang.match(/gb|bg|ru|de/) ? browserLang : 'gb');
     this.selectedLanguage = browserLang;
     this.languagesToShow = translate.getLangs().filter(l => l !== this.selectedLanguage);
-    this.renderer.setAttribute(document.querySelector('html'), 'lang', this.selectedLanguage);    
+    this.renderer.setAttribute(document.querySelector('html'), 'lang', this.selectedLanguage);
 
     this.setSiteTitle();
+    this.setMetaTags();
   }
 
   ngOnInit() {
@@ -61,7 +63,7 @@ export class NavComponent implements OnInit {
     return this.authService.loggedIn();
   }
 
-  changeLanguage(lang: string){
+  changeLanguage(lang: string) {
     this.translate.use(lang)
     this.selectedLanguage = lang;
     this.languagesToShow = this.translate.getLangs().filter(l => l !== this.selectedLanguage);
@@ -72,6 +74,12 @@ export class NavComponent implements OnInit {
     //window.location.reload();
     //window.location.href = window.location.href;
     this.setSiteTitle();
+    //window.location.reload();
+    //this.router.navigate([window.location.href]);
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
   }
 
   logout() {
@@ -82,13 +90,25 @@ export class NavComponent implements OnInit {
     this.authService.currentUser = null;
     this.router.navigate(['/home']);
   }
-
-  public setSiteTitle() {
+  
+  setSiteTitle() {
     //console.log(this.translate.instant('GENERAL.TITLE'));
-
-    this.translate.get('GENERAL.TITLE').subscribe( (newTitle: string) => {
+    this.translate.get('GENERAL.TITLE').subscribe((newTitle: string) => {
       this.titleService.setTitle(newTitle);
     });
-    
   }
+
+    setMetaTags(){
+    this.translate.get('GENERAL.META-KEYWORDS').subscribe((keywords: string) => {
+      console.log(keywords);
+      this.metaService.addTag( { name:'keywords',keywords});
+    });
+
+    this.translate.get('GENERAL.META-DESCRIPTION').subscribe((description: string) => {
+      this.metaService.addTag( { name:'description',description});
+    });
+
+      
+    }
+
 }

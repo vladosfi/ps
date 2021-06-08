@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IEvent } from 'src/app/shared/_interfaces/event';
 import { PaginatedResult, Pagination } from 'src/app/_interfaces/pagination';
@@ -10,10 +10,10 @@ import { EventService } from '../event.service';
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css']
 })
-export class EventListComponent implements OnInit, DoCheck {
+export class EventListComponent implements OnInit {
   events: IEvent[];
   pagination: Pagination;
-  languageOnLoad = document.documentElement.lang;
+  currentLanguage = document.documentElement.lang;
 
   constructor(
     private route: ActivatedRoute, 
@@ -27,12 +27,12 @@ export class EventListComponent implements OnInit, DoCheck {
     });
   }
 
-  ngDoCheck(): void {
-    if(this.languageOnLoad != document.documentElement.lang){
-      this.languageOnLoad = document.documentElement.lang;
-      this.loadEvents();
-    }
-  }
+  // ngDoCheck(): void {
+  //   if(this.currentLanguage != document.documentElement.lang){
+  //     this.currentLanguage = document.documentElement.lang;
+  //     this.loadEvents();
+  //   }
+  // }
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;

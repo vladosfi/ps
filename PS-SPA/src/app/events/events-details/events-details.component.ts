@@ -18,7 +18,7 @@ export class EventsDetailsComponent implements OnInit {
   frontEndUrl = environment.frontEndUrl;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
-  language = document.documentElement.lang;
+  currentLanguage = document.documentElement.lang;
 
   constructor(
     private toast: ToastService,
