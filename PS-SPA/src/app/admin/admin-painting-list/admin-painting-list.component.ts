@@ -42,7 +42,9 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   onChange($event) {
-    
+    // Dobavqne na buton save za zapazvane na reda!
+    // Namirane na naj malkata stojnost za poziciq i uvelichavane na ostanalite
+    // zapazvane na promenite pozicii
     if ($event.length > 0 && !this.lastEvent.every((x, idx) => x === $event[idx])) {
       this.orderChangeCounter++;
       console.log($event);

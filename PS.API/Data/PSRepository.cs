@@ -132,6 +132,18 @@ namespace PS.API.Data
             return null;
         }
 
+        public async Task<int> GetLastPaintingPosition()
+        {
+            var lastPainting = await this.context.Paintings.OrderByDescending(p => p.Position).FirstOrDefaultAsync();
+            
+            if (lastPainting != null){
+                return lastPainting.Position;
+            }
+
+            return 0;
+        }
+        
+
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
             var users = this.context.Users.Include(p => p.Photos).OrderByDescending(u => u.LastActive).AsQueryable();

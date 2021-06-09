@@ -31,6 +31,8 @@ namespace PS.API.Data
 
         Task<Painting> GetPaintingById(string id, PaintingParams paintingParams = null);
 
+        Task<int> GetLastPaintingPosition();
+
         Task<Painting> GetPaintingByIdForEdit(string id);
 
         Task IncreasePaintingViews(string id);

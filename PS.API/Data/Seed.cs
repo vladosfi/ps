@@ -42,12 +42,14 @@ namespace PS.API.Data
                 var paintingsData = System.IO.File.ReadAllText("Data/PaintingSeedData.json");
                 var categories = JsonConvert.DeserializeObject<List<Category>>(categoriesData);
                 var paintings = JsonConvert.DeserializeObject<List<Painting>>(paintingsData);
+                var position = 0;
 
                 foreach (var category in categories)
                 {
                     context.Categories.Add(category);
 
                     foreach(var painting in paintings.Where(p => p.CategoryId == category.Id)){
+                        painting.Position = ++position;
                         context.Paintings.Add(painting);
                     }
                 }

@@ -33,7 +33,6 @@ namespace PS.API.Controllers
         private const string couldNotDeletePainting = "You cannot delete painting";
         private const string failedToDeletePainting = "Failed to delete painting";
 
-
         private const string thumbnailFolder = "thumbnail";
         private const int maxThumbnailSize = 250;
 
@@ -88,7 +87,7 @@ namespace PS.API.Controllers
         {
 
             var painting = await this.repo.GetPaintingByIdForEdit(id);
-            
+
             var paintingToReturn = this.mapper.Map<PaintingForEditDetailsDto>(painting);
 
             if (paintingToReturn != null)
@@ -106,6 +105,10 @@ namespace PS.API.Controllers
         public async Task<IActionResult> AddPainting(int userId, [FromBody] PaintingForCreationDto paintingForCreationDto)
         {
             var paintingToAdd = this.mapper.Map<Painting>(paintingForCreationDto);
+            var lastPaintingPosition = await this.repo.GetLastPaintingPosition();
+
+
+            paintingToAdd.Position = ++lastPaintingPosition;
 
             var createdPainting = await this.repo.AddPainting(paintingToAdd);
 
