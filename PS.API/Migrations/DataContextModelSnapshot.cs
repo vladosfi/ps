@@ -223,9 +223,10 @@ namespace PS.API.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("OrderId")
+                    b.Property<int>("Position")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(1000000);
 
                     b.Property<float>("SizeX")
                         .HasColumnType("REAL");

@@ -2,16 +2,16 @@
 
 namespace PS.API.Migrations
 {
-    public partial class AddOrderIdToPaintings : Migration
+    public partial class AddPositionToPaintings : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "OrderId",
+                name: "Position",
                 table: "Paintings",
                 type: "INTEGER",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 1000000);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Username",
@@ -27,7 +27,7 @@ namespace PS.API.Migrations
                 table: "Users");
 
             migrationBuilder.DropColumn(
-                name: "OrderId",
+                name: "Position",
                 table: "Paintings");
         }
     }

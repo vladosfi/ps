@@ -87,7 +87,7 @@ namespace PS.API.Data
 
             if (paintingParams.Name != string.Empty)
             {
-                paintings = paintings.Where(p => p.Name.ToLower().Contains(paintingParams.Name.ToLower()));
+                paintings = paintings.Where(p => EF.Functions.Like(p.Name, $"%{paintingParams.Name}%"));
             }
 
             return await PagedList<Painting>.CreateAsync(paintings, paintingParams.PageNumber, paintingParams.PageSize);
@@ -110,7 +110,7 @@ namespace PS.API.Data
 
             return painting;
         }
-        
+
 
         public async Task IncreasePaintingViews(string id)
         {

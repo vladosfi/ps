@@ -1,19 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using PS.API.Data.Common.Base;
 
 namespace PS.API.Models
 {
-    public class Painting : BaseModel<int>
+    public class Painting : BaseModel<string>
     {
         public Painting()
         {
+            this.Id = Guid.NewGuid().ToString();
             this.Images = new HashSet<Image>();
             this.CreatedOn = DateTime.UtcNow;
         }
 
+        [Required]
+        public int Position { get; set; }
 
         [Required]
         [StringLength(50)]
