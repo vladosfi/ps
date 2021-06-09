@@ -70,7 +70,8 @@ namespace PS.API.Data
 
         public async Task<PagedList<Painting>> GetPapintings(PaintingParams paintingParams)
         {
-            var paintings = this.context.Paintings.Include(p => p.Images).OrderByDescending(p => p.CreatedOn).AsQueryable();
+            var paintings = this.context.Paintings.Include(p => p.Images).OrderByDescending(p => p.Position)
+            .ThenByDescending(p => p.CreatedOn).AsQueryable();
 
             if (paintingParams.CategoryId != 0)
             {
