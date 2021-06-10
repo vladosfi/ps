@@ -100,7 +100,7 @@ export class NavComponent implements OnInit {
 
     setMetaTags(){
     this.translate.get('GENERAL.META-KEYWORDS').subscribe((keywords: string) => {
-      console.log(keywords);
+      //console.log(keywords);
       this.metaService.addTag( { name:'keywords',keywords});
     });
 

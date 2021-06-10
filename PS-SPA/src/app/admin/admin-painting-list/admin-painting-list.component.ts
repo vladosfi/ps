@@ -23,7 +23,6 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
   private debounce: number = 400;
   orderChangeCounter = 0;
   lastEvent: string[] = [];
-   
 
   // paintinsObservable$: Observable<PaginatedResult<IPainting[]>>;
 
@@ -38,17 +37,27 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
       this.paintings = data['paintings'].result;
       this.pagination = data['paintings'].pagination;
     });
+
     //console.log(this.paintings);
   }
 
   onChange($event) {
-    // Dobavqne na buton save za zapazvane na reda!
-    // Namirane na naj malkata stojnost za poziciq i uvelichavane na ostanalite
     // zapazvane na promenite pozicii
     if ($event.length > 0 && !this.lastEvent.every((x, idx) => x === $event[idx])) {
       this.orderChangeCounter++;
-      console.log($event);
-      console.log(this.paintings[0]);
+      //console.log($event);
+      // this.paintings.forEach(element => {
+      //   console.log(element.position);
+      // });
+      this.paintingService.updatePaintingPosition(this.paintings).subscribe(next => {
+        this.toast.success('Painting updated successfully');
+      }, error => {
+        this.toast.error(error);
+      });
+
+      // this.paintings.forEach(element => {
+      //   console.log(element);
+      // });
     }
     this.lastEvent = $event.map(x => x);
   }
@@ -70,7 +79,6 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   ngOnInit(): void {
-
     this.searchControl = new FormControl('');
     this.searchControl.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())

@@ -53,6 +53,10 @@ export class PaintingService {
         }));
   }
 
+  updatePaintingPosition(paintings: IPainting[]): any {
+    return this.http.put(this.baseUrl + 'paintings/position', paintings);
+  }
+
   getPainting(id: string): Observable<IPaintingDetails> {
 
     let params = new HttpParams();

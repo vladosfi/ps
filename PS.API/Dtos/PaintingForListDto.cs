@@ -11,6 +11,7 @@ namespace PS.API.Dtos
         public string ImageFileName { get; set; }
         public bool Available { get; set; }
         public long ViewCount { get; set; }
+        public int Position { get; set; }
         public DateTime CreatedOn { get; set; }
     }
 }

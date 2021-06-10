@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using PS.API.Dtos;
 using PS.API.Helpers;
 using PS.API.Models;
 
@@ -31,6 +32,8 @@ namespace PS.API.Data
 
         Task<Painting> GetPaintingById(string id, PaintingParams paintingParams = null);
 
+        Task<bool> UpdatePaintingPositionById(ICollection<PaintingForUpdatePaintingPositionDto> paintings);
+        
         Task<int> GetLastPaintingPosition();
 
         Task<Painting> GetPaintingByIdForEdit(string id);

@@ -275,8 +275,25 @@ namespace PS.API.Controllers
         }
 
         [Authorize]
+        [HttpPut("position")]
+        public async Task<IActionResult> UpdatePosition(ICollection<PaintingForUpdatePaintingPositionDto> paintingForDetailsDto)
+        {
+            //Get painting range from database 
+            var paintingFromRepo = await this.repo.GetPaintingByIdForEdit("1");
+            await this.repo.UpdatePaintingPositionById(paintingForDetailsDto);
+
+            // foreach (var elemnet in paintingForDetailsDto)
+            // {
+            //     System.Console.WriteLine(elemnet.Id + ": " + elemnet.Position);
+
+            // }
+            System.Console.WriteLine(Environment.NewLine + Environment.NewLine);
+            return NoContent();
+        }
+
+        [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePainting(string id, PaintingForUpdateDto paintingForDetailsDto)
+        public async Task<IActionResult> Update(string id, PaintingForUpdateDto paintingForDetailsDto)
         {
             var paintingFromRepo = await this.repo.GetPaintingByIdForEdit(id);
 
@@ -299,7 +316,7 @@ namespace PS.API.Controllers
 
         [Authorize]
         [HttpDelete("{paintingId}/delete")]
-        public async Task<IActionResult> DeletePainting(string paintingId)
+        public async Task<IActionResult> Delete(string paintingId)
         {
             var paintingFromRepo = await this.repo.GetPaintingById(paintingId);
 

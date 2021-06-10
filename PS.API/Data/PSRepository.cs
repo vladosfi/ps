@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PS.API.Helpers;
 using System;
+using PS.API.Dtos;
 
 namespace PS.API.Data
 {
@@ -84,7 +85,28 @@ namespace PS.API.Data
             }
 
 
-            paintings = SelectPaintingsWithCorrectLanguage(paintings, paintingParams);
+            var currentLanguage = paintingParams?.Language.ToLower();
+
+            paintings = paintings.Select(p => new Painting
+            {
+                Id = p.Id,
+                Available = p.Available,
+                CreatedOn = p.CreatedOn,
+                Images = p.Images,
+                CategoryId = p.CategoryId,
+                Name =
+                    currentLanguage == "bg" ? p.Name :
+                    currentLanguage == "de" ? p.NameDe :
+                    currentLanguage == "ru" ? p.NameRu : p.NameGb,
+                Description =
+                    currentLanguage == "bg" ? p.Description :
+                    currentLanguage == "de" ? p.DescriptionDe :
+                    currentLanguage == "ru" ? p.DescriptionRu : p.DescriptionGb,
+                SizeX = p.SizeX,
+                SizeY = p.SizeY,
+                ViewCount = p.ViewCount,
+                Position = p.Position
+            });
 
             if (paintingParams.Name != string.Empty)
             {
@@ -100,7 +122,28 @@ namespace PS.API.Data
             //var painting = await this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
             var painting = this.context.Paintings.Include(p => p.Images).Include(c => c.Category).AsQueryable();
 
-            painting = SelectPaintingsWithCorrectLanguage(painting, paintingParams);
+            var currentLanguage = paintingParams?.Language.ToLower();
+
+            painting = painting.Select(p => new Painting
+            {
+                Id = p.Id,
+                Available = p.Available,
+                CreatedOn = p.CreatedOn,
+                Images = p.Images,
+                CategoryId = p.CategoryId,
+                Name =
+                    currentLanguage == "bg" ? p.Name :
+                    currentLanguage == "de" ? p.NameDe :
+                    currentLanguage == "ru" ? p.NameRu : p.NameGb,
+                Description =
+                    currentLanguage == "bg" ? p.Description :
+                    currentLanguage == "de" ? p.DescriptionDe :
+                    currentLanguage == "ru" ? p.DescriptionRu : p.DescriptionGb,
+                SizeX = p.SizeX,
+                SizeY = p.SizeY,
+                ViewCount = p.ViewCount,
+                Position = p.Position
+            });
 
             return await painting.FirstOrDefaultAsync(p => p.Id == id);
         }
@@ -135,14 +178,15 @@ namespace PS.API.Data
         public async Task<int> GetLastPaintingPosition()
         {
             var lastPainting = await this.context.Paintings.OrderByDescending(p => p.Position).FirstOrDefaultAsync();
-            
-            if (lastPainting != null){
+
+            if (lastPainting != null)
+            {
                 return lastPainting.Position;
             }
 
             return 0;
         }
-        
+
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
@@ -190,6 +234,24 @@ namespace PS.API.Data
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
+        public async Task<bool> UpdatePaintingPositionById(ICollection<PaintingForUpdatePaintingPositionDto> paintings)
+        {
+            var paintingsForUpdate = await this.context.Paintings.Where(p => paintings.Select(i => i.Id).FirstOrDefault() == p.Id).ToListAsync();
+
+            //paintingsForUpdate.Select(p => p.Position = paintings.Where(i => i.Id == p.Id).Select(i => i.Position).FirstOrDefault());
+
+            foreach (var painting in paintingsForUpdate)
+            {
+                var newPainting = paintings.Where(p => p.Id == painting.Id).FirstOrDefault();
+                //painting.Position = newPainting.Position;
+                //painting.Position = paintings.Where(p => p.Id == painting.Id).Select(p => p.Position).FirstOrDefault();
+                //System.Console.WriteLine(painting.Id + ": " + painting.Position);
+                System.Console.WriteLine( newPainting.Id + ": " + newPainting.Position);
+            }
+
+            return await this.SaveAll();
+        }
+
         public async Task<bool> SaveAll()
         {
             return await this.context.SaveChangesAsync() > 0;
@@ -207,78 +269,6 @@ namespace PS.API.Data
             {
                 return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
             }
-        }
-
-        private IQueryable<Painting> SelectPaintingsWithCorrectLanguage(IQueryable<Painting> paintings, PaintingParams paintingParams)
-        {
-            var currentLanguage = paintingParams?.Language.ToLower();
-
-            if (currentLanguage == "bg")
-            {
-                paintings = paintings.Select(p => new Painting
-                {
-                    Id = p.Id,
-                    Available = p.Available,
-                    CreatedOn = p.CreatedOn,
-                    Images = p.Images,
-                    CategoryId = p.CategoryId,
-                    Name = p.Name,
-                    Description = p.Description,
-                    SizeX = p.SizeX,
-                    SizeY = p.SizeY,
-                    ViewCount = p.ViewCount
-                });
-            }
-            else if (currentLanguage == "de")
-            {
-                paintings = paintings.Select(p => new Painting
-                {
-                    Id = p.Id,
-                    Available = p.Available,
-                    CreatedOn = p.CreatedOn,
-                    Images = p.Images,
-                    CategoryId = p.CategoryId,
-                    Name = p.NameDe,
-                    Description = p.DescriptionDe,
-                    SizeX = p.SizeX,
-                    SizeY = p.SizeY,
-                    ViewCount = p.ViewCount
-                });
-            }
-            else if (currentLanguage == "ru")
-            {
-                paintings = paintings.Select(p => new Painting
-                {
-                    Id = p.Id,
-                    Available = p.Available,
-                    CreatedOn = p.CreatedOn,
-                    Images = p.Images,
-                    CategoryId = p.CategoryId,
-                    Name = p.NameRu,
-                    Description = p.DescriptionRu,
-                    SizeX = p.SizeX,
-                    SizeY = p.SizeY,
-                    ViewCount = p.ViewCount
-                });
-            }
-            else
-            {
-                paintings = paintings.Select(p => new Painting
-                {
-                    Id = p.Id,
-                    Available = p.Available,
-                    CreatedOn = p.CreatedOn,
-                    Images = p.Images,
-                    CategoryId = p.CategoryId,
-                    Name = p.NameGb,
-                    Description = p.DescriptionGb,
-                    SizeX = p.SizeX,
-                    SizeY = p.SizeY,
-                    ViewCount = p.ViewCount
-                });
-            }
-
-            return paintings;
         }
     }
 }

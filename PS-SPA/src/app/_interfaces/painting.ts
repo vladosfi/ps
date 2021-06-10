@@ -8,4 +8,5 @@ export interface IPainting {
     isMain: boolean;
     available:boolean;
     viewCount: number;
+    position: number;
 }
