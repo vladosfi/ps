@@ -234,22 +234,9 @@ namespace PS.API.Data
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
-        public async Task<bool> UpdatePaintingPositionById(ICollection<PaintingForUpdatePaintingPositionDto> paintings)
+        public async Task<ICollection<Painting>> GetPaintingByIds(ICollection<string> paintingIds)
         {
-            var paintingsForUpdate = await this.context.Paintings.Where(p => paintings.Select(i => i.Id).FirstOrDefault() == p.Id).ToListAsync();
-
-            //paintingsForUpdate.Select(p => p.Position = paintings.Where(i => i.Id == p.Id).Select(i => i.Position).FirstOrDefault());
-
-            foreach (var painting in paintingsForUpdate)
-            {
-                var newPainting = paintings.Where(p => p.Id == painting.Id).FirstOrDefault();
-                //painting.Position = newPainting.Position;
-                //painting.Position = paintings.Where(p => p.Id == painting.Id).Select(p => p.Position).FirstOrDefault();
-                //System.Console.WriteLine(painting.Id + ": " + painting.Position);
-                System.Console.WriteLine( newPainting.Id + ": " + newPainting.Position);
-            }
-
-            return await this.SaveAll();
+            return await this.context.Paintings.Where(p => paintingIds.Contains(p.Id)).ToListAsync();
         }
 
         public async Task<bool> SaveAll()

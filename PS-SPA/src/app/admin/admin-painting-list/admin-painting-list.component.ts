@@ -49,6 +49,9 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
       // this.paintings.forEach(element => {
       //   console.log(element.position);
       // });
+
+      console.log(this.lastEvent);
+
       this.paintingService.updatePaintingPosition(this.paintings).subscribe(next => {
         this.toast.success('Painting updated successfully');
       }, error => {
@@ -63,7 +66,6 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   ngAfterViewInit(): void {
-
     // this.paintinsObservable$ = fromEvent(this.input.nativeElement, 'keyup')
     //   .pipe(
     //     //tap(console.log),

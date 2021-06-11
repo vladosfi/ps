@@ -32,7 +32,7 @@ namespace PS.API.Controllers
         private const string paintingUpdatingFailed = "Updating painting {0} failed on save";
         private const string couldNotDeletePainting = "You cannot delete painting";
         private const string failedToDeletePainting = "Failed to delete painting";
-
+        private const string failedToUpdatePaintingPosition = "Failed to update painting position";
         private const string thumbnailFolder = "thumbnail";
         private const int maxThumbnailSize = 250;
 
@@ -278,16 +278,31 @@ namespace PS.API.Controllers
         [HttpPut("position")]
         public async Task<IActionResult> UpdatePosition(ICollection<PaintingForUpdatePaintingPositionDto> paintingForDetailsDto)
         {
-            //Get painting range from database 
-            var paintingFromRepo = await this.repo.GetPaintingByIdForEdit("1");
-            await this.repo.UpdatePaintingPositionById(paintingForDetailsDto);
+            var paintingIds = paintingForDetailsDto.Select(i => i.Id).ToList();
 
-            // foreach (var elemnet in paintingForDetailsDto)
-            // {
-            //     System.Console.WriteLine(elemnet.Id + ": " + elemnet.Position);
+            var paintingsFromRepo = await this.repo.GetPaintingByIds(paintingIds);
 
-            // }
+
+            var counter = 0;
+            foreach (var item in paintingsFromRepo)
+            {
+                System.Console.WriteLine(counter++ + " - " + item.Id + ": " + item.Position);
+            }
+
+            counter = 0;
+            foreach (var painting in paintingForDetailsDto)
+            {
+                System.Console.WriteLine(counter++ + " -- " + painting.Id + ": " + painting.Position);
+
+                var currentPainting = paintingsFromRepo.FirstOrDefault(p => p.Id == painting.Id);
+                if (currentPainting != null)
+                {
+                    currentPainting.Position = painting.Position;
+                }
+            }
+
             System.Console.WriteLine(Environment.NewLine + Environment.NewLine);
+
             return NoContent();
         }
 

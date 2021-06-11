@@ -32,7 +32,7 @@ namespace PS.API.Data
 
         Task<Painting> GetPaintingById(string id, PaintingParams paintingParams = null);
 
-        Task<bool> UpdatePaintingPositionById(ICollection<PaintingForUpdatePaintingPositionDto> paintings);
+        Task<ICollection<Painting>> GetPaintingByIds(ICollection<string> paintingIds);
         
         Task<int> GetLastPaintingPosition();
 
