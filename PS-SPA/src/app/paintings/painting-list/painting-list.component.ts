@@ -1,4 +1,4 @@
-import { Component,  OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PaginatedResult, Pagination } from 'src/app/_interfaces/pagination';
 import { IPainting } from 'src/app/_interfaces/painting';
@@ -131,7 +131,7 @@ export class PaintingListComponent implements OnInit, OnDestroy {
       this.paintingModal = data;
       this.galleryImages = this.getImages();
 
-      
+
       const currentImageIndex = this.paintings.map(e => e.id).indexOf(this.paintingModal.id);
       this.paintingModal.sizeXIn = +(this.paintingModal.sizeX * inchesFactor).toFixed(1);
       this.paintingModal.sizeYIn = +(this.paintingModal.sizeY * inchesFactor).toFixed(1);;
@@ -142,26 +142,31 @@ export class PaintingListComponent implements OnInit, OnDestroy {
 
       if (currentImageIndex < this.paintings.length - 1) {
         this.paintingModal.nextImageUrl = this.paintings[currentImageIndex + 1].id;
-      } 
+      }
 
 
       this.paintingModal.url = this.baseUrl + this.paintingModal.url;
       this.lgModal.show();
 
       // this.toast.success(JSON.stringify(data));
-    });
+    },
+      // if the error is thrown (or not caught if you do not use catchError) we hit this block
+      error => {
+        this.toast.error('Problem retreiving painting!');
+        // some  code to know error is err_connection_refused
+      });
   }
 
   onScroll() {
-    
-    if(this.pagination.currentPage > this.pagination.totalPages){
+
+    if (this.pagination.currentPage > this.pagination.totalPages) {
       return;
     }
 
     this.pagination.currentPage++;
     this.loadPaintings();
     console.log(`scrolled!! ${this.pagination.currentPage}`);
-    
+
   }
 
   pageChanged(event: any): void {

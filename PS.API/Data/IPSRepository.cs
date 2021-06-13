@@ -14,6 +14,8 @@ namespace PS.API.Data
 
         Task<bool> SaveAll();
 
+        void ClearChangeTracker();
+
         Task<User> GetUser(int id);
 
         Task<PagedList<User>> GetUsers(UserParams userParams);

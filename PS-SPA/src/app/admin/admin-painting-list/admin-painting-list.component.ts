@@ -1,4 +1,4 @@
-import { AfterViewInit, Component,  OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PaginatedResult, Pagination } from 'src/app/_interfaces/pagination';
 import { IPainting } from 'src/app/_interfaces/painting';
@@ -7,12 +7,13 @@ import { ToastService } from 'src/app/_services/toast.service';
 import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { AdminService } from '../admin.service';
 import { FormControl } from '@angular/forms';
-
+import { KeyValuePair } from 'src/app/_interfaces/key-value-pair';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-admin-painting-list',
   templateUrl: './admin-painting-list.component.html',
-  styleUrls: ['./admin-painting-list.component.css']
+  styleUrls: ['./admin-painting-list.component.css'],
 })
 export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewInit {
   // @ViewChild('filter', { static: false }) input: ElementRef;
@@ -23,6 +24,7 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
   private debounce: number = 400;
   orderChangeCounter = 0;
   lastEvent: string[] = [];
+  kvp: KeyValuePair<number, number>[] = [];
 
   // paintinsObservable$: Observable<PaginatedResult<IPainting[]>>;
 
@@ -38,29 +40,34 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
       this.pagination = data['paintings'].pagination;
     });
 
-    //console.log(this.paintings);
+    for (let index = 0; index < this.paintings.length; index++) {
+      this.kvp.push({ key: index, value: this.paintings[index].position });
+    }
+    // this.kvp.forEach(element => {
+    //   console.log(element.key + ' --- ' + element.value);
+    // });
+
+  }
+
+  dropItem($event) {
+    //console.log($event);
+
+    for (let index = 0; index < this.paintings.length; index++) {
+      this.paintings[index].position = this.kvp[index].value;
+      //console.log(index + '-' + this.paintings[index].position)
+    }
+
+    this.paintingService.updatePaintingPosition(this.paintings).subscribe(next => {
+      this.toast.success('Painting updated successfully');
+    }, error => {
+      this.toast.error(error);
+    });
   }
 
   onChange($event) {
     // zapazvane na promenite pozicii
     if ($event.length > 0 && !this.lastEvent.every((x, idx) => x === $event[idx])) {
       this.orderChangeCounter++;
-      //console.log($event);
-      // this.paintings.forEach(element => {
-      //   console.log(element.position);
-      // });
-
-      console.log(this.lastEvent);
-
-      this.paintingService.updatePaintingPosition(this.paintings).subscribe(next => {
-        this.toast.success('Painting updated successfully');
-      }, error => {
-        this.toast.error(error);
-      });
-
-      // this.paintings.forEach(element => {
-      //   console.log(element);
-      // });
     }
     this.lastEvent = $event.map(x => x);
   }

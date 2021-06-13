@@ -257,5 +257,10 @@ namespace PS.API.Data
                 return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
             }
         }
+
+        public void ClearChangeTracker()
+        {
+            this.context.ChangeTracker.Clear();
+        }
     }
 }

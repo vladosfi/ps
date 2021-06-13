@@ -29,7 +29,8 @@ namespace PS.API.Controllers
         private const string cannotDeleteMainImage = "You cannot delete main image";
         private const string failedToDeleteImage = "Failed to delete image";
         private const string failedToUpdatePainting = "Failed to update painting";
-        private const string paintingUpdatingFailed = "Updating painting {0} failed on save";
+        private const string paintingUpdateFailed = "Update painting {0} failed on save";
+        private const string paintingsUpdatingFailed = "Update paintings failed on save";
         private const string couldNotDeletePainting = "You cannot delete painting";
         private const string failedToDeletePainting = "Failed to delete painting";
         private const string failedToUpdatePaintingPosition = "Failed to update painting position";
@@ -282,28 +283,21 @@ namespace PS.API.Controllers
 
             var paintingsFromRepo = await this.repo.GetPaintingByIds(paintingIds);
 
-
-            var counter = 0;
-            foreach (var item in paintingsFromRepo)
-            {
-                System.Console.WriteLine(counter++ + " - " + item.Id + ": " + item.Position);
-            }
-
-            counter = 0;
             foreach (var painting in paintingForDetailsDto)
             {
-                System.Console.WriteLine(counter++ + " -- " + painting.Id + ": " + painting.Position);
-
                 var currentPainting = paintingsFromRepo.FirstOrDefault(p => p.Id == painting.Id);
                 if (currentPainting != null)
                 {
                     currentPainting.Position = painting.Position;
                 }
             }
+            
+            if (await this.repo.SaveAll())
+            {
+                return NoContent();
+            }
 
-            System.Console.WriteLine(Environment.NewLine + Environment.NewLine);
-
-            return NoContent();
+            throw new Exception(string.Format(paintingsUpdatingFailed));
         }
 
         [Authorize]
@@ -326,7 +320,7 @@ namespace PS.API.Controllers
                 return NoContent();
             }
 
-            throw new Exception(string.Format(paintingUpdatingFailed, id));
+            throw new Exception(string.Format(paintingUpdateFailed, id));
         }
 
         [Authorize]
