@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using PS.API.Helpers;
 using System;
-using PS.API.Dtos;
 
 namespace PS.API.Data
 {

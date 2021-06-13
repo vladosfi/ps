@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using PS.API.Data;
+using PS.API.Services.Messaging;
 
 namespace PS.API
 {
@@ -38,6 +39,7 @@ namespace PS.API
             services.AddScoped<IPSRepository, PSRepository>();
             services.AddScoped<IEventsRepository, EventsRepository>();            
             services.AddScoped<LogUserActivity>();
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.Configuration["SendGrid:ApiKey"]));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -88,6 +90,7 @@ namespace PS.API
 
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
 
