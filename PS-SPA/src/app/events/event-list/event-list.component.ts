@@ -37,6 +37,7 @@ export class EventListComponent implements OnInit {
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadEvents();
+    window.scroll(0,0);
   }
 
   loadEvents() {

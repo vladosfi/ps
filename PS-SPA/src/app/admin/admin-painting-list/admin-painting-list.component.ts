@@ -5,10 +5,8 @@ import { IPainting } from 'src/app/_interfaces/painting';
 import { PaintingService } from 'src/app/_services/painting.service';
 import { ToastService } from 'src/app/_services/toast.service';
 import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
-import { AdminService } from '../admin.service';
 import { FormControl } from '@angular/forms';
 import { KeyValuePair } from 'src/app/_interfaces/key-value-pair';
-import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-admin-painting-list',
@@ -31,22 +29,14 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
 
   constructor(private paintingService: PaintingService,
     private toast: ToastService,
-    private route: ActivatedRoute,
-    private adminService: AdminService) {
+    private route: ActivatedRoute,) {
 
     document.body.style.backgroundColor = "#A9D3E9";
     this.route.data.subscribe(data => {
       this.paintings = data['paintings'].result;
       this.pagination = data['paintings'].pagination;
     });
-
-    for (let index = 0; index < this.paintings.length; index++) {
-      this.kvp.push({ key: index, value: this.paintings[index].position });
-    }
-    // this.kvp.forEach(element => {
-    //   console.log(element.key + ' --- ' + element.value);
-    // });
-
+    this.setInitialOrder();
   }
 
   dropItem($event) {
@@ -97,9 +87,24 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
       });
   }
 
+  setInitialOrder() {
+    this.kvp = this.kvp.filter(item => item !== item);
+    console.log(this.kvp);
+
+    for (let index = 0; index < this.paintings.length; index++) {
+      this.kvp.push({ key: index, value: this.paintings[index].position });
+    }
+
+    for (let index = 0; index < this.paintings.length; index++) {
+      console.log(this.kvp[index].key + ' - ' + this.kvp[index].value);
+      console.log(this.paintings[index].position);
+    }
+  }
+
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadPaintings();
+    window.scroll(0,0);
   }
 
   loadPaintings() {
@@ -107,9 +112,12 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
       .subscribe((res: PaginatedResult<IPainting[]>) => {
         this.paintings = res.result;
         this.pagination = res.pagination;
+
+        this.setInitialOrder();
       }, error => {
         this.toast.error(error);
       });
+
   }
 
   deleteItem(paintingId: string) {

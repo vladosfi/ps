@@ -12,14 +12,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using PS.API.Data;
-using PS.API.Services.Messaging;
 
 namespace PS.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment currentEnvironment;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
+            this.currentEnvironment = env;
             Configuration = configuration;
         }
 
@@ -29,7 +31,17 @@ namespace PS.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            if (this.currentEnvironment.IsDevelopment())
+            {
+                //Show SQL queries in dev mode
+                services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging());
+            }
+            else
+            {
+                services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            }
+
+
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
@@ -37,9 +49,8 @@ namespace PS.API
             services.AddAutoMapper(typeof(PSRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IPSRepository, PSRepository>();
-            services.AddScoped<IEventsRepository, EventsRepository>();            
+            services.AddScoped<IEventsRepository, EventsRepository>();
             services.AddScoped<LogUserActivity>();
-            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.Configuration["SendGrid:ApiKey"]));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -55,9 +66,9 @@ namespace PS.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (this.currentEnvironment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -101,7 +112,7 @@ namespace PS.API
 
                 endpoints.MapControllerRoute(
                     name: "spa-fallback",
-                    defaults: new { controller = "Fallback", action = "Index"},
+                    defaults: new { controller = "Fallback", action = "Index" },
                     pattern: "{controller=Fallback}/{action=Index}/{id?}");
 
                 endpoints.MapFallbackToController("Index", "Fallback");
