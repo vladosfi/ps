@@ -101,7 +101,7 @@ namespace PS.API
 
             app.UseRouting();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            //app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
 

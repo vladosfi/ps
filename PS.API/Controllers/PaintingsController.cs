@@ -76,6 +76,7 @@ namespace PS.API.Controllers
             if (paintingToReturn != null)
             {
                 await this.repo.IncreasePaintingViews(id);
+                await this.repo.SaveAll();
                 return Ok(paintingToReturn);
             }
 
@@ -297,7 +298,7 @@ namespace PS.API.Controllers
                 return NoContent();
             }
 
-            throw new Exception(string.Format(paintingsUpdatingFailed));
+            return BadRequest(failedToUpdatePaintingPosition);
         }
 
         [Authorize]

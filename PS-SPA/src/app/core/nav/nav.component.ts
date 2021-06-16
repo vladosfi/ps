@@ -1,9 +1,13 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { ToastService } from '../../_services/toast.service';
 import { AuthService } from '../../_services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { NgcCookieConsentService, NgcInitializeEvent, NgcNoCookieLawEvent, NgcStatusChangeEvent } from 'ngx-cookieconsent';
+import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-nav',
@@ -17,6 +21,14 @@ export class NavComponent implements OnInit {
   languagesToShow: any;
   isCollapsed = true;
   public declarativeFormCaptchaValue: string;
+  baseUrl = environment.localhost;
+  //keep refs to subscriptions to be able to unsubscribe later
+  private popupOpenSubscription: Subscription;
+  private popupCloseSubscription: Subscription;
+  private initializeSubscription: Subscription;
+  private statusChangeSubscription: Subscription;
+  private revokeChoiceSubscription: Subscription;
+  private noCookieLawSubscription: Subscription;
 
   constructor(
     public authService: AuthService,
@@ -25,7 +37,8 @@ export class NavComponent implements OnInit {
     public translate: TranslateService,
     private renderer: Renderer2,
     private titleService: Title,
-    private metaService: Meta
+    private metaService: Meta,
+    private ccService: NgcCookieConsentService
   ) {
     translate.addLangs(['gb', 'bg', 'ru', 'de']);
     translate.setDefaultLang('gb');
@@ -47,6 +60,40 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
+    this.initCookies();
+  }
+
+  initCookies() {
+    // subscribe to cookieconsent observables to react to main events
+    this.popupOpenSubscription = this.ccService.popupOpen$.subscribe(
+      () => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
+
+    this.popupCloseSubscription = this.ccService.popupClose$.subscribe(
+      () => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
+
+    this.initializeSubscription = this.ccService.initialize$.subscribe(
+      (event: NgcInitializeEvent) => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
+
+    this.statusChangeSubscription = this.ccService.statusChange$.subscribe(
+      (event: NgcStatusChangeEvent) => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
+
+    this.revokeChoiceSubscription = this.ccService.revokeChoice$.subscribe(
+      () => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
+
+    this.noCookieLawSubscription = this.ccService.noCookieLaw$.subscribe(
+      (event: NgcNoCookieLawEvent) => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
   }
 
   login(model) {
@@ -77,8 +124,8 @@ export class NavComponent implements OnInit {
     //window.location.reload();
     //this.router.navigate([window.location.href]);
     let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigate([currentUrl]);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
     });
   }
 
@@ -90,25 +137,52 @@ export class NavComponent implements OnInit {
     this.authService.currentUser = null;
     this.router.navigate(['/home']);
   }
-  
+
   setSiteTitle() {
     //console.log(this.translate.instant('GENERAL.TITLE'));
     this.translate.get('GENERAL.TITLE').subscribe((newTitle: string) => {
       this.titleService.setTitle(newTitle);
     });
+
+    this.translate
+      .get(['cookie.header', 'cookie.message', 'cookie.dismiss', 'cookie.allow', 'cookie.deny', 'cookie.link', 'cookie.policy'])
+      .subscribe(data => {
+
+        this.ccService.getConfig().content = this.ccService.getConfig().content || {};
+        // Override default messages with the translated ones
+        this.ccService.getConfig().content.header = data['cookie.header'];
+        this.ccService.getConfig().content.message = data['cookie.message'];
+        this.ccService.getConfig().content.dismiss = data['cookie.dismiss'];
+        this.ccService.getConfig().content.allow = data['cookie.allow'];
+        this.ccService.getConfig().content.deny = data['cookie.deny'];
+        this.ccService.getConfig().content.link = data['cookie.link'];
+        this.ccService.getConfig().content.policy = data['cookie.policy'];
+
+        this.ccService.destroy();//remove previous cookie bar (with default messages)
+        this.ccService.init(this.ccService.getConfig()); // update config with translated messages
+      });
+
   }
 
-    setMetaTags(){
+  setMetaTags() {
     this.translate.get('GENERAL.META-KEYWORDS').subscribe((keywords: string) => {
       //console.log(keywords);
-      this.metaService.addTag( { name:'keywords',keywords});
+      this.metaService.addTag({ name: 'keywords', keywords });
     });
 
     this.translate.get('GENERAL.META-DESCRIPTION').subscribe((description: string) => {
-      this.metaService.addTag( { name:'description',description});
+      this.metaService.addTag({ name: 'description', description });
     });
+  }
 
-      
-    }
+  ngOnDestroy() {
+    // unsubscribe to cookieconsent observables to prevent memory leaks
+    this.popupOpenSubscription.unsubscribe();
+    this.popupCloseSubscription.unsubscribe();
+    this.initializeSubscription.unsubscribe();
+    this.statusChangeSubscription.unsubscribe();
+    this.revokeChoiceSubscription.unsubscribe();
+    this.noCookieLawSubscription.unsubscribe();
+  }
 
 }

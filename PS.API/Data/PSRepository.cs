@@ -34,44 +34,56 @@ namespace PS.API.Data
 
         public async Task<Like> GetLike(int userId, int recipientId)
         {
-            return await this.context.Likes.FirstOrDefaultAsync(u => u.LikerId == userId && u.LikeeId == recipientId);
+            return await this.context.Likes
+                            .FirstOrDefaultAsync(u => u.LikerId == userId && u.LikeeId == recipientId);
         }
 
         public async Task<Photo> GetMainPhotoForUser(int userId)
         {
-            return await this.context.Photos.Where(u => u.UserId == userId).FirstOrDefaultAsync(p => p.IsMain);
+            return await this.context.Photos
+                            .Where(u => u.UserId == userId)
+                            .FirstOrDefaultAsync(p => p.IsMain);
         }
 
         public async Task<Photo> GetPhoto(int id)
         {
-            var photo = await this.context.Photos.FirstOrDefaultAsync(p => p.Id == id);
+            var photo = await this.context.Photos
+                            .FirstOrDefaultAsync(p => p.Id == id);
 
             return photo;
         }
 
         public async Task<Image> GetImage(string id)
         {
-            var image = await this.context.Images.FirstOrDefaultAsync(i => i.Id == id);
+            var image = await this.context.Images
+                                .FirstOrDefaultAsync(i => i.Id == id);
 
             return image;
         }
 
         public async Task<Image> GetMainImageForPainting(string paintingId)
         {
-            return await this.context.Images.Where(i => i.PaintingId == paintingId).FirstOrDefaultAsync(i => i.IsMain == true);
+            return await this.context.Images
+                            .Where(i => i.PaintingId == paintingId)
+                            .FirstOrDefaultAsync(i => i.IsMain == true);
         }
 
         public async Task<User> GetUser(int id)
         {
-            var user = await this.context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await this.context.Users
+                                .Include(p => p.Photos)
+                                .FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
         }
 
         public async Task<PagedList<Painting>> GetPapintings(PaintingParams paintingParams)
         {
-            var paintings = this.context.Paintings.Include(p => p.Images).OrderByDescending(p => p.Position)
-            .ThenByDescending(p => p.CreatedOn).AsQueryable();
+            var paintings = this.context.Paintings
+                        .Include(p => p.Images)
+                        .OrderByDescending(p => p.Position)
+                        .ThenByDescending(p => p.CreatedOn)
+                        .AsQueryable();
 
             if (paintingParams.CategoryId != 0)
             {
@@ -109,7 +121,8 @@ namespace PS.API.Data
 
             if (paintingParams.Name != string.Empty)
             {
-                paintings = paintings.Where(p => EF.Functions.Like(p.Name, $"%{paintingParams.Name}%"));
+                paintings = paintings
+                    .Where(p => EF.Functions.Like(p.Name, $"%{paintingParams.Name}%"));
             }
 
             return await PagedList<Painting>.CreateAsync(paintings, paintingParams.PageNumber, paintingParams.PageSize);
@@ -118,38 +131,41 @@ namespace PS.API.Data
 
         public async Task<Painting> GetPaintingById(string id, PaintingParams paintingParams)
         {
-            //var painting = await this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
-            var painting = this.context.Paintings.Include(p => p.Images).Include(c => c.Category).AsQueryable();
-
             var currentLanguage = paintingParams?.Language.ToLower();
+            //var painting = await this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
 
-            painting = painting.Select(p => new Painting
-            {
-                Id = p.Id,
-                Available = p.Available,
-                CreatedOn = p.CreatedOn,
-                Images = p.Images,
-                CategoryId = p.CategoryId,
-                Name =
-                    currentLanguage == "bg" ? p.Name :
-                    currentLanguage == "de" ? p.NameDe :
-                    currentLanguage == "ru" ? p.NameRu : p.NameGb,
-                Description =
-                    currentLanguage == "bg" ? p.Description :
-                    currentLanguage == "de" ? p.DescriptionDe :
-                    currentLanguage == "ru" ? p.DescriptionRu : p.DescriptionGb,
-                SizeX = p.SizeX,
-                SizeY = p.SizeY,
-                ViewCount = p.ViewCount,
-                Position = p.Position
-            });
+            return await this.context.Paintings
+                            .Include(p => p.Images)
+                            .Include(c => c.Category)
+                            .Select(p => new Painting
+                            {
+                                Id = p.Id,
+                                Available = p.Available,
+                                CreatedOn = p.CreatedOn,
+                                Images = p.Images,
+                                CategoryId = p.CategoryId,
+                                Name =
+                                    currentLanguage == "bg" ? p.Name :
+                                    currentLanguage == "de" ? p.NameDe :
+                                    currentLanguage == "ru" ? p.NameRu : p.NameGb,
+                                Description =
+                                    currentLanguage == "bg" ? p.Description :
+                                    currentLanguage == "de" ? p.DescriptionDe :
+                                    currentLanguage == "ru" ? p.DescriptionRu : p.DescriptionGb,
+                                SizeX = p.SizeX,
+                                SizeY = p.SizeY,
+                                ViewCount = p.ViewCount,
+                                Position = p.Position
+                            }).FirstOrDefaultAsync(p => p.Id == id);
 
-            return await painting.FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<Painting> GetPaintingByIdForEdit(string id)
         {
-            var painting = await this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
+            var painting = await this.context.Paintings
+                .Include(p => p.Images.OrderByDescending(i => i.IsMain))
+                .Include(c => c.Category)
+                .FirstOrDefaultAsync(p => p.Id == id);
 
             return painting;
         }
@@ -157,9 +173,11 @@ namespace PS.API.Data
 
         public async Task IncreasePaintingViews(string id)
         {
-            var paintingEntity = await this.context.Paintings.FirstOrDefaultAsync(e => e.Id == id);
+            var paintingEntity = await this.context
+                .Paintings
+                .FirstOrDefaultAsync(p => p.Id == id);
+
             ++paintingEntity.ViewCount;
-            await SaveAll();
         }
 
         public async Task<Painting> AddPainting(Painting painting)
@@ -176,7 +194,9 @@ namespace PS.API.Data
 
         public async Task<int> GetLastPaintingPosition()
         {
-            var lastPainting = await this.context.Paintings.OrderByDescending(p => p.Position).FirstOrDefaultAsync();
+            var lastPainting = await this.context.Paintings
+                        .OrderByDescending(p => p.Position)
+                        .FirstOrDefaultAsync();
 
             if (lastPainting != null)
             {

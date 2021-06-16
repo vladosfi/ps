@@ -41,21 +41,29 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
 
   dropItem($event) {
     //console.log($event);
+    let isPositionChanged = false;
 
     for (let index = 0; index < this.paintings.length; index++) {
+
+      if (!isPositionChanged && this.paintings[index].position !== this.kvp[index].value) {
+        isPositionChanged = true;
+      }
+
       this.paintings[index].position = this.kvp[index].value;
       //console.log(index + '-' + this.paintings[index].position)
     }
 
-    this.paintingService.updatePaintingPosition(this.paintings).subscribe(next => {
-      this.toast.success('Painting updated successfully');
-    }, error => {
-      this.toast.error(error);
-    });
+    if (isPositionChanged) {
+      this.paintingService.updatePaintingPosition(this.paintings).subscribe(next => {
+        this.toast.success('Painting updated successfully');
+      }, error => {
+        this.toast.error(error);
+      });
+    }
   }
 
-  onChange($event) {
-    // zapazvane na promenite pozicii
+  onChangePosition($event) {
+
     if ($event.length > 0 && !this.lastEvent.every((x, idx) => x === $event[idx])) {
       this.orderChangeCounter++;
     }
@@ -104,7 +112,7 @@ export class AdminPaintingListComponent implements OnInit, OnDestroy, AfterViewI
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadPaintings();
-    window.scroll(0,0);
+    window.scroll(0, 0);
   }
 
   loadPaintings() {

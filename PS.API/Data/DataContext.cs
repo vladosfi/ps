@@ -25,10 +25,6 @@ namespace PS.API.Data
                 .HasIndex(u => u.Username)
                 .IsUnique();
 
-            builder.Entity<Painting>()
-                .Property(b => b.Position)
-                .HasDefaultValue(1000000);
-
             builder.Entity<Like>()
                .HasKey(k => new { k.LikerId, k.LikeeId });
 
