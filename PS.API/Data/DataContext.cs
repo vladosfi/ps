@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using PS.API.Models;
 
@@ -24,6 +25,12 @@ namespace PS.API.Data
             builder.Entity<User>()
                 .HasIndex(u => u.Username)
                 .IsUnique();
+            
+            //ShadowProperties
+            // builder.Entity<User>()
+            //     .Property<DateTime?>("CreatedOn");
+            // builder.Entity<User>()
+            //     .Property<DateTime?>("UpdatedOn");
 
             builder.Entity<Like>()
                .HasKey(k => new { k.LikerId, k.LikeeId });
