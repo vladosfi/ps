@@ -224,9 +224,7 @@ namespace PS.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Position")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasDefaultValue(1000000);
+                        .HasColumnType("INTEGER");
 
                     b.Property<float>("SizeX")
                         .HasColumnType("REAL");

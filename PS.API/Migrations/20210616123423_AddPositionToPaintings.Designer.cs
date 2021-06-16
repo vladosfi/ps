@@ -9,7 +9,7 @@ using PS.API.Data;
 namespace PS.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210609101114_AddPositionToPaintings")]
+    [Migration("20210616123423_AddPositionToPaintings")]
     partial class AddPositionToPaintings
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -226,9 +226,7 @@ namespace PS.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Position")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasDefaultValue(1000000);
+                        .HasColumnType("INTEGER");
 
                     b.Property<float>("SizeX")
                         .HasColumnType("REAL");

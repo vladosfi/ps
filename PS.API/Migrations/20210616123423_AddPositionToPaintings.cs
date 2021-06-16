@@ -11,7 +11,7 @@ namespace PS.API.Migrations
                 table: "Paintings",
                 type: "INTEGER",
                 nullable: false,
-                defaultValue: 1000000);
+                defaultValue: 0);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Username",
