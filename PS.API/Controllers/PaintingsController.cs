@@ -68,14 +68,25 @@ namespace PS.API.Controllers
         public async Task<IActionResult> GetPainting(string id, [FromQuery] PaintingParams paintingParams)
         {
 
-            var painting = await this.repo.GetPaintingById(id, paintingParams);
+            var currentLanguage = paintingParams?.Language.ToLower();
 
+            var painting = await this.repo.GetPaintingById(id);
+
+            painting.Name = currentLanguage == "bg" ? painting.Name :
+                currentLanguage == "de" ? painting.NameDe :
+                currentLanguage == "ru" ? painting.NameRu : painting.NameGb;
+
+            painting.Description = currentLanguage == "bg" ? painting.Description :
+                    currentLanguage == "de" ? painting.DescriptionDe :
+                    currentLanguage == "ru" ? painting.DescriptionRu : painting.DescriptionGb;
+            
+            painting.ViewCount++;                
+                        
             var paintingToReturn = this.mapper.Map<PaintingForDetailsDto>(painting);
 
 
             if (paintingToReturn != null)
             {
-                await this.repo.IncreasePaintingViews(id);
                 await this.repo.SaveAll();
                 return Ok(paintingToReturn);
             }
@@ -88,13 +99,12 @@ namespace PS.API.Controllers
         public async Task<IActionResult> GetPaintingForEdit(string id)
         {
 
-            var painting = await this.repo.GetPaintingByIdForEdit(id);
+            var painting = await this.repo.GetPaintingByIdOrdered(id);
 
             var paintingToReturn = this.mapper.Map<PaintingForEditDetailsDto>(painting);
 
             if (paintingToReturn != null)
             {
-                await this.repo.IncreasePaintingViews(id);
                 return Ok(paintingToReturn);
             }
 
@@ -138,7 +148,7 @@ namespace PS.API.Controllers
         [HttpPost("{paintingId}/images")]
         public async Task<IActionResult> AddImagesForPainting(string paintingId, [FromForm] ImageForCreateDto ImageForCreateDto)
         {
-            var currentPainting = await this.repo.GetPaintingByIdForEdit(paintingId);
+            var currentPainting = await this.repo.GetPaintingByIdOrdered(paintingId);
 
             if (currentPainting == null)
             {
@@ -292,7 +302,7 @@ namespace PS.API.Controllers
                     currentPainting.Position = painting.Position;
                 }
             }
-            
+
             if (await this.repo.SaveAll())
             {
                 return NoContent();
@@ -305,7 +315,7 @@ namespace PS.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, PaintingForUpdateDto paintingForDetailsDto)
         {
-            var paintingFromRepo = await this.repo.GetPaintingByIdForEdit(id);
+            var paintingFromRepo = await this.repo.GetPaintingByIdOrdered(id);
 
             if (paintingFromRepo == null)
             {

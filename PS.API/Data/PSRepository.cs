@@ -129,38 +129,15 @@ namespace PS.API.Data
         }
 
 
-        public async Task<Painting> GetPaintingById(string id, PaintingParams paintingParams)
+        public async Task<Painting> GetPaintingById(string id)
         {
-            var currentLanguage = paintingParams?.Language.ToLower();
-            //var painting = await this.context.Paintings.Include(p => p.Images.OrderByDescending(i => i.IsMain)).Include(c => c.Category).FirstOrDefaultAsync(p => p.Id == id);
-
             return await this.context.Paintings
                             .Include(p => p.Images)
                             .Include(c => c.Category)
-                            .Select(p => new Painting
-                            {
-                                Id = p.Id,
-                                Available = p.Available,
-                                CreatedOn = p.CreatedOn,
-                                Images = p.Images,
-                                CategoryId = p.CategoryId,
-                                Name =
-                                    currentLanguage == "bg" ? p.Name :
-                                    currentLanguage == "de" ? p.NameDe :
-                                    currentLanguage == "ru" ? p.NameRu : p.NameGb,
-                                Description =
-                                    currentLanguage == "bg" ? p.Description :
-                                    currentLanguage == "de" ? p.DescriptionDe :
-                                    currentLanguage == "ru" ? p.DescriptionRu : p.DescriptionGb,
-                                SizeX = p.SizeX,
-                                SizeY = p.SizeY,
-                                ViewCount = p.ViewCount,
-                                Position = p.Position
-                            }).FirstOrDefaultAsync(p => p.Id == id);
-
+                            .FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task<Painting> GetPaintingByIdForEdit(string id)
+        public async Task<Painting> GetPaintingByIdOrdered(string id)
         {
             var painting = await this.context.Paintings
                 .Include(p => p.Images.OrderByDescending(i => i.IsMain))
@@ -168,16 +145,6 @@ namespace PS.API.Data
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             return painting;
-        }
-
-
-        public async Task IncreasePaintingViews(string id)
-        {
-            var paintingEntity = await this.context
-                .Paintings
-                .FirstOrDefaultAsync(p => p.Id == id);
-
-            ++paintingEntity.ViewCount;
         }
 
         public async Task<Painting> AddPainting(Painting painting)

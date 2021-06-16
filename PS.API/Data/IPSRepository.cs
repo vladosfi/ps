@@ -32,15 +32,13 @@ namespace PS.API.Data
 
         Task<Image> GetImage(string id);
 
-        Task<Painting> GetPaintingById(string id, PaintingParams paintingParams = null);
+        Task<Painting> GetPaintingById(string id);
 
         Task<ICollection<Painting>> GetPaintingByIds(ICollection<string> paintingIds);
         
         Task<int> GetLastPaintingPosition();
 
-        Task<Painting> GetPaintingByIdForEdit(string id);
-
-        Task IncreasePaintingViews(string id);
+        Task<Painting> GetPaintingByIdOrdered(string id);
 
         Task<Painting> AddPainting(Painting painting);
     }
