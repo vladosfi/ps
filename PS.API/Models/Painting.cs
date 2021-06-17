@@ -8,6 +8,11 @@ namespace PS.API.Models
 {
     public class Painting : BaseModel<string>
     {
+        private const int minNameLength = 2;
+        private const int maxNameLength = 30;
+        private const int minDeskLength = 10;
+        private const int maxDeskLength = 500;
+
         public Painting()
         {
             this.Id = Guid.NewGuid().ToString();
@@ -15,42 +20,41 @@ namespace PS.API.Models
             this.CreatedOn = DateTime.UtcNow;
         }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int Position { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MinLength(minNameLength), MaxLength(maxNameLength)]
         public string Name { get; set; }
 
         [Required]
-        [StringLength(500)]
+        [MinLength(minDeskLength), MaxLength(maxDeskLength)]
         public string Description { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MinLength(minNameLength), MaxLength(maxNameLength)]
         public string NameGb { get; set; }
 
         [Required]
-        [StringLength(500)]
+        [MinLength(minDeskLength), MaxLength(maxDeskLength)]
         public string DescriptionGb { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MinLength(minNameLength), MaxLength(maxNameLength)]
         public string NameDe { get; set; }
 
         [Required]
-        [StringLength(500)]
+        [MinLength(minDeskLength), MaxLength(maxDeskLength)]
         public string DescriptionDe { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MinLength(minNameLength), MaxLength(maxNameLength)]
         public string NameRu { get; set; }
 
         [Required]
-        [StringLength(500)]
+        [MinLength(minDeskLength), MaxLength(maxDeskLength)]
         public string DescriptionRu { get; set; }
 
-        [Required]
         public bool Available { get; set; }
 
         public float SizeX { get; set; }
@@ -60,10 +64,7 @@ namespace PS.API.Models
         public long ViewCount { get; set; }
 
         public Category Category { get; set; }
-
-        [Required]
         public int CategoryId { get; set; }
-
         public ICollection<Image> Images { get; set; }
     }
 }

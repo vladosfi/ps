@@ -14,9 +14,9 @@ export class PaintingAddComponent implements OnInit {
   model: any = {};
   paintingDetails: IPaintingDetails;
   nameMinLen: number = 2;
-  nameMaxLen: number = 50;
+  nameMaxLen: number = 30;
   descriptionMinLen: number = 10;
-  descriptionMaxLen: number = 200;
+  descriptionMaxLen: number = 500;
 
   constructor(
     private paintingService: PaintingService,
