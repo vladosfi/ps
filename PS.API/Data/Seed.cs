@@ -17,7 +17,7 @@ namespace PS.API.Data
         {
             if (!context.Users.Any())
             {
-                var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
+                var userData = System.IO.File.ReadAllText("Data/Seed/UserSeedData.json");
                 var users = JsonConvert.DeserializeObject<List<User>>(userData);
 
                 foreach (var user in users)
@@ -38,8 +38,8 @@ namespace PS.API.Data
         {
             if (!context.Categories.Any())
             {
-                var categoriesData = System.IO.File.ReadAllText("Data/CategorySeedData.json");
-                var paintingsData = System.IO.File.ReadAllText("Data/PaintingSeedData.json");
+                var categoriesData = System.IO.File.ReadAllText("Data/Seed/CategorySeedData.json");
+                var paintingsData = System.IO.File.ReadAllText("Data/Seed/PaintingSeedData.json");
                 var categories = JsonConvert.DeserializeObject<List<Category>>(categoriesData);
                 var paintings = JsonConvert.DeserializeObject<List<Painting>>(paintingsData);
                 var position = 0;
