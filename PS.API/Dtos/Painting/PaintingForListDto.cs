@@ -1,6 +1,6 @@
 using System;
 
-namespace PS.API.Dtos
+namespace PS.API.Dtos.Painting
 {
     public class PaintingForListDto
     {

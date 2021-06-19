@@ -11,6 +11,7 @@ using PS.API.Data;
 using PS.API.Dtos;
 using PS.API.Helpers;
 using PS.API.Models;
+using PS.API.Dtos.Painting;
 
 namespace PS.API.Controllers
 {
@@ -146,7 +147,7 @@ namespace PS.API.Controllers
 
         [Authorize]
         [HttpPost("{paintingId}/images")]
-        public async Task<IActionResult> AddImagesForPainting(string paintingId, [FromForm] ImageForCreateDto ImageForCreateDto)
+        public async Task<IActionResult> AddImagesForPainting(string paintingId, [FromForm] PaintingImageForCreateInputModel imageForCreateDto)
         {
             var currentPainting = await this.repo.GetPaintingByIdOrdered(paintingId);
 
@@ -155,7 +156,7 @@ namespace PS.API.Controllers
                 return BadRequest(couldNotAddImage);
             }
 
-            if (ImageForCreateDto.File.Length <= 0)
+            if (imageForCreateDto.File.Length <= 0)
             {
                 return BadRequest(invalidFileLength);
             }
@@ -170,7 +171,7 @@ namespace PS.API.Controllers
             }
 
             var imageToAdd = new Image();
-            var uploadedFileExtension = Path.GetExtension(ImageForCreateDto.File.FileName);
+            var uploadedFileExtension = Path.GetExtension(imageForCreateDto.File.FileName);
             imageToAdd.ImageFileName = imageToAdd.Id + uploadedFileExtension;
             imageToAdd.Url = imagesUplaoadFolderPath;
             imageToAdd.Name = currentPainting.Name;
@@ -181,7 +182,7 @@ namespace PS.API.Controllers
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                await ImageForCreateDto.File.CopyToAsync(stream);
+                await imageForCreateDto.File.CopyToAsync(stream);
             }
 
             ThumbnailGenerator.GenerateThumbnail(uploadsFolderPath, fileName, thumbnailFolder, maxThumbnailSize);

@@ -1,6 +1,6 @@
-namespace PS.API.Dtos
+namespace PS.API.Dtos.Painting
 {
-    public class EventImageForDetailedDto
+    public class PaintingImageForDetailedDto
     {
         public string Id { get; set; }
 

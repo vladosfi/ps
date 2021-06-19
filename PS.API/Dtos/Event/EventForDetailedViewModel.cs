@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 
-namespace PS.API.Dtos
+namespace PS.API.Dtos.Event
 {
     public class EventDetailsDto
     {
         public EventDetailsDto()
         {
-            this.Images = new HashSet<EventImageForDetailedDto>();
+            this.Images = new HashSet<ImageForDetailedViewModel>();
         }
         public string Id { get; set; }
         public string Name { get; set; }
@@ -22,7 +22,7 @@ namespace PS.API.Dtos
         public string Author { get; set; } 
         public DateTime CreatedOn { get; set; }
         
-        public ICollection<EventImageForDetailedDto> Images { get; set; }
+        public ICollection<ImageForDetailedViewModel> Images { get; set; }
         //public ICollection<EventImageForDetailedDto> EventImage { get; set; }
     }
 }

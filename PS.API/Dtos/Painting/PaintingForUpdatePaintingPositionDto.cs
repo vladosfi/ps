@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PS.API.Dtos
+namespace PS.API.Dtos.Painting
 {
     public class PaintingForUpdatePaintingPositionDto
     {

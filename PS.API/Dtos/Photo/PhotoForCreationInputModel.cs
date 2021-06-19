@@ -1,11 +1,11 @@
 using System;
 using Microsoft.AspNetCore.Http;
 
-namespace PS.API.Dtos
+namespace PS.API.Dtos.Photo
 {
-    public class PhotoForCreationDto
+    public class PhotoForCreationInputModel
     {
-        public PhotoForCreationDto()
+        public PhotoForCreationInputModel()
         {
             DateAdded = DateTime.UtcNow;
         }

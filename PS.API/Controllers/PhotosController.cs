@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using PS.API.Data;
-using PS.API.Dtos;
 using PS.API.Helpers;
 using PS.API.Models;
 using CloudinaryDotNet;
@@ -11,6 +10,7 @@ using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using PS.API.Dtos.Photo;
 
 namespace PS.API.Controllers
 {
@@ -60,13 +60,13 @@ namespace PS.API.Controllers
         {
             var photoFromRepo = await this.repo.GetPhoto(id);
 
-            var photo = this.mapper.Map<PhotoForReturnDto>(photoFromRepo);
+            var photo = this.mapper.Map<PhotoForReturnViewModel>(photoFromRepo);
 
             return Ok(photo);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPhotoForUser(int userId, [FromForm] PhotoForCreationDto photoForCreationDto)
+        public async Task<IActionResult> AddPhotoForUser(int userId, [FromForm] PhotoForCreationInputModel photoForCreationDto)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {
@@ -110,7 +110,7 @@ namespace PS.API.Controllers
 
             if (await this.repo.SaveAll())
             {
-                var photoToReturn = this.mapper.Map<PhotoForReturnDto>(photo);
+                var photoToReturn = this.mapper.Map<PhotoForReturnViewModel>(photo);
                 //return CreatedAtRoute(nameof(this.GetPhoto), new { id = photo.Id }, photoToReturn);
                 return CreatedAtAction(nameof(this.GetPhoto), new { id = photo.Id }, photoToReturn);
             }

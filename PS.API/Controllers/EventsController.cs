@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
+using System.Security.Claims;
 using PS.API.Data;
-using PS.API.Dtos;
 using PS.API.Helpers;
 using PS.API.Models;
-using System.Linq;
-using System.Security.Claims;
+using PS.API.Dtos.Event;
 
 namespace PS.API.Controllers
 {
@@ -56,10 +56,10 @@ namespace PS.API.Controllers
         {
             var eventsFromRepo = await this.repo.GetEvents(eventParams);
 
-            IEnumerable<EventsForListDto> eventsToReturn;
+            IEnumerable<EventsForListViewModel> eventsToReturn;
             if (eventsFromRepo != null)
             {
-                eventsToReturn = this.mapper.Map<IEnumerable<EventsForListDto>>(eventsFromRepo);
+                eventsToReturn = this.mapper.Map<IEnumerable<EventsForListViewModel>>(eventsFromRepo);
 
                 Response.AddPagination(eventsFromRepo.CurrentPage, eventsFromRepo.PageSize, eventsFromRepo.TotalCount, eventsFromRepo.TotalPages);
                 return Ok(eventsToReturn);
@@ -73,7 +73,7 @@ namespace PS.API.Controllers
         public async Task<IActionResult> GetLatestEvents([FromQuery] EventParams eventParams)
         {
             var eventsFromRepo = await this.repo.GetLatestEvents(eventParams);
-            var eventsToReturn = this.mapper.Map<IEnumerable<EventsLatestDto>>(eventsFromRepo);
+            var eventsToReturn = this.mapper.Map<IEnumerable<EventsLatestViewModel>>(eventsFromRepo);
 
             if (eventsToReturn != null)
             {
@@ -101,7 +101,7 @@ namespace PS.API.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> AddEvent([FromBody] EventForCreationDto eventForAddDto)
+        public async Task<IActionResult> AddEvent([FromBody] EventForCreationInputModel eventForAddDto)
         {
             var eventForCreation = this.mapper.Map<Event>(eventForAddDto);
             eventForCreation.Author = User.FindFirst(ClaimTypes.Name).Value;
@@ -120,7 +120,7 @@ namespace PS.API.Controllers
 
         [HttpPut("{eventId}")]
         [Authorize]
-        public async Task<IActionResult> UpdateEvent(int eventId, [FromBody] EventForCreationDto eventForUpdate)
+        public async Task<IActionResult> UpdateEvent(int eventId, [FromBody] EventForCreationInputModel eventForUpdate)
         {
             var eventFromRepo = await this.repo.GetEventById(eventId);
 
@@ -163,7 +163,7 @@ namespace PS.API.Controllers
 
         [Authorize]
         [HttpPost("{eventId}/images")]
-        public async Task<IActionResult> AddImagesForEvent(int eventId, [FromForm] ImageForCreateDto ImageForCreateDto)
+        public async Task<IActionResult> AddImagesForEvent(int eventId, [FromForm] ImageForCreateInputModel imageForCreateDto)
         {
             var currentEvent = await this.repo.GetEventById(eventId);
 
@@ -172,7 +172,7 @@ namespace PS.API.Controllers
                 return BadRequest(couldNotAddImage);
             }
 
-            if (ImageForCreateDto.File.Length <= 0)
+            if (imageForCreateDto.File.Length <= 0)
             {
                 return BadRequest(invalidFileLength);
             }
@@ -187,7 +187,7 @@ namespace PS.API.Controllers
             }
 
             var imageToAdd = new EventImage();
-            var uploadedFileExtension = Path.GetExtension(ImageForCreateDto.File.FileName);
+            var uploadedFileExtension = Path.GetExtension(imageForCreateDto.File.FileName);
             imageToAdd.ImageFileName = imageToAdd.Id + uploadedFileExtension;
             imageToAdd.Url = imagesUplaoadFolderPath;
             imageToAdd.Name = currentEvent.Name;
@@ -197,7 +197,7 @@ namespace PS.API.Controllers
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                await ImageForCreateDto.File.CopyToAsync(stream);
+                await imageForCreateDto.File.CopyToAsync(stream);
             }
 
             ThumbnailGenerator.GenerateThumbnail(uploadsFolderPath, fileName, thumbnailFolder, maxThumbnailSize);

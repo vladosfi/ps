@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PS.API.Dtos
+namespace PS.API.Dtos.User
 {
-    public class UserForLoginDto
+    public class UserForLoginInputModel
     {
         public string Username { get; set; }
 

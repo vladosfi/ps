@@ -1,10 +1,9 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
-namespace PS.API.Dtos
+namespace PS.API.Dtos.Painting
 {
-    public class ImageForCreateDto
+    public class PaintingImageForCreateInputModel
     {
         public string Id { get; set; }
 

@@ -6,7 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PS.API.Data;
-using PS.API.Dtos;
+using PS.API.Dtos.User;
 using PS.API.Helpers;
 using PS.API.Models;
 
@@ -51,7 +51,7 @@ namespace PS.API.Controllers
 
             var users = await this.repo.GetUsers(userParams);
 
-            var usersToReturn = this.mapper.Map<IEnumerable<UserForListDto>>(users);
+            var usersToReturn = this.mapper.Map<IEnumerable<UserForListViewModel>>(users);
 
             Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
 
@@ -65,13 +65,13 @@ namespace PS.API.Controllers
         {
             var user = await this.repo.GetUser(id);
 
-            var userToReturn = this.mapper.Map<UserForDetailedDto>(user);
+            var userToReturn = this.mapper.Map<UserForDetailedViewModel>(user);
 
             return Ok(userToReturn);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
+        public async Task<IActionResult> UpdateUser(int id, UserForUpdateInputModel userForUpdateDto)
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {

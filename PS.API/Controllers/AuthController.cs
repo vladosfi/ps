@@ -2,7 +2,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PS.API.Data;
-using PS.API.Dtos;
 using PS.API.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -11,6 +10,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using PS.API.Dtos.User;
 
 namespace PS.API.Controllers
 {
@@ -36,7 +36,7 @@ namespace PS.API.Controllers
 
         [HttpPost("register")]
         [Authorize]
-        public async Task<IActionResult> Regietr(UserForRegisterDto userForRegisterDto)
+        public async Task<IActionResult> Regietr(UserForRegisterInputModel userForRegisterDto)
         {
             //Only logedin users can register new user
             if (User.FindFirst(ClaimTypes.NameIdentifier).Value == null)
@@ -57,14 +57,14 @@ namespace PS.API.Controllers
 
             var createdUser = await this.repo.Register(userToCreate, userForRegisterDto.Password);
 
-            var userToReturn = this.mapper.Map<UserForDetailedDto>(createdUser);
+            var userToReturn = this.mapper.Map<UserForDetailedViewModel>(createdUser);
 
             return CreatedAtAction(nameof(UsersController.GetUser), new { controller = "Users", id = createdUser.Id }, userToReturn);
 
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
+        public async Task<IActionResult> Login(UserForLoginInputModel userForLoginDto)
         {
             var userFromRepo = await this.repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
@@ -94,7 +94,7 @@ namespace PS.API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            var user = this.mapper.Map<UserForListDto>(userFromRepo);
+            var user = this.mapper.Map<UserForListViewModel>(userFromRepo);
 
             return Ok(new
             {

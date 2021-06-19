@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PS.API.Dtos
+namespace PS.API.Dtos.Event
 {
-    public class EventForCreationDto
+    public class EventForCreationInputModel
     {
         [Required]
         [StringLength(60, MinimumLength = 5, ErrorMessage = "Event name must be between 5 and 60 characters")]

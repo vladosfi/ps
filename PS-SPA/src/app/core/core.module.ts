@@ -18,7 +18,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     "domain": "localhost"
   },
   "position": "bottom",
-  "theme": "edgeless",
+  "theme": "classic",
   "palette": {
     "popup": {
       "background": "#21539c",

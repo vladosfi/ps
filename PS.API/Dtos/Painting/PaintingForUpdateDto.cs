@@ -1,23 +1,14 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace PS.API.Dtos
+namespace PS.API.Dtos.Painting
 {
-    public class PaintingForCreationDto
+    public class PaintingForUpdateDto
     {
-
-        public PaintingForCreationDto()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
-        public string Id { get; set; }
-
         [Required]
         public string Name { get; set; }
 
         [Required]
         public string Description { get; set; }
-
         [Required]
         public string NameGb { get; set; }
         [Required]

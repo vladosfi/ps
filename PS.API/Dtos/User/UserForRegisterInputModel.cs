@@ -1,11 +1,11 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace PS.API.Dtos
+namespace PS.API.Dtos.User
 {
-    public class UserForRegisterDto
+    public class UserForRegisterInputModel
     {
-        public UserForRegisterDto()
+        public UserForRegisterInputModel()
         {
             this.Created = DateTime.UtcNow;
             this.LastActive = DateTime.UtcNow;
