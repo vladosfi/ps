@@ -107,3 +107,11 @@ app-detail a.nav-link {
 .ngx-gallery-image.ngx-gallery-active{
   border: 1px solid #333333;
 }
+
+/* Event Main Images */
+.article .article-img {
+  height: 300px;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;
+}

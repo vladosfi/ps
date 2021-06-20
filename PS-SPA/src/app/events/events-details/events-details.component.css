@@ -4,6 +4,7 @@
   height: 300px;
   overflow: hidden;
   cursor: pointer;
+  text-align: center;
 }
 
 /* [2] Transition property for smooth transformation of images */
