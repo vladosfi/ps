@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { ToastService } from '../../_services/toast.service';
 import { AuthService } from '../../_services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NgcCookieConsentService, NgcInitializeEvent, NgcNoCookieLawEvent, NgcStatusChangeEvent } from 'ngx-cookieconsent';
@@ -38,7 +38,8 @@ export class NavComponent implements OnInit {
     private renderer: Renderer2,
     private titleService: Title,
     private metaService: Meta,
-    private ccService: NgcCookieConsentService
+    private ccService: NgcCookieConsentService,
+    private route: ActivatedRoute
   ) {
     translate.addLangs(['gb', 'bg', 'ru', 'de']);
     translate.setDefaultLang('gb');
@@ -55,8 +56,10 @@ export class NavComponent implements OnInit {
     this.renderer.setAttribute(document.querySelector('html'), 'lang', this.selectedLanguage);
 
     this.setSiteTitle();
+    this.translateCookie();
     this.setMetaTags();
   }
+
 
   ngOnInit() {
     this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
@@ -121,6 +124,7 @@ export class NavComponent implements OnInit {
     //window.location.reload();
     //window.location.href = window.location.href;
     this.setSiteTitle();
+    this.translateCookie();
     //window.location.reload();
     //this.router.navigate([window.location.href]);
     let currentUrl = this.router.url;
@@ -143,7 +147,9 @@ export class NavComponent implements OnInit {
     this.translate.get('GENERAL.TITLE').subscribe((newTitle: string) => {
       this.titleService.setTitle(newTitle);
     });
+  }
 
+  translateCookie() {
     this.translate
       .get(['cookie.header', 'cookie.message', 'cookie.dismiss', 'cookie.allow', 'cookie.deny', 'cookie.link', 'cookie.policy'])
       .subscribe(data => {
@@ -161,7 +167,6 @@ export class NavComponent implements OnInit {
         this.ccService.destroy();//remove previous cookie bar (with default messages)
         this.ccService.init(this.ccService.getConfig()); // update config with translated messages
       });
-
   }
 
   setMetaTags() {
