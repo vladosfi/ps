@@ -21,6 +21,7 @@ namespace PS.API.Dtos.Event
         public string MainImageUrl { get; set; } 
         public string Author { get; set; } 
         public DateTime CreatedOn { get; set; }
+        public DateTime EventDate { get; set; }
         
         public ICollection<ImageForDetailedViewModel> Images { get; set; }
         //public ICollection<EventImageForDetailedDto> EventImage { get; set; }

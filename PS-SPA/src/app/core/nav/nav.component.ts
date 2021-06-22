@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { ToastService } from '../../_services/toast.service';
 import { AuthService } from '../../_services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NgcCookieConsentService, NgcInitializeEvent, NgcNoCookieLawEvent, NgcStatusChangeEvent } from 'ngx-cookieconsent';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { filter } from 'rxjs/operators';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class NavComponent implements OnInit {
   isCollapsed = true;
   public declarativeFormCaptchaValue: string;
   baseUrl = environment.localhost;
+  private currentSiteTitle: string = 'GENERAL.TITLE';
   //keep refs to subscriptions to be able to unsubscribe later
   private popupOpenSubscription: Subscription;
   private popupCloseSubscription: Subscription;
@@ -29,6 +31,7 @@ export class NavComponent implements OnInit {
   private statusChangeSubscription: Subscription;
   private revokeChoiceSubscription: Subscription;
   private noCookieLawSubscription: Subscription;
+
 
   constructor(
     public authService: AuthService,
@@ -55,7 +58,6 @@ export class NavComponent implements OnInit {
     this.languagesToShow = translate.getLangs().filter(l => l !== this.selectedLanguage);
     this.renderer.setAttribute(document.querySelector('html'), 'lang', this.selectedLanguage);
 
-    this.setSiteTitle();
     this.translateCookie();
     this.setMetaTags();
   }
@@ -64,7 +66,112 @@ export class NavComponent implements OnInit {
   ngOnInit() {
     this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
     this.initCookies();
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+    ).subscribe(() => {
+      const rt = this.getChild(this.route);
+      rt.data.subscribe(data => {
+        this.setSiteTitle(data.title)
+      });
+    });
   }
+
+  getChild(activatedRoute: ActivatedRoute) {
+    if (activatedRoute.firstChild) {
+      return this.getChild(activatedRoute.firstChild);
+    } else {
+      return activatedRoute;
+    }
+  }
+
+  setSiteTitle(newTitle: string) {
+    //console.log(this.translate.instant('GENERAL.TITLE'));
+    //var test = '\'' + newTitle + '\'';
+    if (newTitle == null) return;
+    
+    this.currentSiteTitle = newTitle;
+    this.translate.get(newTitle).subscribe((t: string) => {
+      this.titleService.setTitle(t);
+    });
+  }
+
+
+
+  login(model) {
+    this.authService.login(model).subscribe(next => {
+      this.toast.success('Logged in successfully', '');
+    }, error => {
+      this.toast.error(error);
+    }, () => {
+      this.router.navigate(['/home']);
+    });
+  }
+
+  loggedIn() {
+    return this.authService.loggedIn();
+  }
+
+  changeLanguage(lang: string) {
+    this.translate.use(lang)
+    this.selectedLanguage = lang;
+    this.languagesToShow = this.translate.getLangs().filter(l => l !== this.selectedLanguage);
+    this.renderer.setAttribute(document.querySelector('html'), 'lang', this.selectedLanguage);
+    localStorage.setItem('currentLang', lang);
+    document.documentElement.lang = lang;
+    //this.router.navigate(['/home']);
+    //window.location.reload();
+    //window.location.href = window.location.href;
+    this.setSiteTitle(this.currentSiteTitle);
+    this.translateCookie();
+    //window.location.reload();
+    //this.router.navigate([window.location.href]);
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.toast.info('Logged out');
+    this.authService.decodedToken = null;
+    this.authService.currentUser = null;
+    this.router.navigate(['/home']);
+  }
+
+  translateCookie() {
+    this.translate
+      .get(['cookie.header', 'cookie.message', 'cookie.dismiss', 'cookie.allow', 'cookie.deny', 'cookie.link', 'cookie.policy'])
+      .subscribe(data => {
+
+        this.ccService.getConfig().content = this.ccService.getConfig().content || {};
+        // Override default messages with the translated ones
+        this.ccService.getConfig().content.header = data['cookie.header'];
+        this.ccService.getConfig().content.message = data['cookie.message'];
+        this.ccService.getConfig().content.dismiss = data['cookie.dismiss'];
+        this.ccService.getConfig().content.allow = data['cookie.allow'];
+        this.ccService.getConfig().content.deny = data['cookie.deny'];
+        this.ccService.getConfig().content.link = data['cookie.link'];
+        this.ccService.getConfig().content.policy = data['cookie.policy'];
+
+        this.ccService.destroy();//remove previous cookie bar (with default messages)
+        this.ccService.init(this.ccService.getConfig()); // update config with translated messages
+      });
+  }
+
+  setMetaTags() {
+    this.translate.get('GENERAL.META-KEYWORDS').subscribe((keywords: string) => {
+      //console.log(keywords);
+      this.metaService.addTag({ name: 'keywords', keywords });
+    });
+
+    this.translate.get('GENERAL.META-DESCRIPTION').subscribe((description: string) => {
+      this.metaService.addTag({ name: 'description', description });
+    });
+  }
+
 
   initCookies() {
     // subscribe to cookieconsent observables to react to main events
@@ -99,86 +206,6 @@ export class NavComponent implements OnInit {
       });
   }
 
-  login(model) {
-    this.authService.login(model).subscribe(next => {
-      this.toast.success('Logged in successfully', '');
-    }, error => {
-      this.toast.error(error);
-    }, () => {
-      this.router.navigate(['/home']);
-    });
-  }
-
-  loggedIn() {
-    return this.authService.loggedIn();
-  }
-
-  changeLanguage(lang: string) {
-    this.translate.use(lang)
-    this.selectedLanguage = lang;
-    this.languagesToShow = this.translate.getLangs().filter(l => l !== this.selectedLanguage);
-    this.renderer.setAttribute(document.querySelector('html'), 'lang', this.selectedLanguage);
-    localStorage.setItem('currentLang', lang);
-    document.documentElement.lang = lang;
-    //this.router.navigate(['/home']);
-    //window.location.reload();
-    //window.location.href = window.location.href;
-    this.setSiteTitle();
-    this.translateCookie();
-    //window.location.reload();
-    //this.router.navigate([window.location.href]);
-    let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentUrl]);
-    });
-  }
-
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this.toast.info('Logged out');
-    this.authService.decodedToken = null;
-    this.authService.currentUser = null;
-    this.router.navigate(['/home']);
-  }
-
-  setSiteTitle() {
-    //console.log(this.translate.instant('GENERAL.TITLE'));
-    this.translate.get('GENERAL.TITLE').subscribe((newTitle: string) => {
-      this.titleService.setTitle(newTitle);
-    });
-  }
-
-  translateCookie() {
-    this.translate
-      .get(['cookie.header', 'cookie.message', 'cookie.dismiss', 'cookie.allow', 'cookie.deny', 'cookie.link', 'cookie.policy'])
-      .subscribe(data => {
-
-        this.ccService.getConfig().content = this.ccService.getConfig().content || {};
-        // Override default messages with the translated ones
-        this.ccService.getConfig().content.header = data['cookie.header'];
-        this.ccService.getConfig().content.message = data['cookie.message'];
-        this.ccService.getConfig().content.dismiss = data['cookie.dismiss'];
-        this.ccService.getConfig().content.allow = data['cookie.allow'];
-        this.ccService.getConfig().content.deny = data['cookie.deny'];
-        this.ccService.getConfig().content.link = data['cookie.link'];
-        this.ccService.getConfig().content.policy = data['cookie.policy'];
-
-        this.ccService.destroy();//remove previous cookie bar (with default messages)
-        this.ccService.init(this.ccService.getConfig()); // update config with translated messages
-      });
-  }
-
-  setMetaTags() {
-    this.translate.get('GENERAL.META-KEYWORDS').subscribe((keywords: string) => {
-      //console.log(keywords);
-      this.metaService.addTag({ name: 'keywords', keywords });
-    });
-
-    this.translate.get('GENERAL.META-DESCRIPTION').subscribe((description: string) => {
-      this.metaService.addTag({ name: 'description', description });
-    });
-  }
 
   ngOnDestroy() {
     // unsubscribe to cookieconsent observables to prevent memory leaks

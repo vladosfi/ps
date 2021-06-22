@@ -20,6 +20,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { PreventUnsavedChangesForEvents } from '../_guards/prevent-unsaved-changes';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -42,6 +43,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxEditorModule,
     NgxGalleryModule,
     PaginationModule,
+    BsDatepickerModule,
     SharedModule,
     TranslateModule.forChild({
       loader: {

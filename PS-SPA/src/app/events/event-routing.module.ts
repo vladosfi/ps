@@ -13,7 +13,8 @@ const routes: Routes = [
     {
         path: '',
         component: EventListComponent,
-        resolve: { events: EventsResolver }
+        resolve: { events: EventsResolver },
+        data: {title: 'GENERAL.EVENTS'}   
         // canActivate:[AuthGuard]
     },
     {

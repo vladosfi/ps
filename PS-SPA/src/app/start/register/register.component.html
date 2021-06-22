@@ -71,7 +71,8 @@
       formControlName="dateOfBirth"
       type="text"
       bsDatepicker
-      [bsConfig]="bsConfig"
+      [bsConfig]="{containerClass:'theme-dark-blue',dateInputFormat: 'DD/MM/YYYY'}"
+      
     />
     <div
       class="invalid-feedback"

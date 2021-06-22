@@ -12,6 +12,34 @@
         <ngx-editor [editor]="editor" [(ngModel)]="html" formControlName="editorContent"></ngx-editor>
       </div> -->
 
+      <div class="form-group">
+        <h4>Дата на събитието</h4> 
+        <input
+          [ngClass]="{
+            'is-invalid':
+            parentForm.get('eventDate').errors &&
+            parentForm.get('eventDate').touched
+          }"
+          class="form-control"
+          placeholder="Date of Event"
+          formControlName="eventDate"
+          type="text"
+          bsDatepicker
+          [bsConfig]="{containerClass:'theme-dark-blue',dateInputFormat: 'DD/MM/YYYY'}"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="
+          parentForm.get('eventDate').touched &&
+          parentForm.get('eventDate').hasError('required')
+          "
+        >
+          Date of Birth is required
+        </div>
+      </div>
+
+    
+
       <h4>Български</h4> 
       <app-input-name [parentForm]="parentForm" [inputName]="'name'"></app-input-name>
       <app-editor [parentForm]="parentForm" [conrolName]="'text'"></app-editor>

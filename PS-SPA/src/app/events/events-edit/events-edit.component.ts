@@ -29,8 +29,10 @@ export class EventsEditComponent implements OnInit {
       this.currentEvent = Object.assign({}, data.events);
     });
 
+    const eventDate = new Date(this.currentEvent.eventDate);
 
     this.parentForm = new FormGroup({
+      eventDate: new FormControl(eventDate, [FormValidators.required]),
       name: new FormControl(this.currentEvent.name, [FormValidators.required, FormValidators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
       text: new FormControl(this.currentEvent.text, [Validators.required(), Validators.minLength(this.textMinLen)]),
       nameGb: new FormControl(this.currentEvent.nameGb, [FormValidators.required, FormValidators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
@@ -62,7 +64,7 @@ export class EventsEditComponent implements OnInit {
         }
       );
     }
-    else{
+    else {
       this.toast.warning('Invalid form data!');
     }
   }

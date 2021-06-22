@@ -17,4 +17,5 @@ export interface IEvent {
     imagesUrl: string[];
     imageFileName: string;
     isMain: boolean;
+    eventDate: Date;
 }

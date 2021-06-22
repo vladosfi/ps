@@ -5,6 +5,7 @@ const routes: Routes = [
     {
         path: '',
         component: ContactsComponent,
+        data: {title: 'GENERAL.CONTACTS'}    
     }
 ];
 

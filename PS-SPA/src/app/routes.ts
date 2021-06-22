@@ -10,27 +10,46 @@ import { PaintingEditResolver } from './_resolvers/painting-edit.resolver';
 import { PaintingEditComponent } from './paintings/edit/edit.component';
 
 
+
+
 export const appRoutes: Routes = [
-    { path: '', component: HomeComponent }, //home
+    {
+        path: '', component: HomeComponent,
+        data: {
+            title: 'GENERAL.TITLE'
+        }
+    }, //home
     {
         path: '',
         children: [
             {
                 path: 'paintings', component: PaintingListComponent,
-                resolve: { paintings: PaintingsResolver }
+                resolve: { paintings: PaintingsResolver },
+                data: {
+                    title: 'GENERAL.GALLERY'
+                }
             },
             {
                 path: 'paintings/add', component: PaintingAddComponent,
                 canActivate: [AuthGuard],
+                data: {
+                    title: 'GENERAL.GALLERY'
+                }
             },
             {
                 path: 'paintings/edit/:id', component: PaintingEditComponent,
                 resolve: { painting: PaintingEditResolver },
                 canActivate: [AuthGuard],
+                data: {
+                    title: 'GENERAL.GALLERY'
+                }
             },
             {
                 path: 'paintings/:id', component: PaintingDetailsComponent,
-                resolve: { painting: PaintingResolver }
+                resolve: { painting: PaintingResolver },
+                data: {
+                    title: 'GENERAL.GALLERY'
+                }
             },
         ]
     },
@@ -54,11 +73,11 @@ export const appRoutes: Routes = [
         path: 'admin',
         loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
         canActivate: [AuthGuard],
-    //     path: '',
-    //     runGuardsAndResolvers: 'always',
-    //     canActivate: [AuthGuard],
-    //     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
-    //     resolve: { paintings: AdminPaintingsResolver }
+        //     path: '',
+        //     runGuardsAndResolvers: 'always',
+        //     canActivate: [AuthGuard],
+        //     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+        //     resolve: { paintings: AdminPaintingsResolver }
     },
     // {
     //     path: '',

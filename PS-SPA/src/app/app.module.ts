@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -42,7 +42,6 @@ import { PaintingEditResolver } from './_resolvers/painting-edit.resolver';
 import { LoaderInterceptor } from './_interceptors/loader-interceptor';
 import { LoaderService } from './_services/loader.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -112,6 +111,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalWindowService,
     TranslateService,
     LoaderService,
+    Title,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
   exports: [

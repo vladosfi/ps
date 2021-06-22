@@ -5,7 +5,6 @@ import { IEvent } from "src/app/shared/_interfaces/event";
 import { ToastService } from "src/app/_services/toast.service";
 import { EventService } from "../event.service";
 
-
 @Component({
   selector: 'app-events-add',
   templateUrl: './events-add.component.html',
@@ -19,6 +18,7 @@ export class EventsAddComponent implements OnInit {
   nameMinLen: number = 5;
   nameMaxLen: number = 50;
   textMinLen: number = 300;
+  
 
   constructor(
     private toast: ToastService,
@@ -26,8 +26,8 @@ export class EventsAddComponent implements OnInit {
 
   }
   ngOnInit(): void {
-
     this.parentForm = new FormGroup({
+      eventDate: new FormControl('', [FormValidators.required]),
       name: new FormControl('', [FormValidators.required, FormValidators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),
       text: new FormControl('', [Validators.required(), Validators.minLength(this.textMinLen)]),
       nameGb: new FormControl('', [FormValidators.required, FormValidators.minLength(this.nameMinLen), Validators.maxLength(this.nameMaxLen)]),

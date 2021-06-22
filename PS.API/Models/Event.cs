@@ -18,6 +18,8 @@ namespace PS.API.Models
             this.Images = new HashSet<EventImage>();
         }
 
+        public DateTime EventDate { get; set; }
+
         [Required]
         [MinLength(minNameLength), MaxLength(maxNameLength)]
         public string Name { get; set; }
