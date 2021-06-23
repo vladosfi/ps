@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-4" id="mm">
+            <div class="card">
+                <img class="card-img-top img-fluid" src="../../assets/img-home/mariq-maneva.jpg"
+                    alt="Мariya Maneva – Miriyam" />
+                <div class="card-body">
+                    <h5 class="card-title text-center mt-2">Мariya Maneva – Miriyam</h5>
+                </div>
+            </div>
+
+            <h2 class="d-flex justify-content-center mt-3">
+                {{ "HOME.INTRO-HEADER" | translate }}
+            </h2>
+            <p>{{ "HOME.INTRO-P1" | translate }}</p>
+            <p>{{ "HOME.INTRO-P1" | translate }}</p>
+        </div>
+
+        <div class="col-12 col-md-8">
+            <div class="col-12 home-container">
+                <h2>{{ "HOME.MOSAIC-TITLE1" | translate }}</h2>
+                <p>
+                    <a [routerLink]="['/']"><img class="pull-left mr-3 img-fluid" src="../../assets/img-home/mosaic.jpg"
+                            alt='{{ "HOME.MOSAIC-TITLE1" | translate }}' width="251" height="300" /></a>
+                    {{ "HOME.MOSAIC-P1" | translate }}
+                </p>
+                <p>
+                    {{ "HOME.MOSAIC-P2" | translate }}
+                </p>
+                <p>
+                    {{ "HOME.MOSAIC-P3" | translate }}
+                </p>
+            </div>
+            <div class="col-12 home-container mt-3">
+                <h2>{{ "HOME.MIXED-TECHNIQUE-TITLE" | translate }}</h2>
+                <p>
+                    <a href="https://pebbleshellart.com/смесена-техника/"><img
+                            src="../../assets/img-home/mixed_technic.jpg" class="pull-left mr-3 img-fluid"
+                            alt='{{ "HOME.MIXED-TECHNIQUE-TITLE" | translate }}' width="400" height="213" /></a>
+                    {{ "HOME.MIXED-TECHNIQUE-P1" | translate }}
+                </p>
+                <p>{{ "HOME.MIXED-TECHNIQUE-P2" | translate }}
+                </p>
+                <p>
+                    {{ "HOME.MIXED-TECHNIQUE-P3" | translate }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

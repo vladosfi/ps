@@ -30,6 +30,7 @@
     },
     "NAV": {
         "HOME": "Anfang",
+        "ABOUT": "About",
         "EVENTS": "Ereignisse",
         "CONTACTS": "Kontakte",
         "GALLERY": "Galerie"

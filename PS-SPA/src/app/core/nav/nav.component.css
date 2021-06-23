@@ -13,12 +13,14 @@
     cursor: pointer;
 }
 
-
-
 .lang-bar a:not(:last-child){
     border-right:  2px solid grey;
     padding: 0 5px;
 }
+.lang-bar:last-child{
+    padding-right: 10px;
+}
+
 
 nav {
     z-index: 20;

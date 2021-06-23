@@ -5,35 +5,3 @@ h1{
     margin: 10px;
 }
 
-
-/* .card img{
-    width: 300px;
-} */
-
-/* #mm{
-    padding: 0 20px 20px 20px;
-    border: 4px solid transparent;
-    -webkit-border-image: url("../../assets/img-home/vborder.png") 10 round;
-    -o-border-image: url("../../assets/img-home/vborder.png") 10 round;
-    border-image: url("../../assets/img-home/vborder.png") 10 round;
-    border-image-repeat: stretch;
-    border-top: none;
-    border-left: none;
-    border-bottom: none;
-    max-width: 100%;
-}
-
-.home-container{
-    background-color: #E9E9E7;
-    border-bottom: 20px solid;
-    border-bottom-color: #21539c;
-    background-color: #e9e9e7;
-    padding: 10px 20px 20px 20px;
-}
-
-
-@media (max-width: 992px) {
-    #mm{
-        border: transparent;
-    } 
-} */

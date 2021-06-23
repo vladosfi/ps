@@ -54,6 +54,10 @@ export const appRoutes: Routes = [
         ]
     },
     {
+        path: 'about',
+        loadChildren: () => import('./about/about.module').then(m => m.AboutModule)
+    },
+    {
         path: 'events',
         loadChildren: () => import('./events/event.module').then(m => m.EventModule)
     },
