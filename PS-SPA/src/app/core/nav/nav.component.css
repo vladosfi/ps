@@ -3,9 +3,6 @@
     padding-left: 1rem!important;
     padding-right: 1rem!important;
 }
-.lang-mnu{
-    display: flex;
-}
 .lang-bar{
     justify-content: end;
 }

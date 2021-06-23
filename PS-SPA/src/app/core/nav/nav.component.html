@@ -37,14 +37,21 @@
 
 
 
-<div class="lang-mnu">
-  <ul class="navbar-nav ml-auto">
-    <li class="lang-bar" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a *ngFor="let lang of languagesToShow" (click)="changeLanguage(lang)">
-        {{ "TRANSLATE." + lang | translate }}</a>
-    </li>
-  </ul>
-</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-white">
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" [collapse]="isCollapsed">
+    <a class="navbar-brand" [routerLink]="['/']">
+      <img src="../../assets/logo.jpg" alt="logo" />
+    </a>
+    <ul class="navbar-nav ml-auto">
+      <li class="lang-bar" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a *ngFor="let lang of languagesToShow" (click)="changeLanguage(lang)">
+          {{ "TRANSLATE." + lang | translate }}</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-white shadow-sm p-3 mb-3">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -54,9 +61,9 @@
   </button>
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" [collapse]="isCollapsed">
-    <a class="navbar-brand" [routerLink]="['/']">
+    <!-- <a class="navbar-brand" [routerLink]="['/']">
       <img src="../../assets/logo.jpg" alt="logo" />
-    </a>
+    </a> -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <a class="nav-link" [routerLink]="['']">{{ "NAV.HOME" | translate }}</a>

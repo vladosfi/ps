@@ -1,7 +1,21 @@
 h1{
     margin: 80px 0;
+    color: #3C6478;
 }
+
+h3{
+    color: #3C6478;
+    background-color: ghostwhite;
+}
+
 .card{
     margin: 10px;
 }
 
+.center{
+    display: flex;
+    flex-wrap: wrap; /* Optional. only if you want the items to wrap */
+    justify-content: center; /* For horizontal alignment */
+    align-items: center; /* For vertical alignment */
+
+}
