@@ -1,3 +1,25 @@
+.p-3{
+    padding: 0!important;
+    padding-left: 1rem!important;
+    padding-right: 1rem!important;
+}
+.lang-mnu{
+    display: flex;
+}
+.lang-bar{
+    justify-content: end;
+}
+.lang-bar a{
+    cursor: pointer;
+}
+
+
+
+.lang-bar a:not(:last-child){
+    border-right:  2px solid grey;
+    padding: 0 5px;
+}
+
 nav {
     z-index: 20;
 }

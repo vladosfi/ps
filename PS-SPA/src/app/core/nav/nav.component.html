@@ -10,10 +10,10 @@
         </a>
         <div class="dropdown-menu mt-1 ml-1" *dropdownMenu>
           <a class="dropdown-item" [routerLink]="['/members/detail-edit']"><i class="fa fa-user"></i> Edit Profile</a>
-          <a class="dropdown-item" [routerLink]="['/paintings/add']"><i class="fa fa-paint-brush"></i> Add Painting</a>          
-          <a class="dropdown-item" [routerLink]="['/admin']"><i class="fa fa-users"></i> Administrator</a>          
-          <a class="dropdown-item" [routerLink]="['/events/add']"><i class="fa fa-paint-brush"></i> Events Add</a>          
-          <a class="dropdown-item" [routerLink]="['/start']"><i class="fa fa-play"></i> Start</a>     
+          <a class="dropdown-item" [routerLink]="['/paintings/add']"><i class="fa fa-paint-brush"></i> Add Painting</a>
+          <a class="dropdown-item" [routerLink]="['/admin']"><i class="fa fa-users"></i> Administrator</a>
+          <a class="dropdown-item" [routerLink]="['/events/add']"><i class="fa fa-paint-brush"></i> Events Add</a>
+          <a class="dropdown-item" [routerLink]="['/start']"><i class="fa fa-play"></i> Start</a>
           <a class="dropdown-item" [routerLink]="['/members']"> Members</a>
           <!-- <a class="dropdown-item" [routerLink]="['/events/edit']"><i class="fa fa-calendar"></i> Events Edit</a>      -->
           <div class="dropdown-divider"></div>
@@ -35,9 +35,21 @@
   </div>
 </nav>
 
+
+
+<div class="lang-mnu">
+  <ul class="navbar-nav ml-auto">
+    <li class="lang-bar" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a *ngFor="let lang of languagesToShow" (click)="changeLanguage(lang)">
+        {{ "TRANSLATE." + lang | translate }}</a>
+    </li>
+  </ul>
+</div>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-white shadow-sm p-3 mb-3">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed">
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation"
+    (click)="isCollapsed = !isCollapsed">
     <span class="navbar-toggler-icon"></span>
   </button>
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -71,7 +83,7 @@
           }}</a>
       </li>
 
-      <div class="dropdown" dropdown>
+      <!-- <div class="dropdown" dropdown>
         <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" type="button" dropdownToggle>
           <span class="flag-icon flag-icon-{{ selectedLanguage }}"></span>{{ "TRANSLATE.LANGUAGE" | translate }}
         </a>
@@ -79,7 +91,7 @@
           <a *ngFor="let lang of languagesToShow" class="dropdown-item" (click)="changeLanguage(lang)">
             <span class="flag-icon flag-icon-{{ lang }}"></span>{{ "TRANSLATE." + lang | translate }}</a>
         </div>
-      </div>
+      </div> -->
     </ul>
   </div>
 
