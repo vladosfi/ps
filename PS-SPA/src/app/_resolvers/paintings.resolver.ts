@@ -11,15 +11,19 @@ import { PaintingService } from '../_services/painting.service';
 export class PaintingsResolver implements Resolve<IPainting[]>{
     pageNumber = 1;
     pageSize = 12;
-    paintingParams;
 
     constructor(
         private paintingService: PaintingService,
         private router: Router,
-        private toast: ToastService) { }
+        private toast: ToastService) {
+    }
 
     resolve(route: ActivatedRouteSnapshot): Observable<IPainting[]> {
-        return this.paintingService.getPaintings(this.pageNumber, this.pageSize).pipe(
+        const paintingParams = {
+            categoryId: this.router.getCurrentNavigation().extras.state?.categoryId
+        }
+
+        return this.paintingService.getPaintings(this.pageNumber, this.pageSize, paintingParams).pipe(
             catchError(error => {
                 this.toast.error('Problem retreiving paintings');
                 this.router.navigate(['/home']);

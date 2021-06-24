@@ -24,6 +24,7 @@ export class PaintingListComponent implements OnInit, OnDestroy {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   languageOnLoad = document.documentElement.lang;
+  private categoryId;
 
   constructor(private paintingService: PaintingService,
     private toast: ToastService,
@@ -43,7 +44,12 @@ export class PaintingListComponent implements OnInit, OnDestroy {
     this.route.data.subscribe(data => {
       this.paintings = data['paintings'].result;
       this.pagination = data['paintings'].pagination;
+      this.categoryId = data['paintings'].categoryId
     });
+
+    this.paintingParams.categoryId = this.categoryId?.toString();
+
+
 
     // const mainImageIndex = this.paintingModal.images.findIndex(i=> i.isMain === true);
     // console.log(mainImageIndex);

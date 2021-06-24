@@ -18,6 +18,7 @@ export class PaintingService {
 
   getPaintings(page?, itemsPerPage?, paintingParams?): Observable<PaginatedResult<IPainting[]>> {
     const paginatedResult: PaginatedResult<IPainting[]> = new PaginatedResult<IPainting[]>();
+    
 
     let params = new HttpParams();
 
@@ -41,13 +42,13 @@ export class PaintingService {
 
     params = params.append('language', localStorage.getItem('currentLang'));
 
-
     return this.http.get<any[]>(this.baseUrl + 'paintings', { observe: 'response', params })
       .pipe(
         map(response => {
           paginatedResult.result = response.body;
           if (response.headers.get('Pagination') != null) {
-            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'))
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+            paginatedResult.categoryId = paintingParams?.categoryId;
           }
           return paginatedResult;
         }));

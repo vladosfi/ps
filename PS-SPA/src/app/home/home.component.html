@@ -1,38 +1,42 @@
 <div class="container">
   <div class="row">
-    <div class="col"><h1 class="text-center">Уникално изкуство от раковинки и камъчета</h1></div>
+    <div class="col">
+      <h1 class="text-center">Уникално изкуство от раковинки и камъчета</h1>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-4">
-      <div class="card">
-        <img class="card-img-top" src="../../assets/img-home/1.jpg" alt="Card image">
-        <div class="card-img-overlay center">
-          <h3 class="card-title text-center">{{ "GENERAL.CATEGORY-MIX" | translate }}</h3>
-          <!-- <p class="card-text">Some example text.</p>
+      <a [routerLink]="['paintings']" [state]="{ categoryId:1}">
+        <div class="card">
+          <img class="card-img-top" src="../../assets/img-home/1.jpg" alt="Card image">
+          <div class="card-img-overlay center">
+            <h3 class="card-title text-center">{{ "GENERAL.CATEGORY-MIX" | translate }}</h3>
+            <!-- <p class="card-text">Some example text.</p>
           <a href="#" class="btn btn-primary">See Profile</a> -->
+          </div>
         </div>
-      </div>
+      </a>
     </div>
     <div class="col-md-4">
-      <div class="card" >
-        <img class="card-img-top" src="../../assets/img-home/2.jpg" alt="Card image">
-        <div class="card-img-overlay center">
+      <a [routerLink]="['paintings']" [state]="{ categoryId:2}">
+        <!-- <div class="card" (click)="goTo(2)"> -->
+        <div class="card">
+          <img class="card-img-top" src="../../assets/img-home/2.jpg" alt="Card image">
+          <div class="card-img-overlay center">
             <h3 class="card-title text-center">{{ "GENERAL.CATEGORY-PANELS" | translate }}</h3>
-          
-          <!-- <p class="card-text">Some example text.</p>
-          <a href="#" class="btn btn-primary">See Profile</a> -->
+          </div>
         </div>
-      </div>
+      </a>
     </div>
     <div class="col-md-4">
-      <div class="card" >
-        <img class="card-img-top" src="../../assets/img-home/3.jpg" alt="Card image">
-        <div class="card-img-overlay center">
-          <h3 class="card-title text-center">{{ "GENERAL.CATEGORY-MOSAIC" | translate }}</h3>
-          <!-- <p class="card-text">Some example text.</p>
-          <a href="#" class="btn btn-primary">See Profile</a> -->
+      <a [routerLink]="['paintings']" [state]="{ categoryId:3}">
+        <div class="card">
+          <img class="card-img-top" src="../../assets/img-home/3.jpg" alt="Card image">
+          <div class="card-img-overlay center">
+            <h3 class="card-title text-center">{{ "GENERAL.CATEGORY-MOSAIC" | translate }}</h3>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </div>
