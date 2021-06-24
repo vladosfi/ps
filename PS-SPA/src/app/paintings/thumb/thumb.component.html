@@ -7,7 +7,8 @@
       src="{{ localhost + paintingSource?.url }}/thumbnail/{{
         paintingSource?.imageFileName
       }}"
-      alt="{{ paintingSource?.name }}"
+      alt="{{ paintingSource?.name | lowercase }}"
+      title="{{ paintingSource?.name }}"
     />
     <!-- <div class="card-img-overlay">
       <h5 class="card-title">{{ paintings }}</h5>

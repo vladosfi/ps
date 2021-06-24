@@ -8,7 +8,7 @@
     <div class="col-md-4">
       <a [routerLink]="['paintings']" [state]="{ categoryId:1}">
         <div class="card">
-          <img class="card-img-top" src="../../assets/img-home/1.jpg" alt="Card image">
+          <img class="card-img-top" src="../../assets/img-home/1.jpg" alt="{{ 'GENERAL.CATEGORY-MIX' | translate  | lowercase }}" title="{{ 'GENERAL.CATEGORY-MIX' | translate }}">
           <div class="card-img-overlay center">
             <h3 class="card-title text-center">{{ "GENERAL.CATEGORY-MIX" | translate }}</h3>
             <!-- <p class="card-text">Some example text.</p>
@@ -21,7 +21,7 @@
       <a [routerLink]="['paintings']" [state]="{ categoryId:2}">
         <!-- <div class="card" (click)="goTo(2)"> -->
         <div class="card">
-          <img class="card-img-top" src="../../assets/img-home/2.jpg" alt="Card image">
+          <img class="card-img-top" src="../../assets/img-home/2.jpg" alt="{{ 'GENERAL.CATEGORY-PANELS' | translate | lowercase }}" title="{{ 'GENERAL.CATEGORY-PANELS' | translate }}">
           <div class="card-img-overlay center">
             <h3 class="card-title text-center">{{ "GENERAL.CATEGORY-PANELS" | translate }}</h3>
           </div>
@@ -31,7 +31,7 @@
     <div class="col-md-4">
       <a [routerLink]="['paintings']" [state]="{ categoryId:3}">
         <div class="card">
-          <img class="card-img-top" src="../../assets/img-home/3.jpg" alt="Card image">
+          <img class="card-img-top" src="../../assets/img-home/3.jpg" alt="{{ 'GENERAL.CATEGORY-MOSAIC' | translate  | lowercase  }}" title="{{ 'GENERAL.CATEGORY-MOSAIC' | translate }}">
           <div class="card-img-overlay center">
             <h3 class="card-title text-center">{{ "GENERAL.CATEGORY-MOSAIC" | translate }}</h3>
           </div>
