@@ -64,9 +64,9 @@
     },
     "TRANSLATE": {
         "LANGUAGE": "Deutsch",
-        "gb": "English",
-        "bg": "Български",
-        "ru": "Русский",
-        "de": "Deutsch"
+        "gb": "EN",
+        "bg": "BG",
+        "ru": "RU",
+        "de": "DE"
     }
 }

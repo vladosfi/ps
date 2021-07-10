@@ -62,10 +62,10 @@
     "MESSAGE-SEND": "Изпрати Съобщението"
   },
   "TRANSLATE": {
-    "LANGUAGE": "Български",
-    "gb": "English",
-    "bg": "Български",
-    "ru": "Русский",
-    "de": "Deutsch"
+    "LANGUAGE": "BG",
+    "gb": "EN",
+    "bg": "BG",
+    "ru": "RU",
+    "de": "DE"
   }
 }
