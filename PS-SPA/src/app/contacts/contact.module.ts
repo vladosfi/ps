@@ -6,6 +6,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactsRoutingModule } from './contact-routing.module';
+import { ReCaptchaModule } from 'angular-recaptcha3';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -26,11 +27,22 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient],
       }
     }),
-    ContactsRoutingModule
+    ContactsRoutingModule,
+    ReCaptchaModule.forRoot({
+      invisible: {
+          sitekey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', 
+      },
+      normal: {
+          sitekey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', 
+      },
+      language: 'en'
+  }),
   ],
   providers: [
   ]
 })
+
+
 export class ContactsModule {
   constructor() {
     console.log('Lazily Loaded : LazyModule - Contacts');

@@ -19,3 +19,10 @@ h3{
     align-items: center; /* For vertical alignment */
 
 }
+
+img {
+    float: left;
+    width:  100%;
+    height: 400px;
+    object-fit: cover;
+}
