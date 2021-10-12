@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactsRoutingModule } from './contact-routing.module';
 import { ReCaptchaModule } from 'angular-recaptcha3';
+import { CommonService } from '../_services/common.service';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -35,10 +36,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       normal: {
           sitekey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', 
       },
-      language: 'en'
+      language: localStorage.getItem('currentLang') ? localStorage.getItem('currentLang') : 'en' 
   }),
   ],
   providers: [
+    CommonService
   ]
 })
 

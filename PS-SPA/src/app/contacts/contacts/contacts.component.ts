@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReCaptchaService } from 'angular-recaptcha3';
+import { CommonService } from 'src/app/_services/common.service';
+import { ToastService } from 'src/app/_services/toast.service';
 
 @Component({
   selector: 'app-contacts',
@@ -8,23 +10,21 @@ import { ReCaptchaService } from 'angular-recaptcha3';
 })
 export class ContactsComponent implements OnInit {
 
-  constructor(private recaptchaService: ReCaptchaService) { }
-
+  constructor(private recaptchaService: ReCaptchaService,private commonService: CommonService,private toast: ToastService) { }
+  
   ngOnInit(): void {
   }
-
   
-
-  onCaptchaResponse(event: any): void  {
-    this.recaptchaService.execute({action: 'login'}).then(token => {
-      // Backend verification method
-      this.sendTokenToBackend(token);
-    });
-}
-
-sendTokenToBackend(token): void{
-
-}
+  onCaptchaResponse(token: any): void  {
+    this.commonService.verifyRecaptcha(token).subscribe(
+      () => {
+        console.log('Check Complete');
+      },
+      (error) => {
+        this.toast.error(error);
+      }
+    );
+  }
 }
 
 //https://tanpure-anjali.medium.com/how-to-implement-google-recaptcha-v3-in-angular-2a4fd026f4ab
