@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using PS.API.Data;
+using PS.API.Helpers.Messaging;
+using PS.API.Data.Common.Interfaces;
 
 namespace PS.API
 {
@@ -45,10 +47,12 @@ namespace PS.API
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(Configuration["SendGrid:ApiKey"]));
             services.AddCors();
             services.AddAutoMapper(typeof(PSRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IPSRepository, PSRepository>();
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IEventsRepository, EventsRepository>();
             services.AddScoped<LogUserActivity>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

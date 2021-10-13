@@ -1,6 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using PS.API.Data.EntityConfiguration;
+using PS.API.Dtos.Contact;
 using PS.API.Models;
 
 namespace PS.API.Data
@@ -19,6 +20,7 @@ namespace PS.API.Data
         public DbSet<Painting> Paintings { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<ContactFormEntry> ContactFormEntries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

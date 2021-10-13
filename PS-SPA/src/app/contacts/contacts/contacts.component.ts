@@ -10,7 +10,7 @@ import { ToastService } from 'src/app/_services/toast.service';
 })
 export class ContactsComponent implements OnInit {
 
-  constructor(private recaptchaService: ReCaptchaService,private commonService: CommonService,private toast: ToastService) { }
+  constructor(private commonService: CommonService,private toast: ToastService) { }
   
   ngOnInit(): void {
   }

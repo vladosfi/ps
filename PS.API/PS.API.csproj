@@ -14,5 +14,6 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="CloudinaryDotNet" Version="1.14.0" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+    <PackageReference Include="Sendgrid" Version="9.14.0" />
   </ItemGroup>
 </Project>

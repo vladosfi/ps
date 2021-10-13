@@ -16,6 +16,42 @@ namespace PS.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.3");
 
+            modelBuilder.Entity("PS.API.Dtos.Contact.ContactFormEntry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Ip")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContactFormEntries");
+                });
+
             modelBuilder.Entity("PS.API.Models.Category", b =>
                 {
                     b.Property<int>("Id")
