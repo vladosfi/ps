@@ -6,3 +6,6 @@ wwwroot
 images
 environment.prod.ts
 /PS-SPA/src/environments/environment.prod.ts
+appsettings.json
+appsettings.Production.json
+appsettings.Development.json
