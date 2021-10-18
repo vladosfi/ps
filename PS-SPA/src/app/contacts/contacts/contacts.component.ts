@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 
 export class ContactsComponent implements OnInit {
   @ViewChild('contctForm') editForm: NgForm;
-  contactFormEntry: IContactFormEntry;
+  contactFormEntry: IContactFormEntry = {};
 
   constructor(private commonService: CommonService,private toast: ToastService) { }
   

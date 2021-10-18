@@ -7,13 +7,13 @@
 
             <label class="label-input100" for="name">{{ "CONTACTS.NAME" | translate }} *</label>
             <div class="wrap-input100 validate-input" data-validate="Type name">
-                <input id="name" class="input100" type="text" name="name" placeholder="Name" [ngModel]="contactFormEntry.fromName">
+                <input id="name" class="input100" type="text" name="name" placeholder="Name" [ngModel]="contactFormEntry?.fromName">
                 <span class="focus-input100"></span>
             </div>
 
             <label class="label-input100" for="email">{{ "CONTACTS.EMAIL" | translate }} *</label>
             <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                <input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com" [ngModel]="contactFormEntry.sendersEmail">
+                <input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com" [ngModel]="contactFormEntry?.sendersEmail">
                 <span class="focus-input100"></span>
             </div>
 
@@ -25,7 +25,7 @@
 
             <label class="label-input100" for="message">{{ "CONTACTS.MESSAGE" | translate }} *</label>
             <div class="wrap-input100 validate-input" data-validate = "Message is required">
-                <textarea id="message" class="input100" name="message" placeholder="Write me a message" [ngModel]="contactFormEntry.content"></textarea>
+                <textarea id="message" class="input100" name="message" placeholder="Write me a message" [ngModel]="contactFormEntry?.content"></textarea>
                 <span class="focus-input100"></span>
             </div>
 
