@@ -1,40 +1,147 @@
 <div class="container-contact100">
     <div class="wrap-contact100">
-        <form #contactForm="ngForm" id="contactForm" class="contact100-form validate-form" (ngSubmit)="sentEmail(contactForm.value)">
+        <form [formGroup]="contactModel" id="contactForm" class="contact100-form validate-form" (ngSubmit)="sentEmail()">
             <span class="contact100-form-title">
                 {{ "CONTACTS.SEND-MESSAGE" | translate }}
+
+                <p>Form Status: {{ contactModel.status | json }}</p>
+                <p>Name: {{contactModel.value | json}}</p>
+                
             </span>            
 
-            <label class="label-input100" for="name">{{ "CONTACTS.NAME" | translate }} *</label>
+            <label class="label-input100" for="fromName">{{ "CONTACTS.NAME" | translate }} *</label>
             <div class="wrap-input100 validate-input" data-validate="Type name">
-                <input id="name" class="input100" type="text" name="name" placeholder="Name" [ngModel]="contactFormEntry?.fromName">
+                <input
+                type="text"
+                placeholder="Enter your name"
+                id="name" 
+                class="input100" 
+                type="text" 
+                name="name"
+                [ngClass]="{
+                'is-invalid':
+                    contactModel.get('fromName').errors &&
+                    contactModel.get('fromName').touched,
+                'is-valid':
+                    !contactModel.get('fromName').errors &&
+                    contactModel.get('fromName').statusChanges
+                }"
+                class="form-control"
+                formControlName="fromName"
+                >
                 <span class="focus-input100"></span>
             </div>
+            <div class="valid-feedback"></div>
+          <div
+            class="validate-input"
+            *ngIf="
+            contactModel.get('fromName').hasError('minlength') ||
+              (contactModel.get('fromName').hasError('maxlength') &&
+              contactModel.get('fromName').touched)
+            "
+          >
+            <p>Please enter your name!</p>
+            <p>Name should be between {{fromNameMinLen}} and {{fromNameMaxLen}} characters!</p>
+          </div>
 
             <label class="label-input100" for="email">{{ "CONTACTS.EMAIL" | translate }} *</label>
             <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                <input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com" [ngModel]="contactFormEntry?.sendersEmail">
+                <input
+                type="email"
+                placeholder="Eg. example@email.com"
+                id="email" 
+                class="input100" 
+                type="text" 
+                name="name"
+                [ngClass]="{
+                'is-invalid':
+                    contactModel.get('sendersEmail').errors &&
+                    contactModel.get('sendersEmail').touched,
+                'is-valid':
+                    !contactModel.get('sendersEmail').errors &&
+                    contactModel.get('sendersEmail').statusChanges
+                }"
+                class="form-control"
+                formControlName="sendersEmail"
+                >
                 <span class="focus-input100"></span>
             </div>
+            <div class="valid-feedback"></div>
+            <div
+            class="validate-input"
+            *ngIf="
+            contactModel.get('sendersEmail').hasError('minlength') ||
+              (contactModel.get('sendersEmail').hasError('maxlength') &&
+              contactModel.get('sendersEmail').touched) || contactModel.get('sendersEmail').hasError('email') 
+            "
+          >
+            <p>Valid email is required: ex@abc.xyz!</p>
+            <p>Email should be between {{sendersEmailMinLen}} and {{sendersEmailMaxLen}} characters!</p>
+          </div>
+          
 
-            <!-- <label class="label-input100" for="phone">{{ "CONTACTS.PHONE" | translate }}</label>
-            <div class="wrap-input100">
-                <input id="phone" class="input100" type="text" name="phone" placeholder="Eg. +1 800 000000">
-                <span class="focus-input100"></span>
-            </div> -->
-
-            <label class="label-input100" for="message">{{ "CONTACTS.MESSAGE" | translate }} *</label>
+            <label class="label-input100" for="content">{{ "CONTACTS.MESSAGE" | translate }} *</label>
             <div class="wrap-input100 validate-input" data-validate = "Message is required">
-                <textarea id="message" class="input100" name="message" placeholder="Write me a message" [ngModel]="contactFormEntry?.content"></textarea>
+                <textarea 
+                id="content" 
+                class="input100" 
+                name="content" 
+                placeholder="Write me a message"
+                [ngClass]="{
+                'is-invalid':
+                    contactModel.get('content').errors &&
+                    contactModel.get('content').touched,
+                'is-valid':
+                    !contactModel.get('content').errors &&
+                    contactModel.get('content').statusChanges
+                }"
+                class="form-control"
+                formControlName="content"
+                ></textarea>
                 <span class="focus-input100"></span>
+            </div>
+            <div
+                class="validate-input"
+                *ngIf="
+                contactModel.get('content').hasError('minlength') ||
+                (contactModel.get('content').hasError('maxlength') &&
+                contactModel.get('content').touched) 
+                "
+            >
+                <p>Valid message is required!</p>
+                <p>Message should be between {{contentMinLen}} and {{contentMaxLen}} characters!</p>
             </div>
 
             <div class="container-contact100-form-btn">
                 <recaptcha 
-                    [size]="'normal'"
-                    [hide]="false" 
-                    (captchaResponse)="onCaptchaResponse($event)">
+                id="recaptchaValue" 
+                formControlName="recaptchaValue"
+                [ngClass]="{
+                    'is-invalid':
+                        contactModel.get('recaptchaValue').errors &&
+                        contactModel.get('recaptchaValue').touched,
+                    'is-valid':
+                        !contactModel.get('recaptchaValue').errors &&
+                        contactModel.get('recaptchaValue').statusChanges
+                    }"
+                
+
+                [size]="'normal'"
+                [hide]="false" 
+                (captchaResponse)="onCaptchaResponse($event)">
                 </recaptcha>
+                <span class="focus-input100"></span>
+            </div>
+
+            <div
+                class="validate-input"
+                *ngIf="
+                contactModel.get('recaptchaValue').hasError('minlength') ||
+                (contactModel.get('recaptchaValue').hasError('maxlength')) 
+                "
+            >
+                <p>Validate recaptcha is required!</p>
+                <p>Message should be between {{contentMinLen}} and {{contentMaxLen}} characters!</p>
             </div>
 
             <div class="container-contact100-form-btn">
