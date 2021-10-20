@@ -48,11 +48,7 @@ namespace PS.API.Controllers
                 input.Subject,
                 input.Content);
 
-            // this.TempData["Success"] = true;
-
-            // return this.RedirectToAction(nameof(this.Index));
-
-            return Ok();
+            return Ok(input);
         }
     }
 }

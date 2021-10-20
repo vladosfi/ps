@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IContactFormEntry } from 'src/app/_interfaces/contactFormEntry';
-import { CommonService } from 'src/app/_services/common.service';
+import { ContactsService } from 'src/app/_services/contact.service';
 import { ToastService } from 'src/app/_services/toast.service';
 import { FormBuilder, FormControl, FormGroup, Validators,FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -23,7 +23,7 @@ export class ContactsComponent implements OnInit {
   recaptchaValueMaxLen: number = 500;
   
 
-  constructor(private commonService: CommonService,private toast: ToastService, fb: FormBuilder) {
+  constructor(private contactsService: ContactsService,private toast: ToastService, fb: FormBuilder) {
     
     this.contactModel = new FormGroup({
       fromName: new FormControl('', [Validators.required, Validators.minLength(this.fromNameMinLen), Validators.maxLength(this.fromNameMaxLen)]),
@@ -34,7 +34,6 @@ export class ContactsComponent implements OnInit {
   }
   
    ngOnInit(): void {
-
   }
   
   onCaptchaResponse(token: any): void  {
@@ -49,8 +48,23 @@ export class ContactsComponent implements OnInit {
     // );
   }
 
-  sentEmail(){
-    console.log('sdfsdfsdfsdf');
+  sendMessage(){
+    if (this.contactModel.valid) {
+      this.contactFormEntry = Object.assign({}, this.contactModel.value);
+      this.contactFormEntry.subject = "E-mail from site";
+
+      this.contactsService.sendMessage(this.contactFormEntry).subscribe(
+        (response) => {
+          if (response) {
+            //this.contactFormEntry = Object.assign({}, response);
+            this.toast.success('Your message was sended!');
+          }
+        },
+        (error) => {
+          this.toast.error(error);
+        }
+      );
+    }
   }
 }
 

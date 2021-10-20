@@ -42,7 +42,7 @@ import { PaintingEditResolver } from './_resolvers/painting-edit.resolver';
 import { LoaderInterceptor } from './_interceptors/loader-interceptor';
 import { LoaderService } from './_services/loader.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { CommonService } from './_services/common.service';
+import { ContactsService } from './_services/contact.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -105,7 +105,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     AuthService,
     AuthGuard,
-    CommonService,
+    ContactsService,
     ErrorInterceptorProvider,
     PaintingsResolver,
     PaintingResolver,

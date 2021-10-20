@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactsRoutingModule } from './contact-routing.module';
 import { ReCaptchaModule } from 'angular-recaptcha3';
-import { CommonService } from '../_services/common.service';
+import { ContactsService } from '../_services/contact.service';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -41,7 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   }),
   ],
   providers: [
-    CommonService
+    ContactsService
   ]
 })
 

@@ -1,12 +1,13 @@
 <div class="container-contact100">
     <div class="wrap-contact100">
-        <form [formGroup]="contactModel" id="contactForm" class="contact100-form validate-form" (ngSubmit)="sentEmail()">
+        <form [formGroup]="contactModel" id="contactForm" class="contact100-form validate-form" (ngSubmit)="sendMessage()">
             <span class="contact100-form-title">
                 {{ "CONTACTS.SEND-MESSAGE" | translate }}
 
-                <p>Form Status: {{ contactModel.status | json }}</p>
-                <p>Name: {{contactModel.value | json}}</p>
-                
+                <div>
+                    <p>Form Status: {{ contactModel.status | json }}</p>
+                    <p>Name: {{contactModel.value | json}}</p>
+                </div>
             </span>            
 
             <label class="label-input100" for="fromName">{{ "CONTACTS.NAME" | translate }} *</label>
