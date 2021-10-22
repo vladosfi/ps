@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PS.API.Data.Common.Interfaces;
-using PS.API.Dtos.Common;
+using PS.API.Dtos.Contact;
 using PS.API.Dtos.Contact;
 using PS.API.Helpers;
 using PS.API.Helpers.Messaging;
@@ -26,7 +26,7 @@ namespace PS.API.Controllers
         
         //[HttpPost("{token}")]
         [HttpPost]
-        public async Task<IActionResult> Recaptcha([FromBody]ContactsInputModel input)
+        public async Task<IActionResult> SendMessage([FromBody]ContactsInputModel input)
         {
             var ip = this.HttpContext.Connection.RemoteIpAddress.ToString();
             var contactFormEntry = new ContactFormEntry

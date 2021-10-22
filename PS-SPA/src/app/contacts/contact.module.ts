@@ -8,6 +8,7 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { ContactsRoutingModule } from './contact-routing.module';
 import { ReCaptchaModule } from 'angular-recaptcha3';
 import { ContactsService } from '../_services/contact.service';
+import { environment } from 'src/environments/environment';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -32,10 +33,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ContactsRoutingModule,
     ReCaptchaModule.forRoot({
       invisible: {
-          sitekey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', 
+          sitekey: environment.reCaptchaSiteKey, 
       },
       normal: {
-          sitekey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', 
+          sitekey: environment.reCaptchaSiteKey, 
       },
       language: localStorage.getItem('currentLang') ? localStorage.getItem('currentLang') : 'en' 
   }),

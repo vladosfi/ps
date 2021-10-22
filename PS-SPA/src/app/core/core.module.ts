@@ -9,9 +9,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RouterModule } from '@angular/router';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TranslateModule } from '@ngx-translate/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, Meta } from '@angular/platform-browser';
 import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
+import { ReCaptchaModule } from 'angular-recaptcha3';
+import { environment } from 'src/environments/environment';
 
 const cookieConfig:NgcCookieConsentConfig = {
   "cookie": {
@@ -46,6 +48,7 @@ const cookieConfig:NgcCookieConsentConfig = {
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     TabsModule,
     ButtonsModule,
     BsDatepickerModule,
@@ -54,7 +57,16 @@ const cookieConfig:NgcCookieConsentConfig = {
     CollapseModule,
     TranslateModule.forChild(),
     BrowserModule,
-    NgcCookieConsentModule.forRoot(cookieConfig)
+    NgcCookieConsentModule.forRoot(cookieConfig),
+    ReCaptchaModule.forRoot({
+      invisible: {
+          sitekey: environment.reCaptchaSiteKey, 
+      },
+      normal: {
+          sitekey: environment.reCaptchaSiteKey, 
+      },
+      language: localStorage.getItem('currentLang') ? localStorage.getItem('currentLang') : 'en' 
+  }),
   ],
   providers: [Meta],
   exports:[

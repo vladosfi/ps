@@ -1,4 +1,4 @@
-namespace PS.API.Dtos.Common
+namespace PS.API.Dtos.Contact
 {
     using System;
     using System.Collections.Generic;

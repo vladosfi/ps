@@ -7,6 +7,7 @@ export const environment = {
   localhost: 'http://localhost:5000/',
   apiUrl: 'http://localhost:5000/api/',
   frontEndUrl: 'http://localhost:4200/',
+  reCaptchaSiteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
 };
 
 /*

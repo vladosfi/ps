@@ -8,6 +8,7 @@ import { NgcCookieConsentService, NgcInitializeEvent, NgcNoCookieLawEvent, NgcSt
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { filter } from 'rxjs/operators';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -17,6 +18,8 @@ import { filter } from 'rxjs/operators';
 })
 export class NavComponent implements OnInit {
   model: any = {};
+  loginModel: FormGroup;
+  
   photoUrl: string;
   selectedLanguage: string;
   languagesToShow: any;

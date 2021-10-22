@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace PS.API.Dtos.Common
+namespace PS.API.Dtos.Contact
 {
     public class ContactsInputModel
     {
