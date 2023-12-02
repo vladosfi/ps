@@ -18,7 +18,7 @@
    - Upcoming and past events, exhibitions, or shows featuring the artist's work.
 
 5. **Contacts**
-   - Ways to get in touch with the artist, including social media links and a contact form.
+   - Ways to get in touch with the artist.
 
 6. **Admin Panel**
    - Administrative section for content management, allowing the artist to update and add new content easily.
