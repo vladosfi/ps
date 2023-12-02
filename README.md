@@ -23,13 +23,16 @@
 6. **Admin Panel**
    - Administrative section for content management, allowing the artist to update and add new content easily.
 
+
 ## Technologies Used
 
-- **SQLite as Database Service:** Utilizing SQLite for a lightweight and efficient database to manage website content.
+- **.NET Core:** A cross-platform, high-performance framework for building modern, cloud-based, and internet-connected applications.
 
 - **Entity Framework Core:** An Object-Relational Mapping (ORM) framework for interacting with the database.
 
 - **Angular:** A robust front-end framework for building dynamic and responsive user interfaces.
+  
+- **SQLite as Database Service:** Utilizing SQLite for a lightweight and efficient database to manage website content.
 
 - **REST API:** Implementing a RESTful API to enable communication between the front-end and back-end.
 
