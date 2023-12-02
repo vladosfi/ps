@@ -36,7 +36,7 @@
   border-bottom: 1px solid #fc5356;
 }
 .article .article-title h2 {
-  color: #A2A29A;
+  color: #222f2f;
   font-weight: 600;
   cursor: pointer;
 }
@@ -64,7 +64,7 @@
   font-size: 12px;
 }
 
-.article-content{
+.article-content {
   cursor: pointer;
 }
 
@@ -74,7 +74,7 @@
 .article .article-content h4,
 .article .article-content h5,
 .article .article-content h6 {
-  color: #A2A29A;
+  color: #222f2f;
   font-weight: 600;
   margin-bottom: 15px;
 }
@@ -123,14 +123,13 @@
 
 /* [2] Transition property for smooth transformation of images */
 .article-img img {
-  transition: transform .5s ease;
+  transition: transform 0.5s ease;
 }
 
 /* [3] Finally, transforming the image when container gets hovered */
 .article-img:hover img {
   transform: scale(1.5);
 }
-
 
 img {
   max-width: 100%;
@@ -139,7 +138,6 @@ img {
   vertical-align: middle;
   border-style: none;
 }
-
 
 /* Contact Us
 ---------------------*/

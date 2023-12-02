@@ -4397,7 +4397,7 @@ button.toast-close-button {
   src: url('Lucida Grande Regular.ttf') format("opentype");
 }
 body {
-  color: #A2A29A;
+  color: #222f2f;
 }
 h1, h2, h3, h4, h5, h6, p {
   font-family: "Lucida Grande Regular", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif !important;

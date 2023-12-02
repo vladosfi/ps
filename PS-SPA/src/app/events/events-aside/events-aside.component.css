@@ -1,12 +1,12 @@
 .blog-listing {
-    padding-top: 30px;
-    padding-bottom: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 .gray-bg {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
-/* Blog 
+/* Blog
 ---------------------*/
 .blog-grid {
   box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
@@ -56,7 +56,6 @@
   margin-top: 20px;
 }
 
-
 /* Blog Sidebar
 -------------------*/
 .blog-aside .widget {
@@ -98,7 +97,7 @@
 }
 .blog-aside .widget-author h6 {
   font-weight: 600;
-  color: #A2A29A;
+  color: #222f2f;
   font-size: 22px;
   margin: 0;
   padding-left: 20px;
@@ -118,7 +117,7 @@
   padding-bottom: 10px;
 }
 .blog-aside .post-aside .post-aside-meta a {
-  color: #6F8BA4;
+  color: #6f8ba4;
   font-size: 12px;
   text-transform: uppercase;
   display: inline-block;
@@ -147,7 +146,7 @@
   font-weight: 600;
 }
 .blog-aside .latest-post-aside .lpa-meta a {
-  color: #6F8BA4;
+  color: #6f8ba4;
   font-size: 12px;
   text-transform: uppercase;
   display: inline-block;
@@ -167,11 +166,10 @@
   background: #fc5356;
 }
 
-
 img {
-    max-width: 100%;
+  max-width: 100%;
 }
 img {
-    vertical-align: middle;
-    border-style: none;
+  vertical-align: middle;
+  border-style: none;
 }

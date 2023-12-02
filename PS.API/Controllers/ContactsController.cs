@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PS.API.Data.Common.Interfaces;
 using PS.API.Dtos.Contact;
-using PS.API.Dtos.Contact;
 using PS.API.Helpers;
 using PS.API.Helpers.Messaging;
 

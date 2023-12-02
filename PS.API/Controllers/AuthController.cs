@@ -35,23 +35,23 @@ namespace PS.API.Controllers
         }
 
         [HttpPost("register")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Regietr(UserForRegisterInputModel userForRegisterDto)
         {
             //Only logedin users can register new user
-            if (User.FindFirst(ClaimTypes.NameIdentifier).Value == null)
-            {
-                return Unauthorized();
-            }
+            // if (User.FindFirst(ClaimTypes.NameIdentifier).Value == null)
+            // {
+            //     return Unauthorized();
+            // }
 
-            
+
             //validate result
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
-            if (await this.repo.UserExist(userForRegisterDto.Username))
-            {
-                return BadRequest(userAlreadyExist);
-            }
+            // if (await this.repo.UserExist(userForRegisterDto.Username))
+            // {
+            //     return BadRequest(userAlreadyExist);
+            // }
 
             var userToCreate = this.mapper.Map<User>(userForRegisterDto);
 

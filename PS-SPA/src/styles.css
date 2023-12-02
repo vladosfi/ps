@@ -1,44 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-@import '../node_modules/bootswatch/dist/united/bootstrap.min.css';
-@import '../node_modules/font-awesome/css/font-awesome.min.css';
-@import '../node_modules/flag-icon-css/css/flag-icon.min.css';
-@import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/bootswatch/dist/united/bootstrap.min.css";
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+@import "../node_modules/flag-icon-css/css/flag-icon.min.css";
+@import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css";
 /* ngx-toastr */
 
-@import '../node_modules/ngx-toastr/toastr';
+@import "../node_modules/ngx-toastr/toastr";
 @font-face {
   font-family: lato;
-  src: url("./assets/fonts/lucida-grande/Lucida Grande Regular.ttf") format("opentype");
+  src: url("./assets/fonts/lucida-grande/Lucida Grande Regular.ttf")
+    format("opentype");
 }
 
 body {
-  color: #A2A29A;
+  color: #222f2f;
 }
 
-h1, h2, h3, h4, h5, h6, p {
-  font-family: "Lucida Grande Regular", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif !important;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: "Lucida Grande Regular", "Lucida Sans Unicode", Helvetica, Arial,
+    Verdana, sans-serif !important;
 }
 
 /* app-painting-list */
-.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle,
-.btn-primary:not(:disabled):not(.disabled).focus, .btn-primary:not(:disabled):not(.disabled):focus, .show>.btn-primary.dropdown-toggle,
 .btn-primary:not(:disabled):not(.disabled).active,
-.btn-primary:not(:disabled):not(.disabled).focus{
-    border-color: #1E66A6;    
-    background-color: #222F2F;
+.btn-primary:not(:disabled):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle,
+.btn-primary:not(:disabled):not(.disabled).focus,
+.btn-primary:not(:disabled):not(.disabled):focus,
+.show > .btn-primary.dropdown-toggle,
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled).focus {
+  border-color: #1e66a6;
+  background-color: #222f2f;
 }
 
 app-painting-list .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #21539C;
-  border-color: #21539C;
+  background-color: #21539c;
+  border-color: #21539c;
 }
 
 app-painting-list .page-link {
-  color: #21539C;
+  color: #21539c;
 }
 
 /* app-detail */
@@ -49,47 +61,54 @@ app-detail .tab-panel {
   border-radius: 4px;
 }
 
-app-painting-list .nav-tabs>li.open, .member-tabset>.nav-tabs>li:hover ,
-app-detail .nav-tabs>li.open, .member-tabset>.nav-tabs>li:hover {
+app-painting-list .nav-tabs > li.open,
+.member-tabset > .nav-tabs > li:hover,
+app-detail .nav-tabs > li.open,
+.member-tabset > .nav-tabs > li:hover {
   border-bottom: 4px solid #fbcdcf;
 }
 
-app-painting-list .member-tabset>.nav-tabs>li.open>a, .member-tabset>.nav-tabs>li:hover>a,
-app-detail .member-tabset>.nav-tabs>li.open>a, .member-tabset>.nav-tabs>li:hover>a {
+app-painting-list .member-tabset > .nav-tabs > li.open > a,
+.member-tabset > .nav-tabs > li:hover > a,
+app-detail .member-tabset > .nav-tabs > li.open > a,
+.member-tabset > .nav-tabs > li:hover > a {
   border: 0;
   background: none !important;
   color: #333333;
 }
 
-app-painting-list .member-tabset>.nav-tabs>li.open>a>i, .member-tabset>.nav-tabs>li:hover>a>i,
-app-detail .member-tabset>.nav-tabs>li.open>a>i, .member-tabset>.nav-tabs>li:hover>a>i {
+app-painting-list .member-tabset > .nav-tabs > li.open > a > i,
+.member-tabset > .nav-tabs > li:hover > a > i,
+app-detail .member-tabset > .nav-tabs > li.open > a > i,
+.member-tabset > .nav-tabs > li:hover > a > i {
   color: #a6a6a6;
 }
 
-app-painting-list .member-tabset>.nav-tabs>li.open .dropdown-menu, .member-tabset>.nav-tabs>li:hover .dropdown-menu ,
-app-detail .member-tabset>.nav-tabs>li.open .dropdown-menu, .member-tabset>.nav-tabs>li:hover .dropdown-menu {
+app-painting-list .member-tabset > .nav-tabs > li.open .dropdown-menu,
+.member-tabset > .nav-tabs > li:hover .dropdown-menu,
+app-detail .member-tabset > .nav-tabs > li.open .dropdown-menu,
+.member-tabset > .nav-tabs > li:hover .dropdown-menu {
   margin-top: 0px;
 }
 
-app-painting-list
-app-detail .member-tabset>.nav-tabs>li.active {
-  border-bottom: 4px solid #21539C;
+app-painting-list app-detail .member-tabset > .nav-tabs > li.active {
+  border-bottom: 4px solid #21539c;
   position: relative;
 }
 
-app-painting-list .member-tabset>.nav-tabs>li.active>a ,
-app-detail .member-tabset>.nav-tabs>li.active>a {
+app-painting-list .member-tabset > .nav-tabs > li.active > a,
+app-detail .member-tabset > .nav-tabs > li.active > a {
   border: 0 !important;
-  color: #21539C;
+  color: #21539c;
 }
 
-app-painting-list .member-tabset>.nav-tabs>li.active>a>i ,
-app-detail .member-tabset>.nav-tabs>li.active>a>i {
-  color: #21539C;
+app-painting-list .member-tabset > .nav-tabs > li.active > a > i,
+app-detail .member-tabset > .nav-tabs > li.active > a > i {
+  color: #21539c;
 }
 
-app-painting-list .member-tabset>.tab-content ,
-app-detail .member-tabset>.tab-content {
+app-painting-list .member-tabset > .tab-content,
+app-detail .member-tabset > .tab-content {
   margin-top: -3px;
   background-color: #fff;
   border: 0;
@@ -99,12 +118,11 @@ app-detail .member-tabset>.tab-content {
 
 app-painting-list a.nav-link,
 app-detail a.nav-link {
-  color: #21539C;
+  color: #21539c;
 }
 
-
 /* Image Gallery Modal Border */
-.ngx-gallery-image.ngx-gallery-active{
+.ngx-gallery-image.ngx-gallery-active {
   border: 1px solid #333333;
 }
 
